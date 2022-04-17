@@ -1,0 +1,74 @@
+<% title "Bindlink | " + current_agent.fullname %>
+<%= javascript_include_tag "agentdashboard" %>
+
+
+<!--[if lte IE 8]><script language="javascript" type="text/javascript" src="excanvas.min.js"></script><![endif]-->
+
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+
+    <div class="previewheadbold" > <h3>Welcome, <%= current_agent.first_name %>! <span style="float: right;"><h3><%if current_agent.isgeneralagent == "GA"%> <b> <%= current_agent.generalagency.agency_name %> </b><% else %><b><%= current_agent.agency.agency_name %> </b> <%end%></h3></span></h3>
+    </div>
+
+    <div class="wellwhiteblock">
+      <div class="wellwhitemenu"><h3>Business Intelligence </h3></div>
+      <%= render 'graphs' %>
+    </div>
+
+    <div class="wellwhiteblock dashboardsummary">
+      <div class="wellwhitemenu"><h3>Direct Bill Policy Renewals</h3></div>
+      <%= render partial: "renewals", object: @direct_renewal, type: "direct" %>
+    </div>
+    <div class="wellwhiteblock dashboardsummary">
+      <div class="wellwhitemenu"><h3>Agency Bill Policy Renewals</h3></div>
+      <%= render partial: "renewals", object: @agency_renewal, type: "agency" %>
+    </div>
+    <div class="wellwhiteblock dashboardsummary">
+      <div class="wellwhitemenu"><h3>Accounts Past Due</h3></div>
+      <%= render 'agedinvoice' %>
+    </div>
+    <div style="clear:both;">
+    </div>
+
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tasks" data-toggle="tab">Tasks</a></li>
+        <li><a href="#recent" data-toggle="tab">Recent Activity</a></li>
+        <li><a href="#pbi" data-toggle="tab">Pending Binder/Issuance</a></li>
+        <li><a href="#pe" data-toggle="tab">Pending Endorsement</a></li>
+        <li><a href="#oi" data-toggle="tab">Open Items</a></li>
+      </ul>
+
+      <div class="tab-content" >
+        <div class="tab-pane active" id="tasks" >
+          <div id="taskunitwrapper">
+            <%= render :partial=> 'tasks/tasksunit', :locals => { :caption => "Tasks", :tasks => @tasks, :todaycount => @todaycount, :overduecount => @overduecount, :upcomingcount => @upcomingcount, :allcount => @allcount, :agentid => current_agent.id, :suffix => "" }%>
+          </div>
+        </div>
+        <div class="tab-pane" id="recent">
+          <div class="wellwhiteblock" >
+            <div  class="wellwhitemenu"><h3>Recent Activity</h3></div>
+            <div id="recentactivity">
+              <%= render :partial => '/notes/notelist', :locals => { :notespaginate => @notespaginate }%>
+            </div>
+          </div>
+        </div>
+        <div class="tab-pane" id="pbi" >
+          <div id="taskunitpbiwrapper">
+            <%= render :partial=> 'tasks/tasksunit', :locals => { :caption => "Pending Binder/Issuance", :tasks => @taskspbi, :todaycount => @todaycountpbi, :overduecount => @overduecountpbi, :upcomingcount => @upcomingcountpbi, :allcount => @allcountpbi, :agentid => -1, :suffix => "pbi" }%>
+          </div>
+        </div>
+        <div class="tab-pane" id="pe" >
+          <div id="taskunitpewrapper">
+            <%= render :partial=> 'tasks/tasksunit', :locals => { :caption => "Pending Endorsement", :tasks => @taskspe, :todaycount => @todaycountpe, :overduecount => @overduecountpe, :upcomingcount => @upcomingcountpe, :allcount => @allcountpe, :agentid => -2, :suffix => "pe" }%>
+          </div>
+        </div>
+        <div class="tab-pane" id="oi" >
+          <div id="taskunitpewrapper">
+            <%= render :partial=> 'tasks/tasksunit', :locals => { :caption => "Open Items", :tasks => @tasksoi, :todaycount => @todaycountoi, :overduecount => @overduecountoi, :upcomingcount => @upcomingcountoi, :allcount => @allcountoi, :agentid => -3, :suffix => "oi" }%>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

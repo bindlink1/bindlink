@@ -1,0 +1,5 @@
+$('#newcontact').html("");
+$('#ccwrapper').html("<%= escape_javascript(render('showallforclient'))%>");
+$("#newcontactbtn").fadeIn(300);
+$("#contacttable tr:last").effect('highlight',1000);
+$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove();

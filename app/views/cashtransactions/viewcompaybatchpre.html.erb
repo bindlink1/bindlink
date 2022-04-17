@@ -1,0 +1,52 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Return Premium
+    </span>
+    </div>
+    <div class="previewhead">
+     <%= link_to "Back to Return Premium Home", returnhome_path, :class=>"linktext" %> | <%= link_to "Re-Print checks from this batch", editreturnbatch_path(@returnbatch), :class=>"linktext" %>
+    </div>
+   <b> Status: <%= @returnbatch.status %></b>
+    <table class="worktable">
+      <thead>
+      <tr style="border-bottom: 1px solid #d3d3d3;">
+
+        <th style="border: 1px solid #d3d3d3; padding: 5px;">Policy Number</th>
+        <th style="border: 1px solid #d3d3d3;">Producing Agency</th>
+        <th style="border: 1px solid #d3d3d3;">Named Insured</th>
+        <th style="border: 1px solid #d3d3d3;">Pay To</th>
+        <th style="border: 1px solid #d3d3d3;">Return Premium</th>
+        <th style="border: 1px solid #d3d3d3;">Check #</th>
+      </tr>
+      </thead>
+      <tbody style="display: table-row-group;">
+      <% @returnbatch.returnpremiumbatchpreitems.each do |item| %>
+          <tr style="border-bottom: 1px solid #d3d3d3; ">
+            <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+              <%=  item.policy.policy_number %>
+            </td>
+            <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+              <%=  item.policy.producingagency.agency_name %>
+            </td>
+            <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+              <%=  item.policy.namedinsured.named_insured %>
+            </td>
+            <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+              <% if item.pay_to_entity == "PFC" %><%= item.pfc.pfc_name%> <%else%> <%= item.producingagency.agency_name%> <%end%>
+            </td>
+            <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+              <%=  number_to_currency(item.policy.policybalance * -1,  :negative_format => "(%u%n)") %>
+            </td>
+            <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+              <%=  item.cashtransaction.check_number %>
+            </td>
+          </tr>
+      <%end%>
+      </tbody>
+    </table>
+
+
+
+  </div>
+</div>
+

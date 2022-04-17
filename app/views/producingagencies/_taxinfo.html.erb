@@ -1,0 +1,36 @@
+<table class="table table-bordered table-condensed table-layout:fixed " id="producergentable" style="width: 50%">
+  <col width="30%"  />
+  <col width="70%" />
+  <tr>
+    <td style="text-align: right;">
+      Tax ID
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.tax_id %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      1099 Name
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.name1099 %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Address
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.address1099 %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      City, State, Zip
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.city1099 %>, <%= @producerforview.state1099 %> <%= @producerforview.zip1099 %>
+    </td>
+  </tr>
+</table>

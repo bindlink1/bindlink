@@ -1,0 +1,28 @@
+
+
+  <%= c.fields_for :acord_xml_limits do |l| %>
+
+      <td>
+      <%= l.text_field :limit_amt ,:placeholder=>'Limit' ,:class=>'input-mini'%>
+    </td>
+    <td>
+      <%= l.collection_select :limit_applies_to_cd ,[['PerPerson','Per Person'],['PerAcc','Per Accident'],['Property Damage','PropDam'],['MaxAmount','Max Amount']], :first, :last, {:include_blank => 'Select One' }, :style=>'margin-left: 0px;' %>
+    </td>
+
+<%end%>
+
+
+  <%= c.fields_for :acord_xml_deductibles do |d| %>
+
+
+    <td>
+      <%= d.text_field :deductible_amt ,:placeholder=>'Deductible' ,:class=>'input-mini'%>
+    </td>
+    <td>
+
+      <%= d.collection_select :deductible_applies_to_cd ,[['AllPeril','All Perils'],['SpecPeril','Specified Perils'],['PerDay','Per Day'],['MaxAmount','Max Amount']], :first, :last, {:include_blank => 'Select One' }, :style=>'margin-left: 0px;' %>
+    </td>
+
+<%end%>
+
+

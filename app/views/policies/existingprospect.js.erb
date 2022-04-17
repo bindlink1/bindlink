@@ -1,0 +1,28 @@
+
+
+$("#createclientforpolicy").html('<%= escape_javascript(render'policyprospectview') %>').hide().slideDown(300) ;
+
+
+$("#clientselectionnew").fadeIn();
+
+
+ $("#prospects").dataTable(
+
+        {
+
+            "sPaginationType": "bootstrap",
+
+            "oLanguage": {
+                "sLengthMenu": "Display _MENU_ Prospects" ,
+                "sZeroRecords": "No Prospects match your search!",
+                "sEmptyTable": "No Prospects",
+                "sInfo": "Showing (_START_ to _END_) of _TOTAL_ Prospects",
+                "sSearch": "Search Prospects:" ,
+                "sProcessing": "Processing",
+                "sInfoFiltered": " - searching from _MAX_ Prospects"
+            }
+
+        }
+
+    );
+

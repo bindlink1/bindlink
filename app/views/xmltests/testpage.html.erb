@@ -1,0 +1,5 @@
+<% @doc.xpath("//appfield/field_name").each do |node| %>
+
+<div class="infoblock"><%= node.text %>  </br> </div>
+
+<% end %>

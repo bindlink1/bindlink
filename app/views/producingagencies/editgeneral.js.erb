@@ -1,0 +1,7 @@
+$('#producerinfo').slideUp(300);
+$('#producerinfowork').html('<%= escape_javascript(render 'showproducerdetailsedit' ) %>').hide().slideDown(300);
+$('#producingagencycacnel').click(function(){$('#producerinfowork').slideUp(300).html('')
+
+  $('#producerinfo').slideDown(300);
+
+});

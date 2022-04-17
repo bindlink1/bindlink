@@ -1,0 +1,240 @@
+<%= javascript_include_tag "uploaddocument" %>
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu" >
+    <h3>Create a new Document</h3> <button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+  </div>
+
+  <%= form_for @document, :url => createnewdocument_path( :id=>@id, :type=>@type, :doctype=>@doctype ), :html => { :multipart => true, :autocomplete => "off", :id =>'documentform' }, :remote => true do |f| %>
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="row fileupload-buttonbar">
+      <div class="span7">
+        <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button">
+          <i class="icon-plus icon-white"></i>
+          <span>Add files...</span>
+          <%= f.file_field :image,multiple: true,:class=>"input-xlarge", name: "document[image]" %>
+        </span>
+        <button type="submit" class="btn btn-primary start">
+          <i class="icon-upload icon-white"></i>
+          <span>Start upload</span>
+        </button>
+        <button type="reset" class="btn btn-warning cancel closeit">
+          <i class="icon-ban-circle icon-white"></i>
+          <span>Cancel upload</span>
+        </button>
+      </div>
+    </div>
+    <div id="dropzone" class="fade well"><h3>Drop files here</h3></div>
+    <!-- The loading indicator is shown during image processing -->
+    <div class="fileupload-loading"></div>
+    <br>
+    <!-- The table listing the files available for upload/download -->
+    <div class="modal_body" style="overflow-y: auto; max-height: 400px;" >
+      <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery" id="filescontainer"></tbody>
+      </table>
+    </div>
+  <% end %>
+</div>
+<script>
+    var fileUploadErrors = {
+        maxFileSize: 'File is too big',
+        minFileSize: 'File is too small',
+        acceptFileTypes: 'Filetype not allowed',
+        maxNumberOfFiles: 'Max number of files exceeded',
+        uploadedBytes: 'Uploaded bytes exceed file size',
+        emptyResult: 'Empty file upload result'
+    };
+
+    var onFileCategorySelectChange = function(event) {
+      var targetValue = event.target.value,
+        parentElement = event.target.parentElement.parentElement;
+
+      if (targetValue === 'Other') {
+        $(parentElement).find('.documentNameInputTextWrapper').css('display', 'block');
+      } else {
+        $(parentElement).find('.documentNameInputTextWrapper').css('display', 'none');
+
+        var d        = new Date(),
+          dateString = ('0'+(d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2)  + '-' + d.getFullYear(),
+          value      = event.target.value + ' ' + dateString;
+
+        $(parentElement).find('.documentNameInput').val(value);
+      }
+    }
+
+    var onFileNameValueChange = function(event) {
+      var targetValue = event.target.value,
+        parentElement = event.target.parentElement.parentElement;
+
+      $(parentElement).find('.documentNameInput').val(targetValue);
+    }
+</script>
+
+<script id="template-upload" type="text/x-tmpl">
+  {% for (var i=0, file; file=o.files[i]; i++) { %}
+  <% i = 0 %>
+  <tr class="template-upload">
+    <td class="preview"><span></span></td>
+    <td>
+      <span>
+        <label>Select document name</label>
+        <br>
+        <input class="documentNameInput" value="{%=file.name %}" type="hidden" name="document[name]"/>
+        <%= select_tag("", options_for_select([
+          ['Cancellation'],
+          ['Correspondence'],
+          ['Final Audit'],
+          ['Inspection'],
+          ['New Business'],
+          ['Non-Renewal'],
+          ['Other'],
+          ['Reinstatement'],
+          ['Renewal Offer'],
+          ['Request to Bind'],
+          ['Submission'],
+          ['Endorsement – 1'],
+          ['Endorsement – 2'],
+          ['Endorsement – 3'],
+          ['Endorsement – 4'],
+          ['Endorsement – 5'],
+          ['Endorsement – 6'],
+          ['Endorsement – 7'],
+          ['Endorsement – 8'],
+          ['Endorsement – 9'],
+          ['Endorsement – 10'],
+          ['Endorsement – 11'],
+          ['Endorsement – 12'],
+          ['Endorsement – 13'],
+          ['Endorsement – 14'],
+          ['Endorsement – 15'],
+          ['Endorsement – 16'],
+          ['Endorsement – 17'],
+          ['Endorsement – 18'],
+          ['Endorsement – 19'],
+          ['Endorsement – 20'],
+          ['Endorsement – 21'],
+          ['Endorsement – 22'],
+          ['Endorsement – 23'],
+          ['Endorsement – 24'],
+          ['Endorsement – 25'],
+          ['Endorsement – 26'],
+          ['Endorsement – 27'],
+          ['Endorsement – 28'],
+          ['Endorsement – 29'],
+          ['Endorsement – 30'],
+          ['Endorsement – 31'],
+          ['Endorsement – 32'],
+          ['Endorsement – 33'],
+          ['Endorsement – 34'],
+          ['Endorsement – 35'],
+          ['Endorsement – 36'],
+          ['Endorsement – 37'],
+          ['Endorsement – 38'],
+          ['Endorsement – 39'],
+          ['Endorsement – 40'],
+          ['Endorsement Request 1'],
+          ['Endorsement Request 2'],
+          ['Endorsement Request 3'],
+          ['Endorsement Request 4'],
+          ['Endorsement Request 5'],
+          ['Endorsement Request 6'],
+          ['Endorsement Request 7'],
+          ['Endorsement Request 8'],
+          ['Endorsement Request 9'],
+          ['Endorsement Request 10'],
+          ['Endorsement Request 11'],
+          ['Endorsement Request 12'],
+          ['Endorsement Request 13'],
+          ['Endorsement Request 14'],
+          ['Endorsement Request 15'],
+          ['Endorsement Request 16'],
+          ['Endorsement Request 17'],
+          ['Endorsement Request 18'],
+          ['Endorsement Request 19'],
+          ['Endorsement Request 20'],
+          ['Endorsement Request 21'],
+          ['Endorsement Request 22'],
+          ['Endorsement Request 23'],
+          ['Endorsement Request 24'],
+          ['Endorsement Request 25'],
+          ['Endorsement Request 26'],
+          ['Endorsement Request 27'],
+          ['Endorsement Request 28'],
+          ['Endorsement Request 29'],
+          ['Endorsement Request 30'],
+          ['Endorsement Request 31'],
+          ['Endorsement Request 32'],
+          ['Endorsement Request 33'],
+          ['Endorsement Request 34'],
+          ['Endorsement Request 35'],
+          ['Endorsement Request 36'],
+          ['Endorsement Request 37'],
+          ['Endorsement Request 38'],
+          ['Endorsement Request 39'],
+          ['Endorsement Request 40']
+        ], 'Other'), {
+          :onchange => 'onFileCategorySelectChange(event)',
+          :class => 'input-large documentNameSelect',
+          :id => ''
+        }) %>
+      </span>
+      <br/>
+      <div class="documentNameInputTextWrapper">
+        <br/>
+        <input class="documentNameInputText" value="{%=file.name%}" placeholder="Document name..." class="input-large" type="text" onkeyup="onFileNameValueChange(event)" />
+      </div>
+      <br/>
+      {% if (file.error) { %}
+      <span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}
+      {% } else if (o.files.valid && !i) { %}
+      <% i = i +1 %>
+
+      <div class="progress progress-success progress-striped active"><div class="bar" style="width:0%;"></div></div>
+    </td>
+    <td class="start">{% if (!o.options.autoUpload) { %}
+      <button class="btn btn-primary">
+        <i class="icon-upload icon-white"></i>
+        <span>{%=locale.fileupload.start%}</span>
+      </button>
+      {% } %}</td>
+    {% } else { %}
+    <td colspan="2"></td>
+    {% } %}
+    <td class="cancel">{% if (!i) { %}
+      <button class="btn btn-warning">
+        <i class="icon-ban-circle icon-white"></i>
+        <span>{%=locale.fileupload.cancel%}</span>
+      </button>
+      {% } %}</td>
+  </tr>
+  {% } %}
+</script>
+
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+<tr class="template-download">
+{% if (file.error) { %}
+<td></td>
+<td class="name"><span>{%=file.name%}</span>
+<span>{%=o.formatFileSize(file.size)%}</span></td>
+<td class="error" colspan="2"><span class="label label-important">{%=locale.fileupload.error%}</span> {%=locale.fileupload.errors[file.error] || file.error%}</td>
+{% } else { %}
+<td class="preview">{% if (file.thumbnail_url) { %}
+<a href="{%=file.url%}" title="{%=file.name%}" rel="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+{% } %}</td>
+<td class="name">
+<a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}" download="{%=file.name%}">{%=file.name%}</a>
+</td>
+<td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+<td colspan="2"></td>
+{% } %}
+<td class="delete">
+<button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+<i class="icon-trash icon-white"></i>
+<span>{%=locale.fileupload.destroy%}</span>
+</button>
+<input type="checkbox" name="delete" value="1">
+</td>
+</tr>
+{% } %}
+</script>

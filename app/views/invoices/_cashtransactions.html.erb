@@ -1,0 +1,20 @@
+
+                    <h3>Cash transactions received for this invoice:</h3>
+                    <table id="cashtransactions" class="display">
+                        <thead>
+                          <tr>
+                               <th>Date Entered</th>
+                               <th>Amount</th>
+                               <th>Payment Type</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            <% @cashtransactions.each do |cash| %>
+                          <tr>
+                            <td><%= cash.created_at.strftime("%m/%d/%Y") %></td>
+                            <td><%= cash.cash_amount %></td>
+                            <td><%= cash.payment_type  %></td>
+                          </tr>
+                            <% end %>
+                        </tbody>
+                    </table>

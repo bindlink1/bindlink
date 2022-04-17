@@ -1,0 +1,13 @@
+<%= form_for [@quote, @newnote], :html => {:autocomplete => "off"}, :class=>"form-horizontal"  ,:remote => true do |f| %>
+
+    <div class="control-group">
+
+      <%= f.label :notetext,"Note", :class=>"control-label" %>
+      <div class="controls">
+        <%= f.text_area :notetext , :class =>'required BLselect', :autocomplete => :off,:minlength=>'2', :cols => 1, :rows => 5 %>
+      </div>
+
+      <div class="form-actions"><%= f.submit 'Create Note', :class=>'btn btn-success', :id=>'Create Note' %> <button class="btn" id="clearnote" onclick='return false;'>Clear</button>  </div>
+    </div>
+
+<%end%>

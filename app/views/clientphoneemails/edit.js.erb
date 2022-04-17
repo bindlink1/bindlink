@@ -1,0 +1,5 @@
+$('#cpecancel').off('click');
+
+$("#cpework<%= @cpe.id.to_s %>").html("<td colspan='4' style='border-left: 0px;padding: 0; margin: 0;'><%=escape_javascript(render('editform')) %></td>");
+$("#cpe<%= @cpe.id.to_s %>").fadeOut(300);
+$('#cpecancel').on('click.mynamespace',function(){$(this).parents(".cpeworkarea").prev('tr').fadeIn(300);$(this).parents(".cpeworkarea").html(""); });

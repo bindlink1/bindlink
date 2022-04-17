@@ -1,0 +1,25 @@
+<table class="table table-bordered table-layout:fixed;">
+    <thead>
+    <tr>
+      <th colspan="4"><h3>Select a location to view more details or edit:</h3></th>
+    </tr>
+        <tr>
+      <th>Nickname</th>
+      <th>Address 1</th>
+      <th>City</th>
+      <th>State</th>
+    </tr>
+    </thead>
+    <tbody>
+     <%  @locations.each do |l| %>
+       <tr>
+         <td><%= link_to l.location_nickname.to_s , location_path(:id => l) %></td>
+         <td><%= l.address_1 %></td>
+         <td><%= l.city %></td>
+         <td><%= l.state %></td>
+       </tr>
+
+
+     <% end %>
+    </tbody>
+</table>

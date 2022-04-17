@@ -1,0 +1,43 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+  <div class="wellwhitemenu">
+      <span class="headtext"><%= link_to lineofbusinesses_path do%>Line of Business<%end%> : <%= @lobforview.line_name %>
+      <li class="dropdown" style="display: inline;">
+        <a  data-toggle="dropdown" href="#polmenu" class="dropdownmenubox">
+          <%= image_tag("list 2.png", :height=>"15px", :width=>"15px") %> Menu
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" >
+          <li>
+            <%= link_to  edit_lineofbusiness_path(:id=>@lobforview.id), :remote=>true, :method => :get  do %> <i class="icon-pencil"></i> Edit <% end %>
+          </li>
+        </ul>
+      </li>
+    </span>
+    </div>
+
+    <div id="lobinfo">
+      <%= render('viewinfo') %>
+    </div>
+    <div id="editlobwork"></div>
+    <table class="table table-bordered table-layout:fixed;">
+      <thead>
+      <tr>
+        <th>Action</th>
+        <th>Associated Fee</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>State</th>
+      </tr>
+      </thead>
+      <tbody id="associatedfees">
+      <%= render 'lobfees/showallforlob' %>
+      </tbody>
+    </table>
+    <div id="availablefees">
+      <%= render  'lobfees/availablefees', :allfees => @allfees %>
+    </div>
+
+
+  </div>
+</div>

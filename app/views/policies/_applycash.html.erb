@@ -1,0 +1,33 @@
+<%= javascript_include_tag "paycarrier" %>
+</br>
+<div class="wellwhite">
+
+    <h3>Apply Cash:</h3>
+
+  <hr>
+    <%= form_for @policycash, :url => pay_carrier_transactions_path, :class=>"form-horizontal"  ,:remote => true do |f| %>
+
+          <fieldset>
+            <div class="control-group">
+
+             <%= f.label :cash_amount,"Cash Amount", :class=>"control-label"%>
+                    <div class="controls">
+                      <%= f.text_field :cash_amount,:class=>"input-xlarge" , :autocomplete => :off  %>
+                    </div>
+            </div>
+            <div class="control-group">
+
+             <%= f.label :payment_type ,"Check #", :class=>"control-label" %>
+                    <div class="controls">
+                      <%= f.text_field :payment_type ,:class=>"input-xlarge" %>
+                    </div>
+            </div>
+
+
+            <div class="form-actions"><%= f.submit 'Process Payment', :class=>'btn btn-success', :id=>'paythispolicy' %> <button class="btn" id="gobackpay" onclick='return false;'>Go Back</button>   </div>
+
+          </fieldset>
+    <%end%>
+
+
+</div>

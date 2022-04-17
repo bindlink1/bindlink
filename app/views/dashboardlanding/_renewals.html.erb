@@ -1,0 +1,8 @@
+<table>
+  <% renewals.each do |renewal| %>
+  <tr>
+    <td><%= renewal[1] %> days left to renew</td>
+    <td><a id="renewal<%= renewal[0] %>" class="renewallink <%= renewal[3] %>" href="#"><%= renewal[2] %></a></td>
+  </tr>
+  <% end %>
+</table>

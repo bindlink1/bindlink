@@ -1,0 +1,3 @@
+$("#lobinfo").slideUp(300);
+ $('#editlobwork').html('<%= escape_javascript(render 'editinfo' ) %>').hide().slideDown(300);
+$("#cancelbutton").click(function(){$('#editlobwork').slideUp(300).html("");$("#lobinfo").slideDown(300); });

@@ -1,0 +1,3 @@
+$("#homeownerworkarea").html('<%=escape_javascript(render('new')) %>');
+$("#homepolicynew").fadeOut(300);
+$('#cancelnewhome').click(function(){$("#homepolicynew").fadeIn(300); $("#homeownerworkarea").html('');});

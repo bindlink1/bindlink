@@ -1,0 +1,4 @@
+$('#associatedfees').slideUp(300);
+$('#associatedfees').html("<%= escape_javascript(render('lobfees/showallforlob'))%>").slideDown(300);
+$('#availablefees').slideUp(300);
+$('#availablefees').html("<%= escape_javascript(render('lobfees/availablefees'))%>").slideDown(300);

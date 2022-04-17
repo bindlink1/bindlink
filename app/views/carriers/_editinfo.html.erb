@@ -1,0 +1,7 @@
+<div class="wellwhite">
+<%= form_for @carrier ,:remote => true do |f| %>
+<div> <%= render :partial => 'formdetails', :locals=>{:f => f}%>
+<div class="form-actions"><%= f.submit 'Save Changes', :class=>'btn btn-primary' %>  <button type="button" id="cancelbutton" onclick="cancelclick(); return false" class="btn btn-inverse">Cancel Edit</button> </div>
+</div>
+<% end %>
+</div>

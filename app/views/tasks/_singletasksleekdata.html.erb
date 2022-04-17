@@ -1,0 +1,55 @@
+
+<td class="taskrow">
+    <table  style="width: 100%;" >
+      <tr>
+        <td class="tasktitle">
+          <div class="singletask">
+
+            <div id="taskcheck<%=task.id%>" style="float: left;  margin_right: 10px;">
+              <%if task.status == 'completed'%>
+
+                  <%= form_tag(completetask_path(task), :method => "get", :remote=>true) do %>
+                      <%= check_box_tag  'done', 'yes', true, :class => 'submitcheck' %>
+                  <% end %>
+              <%else %>
+                  <%= form_tag(completetask_path(task), :method => "get", :remote=>true) do %>
+                      <%= check_box_tag  'done', 'yes', false, :class => 'submitcheck' %>
+                  <% end %>
+              <% end %>
+
+
+            </div>
+            <div class="taskname">
+              <%= link_to  task_path(task), :remote=>true do %><%= truncate(task.task_name, :length => 80, :omission => '...') %><%end%>
+
+
+            </div>
+          </div>
+        </td>
+        <td class="taskassigned">
+            <% if !task.policy_id.nil? %>
+      Policy : <%= link_to task.policy.policy_number, policy_path(task.policy), :class => 'linktext' %>
+  <% elsif !task.client_id.nil? %>
+      <% if task.client.client_status == "Prospect" %>
+          Prospect : <%= link_to task.client.fullname, showprospect_path(task.client), :class => 'linktext' %>
+      <% else %>
+          Client : <%= link_to task.client.fullname, client_path(task.client), :class => 'linktext' %>
+      <% end %>
+  <% elsif !task.quote_id.nil? %>
+      Quote : <%= link_to task.quote.submission.namedinsured.named_insured, quote_path(task.quote), :class => 'linktext' %>
+  <% end %>
+        </td>
+        <td class="taskdue">
+          <% if !task.reminder_date.nil? %>
+              <%= task.reminder_date.strftime("%m/%d/%Y") %>
+          <%else%>
+              --
+          <%end%>
+
+        </td>
+        <td class="taskmore">
+          <%= link_to task_path(task), :class=>'btn btn-micro', :remote =>true do%> <i class="icon-chevron-right"></i><%end%>
+        </td>
+      </tr>
+    </table>
+  </td>

@@ -1,0 +1,31 @@
+<% content_for :head do %>
+    <%= javascript_include_tag "taskunit" %>
+<% end %>
+<div class="wellwhiteblockcontrol">
+  <div class="wellwhitemenucontrol">
+    <div style="float:left;"><h3>Tasks</h3> | <%= link_to "Add New", new_client_task_path(@clientforview) , :remote => true, :style=>"text-decoration: underline;", :id=>"newtaskbutton" %>
+    </div>
+    <div style="float: right;">
+      <div style="float:right" class="sunkenlist">
+        Showing :
+        <ul>
+          <li id="outstandingtasks" class="active">
+            <%= link_to showoutstandingtasks_path(@clientforview, :type=>"Client"), :remote=>true do %> Outstanding (<%= @clientforview.outstandingtaskcount %>) <% end%>
+          </li>
+          <li id="completedtasks"><%= link_to showcompletedtasks_path(@clientforview, :type=>"Client"), :remote=>true do %> Completed (<%= @clientforview.completedtaskcount %>)<%end%></li>
+        </ul>
+      </div>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+
+  <div id="newtaskwork">
+
+  </div>
+  <div id="existingtasks">
+    <%= render 'tasks/tasksmin' %>
+  </div>
+</div>
+
+
+

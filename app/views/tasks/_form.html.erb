@@ -1,0 +1,8 @@
+<% if !@policy.blank? %>
+    <%= render 'policyform' %>
+
+<% elsif !@client.blank? %>
+    <%= render 'clientform' %>
+<% elsif !@quote.blank? %>
+    <%= render 'quoteform' %>
+<% end %>

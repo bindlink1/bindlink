@@ -1,0 +1,27 @@
+
+$("#createclientforpolicy").html('<%= escape_javascript(render'policyclientview') %>').hide().slideDown(300) ;
+
+
+$("#clientselectionnew").fadeIn();
+
+
+
+    $("#clients").dataTable(
+
+        {
+
+            "sPaginationType": "bootstrap",
+
+            "oLanguage": {
+                "sLengthMenu": "Display _MENU_ Clients" ,
+                "sZeroRecords": "No clients match your search!",
+                "sEmptyTable": "No data available in table",
+                "sInfo": "Showing (_START_ to _END_) of _TOTAL_ Clients",
+                "sSearch": "Search Clients:" ,
+                "sProcessing": "Processing",
+                "sInfoFiltered": " - searchinging from _MAX_ Clients" }
+
+
+        }
+
+    );

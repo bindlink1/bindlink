@@ -1,0 +1,12 @@
+$("#newpolicy").fadeOut();
+$("#entryformsectionhead").fadeOut();
+$("#clientforpolicy").fadeOut();
+$("#invoiceselectionnew").html("<%= escape_javascript(render 'aftercreate') %>");
+$("#step2").removeClass("activestep");
+$("#step2").addClass("inactivestep");
+$("#step3").removeClass("inactivestep");
+$("#step3").addClass("activestep");
+
+$("#gastep3").addClass("inactivestep");
+$("#gastep4").removeClass("inactivestep");
+$("#gastep4").addClass("activestep");

@@ -1,0 +1,21 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Workstreams</span>
+    </div>
+
+    <div class="wellwhite">
+      <% @workstreams.each do |ws| %>
+          <h3><%=  ws.workstream_name %></h3>
+          <hr>
+          <% ws.worksteps.each do |steps|%>
+
+              <%= steps.workitem.workitem_name%>
+          <% end %>
+
+      <% end %>
+
+
+    </div>
+
+  </div>
+</div>

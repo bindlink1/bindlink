@@ -1,0 +1,3 @@
+$('#quotefields').slideUp(300);
+$('#quotefieldswork').html('<%= escape_javascript(render 'editinfo' ) %>').hide().slideDown(300);
+$('#cancelquote').click(function(){$('#quotefields').slideDown(300);$('#quotefieldswork').html('') });

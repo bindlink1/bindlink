@@ -1,0 +1,2 @@
+class CompayBatchesController < ApplicationController
+end

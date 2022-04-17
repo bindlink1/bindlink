@@ -1,0 +1,4 @@
+$("#homeownerpolicy").html('<%= escape_javascript(render :partial => '/homeownerpolicies/policyfields', :locals => { :policyforview => @policyforview}) %>');
+$("#homeownerpolicy").slideDown(300);
+$("#homeownerworkarea").html('');
+$("#homepolicyedit").fadeIn(300);

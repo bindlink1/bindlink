@@ -1,0 +1,39 @@
+<%= form_for(@underwriter) do |f| %>
+  <% if @underwriter.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@underwriter.errors.count, "error") %> prohibited this Underwriter Data from being saved:</h2>
+
+      <ul>
+      <% @underwriter.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  
+  <div class="field">
+  	<%= f.label :quotingentity_id%></br>
+  	<%= collection_select( :underwriter, :quotingentity_id, Quotingentity.all, :id, :quotingentity_name) %>
+
+  </div>
+    <div class="field">
+    <%= f.label :email%><br />
+    <%= f.text_field :email %>
+  </div>
+
+  
+</br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+</br>
+<% end %>

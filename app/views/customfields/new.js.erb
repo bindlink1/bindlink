@@ -1,0 +1,4 @@
+$('#newcf').html('<%= escape_javascript(render('new')) %>').hide().slideDown(300);
+$('#newcustomfield').fadeOut(300);
+$('#customfieldcancel').click(function(){$('#newcf').slideUp(300).html('');$("#newcustomfield").fadeIn(300); });
+

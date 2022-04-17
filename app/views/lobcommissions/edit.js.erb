@@ -1,0 +1,3 @@
+$('#lobcomm<%=@lobcommission.id%>').slideUp(300);
+$('#lobcommwork<%=@lobcommission.id%>').html("<td colspan='5' style='border-left: 0px;padding: 0; margin: 0;'><%=escape_javascript(render('editform')) %></td>").slideDown(300);
+$('#lobeditcancel<%=@lobcommission.id%>').click(function(){$('#lobcommwork<%=@lobcommission.id%>').slideUp(300).html("");$('#lobcomm<%=@lobcommission.id%>').fadeIn(300); });

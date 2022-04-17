@@ -1,0 +1,6 @@
+$('#ppcancel').off('click');
+
+$("#ppwork<%= @pp.id.to_s %>").html("<td colspan='5' style='border-left: 0px;padding: 0; margin: 0;'><%=escape_javascript(render('editform')) %></td>");
+$("#pp<%= @pp.id.to_s %>").fadeOut(300);
+$('#ppcancel').on('click.mynamespace',function(){$(this).parents(".ppworkarea").prev('tr').fadeIn(300);$(this).parents(".ppworkarea").html(""); });
+$(document).ready(function() { $('#prospectpolicy_expiration_date').datepicker(); });

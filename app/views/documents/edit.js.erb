@@ -1,0 +1,71 @@
+$("#documentdetails_<%= @document.id%>").slideUp(300);
+
+var previousValue = "<%= @document.name%>";
+
+var onEditFileCategorySelectChange = function(event) {
+  var targetValue = event.target.value,
+  	parentElem = event.target.parentElement.parentElement;
+
+  if (targetValue === 'Other') {
+    $(parentElem).find('.documentEditNameInputTextWrapper').css('display', 'block');
+  } else {
+    $(parentElem).find('.documentEditNameInputTextWrapper').css('display', 'none');
+
+    var d        = new Date(),
+      dateString = ('0'+(d.getMonth()+1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2)  + '-' + d.getFullYear(),
+      value      = event.target.value + ' ' + dateString;
+
+    $(parentElem).find('.documentEditNameInput').val(value);
+  }
+}
+
+var onEditFileNameValueChange = function(event) {
+  var targetValue = event.target.value,
+  	parentElem = event.target.parentElement.parentElement;
+
+  $(parentElem).find('.documentEditNameInput').val(targetValue);
+}
+
+$("#documentwork_<%= @document.id%>").html('<%= escape_javascript(render :partial => 'editform') %>').hide().slideDown(300);
+
+var defaultStatuses = ['Cancellation', 'Correspondence', 'Final Audit', 'Inspection', 'New Business', 'Non-Renewal', 'Reinstatement', 'Renewal Offer', 'Request to Bind', 'Submission', 'Endorsement', 'Endorsement Request'],
+	previousDefaultStatus,
+	previousValueIsDefaultStatus = defaultStatuses.some(function(status){
+		if (previousValue.indexOf(status) === 0) {
+			previousDefaultStatus = status;
+
+			if (status === 'Endorsement') {
+				var postfix = / – \d\d?/.exec(previousValue);
+				if (postfix)
+					previousDefaultStatus += postfix[0];
+				else
+					return false;
+			}
+			else if (status === 'Endorsement Request') {
+				var postfix = / \d\d?/.exec(previousValue);
+				if (postfix)
+					previousDefaultStatus += postfix[0];
+				else
+					return false;
+			}
+
+			return true;
+		}
+	});
+
+if (previousValueIsDefaultStatus) {
+	$("#documentwork_<%= @document.id%> select").val(previousDefaultStatus)
+} else {
+	$("#documentwork_<%= @document.id%> select").val('Other')
+	$('#documentwork_<%= @document.id%> .documentEditNameInputTextWrapper').css('display', 'block');
+	$('#documentwork_<%= @document.id%> .documentEditNameInputText').val(previousValue);
+}
+
+$('#documentwork_<%= @document.id%> .documentEditNameInput').val(previousValue);
+$('#documentwork_<%= @document.id%> .documentNameOldLabel').html(previousValue);
+
+$('#documentwork_<%= @document.id%> .doceditcancel').on('click.mynamespace',function(){
+	$("#documentwork_<%= @document.id%>").slideUp(300).html('');
+
+	$("#documentdetails_<%= @document.id%>").slideDown(300);
+});

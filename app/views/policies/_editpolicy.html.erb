@@ -1,0 +1,7 @@
+<div id="dialogquestion" title="Edit Policy: are you sure?"></div>
+<%= form_for @policy,:remote => true do |f| %>
+
+ <%= render :partial => 'policyfields', :locals=>{:f => f}%>
+<div class="form-actions"><%= f.submit 'Save', :class=>'btn btn-success' %> <button class="btn" id="editcancel" onclick='return false;'>Cancel</button> </div>
+
+<% end %>

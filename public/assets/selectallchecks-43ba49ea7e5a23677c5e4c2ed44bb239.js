@@ -1,0 +1,1 @@
+$("#select-all").live("click",function(){this.checked?$(":checkbox").each(function(){this.checked=!0}):$(":checkbox").each(function(){this.checked=!1})});

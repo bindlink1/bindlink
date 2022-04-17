@@ -1,0 +1,41 @@
+<%= f.fields_for :acord_xml_pers_auto_line_business do |palb|  %>
+
+    <h3>Vehicles</h3>
+
+    <%= palb.fields_for :acord_xml_pers_vehs, :index=>"1"  do |builder|  %>
+        <div class="vehiclecontainer">
+
+          <%= render 'acord_xml_pers_veh_fields', :f => builder %>
+
+
+
+        </div>
+
+    <% end %>
+    <div id="newvehicles"></div>
+    <%= link_to_add_fields "Add Vehicle", palb, :acord_xml_pers_vehs %>
+
+    <hr/>
+
+
+<% end %>
+
+
+<h3>Drivers</h3>
+<%= f.fields_for :acord_xml_insured_or_principals, :index=>"1" do |iop| %>
+    <%= render 'acord_xml_insured_or_principal_fields', :f => iop %>
+<%end%>
+<div id="newdrivers"></div>
+<%= link_to_add_fields "Add Driver", f, :acord_xml_insured_or_principals %>
+<hr/>
+<h3>Locations</h3>
+<%= f.fields_for :acord_xml_locations, :index=>"1" do |l| %>
+    <%= render 'acord_xml_location_fields', :f => l %>
+<%end%>
+<div id="newlocations"></div>
+<%= link_to_add_fields "Add Location", f, :acord_xml_locations %>
+
+
+<br/>
+
+<%= f.submit 'Save', :class=>'btn btn-success' %>

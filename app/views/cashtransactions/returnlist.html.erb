@@ -1,0 +1,55 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Return Premium
+    </span>
+    </div>
+
+    <div id="afterprocess"></div>
+
+    <div id="returnworkarea"></div>
+    <%= form_for @returnbatch, :url=>returnpremium_path(@returnbatch.id), :html => {:autocomplete => "off", :class=>"form-horizontal"}, :remote=>true  do |f| %>
+        <div id="selectreturn">
+          <table class="worktable">
+            <thead>
+            <tr style="border-bottom: 1px solid #d3d3d3;">
+              <th style="border: 1px solid #d3d3d3; padding: 5px;">Select</th>
+              <th style="border: 1px solid #d3d3d3; padding: 5px;">Policy Number</th>
+              <th style="border: 1px solid #d3d3d3;">Producing Agency</th>
+              <th style="border: 1px solid #d3d3d3;">Named Insured</th>
+              <th style="border: 1px solid #d3d3d3;">Pay To</th>
+              <th style="border: 1px solid #d3d3d3;">Return Premium</th>
+            </tr>
+            </thead>
+            <tbody style="display: table-row-group;">
+
+            <% @return.each do |ret| %>
+                <% if !ret.policy.nil? && ret.policy.policybalance < -0.01 %>
+                  <tr style="border-bottom: 1px solid #d3d3d3; ">
+                    <td style="padding: 5px;  border-left: 1px solid #d3d3d3; width: 25px; background-color: #FAFAFA; text-align: center;"><%= check_box_tag "return[policy_ids][]", ret.policy.id %></td>
+                    <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;"><%=  ret.policy.policy_number %> </td>
+                    <% if current_agent.isgeneralagent == "GA" %>
+                        <td style=" border: 1px solid #d3d3d3; text-align: center;"> <%= ret.policy.producingagency.agency_name %></td>
+                        <td style=" border: 1px solid #d3d3d3; text-align: center;"> <%= ret.policy.namedinsured.named_insured %></td>
+                    <% else %>
+                        <td style=" border: 1px solid #d3d3d3; text-align: center;"> <%= ret.policy.client.fullname %></td>
+                    <% end %>
+                    <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">   <% if ret.policy.pfc_id.nil? == false %>
+                          <%= select_tag("return[policy_payto][" + ret.policy.id.to_s + "]", options_for_select([[ret.policy.pfc.pfc_name,'PFC' ],[ret.policy.producingagency.agency_name, 'ProducingAgency']])) %>
+                      <%else%>
+                          <%= select_tag("return[policy_payto][" + ret.policy.id.to_s + "]", options_for_select([[ret.policy.producingagency.agency_name, 'ProducingAgency']])) %>
+                      <% end %></td>
+                    <td style="padding: 5px 15px 5px 5px; border: 1px solid #d3d3d3; text-align: right;"><%= number_to_currency(ret.policy.policybalance * -1,  :negative_format => "(%u%n)") %></td>
+                  </tr>
+                <% end %>
+            <% end %>
+
+            </tbody>
+          </table>
+          <div style="padding-top: 15px">
+            <%= f.submit "Process Return Premium" %>
+             &nbsp;&nbsp; <%= link_to 'Print Invoices', printinvoicesunprocessed_path(@returnbatch), :class=>"linktext", :target=>"_blank"%>
+          </div>
+    <% end %>
+    </div>
+  </div>
+</div>

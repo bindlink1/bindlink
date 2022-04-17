@@ -1,0 +1,18 @@
+
+
+<%= form_for(@inboundemail, :html => { :class => "form-inline"}) do |f| %>
+
+
+  <%= render :partial => 'formdetails', :locals=>{:f => f}%>
+
+
+
+
+                      <%= f.submit 'Save', :class=>'btn btn-success' %>   <%= link_to "Cancel", @inboundemail , :class=>"btn" %>
+
+
+
+
+
+
+<% end %>

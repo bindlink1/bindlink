@@ -1,0 +1,124 @@
+<div class="previewhead">
+    <div  style=" margin: 5px;">
+      <% if current_agent.isgeneralagent == "GA"  %>
+          <div id="producingagency">
+            <%  if @policyforview.producingagency  %>
+                <b>Producing Agency :</b> <%= link_to @policyforview.producingagency.agency_name, producingagency_path(@policyforview.producingagency) ,:style =>"text-decoration: underline;"%>
+            <% end %>
+          </div>
+          <div id="producingagencywork">
+          </div>
+      <%end%>
+      <%  if !@policyforview.quote_id.nil?  %>
+          <b> <%= link_to 'View Quote Info', quote_path(@policyforview.quote_id) ,:style =>"text-decoration: underline;"%></b>
+      <% end %>
+    </div>
+    <div style="float: left; margin: 5px;">
+      <div>
+        <div style="margin-bottom: 5px;">Current Status</div>
+        <b class="<%= @styleclass %>" id="policystatus"><%= @policyforview.status%></b>
+      </div>
+
+    </div>
+      <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; min-height: 35px;">
+      <div>
+        <div style="margin-bottom: 5px;">Transaction Type</div>
+        <b id="transactiontype"><%if @policyforview.is_renewal%> Renewal <%else%> New Business <%end%></b>
+      </div>
+
+    </div>
+      <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; min-height: 35px;">
+      <div>
+        <div style="margin-bottom: 5px;"><b>Effective:</b><%=  @policyforview.effective_date.strftime("%m/%d/%Y") %></div>
+        <b>Expiration:</b><%=  @policyforview.expiration_date.strftime("%m/%d/%Y") %>
+      </div>
+    </div>
+    <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px;">
+      <div>
+        <div style="margin-bottom: 5px;">Annual Premium</div>
+        <b><%= number_to_currency(@policyforview.annualpremiumbase, :negative_format => "(%u%n)") %></b>
+      </div>
+    </div>
+    <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px;">
+      <div>
+
+        <% if current_agent.isgeneralagent == "GA"  %>
+
+            <% if  @policyforview.accountbalance(20006, 'Liability') > 0.001 %>
+                <div style="margin-bottom: 5px;">Balance Due to Producing Agency</div>
+                <b><%= number_to_currency(@policyforview.accountbalance(20006, 'Liability'),  :negative_format => "(%u%n)") %> </b>
+
+            <% end %>
+
+
+
+        <% else %>
+            <% if  @policyforview.accountbalance(20004, 'Liability') >0.001 %>
+                <div style="margin-bottom: 5px;">Balance Due to Client:</div>
+
+                <b><% begin%> <%= number_to_currency(@policyforview.accountbalance(20004, 'Liability'),  :negative_format => "(%u%n)") %><%rescue%> $0 <%end%></b>
+
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+
+
+    <% if current_agent.isgeneralagent == "GA"  %>
+        <% if  @policyforview.accountbalance(10006, 'Asset') != 0 %>
+            <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px;">
+              <div>
+
+                <div style="margin-bottom: 5px;">Balance Due</div>
+                <b><%= number_to_currency(@policyforview.accountbalance(10006, 'Asset'),  :negative_format => "(%u%n)") %> </b>
+              </div>
+            </div>
+
+
+        <%end%>
+      <% if  @policyforview.accountbalance(10007, 'Asset') != 0 %>
+          <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px;">
+            <div>
+
+              <div style="margin-bottom: 5px;">Unearned Commission Due</div>
+              <b><%= number_to_currency(@policyforview.accountbalance(10007, 'Asset'),  :negative_format => "(%u%n)") %> </b>
+            </div>
+          </div>
+
+
+      <%end%>
+
+    <% else %>
+        <% begin%>
+            <% if  @policyforview.accountbalance(10002, 'Asset') != 0 %>
+                <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px;">
+                  <div>
+                    <div style="margin-bottom: 5px;">Balance Due from Client:</div>
+
+                    <b><% begin%> <%= number_to_currency(@policyforview.accountbalance(10002, 'Asset'),  :negative_format => "(%u%n)") %><%rescue%> $0 <%end%></b>
+                  </div>
+                </div>
+            <%end%>
+        <% rescue %>
+        <% end %>
+    <% end %>
+
+    <% begin%>
+     <% if  @policyforview.carrierbalance != 0 %>
+        <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px;">
+          <div>
+            <div style="margin-bottom: 5px;">Amount Due <%if @policyforview.carrierbalance < 0 %>from<%else%>to<%end%> Carrier</div>
+            <b><% begin%>
+
+                  <%if @policyforview.carrierbalance < 0 %><%= number_to_currency(@policyforview.carrierbalance * -1) %><%else%><%= number_to_currency(@policyforview.carrierbalance) %><%end%>
+
+
+              <%rescue%> $0 <%end%></b>
+          </div>
+        </div>
+      <% end%>
+    <% rescue %>
+    <% end %>
+
+
+    <div style="clear: both"></div> </div>

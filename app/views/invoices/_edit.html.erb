@@ -1,0 +1,38 @@
+
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu" >
+
+    <h3>Adjust Invoice</h3> <button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+  </div>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+
+    <strong>Warning!</strong> This action will adjust the amount due on this invoice.
+
+
+  </div>
+
+
+  <%= form_for @invoice, :html=>{:class=>'form-horizontal'},:remote =>true do |f| %>
+
+      <div class="control-group">
+        <label class="control-label" for="inputamount">Total Billed</label>
+        <div class="controls">
+          <%= f.text_field :total_billed ,:autocomplete => :off %>
+
+        </div>
+
+
+
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+
+          <%= f.submit 'Save', :remote => true, :class=>"btn btn-success"%> <button class="btn btn-info"  id ="close_modal"  onclick='return false;'>Cancel</button>
+
+        </div>
+      </div>
+
+  <% end %>
+</div>

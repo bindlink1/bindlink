@@ -1,0 +1,17 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite" >
+    <div class="wellwhitemenu"><span class="headtext">Custom Fields</span> </div>
+
+    <h3>You can define your own custom fields in Bindlink!</h3>
+    <p>Add pet birthdays, nicknames, anniversary dates...ANYTHING to your clients or policies by defining custom fields. </p>
+
+    <%= link_to 'Create New', new_customfield_path ,:class=>"btn btn-success", :id=>"newcustomfield", :remote=>true %>
+    <div id="newcf"></div>
+
+    <hr/>
+    <div id="customfieldlist">
+      <%= render 'customfieldlist' %>
+    </div>
+
+  </div>
+</div>

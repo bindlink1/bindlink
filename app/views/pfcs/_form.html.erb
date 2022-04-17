@@ -1,0 +1,6 @@
+<%= form_for(@pfc, :html => { :class => "form-horizontal"} ) do |f| %>
+    <%= render :partial => 'formdetails', :locals=>{:f => f}%>
+    <div class="form-actions">
+      <%= f.submit 'Add Premium Finance Co', :class=>'btn btn-success' %>   <%= link_to "Cancel", pfcs_path, :class=>"btn btn-inverse" %>
+    </div>
+<% end %>

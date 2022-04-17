@@ -1,0 +1,95 @@
+   <hr>
+    <h3>Drivers</h3>
+    <br>
+    <table class="table table-bordered table-condensed table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>DOB</th>
+        <th>Sex</th>
+        <th>DL#</th>
+        <th>State</th>
+        <th>SSN#</th>
+      </tr></thead>
+      <tbody>
+      <% @transaction.al3h2trg.al3h5bpi.al3h5drvs.each do |driver|%>
+          <tr>
+            <td><%= driver.drivers_name%></td>
+            <td><%= driver.date_of_birth%></td>
+            <td><%= driver.driver_sex_code%></td>
+            <td><%= driver.drivers_license_number%></td>
+            <td><%= driver.licensed_state%></td>
+            <td><%= driver.social_security_number%></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+
+    <hr>
+    <h3>Vehicles</h3>
+    <br>
+    <table class="table table-bordered table-condensed table-striped">
+      <thead>
+      <tr>
+        <th>Year</th>
+        <th>Make</th>
+        <th>Model</th>
+        <th>Vin</th>
+        <th>Comp</th>
+        <th>Coll</th>
+        <th>Rental</th>
+        <th>Towing</th>
+      </tr></thead>
+      <tbody>
+      <% @transaction.al3h2trg.al3h5bpi.al3h5lags.each do |lag|%>
+          <% lag.al3h5vehs.each do |vehicle| %>
+              <tr>
+                <td><%= vehicle.vehicle_year%></td>
+                <td><%= vehicle.vehicle_make %></td>
+                <td><%=vehicle.vehicle_model %></td>
+                <td><%= vehicle.vin %></td>
+                <% @comp = Al3h6cva.where("coverage_code = 'COMP '", vehicle.id).find_all_by_al3h5veh_id(vehicle.id) %>
+                <td><%begin%><%= number_to_currency(@comp[0].deductible, :precision => 0) %><%rescue%> <%end%></td>
+                <% @coll = Al3h6cva.where("coverage_code = 'COLL '", vehicle.id).find_all_by_al3h5veh_id(vehicle.id) %>
+                <td><%begin%><%= number_to_currency(@coll[0].deductible, :precision => 0) %><%rescue%> <%end%></td>
+
+                <% @rental = Al3h6cva.where("coverage_code = 'RREIM'", vehicle.id).find_all_by_al3h5veh_id(vehicle.id) %>
+                <td><%begin%><%= number_to_currency(@rental[0].limit1, :precision => 0) %> <%rescue%> <%end%> <%begin%>/ <%= number_to_currency(@rental[0].limit2, :precision => 0) %> <%rescue%> <% end %></td>
+                <% @tow = Al3h6cva.where("coverage_code = 'TL   '", vehicle.id).find_all_by_al3h5veh_id(vehicle.id) %>
+                <td><%begin%><%= number_to_currency(@tow[0].limit1, :precision => 0) %><%rescue%> <%end%> <%begin%> / <%= number_to_currency(@tow[0].limit2, :precision => 0) %><%rescue%> <%end%> </td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+    <hr>
+    <h3>Coverages</h3>
+    <br>
+    <table class="table table-bordered table-condensed table-striped">
+      <thead>
+      <tr>
+        <th>Coverage</th>
+        <th>Limit</th>
+
+      </tr></thead>
+      <tbody>
+      <% @transaction.al3h2trg.al3h5bpi.al3h5lags.each do |lag|%>
+          <%lag.autocoverages.each do |cva| %>
+              <tr>
+                <td><%= cva.coverage_code%> </td>
+                <td><%= number_to_currency(cva.limit1, :precision => 0)%> <%if !cva.limit2.nil? %> / <%= number_to_currency(cva.limit2, :precision => 0)%> <% end%></td>
+              </tr>
+          <% end %>
+      <% end %>
+      </tbody>
+    </table>
+
+
+    <hr>
+    <h3>Remarks</h3>
+    <br>
+    <p>
+      <% @transaction.al3h2trg.al3h5bpi.al3h5rmks.each do |rmk|%>
+          <%= rmk.remarks_text%>
+      <%end%></p>

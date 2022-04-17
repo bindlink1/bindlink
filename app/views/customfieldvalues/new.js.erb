@@ -1,0 +1,3 @@
+$("#newcfbtn").fadeOut(300);
+$('#newcf').html('<%=escape_javascript(render('newform')) %>').hide().slideDown(300);
+$('#cfcancel').click(function(){$('#newcf').slideUp(300).html('');$("#newcfbtn").fadeIn(300); });

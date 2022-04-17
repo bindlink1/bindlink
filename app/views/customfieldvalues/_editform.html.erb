@@ -1,0 +1,14 @@
+<%= javascript_include_tag "createcustomfieldvalue" %>
+<%= form_for @cfv,:html => {:autocomplete => "off"}, :remote =>true do |f| %>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit 'save', :remote => true,:style=>"margin-bottom: 5px;", :class=>"btn btn-success btn-mini", :id=>"cffrmbtn"%> <button class="btn btn-mini" id="cfcancel" style="margin-bottom: 5px;" onclick='return false;'>cancel</button>
+
+        <%= f.collection_select :customfield_id, @customfields , :id, :field_name , {:include_blank => 'Select Custom Field'}, { :class =>'required' } %>
+        <%= f.text_field :value, :class=>"required" %>
+        <%= f.text_field :value_date ,:autocomplete => :off, :size=>"8" , :placeholder =>"Date", :id=>"customdate" %>
+
+         </div>
+    </div>
+<% end %>

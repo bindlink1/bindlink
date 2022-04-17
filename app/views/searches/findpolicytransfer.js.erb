@@ -1,0 +1,13 @@
+
+$("#searchresults").html("<%= escape_javascript(render 'searchresultstransfer') %>").fadeIn(300);
+$('#cashtransactionssection').fadeOut(300);
+
+
+$(document).ready(
+        $(function(){
+
+            $(".transferlinks").click( function() {
+                alert("I Surrender!");
+            });
+
+        }));

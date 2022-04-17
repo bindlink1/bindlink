@@ -1,0 +1,42 @@
+
+class Createdocumentpages  < Struct.new(:document_id)
+
+  def perform
+    document = Document.find(document_id)
+
+    # working code
+    open("#{Rails.root}/tmp/#{document.image_file_name.to_s}", 'wb') do |file|
+     
+	obj = document.image.s3_object(:original)
+	file << obj.read
+
+
+
+    end
+    qfr = "#{Rails.root}/tmp/#{document.image_file_name.to_s}"
+    Paperclip.run('convert', "-quality #{Documentpage::QUALITY} -density #{Documentpage::DENSITY} #{qfr} #{qfr}%d.png")
+    images = Dir.glob("#{qfr}*.png").sort_by do |line|
+      line.match(/(\d+)\.png$/)[1].to_i
+    end
+
+
+    images.each_with_index do |page_image, index|
+
+      #document.documentpages.build(:image => File.open(page_image), :page_number => index)
+      	dp = Documentpages.new
+    	dp.document_id = document.id
+	#dp.image = File.open(page_image)
+	dp.page_number = index
+	dp.save
+
+    end
+
+  end
+
+  def success(job)
+
+  end
+
+
+
+end

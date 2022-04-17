@@ -1,0 +1,13 @@
+<div id="searcharea">
+
+
+  <h2>Import Statement Payments</h2>
+
+  <%= form_tag import_statements_path, multipart: true do %>
+      <%= file_field_tag :file %>
+      <%= submit_tag "Import" %>
+  <% end %>
+</div>
+
+<div id="workarea"></div>
+<div id="searchresults"></div>

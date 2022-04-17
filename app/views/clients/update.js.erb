@@ -1,0 +1,3 @@
+$("#clientinfo").slideUp(300);
+ $('#clientinfo').html('<%= escape_javascript(render :partial => 'showclientdetails', :locals => {:clientforview => @clientforview}) %>').hide().slideDown(300);
+$('#clientinfowork').html('')

@@ -1,0 +1,10 @@
+
+$("#documentdetailslist_<%= @document.id%>").slideUp(300);
+
+$("#documentworklist_<%= @document.id%>").html('<%= escape_javascript(render :partial => 'editformlist') %>').hide().slideDown(300);
+
+$('#doceditcancel').on('click.mynamespace',function(){
+
+$("#documentworklist_<%= @document.id%>").slideUp(300).html('');
+
+$("#documentdetailslist_<%= @document.id%>").slideDown(300);});

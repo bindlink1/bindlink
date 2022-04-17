@@ -1,0 +1,32 @@
+<% title @referrer.refererfullname + " | Referrer | bindlink" %>
+<% content_for :head do %><%= javascript_include_tag "referrertree" %>  <%end%>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Referrers: <%if @referrer.client_id.nil?%><%= @referrer.refererfullname %><%else%><%= link_to @referrer.refererfullname, client_path(@referrer.client_id) %> <%end%></span> </div>
+    <div class="previewhead">
+
+      <div style="float: left; margin: 5px; margin-left: 10px;  padding-left: 10px; text-align: center;"><b>Active Referred Premium</b><h3><%= number_to_currency(@referrer.referraltotal) %></h3></div>
+      <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Referred Clients</b><h3><%= @referrer.referralcountclient %></h3></div>
+      <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Referred Prospects</b><h3><%= @referrer.referralcountprospect %></h3></div>
+      <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Active Policies Referred</b><h3><%= @referrer.referraltotalpol %></h3></div>
+
+
+      <div style="clear:both"></div>
+    </div>
+
+    <%= render 'referredclientspolicy' %>
+
+    <div class="row-fluid">
+      <div class="span12">
+
+        <hr>
+
+
+        <div style="font-family: Arial;border: 0 none;">
+          <div id="referralfchart" style="width: 300px; height: 300px;"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

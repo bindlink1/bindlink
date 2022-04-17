@@ -1,0 +1,22 @@
+
+<% if @errorarray.empty?  %>
+        $("#applicationformmessages").html("Form Successfully Sumbitted!");
+        $("#applicationformmessages").effect('highlight', 1000)
+        <% @applicationarray.each do |okayform|%>
+            $('input[name=<%= "response" + okayform.field_name %>]').removeClass('formnotfillederror') ;
+        <% end %>
+
+
+<% else %>
+         $("#applicationformmessages").html("See missing fields below");
+         <% @applicationarray.each do |okayform|%>
+            $('input[name=<%= "response" + okayform.field_name %>]').removeClass('formnotfillederror') ;
+        <% end %>
+        <% @errorarray.each do |formerrors|%>
+            $('input[name=<%= "response" + formerrors.field_name %>]').addClass('formnotfillederror') ;
+        <% end %>
+        <% @errorarray = Array.new %>
+<% end %>
+
+
+

@@ -1,0 +1,9 @@
+<div class="wellwhite" >
+  <%= javascript_include_tag "newquote" %>
+  <%= form_for  @quote,:remote=>true,:html => {:autocomplete => "off", :class=>"form-horizontal"} do |f| %>
+      <%= render :partial => 'quotefields', :locals=>{:f => f} %>
+      <div class="form-actions">
+        <%= f.submit 'Save', :remote => true, :class=>"btn btn-success", :id=>"createquotebtn"%> <button class="btn" id="cancelquote" onclick='return false;'>Go Back</button>
+      </div>
+  <% end %>
+</div>

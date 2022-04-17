@@ -1,0 +1,23 @@
+<td>
+  <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini", :id=>"lobcommsub"%> <button class="btn btn-mini" id="lobeditcancel<%=@lobcommission.id%>" onclick='return false;' >cancel</button>
+</td>
+<td >
+  <%= f.collection_select :state, State.all, :abbreviation, :abbreviation, {:include_blank => 'Select One'} %>
+</td>
+<td>
+  <%= f.text_field :commission_rate,:autocomplete => :off,:class=>"input-medium", :placeholder =>"New Rate"  %>
+</td>
+<% if current_agent.isgeneralagent == "GA" %>
+    <td>
+      <%= f.text_field :producer_rate,:autocomplete => :off,:class=>"input-medium", :placeholder =>"Producing Agency Rate"  %>
+    </td>
+<%else%>
+    <td> <%= f.text_field :commission_rate_renew,:autocomplete => :off,:class=>"input-medium", :placeholder =>"Renewal Rate"  %>
+    </td>
+<%end%>
+<td>
+  <%= f.collection_select :billing_type, @paymenttype, :first, :last, {:include_blank => 'Select One'}, :class=>"input-medium" %>
+</td>
+
+
+

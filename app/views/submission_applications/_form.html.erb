@@ -1,0 +1,39 @@
+<div id="applicationformmessages"></div>
+
+
+<%= form_for@submissionapplication, :remote => true  do |f| %>
+<div class="infoblock">
+    <% @formfieldarray.each do |formfield| %>
+
+             <%= formfield.display_name.to_s %>
+
+              <% if formfield.field_type.to_s == 'Text' %>
+                         <div> <%= f.text_field :response,:class =>formfield.required.to_s ,:name =>"response"+ formfield.field_name.to_s  %>*<br/> </div>
+              <% elsif formfield.field_type.to_s == 'drop_down' %>
+                         <div> <%= f.select :response ,formfield.field_options,{:include_blank => 'Select One'}, {:name =>"response"+ formfield.field_name.to_s , :class =>formfield.required.to_s } %>  <br/> </div>
+              <% elsif formfield.field_type.to_s == 'radio' %>
+                     <div>
+                           <% formfield.field_options.each do |option| %>
+                                <%=option.to_s%> <%= f.radio_button :response, option, {:name =>"response"+ formfield.field_name.to_s , :class =>formfield.required.to_s } %>  <br/>
+                           <% end %>
+                     </div>
+
+              <% elsif formfield.field_type.to_s == 'checkbox' %>
+                       <div>
+                           <% formfield.field_options.each do |option| %>
+                                <%=option.to_s%> <%= f.check_box :response , {:multiple =>true, :name =>"response"+ formfield.field_name.to_s+"[response][]"}, option, nil %>  <br/>
+                           <% end %>
+                     </div>
+              <% end %>
+
+
+    <% end %>
+
+
+</div>
+
+    <div class="actions">
+    <%= f.submit %>
+    </div>
+
+<% end %>

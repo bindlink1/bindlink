@@ -1,0 +1,53 @@
+<tr id="task<%=task.id%>"  style="word-wrap: break-word; width: 100%;">
+  <td class="taskrow">
+    <div id="taskcheck<%=task.id%>" style="float: left;  margin-right: 10px;">
+      <%if task.status == 'completed'%>
+          <%= image_tag('check-box-check.gif')%>
+      <%else %>
+          <%=  link_to  image_tag('check-box-empty.gif', :mouseover => image_path('check-box-check.gif') ), completetask_path(task), :remote => true%>
+      <% end %>
+    </div>
+    <div>
+
+      <%= task.task_name %>
+      <br/>
+      <div class="taskdetails">
+        <% if !task.policy_id.nil? %>
+            <h4>Policy : <%= link_to task.policy.policy_number, policy_path(task.policy), :class => 'linktext' %></h4>
+        <% elsif !task.client_id.nil? %>
+            <% if task.client.client_status == "Prospect" %>
+                <h4>Prospect : <%= link_to task.client.fullname, showprospect_path(task.client), :class => 'linktext' %></h4>
+            <% else %>
+                <h4>Client : <%= link_to task.client.fullname, client_path(task.client), :class => 'linktext' %></h4>
+            <% end %>
+        <% elsif !task.quote_id.nil? %>
+            <h4>Quote: <%= link_to task.quote.submission.namedinsured.named_insured, quote_path(task.quote), :class => 'linktext' %></h4>
+        <% end %>
+
+      </div>
+      <div class="taskdetails">
+        <% if !task.reminder_date.nil? %>
+            <b>Follow Up Date:</b> <%= task.reminder_date.strftime("%m/%d/%Y") %>
+            <br />
+        <%end%>
+        <b>Created On:</b> <%= task.created_at.strftime("%m/%d/%Y") %>
+
+        <% begin %>
+            | <b>Assigned To:</b> <%= task.agent.fullname %>
+        <%rescue%>
+
+
+
+        <%end%>
+
+      </div>
+      <% task.subordinates.each do |subordinate| %>
+
+          <%= render :partial => 'tasks/singletasksubdetails', :locals => { :task => subordinate } %>
+
+      <% end %>
+    </div>
+  </td>
+
+
+</tr>

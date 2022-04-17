@@ -1,0 +1,25 @@
+<table class="table table-bordered table-layout:fixed;">
+    <thead>
+    <tr>
+      <th colspan="4"><h3>Select a Premium Finance Company to view more details or edit:</h3></th>
+    </tr>
+        <tr>
+      <th>Name</th>
+      <th>Created On</th>
+      <th>Telephone</th>
+      <th>Marketing Contact</th>
+    </tr>
+    </thead>
+    <tbody>
+     <%  @pfcs.each do |p| %>
+       <tr>
+         <td><%= link_to p.pfc_name.to_s , pfc_path( p) %></td>
+         <td><%= p.created_at %></td>
+         <td><%= p.telephone %></td>
+         <td><%= p.marketing_contact %></td>
+       </tr>
+
+
+     <% end %>
+    </tbody>
+</table>

@@ -1,0 +1,32 @@
+<%= javascript_include_tag "uploaddocument" %>
+</br>
+<div class="wellwhite">
+    <h3>Upload Document</h3>
+   <div id="uploadstatus"></div>
+  <hr>
+
+<%= form_for @document , :url => createsubmissiondoc_path(@submission) , :class=>"form-vertical", :html => { :multipart => true, :id =>'documentform', :autocomplete => "off" }, :remote => true   do |f| %>
+
+                    <div class="control-group">
+
+                        <%= f.label :name,"Document Name", :class=>"control-label" %>
+                        <div class="controls">
+                         <%= f.text_field :name,:class=>"input-xlarge" %>
+                        </div>
+                    </div>
+                    <div class="control-group">
+
+                        <%= f.label :image,"Document to Upload", :class=>"control-label" %>
+                        <div class="controls">
+                          <%= f.file_field :image,:class=>"input-xlarge" %>
+                        </div>
+                    </div>
+
+            <div class="form-actions"><%= f.submit "Submit", :id=>"uploadbutton", :class=>"btn btn-success"%> <button class="btn" id="gobackdocumentupload" onclick='return false;'>Go Back</button></div>
+
+
+
+<% end %>
+
+
+</div>

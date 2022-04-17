@@ -1,0 +1,4 @@
+$("#returnworkarea").html("<%= escape_javascript(render :partial => 'processreturn', :locals =>{:policy =>@policy}) %>").hide().slideDown(300);
+$("#returndone").click(function(){$("#returnworkarea").slideUp(300); $("#returnworkarea").html("");});
+
+

@@ -1,0 +1,23 @@
+
+<h3>Select an existing client</h3>
+
+<table id="clients" class="display">
+        <thead>
+          <tr>
+               <th>Client Name</th>
+               <th>Address</th>
+               <th>Created</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% @allclients.each do |clients| %>
+          <tr>
+            <td><%= link_to clients.client_name.to_s , existing_client_policy_path(:id => clients), :remote => true %></td>
+            <td><%= clients.address_1  %></td>
+            <td><%= clients.created_at  %></td>
+          </tr>
+            <% end %>
+        </tbody>
+</table>
+
+

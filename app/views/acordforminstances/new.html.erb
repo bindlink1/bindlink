@@ -1,0 +1,76 @@
+<%= stylesheet_link_tag 'acordforms' %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu">
+      <span class="headtext" >Create Form: <%=@acordformbuilder.acordform.form_name%>  </span>
+    </div>
+    <%=  link_to '<< Back to Client', client_path(@client), :class=>"linktext"  %>
+    <div class="span12">
+      <%= form_for [@client,@acordforminstance] do |f| %>
+
+          <%=  f.submit %>
+
+      <div class="span12" id="tabcontainer">
+        <div class="tabbable">
+          <ul class="nav nav-tabs">
+
+                <% @acordformbuilder.formurls.each_with_index do | url, index| %>
+                    <% if index == 0 %>
+                        <li class="active"><a href="#tab<%= index %>" data-toggle="tab">Page <%= index + 1 %></a></li>
+                    <% else %>
+                        <li><a href="#tab<%= index %>" data-toggle="tab"> Page <%= index + 1 %> </a></li>
+                    <% end %>
+                <% end %>
+                </ul>
+
+                <div class="tab-content" style="overflow: visible;">
+
+                  <% @acordformbuilder.formurls.each_with_index do | url, index| %>
+                      <% if index == 0 %>
+
+                          <div id="tab<%= index %>" class="tab-pane active">
+                            <div class="acordForm" style=" background-image: url('<%= url %>'); border:  1px solid #000000;">
+                              <div class="acordFields">
+                                <% @fields = Acordformfield.where("acordform_id = ? AND page = ?", @acordformbuilder.acordform.id, index+1) %>
+                                <% @fields.each do |af| %>
+                                    <input name="acordforminstance[<%= af.formfieldname %>]" type="<%= af.fieldtype %>" style="left:<%= af.xposoffset %>px; top:<%= af.yposoffset %>px; width:<%= af.widthoffset %>px; height:<%= af.heightoffset %>px" />
+                                <% end %>
+
+                              </div>
+                            </div>
+
+
+                          </div>
+                      <% else %>
+
+                          <div id="tab<%= index %>" class="tab-pane">
+
+                            <div class="acordForm" style=" background-image: url('<%= url %>'); border:  1px solid #000000;">
+                              <div class="acordFields">
+                                <% @fields = Acordformfield.where("acordform_id = ? AND page = ?", @acordformbuilder.acordform.id, index+1) %>
+                                <% @fields.each do |af| %>
+                                    <input name="acordforminstance[<%= af.formfieldname %>]" type="<%= af.fieldtype %>" style="left:<%= af.xposoffset %>px; top:<%= af.yposoffset %>px; width:<%= af.widthoffset %>px; height:<%= af.heightoffset %>px" />
+                                <% end %>
+
+                              </div>
+                            </div>
+
+
+
+                          </div>
+                      <% end %>
+                  <% end %>
+            <% end %>
+            </div>
+            </div>
+
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+</div>

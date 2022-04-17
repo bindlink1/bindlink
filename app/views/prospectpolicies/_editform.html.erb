@@ -1,0 +1,12 @@
+<%= form_for @pp,:remote =>true do |f| %>
+    <table style="width: 100%;">
+      <col width="10%" />
+      <col width="10%" />
+      <col width="20%" />
+      <col width="20%" />
+      <col width="40%" />
+
+      <%= render('formfields', :f => f) %>
+
+    </table>
+<% end %>

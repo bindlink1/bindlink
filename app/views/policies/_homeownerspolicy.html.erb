@@ -1,0 +1,11 @@
+<div id="homeownerworkarea">
+
+</div>
+<div id="homeownerpolicy">
+  <% if !@policyforview.homeownerpolicy.nil? %>
+      <%= render('/homeownerpolicies/policyfields', :policyforview => @policyforview) %>
+
+
+<% end %>
+
+</div>

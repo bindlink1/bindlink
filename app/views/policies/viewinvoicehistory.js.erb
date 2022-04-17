@@ -1,0 +1,5 @@
+$("#invoice<%= @invoice.id.to_s %>").show();
+ $("#invoice<%= @invoice.id.to_s %>").html("<td colspan='9' style='background-color: #f5f5f5;' ><div id='invhist<%= @invoice.id.to_s %>'><%= escape_javascript(render  'invoicehistory') %>  </div></td>");
+ $("#invhist<%= @invoice.id.to_s %>").hide().slideDown(300);
+ $("#history<%= @invoice.id.to_s %>").html("<%= escape_javascript(link_to ' Hide History', hide_invoice_history_path(:id => @invoice.id.to_s), :remote => true, :class=>'btn btn-info') %>");
+

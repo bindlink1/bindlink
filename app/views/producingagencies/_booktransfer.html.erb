@@ -1,0 +1,33 @@
+
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu" >
+
+    <h3>Book Transfer</h3> <button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+  </div>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+
+    <strong>Warning!</strong> This action will transfer all of this agencies policies
+
+  </div>
+  <%= form_for @producingagency,:method=>"POST" ,:url=>updatebooktransfer_path(@producingagency.id), :html=>{:class=>'form-horizontal'}, :remote => true do |f| %>
+
+      <div class="control-group">
+        <label class="control-label">Agency to transfer to:</label>
+        <div class="controls">
+
+          <%= collection_select :producingagency, :id, @producingagencies.all,:id, :nameandcode, {:include_blank => 'Select One'}, { :class =>'required' }%>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit 'OK', :class=>"btn btn-success btn-small", :id=>"aorfrmbtn"%> <button class="btn btn-info"  id ="close_modal"  onclick='return false;'>Cancel</button>
+
+
+
+      </div>
+
+
+
+  <% end %>
+</div>

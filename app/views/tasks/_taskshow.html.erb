@@ -1,0 +1,53 @@
+<%= javascript_include_tag "taskshow" %>
+<div class="taskshow"  >
+  <div id="taskworkdiv" class="taskworkdiv"></div>
+  <div id="taskdetails" class="taskdetails">
+    <%= link_to('edit', edit_task_path(@task) , :remote => true, :class=>'linktext') %> | <%= link_to('reply', newtaskreply_path(@task) , :remote => true, :class=>'linktext') %> | <%= link_to('delete', @task, :confirm => 'Are you sure you want to delete this task?', :method => :delete, :remote => true, :class=>'linktext') %>
+    <br/> <br/>
+
+    <h3><%= @task.task_name%></h3>
+    <hr>
+    <table>
+      <col width="150px">
+      <col width="400px">
+      <tr>
+        <td>Due On:</td>
+        <td>
+          <% if !@task.reminder_date.nil? %>
+              <%= @task.reminder_date.strftime("%m/%d/%Y") %>
+          <%else%>
+              --
+          <%end%>
+        </td>
+      </tr>
+      <tr>
+        <td>Assigned To:</td>
+        <td>
+          <%begin%>
+          <%= @task.agent.fullname %>
+          <%rescue%>
+          <%end%>
+        </td>
+      </tr>
+      <tr>
+        <td>Created On:</td>
+        <td><%= @task.created_at.strftime("%m/%d/%Y")  %></td>
+      </tr>
+
+    </table>
+  </div>
+  <div id="discussionwrapper">
+    <% if !@task.subordinates.blank? %>
+        <div id="discussionheader">
+          <hr>
+          <b><a><i class="icon-comment"></i> Discussion</a></b>
+        </div>
+    <% end%>
+  </div>
+  <% @task.subordinates.each do |subordinate| %>
+
+      <%= render :partial => 'tasks/singletasksubdetails', :locals => { :task => subordinate } %>
+
+  <% end %>
+  <div id="temptask"></div>
+</div>

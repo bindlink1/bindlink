@@ -1,0 +1,3 @@
+$('#namedinsuredfields').slideUp(300);
+$('#namedinsuredwork').html('<%= escape_javascript(render 'editform' ) %>').hide().slideDown(300);
+$('#namedinsuredcancel').on('click.mynamespace',function(){ $('#namedinsuredwork').slideUp(300);$('#namedinsuredfields').slideDown(300);});

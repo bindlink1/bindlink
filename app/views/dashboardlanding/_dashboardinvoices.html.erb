@@ -1,0 +1,27 @@
+
+<h3>Overdue Invoices</h3>
+<hr>
+<table id="overdueinvoices" class="display">
+  <thead>
+  <tr>
+    <th>Client Name</th>
+    <th>Created</th>
+    <th>Due Date</th>
+    <th>Total Billed</th>
+    <th>Balance</th>
+    <th>Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @odlist.each do |invoice| %>
+      <tr>
+        <td><%begin%><%= link_to invoice.policypremiumtransaction.policy.client.fullname.to_s , view_invoice_path(:id => invoice) %><%rescue%> N/A <%end%></td>
+        <td><%= invoice.created_on.strftime("%m/%d/%Y")  %></td>
+        <td><%= invoice.due_on.strftime("%m/%d/%Y")  %></td>
+        <td><%= invoice.total_billed  %></td>
+        <td><%= invoice.outstandingbalance  %></td>
+        <td><%= invoice.isoverdue %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>

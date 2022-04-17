@@ -1,0 +1,5 @@
+$("#notewrapper").html('<%= escape_javascript(render :partial => 'notes/filenotelist', :locals => { :notesforview => @notesforview, :quotenotes =>  @quotenotesforview } )%>');
+$("#note_notetext").val("");
+$('#noteform').slideUp(300).html('');
+
+

@@ -1,0 +1,25 @@
+<%= form_for [@client,@cpe], :remote =>true do |f| %>
+    <table class="table table-bordered table-condensed table-layout:fixed " width="100%" id="newcpe" >
+      <col width="15%" />
+      <col width="25%" />
+      <col width="25%" />
+      <col width="35%" />
+      <thead>
+      <tr>
+        <td></td>
+        <td>Number / e-Mail</td>
+        <td>Type</td>
+        <td>Note</td>
+
+      </tr>
+      </thead>
+      <tbody>
+
+      <%= render('formfields', :f => f) %>
+
+      </tbody>
+    </table>
+<% end %>
+
+
+

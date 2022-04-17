@@ -1,0 +1,7 @@
+$(document).ready(function() {
+  $('#fee_effective_date').datepicker();
+  $('#fee_expiration_date').datepicker();
+});
+$("#feeinfo").slideUp(300);
+$('#feeinfo').html('<%= escape_javascript(render 'editinfo' ) %>').hide().slideDown(300);
+ 

@@ -1,0 +1,2 @@
+$("#carrierinfo").slideUp(300);
+ $("#carrierinfo").html('<%= escape_javascript(render :partial => 'viewinfo', :locals => {:carrierforview => @carrierforview}) %>').hide().slideDown(300);

@@ -1,0 +1,54 @@
+<%= javascript_include_tag "senddocemail" %>
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu">
+    <button type="button" class="close" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+    <h3>Create e-Mail</h3>
+  </div>
+  <div id="emailstatus"></div>
+  <div class="modal_body" style=" overflow-x: hidden; max-height: 450px;" id="emailform">
+    <%= form_for @email,:url=>createdocemail_path, :html => { :class => "form-horizontal"}  ,:remote =>true  do |f| %>
+        <div class="control-group">
+          <label class="control-label">From:</label>
+          <div class="controls">
+            <%= f.text_field :from, :value=>@emailaddress.outboundemail ,:autocomplete => :off %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">To:</label>
+          <div class="controls">
+            <%= f.text_field :to,:class=>"required",:autocomplete => :off %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Subject:</label>
+          <div class="controls">
+            <%= f.text_field :subject,:autocomplete => :off %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label">Message:</label>
+          <div class="controls">
+            <%= f.text_area :body, :autocomplete => :off,:minlength=>'2', :cols => 45, :rows => 8 %>
+
+          </div>
+        </div>
+
+        <b>Attached Files</b>
+        <hr/>
+        <div style="max-height: 75px; overflow-y: auto;">
+        <ul >
+          <% @documents.each do |doc|%>
+              <li class="emaildocs" id="doc_<%=doc.id %>">
+                <%= link_to doc.name, download_document_path(doc), :target => "_blank" , :class=>'linktext'%> |  <a class="removedoc linktext" style="cursor: pointer;" onclick='return false;'>(Remove)</a>
+                 <input type="hidden" name="[documents][]" value="<%=doc.id %>">
+              </li>
+          <% end %>
+        </ul>
+        </div>
+        </div>
+        <div class="controls form-actions">
+          <%= f.submit 'Send', disable_with: 'Sending...', :remote => true, :class=>"btn btn-success", :id=>"sendemailbtn"%>  <button class="btn btn-info"  id ="close_modal"  onclick='return false;'>Cancel</button>
+        </div>
+    <% end %>
+
+    </div>

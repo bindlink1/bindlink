@@ -1,0 +1,8 @@
+$("#selectproducer").fadeOut(300);
+$("#neworexistingclient").append('<%= escape_javascript(render 'clientselection') %>').hide().slideDown(300) ;
+
+$("#gastep1").addClass("inactivestep");
+$("#gastep2").removeClass("inactivestep");
+$("#gastep2").addClass("activestep");
+
+

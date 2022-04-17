@@ -1,0 +1,33 @@
+
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu" >
+
+    <h3>Adjust Producing Agency Commission Rate</h3> <button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+  </div>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+
+    <strong>Warning!</strong> This action will change the producing agency commission rate on this policy.
+
+  </div>
+  <%= form_for @policy, :url=>updatecommissionrate_path(@policy),:html=>{:class=>"form-horizontal"}, :remote=>true do |f|%>
+
+      <div class="control-group">
+        <label class="control-label">Producing Agency Commission Rate</label>
+        <div class="controls">
+
+          <input id='producer_comm'  type='text' size='10' name='producer_comm' autocomplete='off' value="<%= @policy.producercommrate %>">
+
+
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit 'Adjust' ,:confirm => 'Are you sure you want to adjust the commission rate for this policy?' ,disable_with: 'Processing...', :class=>"btn btn-success" %>
+        <button class="btn"  id ="close_modal" onclick='return false;'>Cancel</button>
+      </div>
+  <% end %>
+
+
+
+</div>

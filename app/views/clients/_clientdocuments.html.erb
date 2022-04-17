@@ -1,0 +1,30 @@
+<div class="page-header"><div style="float: left;"><h3>Documents:</h3></div>
+
+
+  <div style="float: right;">
+    <div class="btn-group" data-toggle="buttons-radio">
+
+      <%= link_to showgrid_path(:id=>@clientforview.id, :type=>'client') ,:class=>"btn active", :remote=>true do %><i class="icon-th-large"></i> Grid <%end%>
+
+      <%= link_to showlist_path(:id=>@clientforview.id, :type=>'client') ,:class=>"btn", :remote=>true do %><i class="icon-list"></i> List <%end%>
+
+    </div>
+  </div>
+  <div style="float: right; padding-right: 10px;">
+
+    <%= link_to sendalldocs_path(:id=>@clientforview.id, :type=>"client") ,:class=>"btn", :remote=>true do %><i class="icon-envelope"></i> e-Mail All Documents <%end%>
+  </div>
+  <div style="float: right; padding-right: 10px;">
+
+    <%= link_to new_document_path(:id=>@clientforview.id, :type=>'client') ,:class=>"btn btn-success", :remote=>true do %><i class="icon-arrow-up icon-white"></i> Create New <%end%>
+  </div>
+  <div style="clear: both"></div>
+</div>
+<div id="documentcontainer" class="documentcontainer" >
+
+
+  <%= render :partial=>'documents/documentgridviewquickload', :locals=>{:documentsforview => @documentsforview}%>
+
+
+
+</div>

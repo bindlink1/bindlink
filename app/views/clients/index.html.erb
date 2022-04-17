@@ -1,0 +1,71 @@
+<%= javascript_include_tag "clientsdashboard" %>
+<%= javascript_include_tag "clientstats" %>
+<% title "Clients | bindlink" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite" >
+    <div class="wellwhitemenu"><span class="headtext">Client Home</span> </div>
+
+
+
+    <div  style="width: 50%; float: left;">
+      <div class="wellwhiteblock">
+        <div class="wellwhitemenu"><h3>Recent Clients</h3></div>
+
+        <table class="table table-striped table-bordered">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Policy Count</th>
+            <th>Active Premium</th>
+            <th>Open Balance</th>
+          </tr>
+          </thead>
+          <tbody style="max-height: 170px; overflow-y: scroll; margin: 0px; padding: 0px;">
+          <% @recentclients.each do |recclients| %>
+              <tr data-href='<%=client_path(recclients)%>' style="cursor: pointer;">
+                <td><%= recclients.fullname %></td>
+                <td><%= recclients.activepolcount %></td>
+                <td><%begin%><%= number_to_currency(recclients.activepremium) %><%rescue%>$0<%end%></td>
+                <td><%begin%><%= number_to_currency(recclients.openbalance) %><%rescue%>$0<%end%></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+
+    <div style="width: 48%; float: right; ">
+      <div class="wellwhiteblock">
+        <div class="wellwhitemenu"><h3>Business Intelligence </h3></div>
+        <h3># of Active policies by Client</h3>
+        <hr>
+        <div id="carriercntchart" style="width:90%;min-height:125px;margin: 0px; padding:  10px;"></div>
+      </div>
+    </div>
+
+
+
+    <div style="clear:both;"></div>
+
+    <h3>All clients: click on a client name below to view.</h3>
+    <br />
+    <div class="dataTablewrapper">
+      <table id="clients" class="bordered-table zebra-striped " data-source="<%= clients_url(format: "json") %>">
+        <thead>
+        <tr>
+          <th>Client Name</th>
+          <th>Policy Count</th>
+          <th>Active Premium</th>
+          <th>Open Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+

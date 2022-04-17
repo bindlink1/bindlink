@@ -1,0 +1,390 @@
+<%= javascript_include_tag "policy" %>
+<% title "Policy: " + @policyforview.policy_number + " | bindlink" %>
+<div id="dialogquestion"></div>
+<div class="col1wrap">
+<div class="col1 wellwhite" id="policyviewmain" >
+<div class="wellwhitemenu">
+
+  <div class="headtext"><span id="pageheader"><%= @policyforview.policy_number %> :<% if current_agent.isgeneralagent == "GA"%> <%= link_to @policyforview.namedinsured.named_insured, namedinsured_path(@policyforview.namedinsured), :style =>"text-decoration: underline;"  %> <%else %> <%= link_to @policyforview.client.fullname , client_path(@policyforview.client.id), :style =>"text-decoration: underline;" , :title=>"go to client file" %><% end %></span>
+
+
+
+  </div>
+
+
+</div>
+<% if !@policyforview.cond_comm_producer.nil? %>
+    <div class="row-fluid">
+      <div class="span12" id="alercommtcontainer">
+
+        <div class="alert alert-error">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <b>Alert!</b> Policy has a conditional commission. <%= number_to_percentage(@policyforview.cond_comm_producer*100) %>.
+        </div>
+
+      </div>
+    </div>
+<% end %>
+<% if @policyforview.policy_flag? %>
+    <div class="row-fluid">
+      <div class="span12" id="flagcontainer">
+
+        <div class="alert alert-error">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <b>Policy Flagged:</b> <%= @policyforview.flag_note %>
+          <%= link_to  flag_policy_remove_path(:id=>@policyforview.id), :remote=>true,:id=>"aorpolbutton",:confirm => 'Are you sure you want to remove this flag?', :method => :get, :class=>"linktext"  do %>    (Remove Flag) <% end %>
+
+        </div>
+
+      </div>
+    </div>
+<% end %>
+<% if @policyforview.status == "Active" %>
+    <% if @policyforview.cancelcount > 0 %>
+        <div class="row-fluid">
+          <div class="span12" id="alertcontainer">
+
+            <div class="alert alert-error">
+              <a class="close" data-dismiss="alert" href="#">×</a>
+              <b>Alert!</b> Policy has <%= pluralize(@policyforview.cancelcount,'cancellation')%>.
+            </div>
+
+          </div>
+        </div>
+    <%end%>
+<%end %>
+<% if @policyforview.is_nonrenew == true%>
+    <div class="row-fluid">
+      <div class="span12" id="alertcontainernonrenew">
+        <div class="alert alert-error">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <b>Alert!</b> Policy has been flagged for non renewal.
+        </div>
+      </div>
+    </div>
+<%end %>
+<% if @policyforview.is_pendingcancellation == true%>
+    <div class="row-fluid">
+      <div class="span12" id="alertcontainerpendingcancellation">
+        <div class="alert alert-error">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <b>Alert!</b> Policy has been flagged for pending cancellation.
+        </div>
+      </div>
+    </div>
+<%end %>
+<% if @policyforview.status == "Renewed" %>
+    <span id="viewrenewals" class="linktext" style="cursor: pointer">This policy is renewed. Click here to view its renewals.  <i class=" icon-chevron-down"></i></span>
+    <span id="hiderenewals" class="linktext"  style="cursor: pointer">Click here to Hide.  <i class=" icon-chevron-up"></i></span>
+
+    <div class="row-fluid" id="renewcontainer" >
+
+      <div class="span12" >
+        <table class="table" style="">
+          <thead>
+          <tr>
+            <th>
+              Policy #
+            </th>
+            <th>
+              Status
+            </th>
+            <th>
+              Effective Date
+            </th>
+            <th>
+              Expiration Date
+            </th>
+          </tr>
+
+          </thead>
+          <% @renewalpolicies.each do |rp| %>
+            <tr>
+              <td>
+                <%= link_to rp.policy_number, policy_path(rp), :class=>"linktext" %>
+              </td>
+              <td>
+                <%= rp.status %>
+              </td>
+              <td>
+                <%= rp.effective_date %>
+              </td>
+              <td>
+                <%= rp.expiration_date %>
+              </td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+<%end %>
+<div class="policymenu">
+
+  <li class="dropdown" style="display: inline;">
+
+    <a  data-toggle="dropdown" href="#polmenu" class="dropdownmenubox">
+      Menu
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" >
+      <li>
+
+        <%= link_to  edit_policy_path(:id=>@policyforview.id), :remote=>true,:id=>"editpolbutton", :method => :get  do %> <i class="icon-pencil"></i> Edit <% end %>
+
+      </li>
+
+      <li>
+        <% if current_agent.is_admin? %>
+            <%= link_to @policyforview ,:method=>:delete, :confirm => 'Are you sure you want to delete this policy? Once deleted, the policy cannot be recovered.', :id=>"deletepolbutton"  do  %> <i class="icon-ban-circle"></i> Delete Policy <%end%>
+        <% end %>
+      </li>
+
+
+      <li>
+        <a href="/printcertificate/<%= @policyforview.id%>.pdf" target="blank" ><i class="icon-list-alt"></i> Print Certificate </a>
+
+      </li>
+      <li>
+
+        <%= link_to  flag_policy_path(:id=>@policyforview.id), :remote=>true,:id=>"aorpolbutton", :method => :get  do %> <i class="icon-flag"></i> Flag Policy <% end %>
+
+      </li>
+      <% if current_agent.isgeneralagent == "GA"%>
+          <li class="divider"></li>
+          <li>
+
+            <%= link_to  agentofrecordchange_path(:id=>@policyforview.id), :remote=>true,:id=>"aorpolbutton", :method => :get  do %> <i class="icon-minus-sign"></i> Agent of Record <% end %>
+
+          </li>
+          <li>
+            <%= link_to nonrenew_path(:id=>@policyforview.id), :remote=>true,:id=>"nonrenewpolbutton", :method => :get  do %> <i class="icon-fire"></i> Non Renew <% end %>
+          </li>
+          <li>
+            <%= link_to pendingcancellation_path(:id=>@policyforview.id), :remote=>true,:id=>"pendingcancellationpolbutton", :method => :get  do %> <i class="icon-fire"></i> Pending Cancellation <% end %>
+          </li>
+      <% end %>
+    </ul>
+  </li>
+  <li class="dropdown" style="display: inline;">
+
+    <a  data-toggle="dropdown" href="#polmenu" class="dropdownmenubox">
+      Transactions <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" >
+
+
+
+      <li>
+        <%= link_to endorse_policy_path(:id=>@policyforview.id), :remote=>true, :id=>"endorsepolbutton"  do %> <i class="icon-wrench"></i>  Endorse <% end %>
+      </li>
+      <li>
+        <% if !@policyforview.is_nonrenew? && !@policyforview.is_pendingcancellation? %>
+            <%= link_to renew_policy_path(:id=>@policyforview.id),  :id=>"renewpolbutton" , :disabled => @cancelbuttondisabled do  %> <i class="icon-share-alt"></i> Renew <%end%>
+        <% end %>
+      </li>
+      <li id="cancelreinstatelink">
+        <%  if @policyforview.status =='Active' or @policyforview.status =='Expired' %>
+            <%= link_to cancel_policy_path(:id=>@policyforview.id), :remote=>true, :id=>"cancelpolbutton" , :disabled => @cancelbuttondisabled do  %> <i class="icon-remove"></i> Cancel <%end%>
+
+        <% elsif @policyforview.status =='Cancelled' %>
+            <%= link_to reinstate_policy_path(:id=>@policyforview.id), :remote=>true, :id=>"reinstatepolbutton" , :disabled => @cancelbuttondisabled do  %> <i class="icon-refresh"></i> Reinstate <%end%>
+        <%  end %>
+      </li>
+      <% if current_agent.isgeneralagent == "GA"%>
+          <li>
+            <%= link_to enterunearnedcommcheck_path(:id=>@policyforview.id), :remote=>true, :id=>"unearnedcommbutton"  do %> <i class="icon-plus"></i>  Unearned Commission Payment <% end %>
+          </li>
+      <% end %>
+      <% if current_agent.is_admin? %>
+          <li class="divider"></li>
+          <li><%= link_to new_policy_journalentry_path(@policyforview), :remote=>true, :id=>"reinstatepolbutton" , :disabled => @cancelbuttondisabled do  %> <i class="icon-book"></i> Journal Entry <%end%>  </li>
+          <li><%= link_to editcommissionrate_path(:id=>@policyforview.id), :remote=>true, :id=>"adjustcommbutton" , :disabled => @cancelbuttondisabled do  %> <i class="icon-random"></i> Adjust Commission <%end%></li>
+          <li><%= link_to flatcancel_policy_path(:id=>@policyforview.id), :remote=>true, :confirm => 'Are you sure you want to flat cancel this policy? ', :id=>"flatcancel" , :disabled => @cancelbuttondisabled do  %> <i class="icon-trash"></i> Flat Cancel <%end%></li>
+
+    <% end %>
+
+    </ul>
+  </li>
+  <li class="dropdown" style="display: inline;">
+
+    <a  data-toggle="dropdown" href="#polmenu" class="dropdownmenubox">
+
+      Documents
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu" >
+
+      <% if current_agent.isgeneralagent == "GA" %>
+          <% @policyforview.generalagency.customdocuments.each do |c| %>
+              <li>
+                <a href="/customdocuments/showcustomdocument/<%= c.id%>/<%= @policyforview.id%>.pdf" target="blank" > <i class="icon-list-alt"></i> <%= c.document_name %></a>
+              </li>
+          <% end %>
+      <% end %>
+
+
+    </ul>
+  </li>
+
+</div>
+<div id="previewcontainer">
+  <%= render 'previewhead'%>
+</div>
+<div class="row-fluid">
+  <div class="span12" id="policyactions">
+
+  </div>
+</div>
+<div class="row-fluid">
+  <div class="span12" id="tabcontainer">
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#generaltab" data-toggle="tab">Home</a></li>
+        <% begin %>
+            <% if @policyforview.lineofbusiness.lobbroadcategory.category_name == "Personal Auto"%>
+                <li><a href="#personalautotab" data-toggle="tab">Auto Policy</a></li>
+            <% end %>
+            <% if @policyforview.lineofbusiness.lobbroadcategory.category_name == "Homeowners"%>
+                <li><a href="#homeownerstab" data-toggle="tab">Homeowner's Policy</a></li>
+            <% end %>
+        <% rescue %>
+        <% end %>
+        <li><a href="#documentstab" data-toggle="tab" id="documentstabhead">Documents <% if @policyforview.documentcount > 0 %> (<%=@policyforview.documentcount%>) <% end %> </a></li>
+        <li><a href="#endorsementstab" data-toggle="tab">Endorsements <% if @policyforview.endorsementcount > 0 %> (<%=@policyforview.endorsementcount%>) <% end %> </a></li>
+        <li><a href="#transactionstab" data-toggle="tab">Transactions</a></li>
+        <% if @policyforview.payment_type_id  == 1 %>
+            <li><a href="#invoicestab" data-toggle="tab">Invoices</a></li>
+        <% end %>
+
+        <li><a href="#accountingtab" data-toggle="tab">Accounting</a></li>
+        <li><a href="#historytab" data-toggle="tab">e-Mail</a></li>
+        <% if current_agent.isgeneralagent == "GA"  %>
+            <li><a href="#feetab" data-toggle="tab">Fees</a></li>
+        <% end %>
+        <li><a href="#claimstab" data-toggle="tab">Claims <% if @policyforview.claimcount > 0 %> (<%=@policyforview.claimcount%>) <% end %> </a></li>
+      </ul>
+
+      <div class="tab-content" style="overflow: visible;">
+        <div id="generaltab" class="tab-pane active">
+          <div class="row-fluid">
+            <div class="span12" id="statuscontainer">
+              <%= render :partial =>'policystatuscontainer' %>
+            </div>
+          </div>
+
+          <div class="row-fluid">
+            <div class="span12" >
+              <%= render :partial =>'tasks/showtasksforpolicy' %>
+            </div>
+          </div>
+          <div class="row-fluid">
+            <div class="span12" >
+              <div id="notescontainer">
+                <%= render :partial =>'policynotes' %>
+              </div>
+            </div>
+          </div>
+
+          <div class="row-fluid">
+            <div class="span12" >
+              <div id="emailloglink">
+                <div class="wellwhiteblock">
+                  <div class="wellwhitemenu"><h3>Email Log</h3></div>
+                  <br />
+                  <div class="dataTablewrapper">
+                    <table id="emaillog" class="bordered-table zebra-striped " data-source="<%= emails_url(format: "json") %>">
+                      <thead>
+                      <tr>
+                        <th>Id</th>
+                        <th>Date</th>
+                        <th>Subject</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Body</th>
+                        <th>Document</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="personalautotab" class="tab-pane">
+          <div id="personalautocontainer">
+            <br/>
+            <% if @policyforview.acord_xml_pers_auto_policy.nil? %> <%= link_to 'Create Auto Policy' , new_policy_acord_xml_pers_auto_policy_path(@policyforview), :class=>'btn btn-info' %><%else%>  <%= link_to 'Edit Auto Policy' , edit_acord_xml_pers_auto_policy_path(@policyforview.acord_xml_pers_auto_policy.id), :class=>'btn btn-info' %> <%end%>  <a href="/autoxml/<%=@policyforview.id%>" class="btn btn-success">Open Acord XML</a>
+            <%= render :partial =>'personalautopolicy' %>
+          </div>
+        </div>
+
+        <div id="homeownerstab" class="tab-pane">
+          <div id="homeownerscontainer">
+            <br/>
+            <% if @policyforview.homeownerpolicy.nil? %> <%= link_to "Create Homeowner's Policy" , new_policy_homeownerpolicy_path(@policyforview), :class=>'btn btn-info',:id=>'homepolicynew', :remote=>true %><%else%>  <%= link_to "Edit Homeowner's Policy" ,edit_homeownerpolicy_path(@policyforview.homeownerpolicy), :class=>'btn btn-info', :id=>'homepolicyedit', :remote=>true %> <%end%>
+            <%= render :partial =>'homeownerspolicy' %>
+          </div>
+        </div>
+
+        <div id="documentstab" class="tab-pane">
+          <%= render :partial =>'policydocuments', :locals => { :type => "other" } %>
+        </div>
+
+        <div id="endorsementstab" class="tab-pane">
+          <%= render :partial =>'policydocuments', :locals => { :type => "Endorsements" } %>
+        </div>
+
+        <div id="transactionstab" class="tab-pane">
+          <div id="transactioncontainer">
+            <%= render :partial =>'policytransactions' %>
+          </div>
+        </div>
+
+        <div id="invoicestab" class="tab-pane" >
+          <div id="invoicecontainer">
+            <%= render :partial =>'policyinvoices' %>
+          </div>
+        </div>
+
+        <div id="accountingtab" class="tab-pane">
+          <div id="accountingcontainer">
+            <%= render :partial =>'policyaccounting' %>
+          </div>
+        </div>
+
+        <div id="historytab" class="tab-pane">
+          <div id="historycontainer">
+            <%= render :partial =>'policyemails' %>
+          </div>
+        </div>
+
+        <% if current_agent.isgeneralagent == "GA"  %>
+          <div id="feetab" class="tab-pane">
+            <div class="page-header"><h3>Fees:</h3></div>
+            <div id="feecontainer">
+              <%= render :partial =>'policyfees' %>
+            </div>
+          </div>
+        <% end %>
+
+        <div id="claimstab" class="tab-pane">
+          <%= render :partial =>'policydocuments', :locals => { :type => "Claims" } %>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+</div>
+<iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+</div>
+
+
+

@@ -1,0 +1,54 @@
+<table class="table table-striped table-bordered" >
+  <col width="30%" />
+  <col width="70%" />
+  <thead>
+  <tr>
+    <th colspan="2"><h3>Premium Breakdown: </h3></th>
+
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+    <td><%= f.label :base_premium, :style=>"font-weight: bold;" %> *</td>
+    <td><%= f.text_field :base_premium, :class =>'BLselect required span2', :autocomplete => :off %></td>
+  </tr>
+  <%= f.fields_for :feetransactions do |builder| %>
+      <tr id="feerow">
+
+      </tr>
+  <% end %>
+  <tr id="complexfeerow">
+    <td><b>Total Fees</b></td><td><input id='complexfeetotal' class='BLselect span2' type='text' size='30' name='policy[policypremiumtransactions_attributes][0][complexfees]' autocomplete='off' readonly="readonly"></td>
+  </tr>
+  <tr id="simplefeerow">
+    <td><%= f.label :fees, 'Total Fees', :style=>"font-weight: bold;" %></td>
+    <td><%= f.text_field :fees, :class =>'BLselect span2', :autocomplete => :off %></td>
+  </tr>
+  <tr>
+    <td><%= f.label :total_premium, :style=>"font-weight: bold;" %></td>
+    <td><%= f.text_field :total_premium, :class =>'BLselect span2', :autocomplete => :off , :readonly=>'readonly' %></td>
+  </tr>
+  <tr>
+    <td colspan="2"> <button class="btn btn-primary btn-mini" data-disable-with="Processing..."  type="submit" id="calcpolicy" onclick='return false;'>Calculate Total</button></td>
+
+  </tr>
+
+
+
+  </tbody>
+  <!-- %><thead>
+        <tr>
+            <td colspan="2">
+                 <h3>Invoice Information: </h3>
+            </td>
+        </tr>
+</thead>
+<tbody>
+ <%= f.fields_for :invoices do |builder| %>
+                   <%= render 'invoiceform', f: builder %>
+ <% end %>
+
+</tbody> -->
+
+</table>

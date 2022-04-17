@@ -1,0 +1,25 @@
+
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu">Referrals</div>
+
+  <ul>
+    <% @referrer.referrals.each do |ref| %>
+
+        <li>
+          <% if ref.client.client_status != "Prospect" %>
+              Client:  <%= link_to ref.client.fullname, client_path(ref.client.id), :class=>"linktext" %>
+          <% else %>
+              Prospect:   <%= link_to ref.client.fullname, showprospect_path(ref.client.id), :class=>"linktext" %>
+          <% end %>
+
+          <ul>
+            <% ref.client.policies.each do |policy| %>
+                <li><%= link_to policy.policy_number, policy_path(policy.id), :class=>"linktext"%></li>
+            <% end %>
+          </ul>
+
+        </li>
+
+    <% end %>
+  </ul>
+</div>

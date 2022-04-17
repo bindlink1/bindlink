@@ -1,0 +1,291 @@
+<div class="wellwhite" style="width:100%;" id="feesrpt">
+  <h3>Fees Report</h3>
+  <hr>
+  <%= link_to "fee", feesreport_path%>
+
+</div>
+
+
+<div class="wellwhite" style="width:100%;" id="agingrpt">
+  <h3>Aging Invoice Report</h3>
+  <hr>
+  <%=link_to  aragingreport_path, :class=>'linktext' ,:remote=>true  , :id=>'arreportlink' do%>Click to send report to: <%= current_agent.email%><%end%>
+  <br>
+  <br>
+  <a href="/aragingreportpdf" class="linktext" id="arreportlinkpdf">Download the report in PDF</a>
+  &nbsp;&nbsp;
+  <a href="/aragingreportxls" class="linktext" id="arreportlinkxls">Download the report in Excel</a>
+</div>
+
+
+<div class="wellwhite" style="width:100%;" id="returnrpt">
+  <h3>Return Premium Report</h3>
+  <hr>
+  <div class="control-group" style="display:none;">
+    <b>Start Date</b>
+    <div class="controls">
+      <input type="text" name="start_date" id="startdatereturnrpt" value="01/01/1980">
+    </div>
+  </div>
+  <div class="control-group" style="display:none;">
+    <b>End Date</b>
+    <div class="controls">
+      <input type="text" name="end_date" id="enddatereturnrpt"/>
+    </div>
+  </div>
+  <br>
+  <%=link_to  returnreport_path, :class=>'linktext' ,:remote=>true  , :id=>'returnreportlink', :onclick=> 'this.href = "/returnreport?start_date=" + $("#startdatereturnrpt").val() + "&end_date=" + $("#enddatereturnrpt").val();' do%> Click to send report to: <%= current_agent.email%> <%end%>
+  <!--br>
+  <br>
+  <a href="/returnreportpdf" class="linktext" id="returnreportlinkpdf" onclick="this.href = '/returnreportpdf?start_date=' + $('#startdatereturnrpt').val() + '&end_date=' + $('#enddatereturnrpt').val();">Download the report in PDF</a>
+  &nbsp;&nbsp;
+  <a href="/returnreportinvoices" class="linktext" id="returnreportlinkinvoices" onclick="this.href = '/returnreportinvoices?start_date=' + $('#startdatereturnrpt').val() + '&end_date=' + $('#enddatereturnrpt').val();" target="report_frame">Batch print invoices</a-->
+</div>
+
+
+<div class="wellwhite" style="width:100%;" id="cashrpt">
+  <%= form_for @cashreport, :url => "cashreport.pdf" , :method=>'get' ,:html => {:target =>'report_frame'}, :class=>"form-horizontal"   do |f| %>
+      <h3>Cash Deposited Report</h3>
+      <b>Show all cash deposited between the dates selected below:</b>
+      <hr>
+      <div class="control-group">
+
+        <b>Start Date</b>
+        <div class="controls">
+          <input type="text" name="start_date" id="startdate"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <b>End Date</b>
+        <div class="controls">
+          <input type="text" name="end_date" id="enddate"/>
+        </div>
+      </div>
+
+      <div class="form-actions"><%= f.submit 'Run Report', :class=>'btn btn-success', :id=>'endorsethispolicy' %>   </div>
+  <% end %>
+</div>
+
+
+<div class="wellwhite" style="width: 100%;" id="policytransactionrpt">
+  <%= form_for @policylistingreport, :url => "policylistingreport.pdf", :method=>'get' ,:html => {:target =>'report_frame'}, :class=>"form-horizontal"   do |f| %>
+      <h3>Policy Transaction Report</h3>
+      <b>Show all policy transactions between the dates selected below:</b>
+      <hr>
+      <div class="control-group">
+
+        <b>Start Date</b>
+        <div class="controls">
+          <input type="text" name="start_date" id="startdatelist"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <b>End Date</b>
+        <div class="controls">
+          <input type="text" name="end_date" id="enddatelist"/>
+        </div>
+      </div>
+
+      <div class="form-actions"><%= f.submit 'Run Report', :class=>'btn btn-success', :id=>'policylistingreportbtn' %>    </div>
+  <% end %>
+</div>
+
+
+<div class="wellwhite" style="width: 100%;" id="accountrpt">
+  <%= form_for @accounttransactionreport, :url => "accountingreport.pdf", :method=>'get' ,:html => {:target =>'report_frame'}, :class=>"form-horizontal"   do |f| %>
+      <h3>Accounting Transaction Report</h3>
+      <b>Show all accounting transactions between the dates selected below:</b>
+      <hr>
+      <div class="control-group">
+
+        <b>Start Date</b>
+        <div class="controls">
+          <input type="text" name="start_date" id="startdatelistacc"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <b>End Date</b>
+        <div class="controls">
+          <input type="text" name="end_date" id="enddatelistacc"/>
+        </div>
+      </div>
+
+      <div class="form-actions"><%= f.submit 'Run Report', :class=>'btn btn-success', :id=>'accountingreportbtn' %>    </div>
+  <% end %>
+</div>
+
+
+<div class="wellwhite" style="width: 100%;" id="surpluslinesrpt">
+  <%= form_for @policylistingreport, :url => surpluslinesreport_path, :method=>'get' ,:html => {:target =>'_blank'}, :class=>"form-horizontal"   do |f| %>
+      <h3>Surplus Lines Report</h3>
+      <hr>
+      <div class="control-group">
+
+        <b>Start Date</b>
+        <div class="controls">
+          <input type="text" name="start_date" id="startdatelistsl"/>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <b>End Date</b>
+        <div class="controls">
+          <input type="text" name="end_date" id="enddatelistsl"/>
+        </div>
+      </div>
+      <div class="form-actions"><%= f.submit 'Run Report', :class=>'btn btn-success', :id=>'policylistingreportbtn' %>    </div>
+  <% end %>
+</div>
+
+
+<div class="wellwhite" style="width: 100%;" id="surpluslinesrptauto">
+  <%= form_for @policylistingreport, :url => surpluslinesreportauto_path, :method=>'get' ,:html => {:target =>'report_frame'}, :class=>"form-horizontal"   do |f| %>
+    <h3>Surplus Lines Report Auto</h3>
+    <hr>
+    <div class="control-group">
+      <b>Start Date</b>
+      <div class="controls">
+        <input type="text" name="start_date" id="startdatelistsla"/>
+      </div>
+    </div>
+    <div class="control-group">
+      <b>End Date</b>
+      <div class="controls">
+        <input type="text" name="end_date" id="enddatelistsla"/>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit 'Run Report', :class=>'btn btn-success', :id=>'policylistingreportbtn' %>
+    </div>
+  <% end %>
+</div>
+
+
+<div class="wellwhite" style="width: 100%;" id="commissionrpt">
+  <h3>Commission Report</h3>
+  <b>Show commission for policies between the dates selected below:</b>
+  <hr>
+  <%= form_for @newreport, :url => "commissionreport.pdf", :method=>'get' ,:html => {:target =>'report_frame'}, :class=>"form-horizontal"   do |f| %>
+      <div class="control-group">
+        <b>Report Commissions by:</b>
+      <select id="datetype" name="datetype">
+        <option value="effective">Effective Date</option>
+        <option value="transaction">Transaction Date</option>
+      </select>
+      </div>
+      <div class="control-group">
+        <b>Start Date</b>
+        <div class="controls">
+          <input type="text" name="start_date" id="startdatecomm"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <b>End Date</b>
+        <div class="controls">
+          <input type="text" name="end_date" id="enddatecomm"/>
+        </div>
+      </div>
+      <hr>
+      <b>Select below if you only want to see commissions for a specific carrier:</b>
+      <select id="carrier" name="commissioncarrier">
+        <option value="all">Show All</option>
+        <% @carriers.each do |carrier| %>
+            <option value="<%= carrier.id%>"><%= carrier.carrier_name%></option>
+        <% end %>
+      </select>
+      <br><br>
+      <b>Select below if you only want to see commissions for a specific location:</b>
+      <select id="location" name="commissionlocation">
+        <option value="all">Show All</option>
+        <% @location.each do |location| %>
+            <% if location.main_location_flag == true%>
+                  <option value="<%= location.id%>"><b><%= location.location_nickname%></b></option>
+                <option class="select-dash" disabled="disabled">-------</option>
+            <% else %>
+            <option value="<%= location.id%>"><%= location.location_nickname%></option>
+            <% end %>
+        <% end %>
+      </select>
+      <hr>
+      <input type="submit" value="Run Report" class="btn btn-success">
+  <% end %>
+</div>
+<div class="wellwhite" style="width: 100%;" id="expirationrpt">
+  <h3>Expiration Report</h3>
+  <b>Show policies expiring between the dates selected below:</b>
+  <hr>
+  <%= form_for @newreport, :url => "expirationreport.pdf", :method=>'get' ,:html => {:target =>'report_frame'}, :class=>"form-horizontal"   do |f| %>
+      <div class="control-group">
+        <b>Start Date</b>
+        <div class="controls">
+          <input type="text" name="start_date" id="startdateexp"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <b>End Date</b>
+        <div class="controls">
+          <input type="text" name="end_date" id="enddateexp"/>
+        </div>
+      </div>
+      <hr>
+      <b>Select below if you only want to see expirations for a specific line of business:</b>
+      <select id="lobid" name="lobid">
+        <option value="all">Show All</option>
+        <% @linesofbusiness.each do |lob| %>
+            <option value="<%= lob.id%>"><%= lob.line_name%></option>
+        <% end %>
+      </select>
+      <hr>
+      <b>Select below if you only want to see expirations for a specific Carrier:</b>
+      <select id="carrierid" name="carrierid">
+        <option value="all">Show All</option>
+        <% @carriers.each do |c| %>
+            <option value="<%= c.id %>"><%= c.carrier_name %></option>
+        <% end %>
+      </select>
+      <hr>
+      <input type="submit" value="Run Report" class="btn btn-success">
+  <% end %>
+</div>
+<div class="wellwhite" style="width: 100%;" id="renewalrpt">
+  <h3>Renewal Report</h3>
+  <b>Show policies that does not have a labeled document “Renewal Offer” or “Non-Renewal” and expiring between the dates selected below:</b>
+  <hr>
+  <%= form_for @newreport, :url => "renewalreport.pdf", :method=>'get' ,:html => {:target =>'report_frame'}, :class=>"form-horizontal"   do |f| %>
+      <div class="control-group">
+        <b>Start Date</b>
+        <div class="controls">
+          <input type="text" name="start_date" id="startdaterenewal"/>
+        </div>
+      </div>
+      <div class="control-group">
+        <b>End Date</b>
+        <div class="controls">
+          <input type="text" name="end_date" id="enddaterenewal"/>
+        </div>
+      </div>
+      <hr>
+      <b>Select below if you only want to see expirations for a specific line of business:</b>
+      <select id="carrier" name="lobid">
+        <option value="all">Show All</option>
+        <% @linesofbusiness.each do |lob| %>
+            <option value="<%= lob.id%>"><%= lob.line_name%></option>
+        <% end %>
+      </select>
+      <hr>
+      <input type="submit" value="Run Report" class="btn btn-success">
+  <% end %>
+</div>
+
+
+<div class="wellwhite" style="width: 100%;" id="producerrpt">
+  <%= form_for @policylistingreport, :url => producerrpt_path, :method=>'get' ,:html => {:target =>'report_frame'}, :class=>"form-horizontal" do |f| %>
+    <h3>Producing Agencies YTD</h3>
+    <div class="form-actions">
+      <%= f.submit 'Run Report', :class=>'btn btn-success', :id=>'policylistingreportbtn' %>
+    </div>
+  <% end %>
+</div>

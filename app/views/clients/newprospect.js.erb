@@ -1,0 +1,7 @@
+$("#myModal").remove();
+$("#wrapper").append('<%= escape_javascript(render :partial => "newprospect") %>');
+$('#myModal').modal('show');
+$("#close_modal").click(function(){$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove();  });
+$(".closeit").click(function(){$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove(); });
+
+

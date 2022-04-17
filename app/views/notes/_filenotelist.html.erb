@@ -1,0 +1,40 @@
+<ul class="notes">
+  <% @notesforview.each do |note| %>
+      <li id=<%=note.id%>>
+        <table width="100%">
+          <tr>
+            <td>
+              <div class="noteheader"><%= note.agent.fullname %></div>
+              <%if note.note_type =="TaskComplete"%> Completed a Task: <%= image_tag("check.png", :height=>"25px", :width=>"25px") %> <%end%>
+              <%= note.notetext.gsub(/\n/, '<br />').html_safe %>
+              <div class="notefooter">created on: <%= note.created_at.strftime("%m/%d/%Y %I:%M %p") %></div>
+              <hr>
+            </td>
+          </tr>
+        </table>
+      </li>
+  <% end %>
+  <% begin %>
+      <%  if !@quotenotesforview.empty?  %>
+          <li>
+            <h3>Quote Notes</h3>
+            <hr>
+          </li>
+          <% @quotenotesforview.each do |note| %>
+              <li id=<%=note.id%>>
+                <table width="100%">
+                  <tr>
+
+                    <td><div class="noteheader"><%= note.agent.fullname %> </div><%if note.note_type =="TaskComplete"%> Task Completed: <%= image_tag("check.png", :height=>"25px", :width=>"25px") %> <%end%><%= note.notetext.to_s %>
+                      <div class="notefooter">created on: <%= note.created_at.strftime("%m/%d/%Y %I:%M %p") %>  </div>
+                    </td>
+                  </tr>
+                </table>
+              </li>
+
+          <%end%>
+      <% end %>
+  <% rescue %>
+
+  <%end%>
+</ul>

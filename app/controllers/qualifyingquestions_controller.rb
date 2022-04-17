@@ -1,0 +1,2 @@
+class QualifyingquestionsController < ApplicationController
+end

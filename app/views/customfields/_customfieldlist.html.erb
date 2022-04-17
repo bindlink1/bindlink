@@ -1,0 +1,19 @@
+<% if !@customfields.blank? %>
+    <table class="table table-bordered table-striped">
+      <thead>
+      <tr>
+        <th>Field Name</th>
+        <th>Type</th>
+        <th>Associated With</th>
+      </tr>
+
+      </thead>
+      <% @customfields.each do |cf| %>
+          <tr>
+            <td><%= cf.field_name %></td>
+            <td><%= cf.field_type %></td>
+            <td><%= cf.associated_with %></td>
+          </tr>
+      <% end %>
+    </table>
+<% end %>

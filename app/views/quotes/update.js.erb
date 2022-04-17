@@ -1,0 +1,3 @@
+$("#quotefieldswork").slideUp(300);
+$('#quotefieldswork').html('')
+$('#quotefields').html('<%= escape_javascript(render :partial => 'viewquote', :locals => {:quote=> @quote}) %>').hide().slideDown(300);

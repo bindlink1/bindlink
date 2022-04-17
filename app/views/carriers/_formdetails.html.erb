@@ -1,0 +1,96 @@
+<%= javascript_include_tag "carrier" %>
+<table class="table table-bordered table-layout:fixed;">
+  <thead>
+  <tr>
+    <th colspan="4"><h3>Edit Carrier: </h3></th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td style="text-align: right;"><%= f.label :carrier_name,"Carrier Name"%></td>
+    <td><%= f.text_field :carrier_name, :class=> "BLselect required", :tabindex => 1 %></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :status,"Status"%></td>
+    <td><%= f.collection_select  :status  ,[['Active','Active'], ['Inactive','Inactive']], :last, :last, {:include_blank => 'Select One'}%></td>
+    <td style="text-align: right;"><%= f.label :admitted_status ,"Admitted Status"%></td>
+    <td><%= f.collection_select  :admitted_status  ,[['Admitted','Admitted'], ['Non Admitted','Non Admitted']], :last, :last, {:include_blank => 'Select One'}%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :agency_code,"Agency Code"%></td>
+    <td><%= f.text_field :agency_code, :class=> "BLselect" , :tabindex => 2 %></td>
+    <td style="text-align: right;"><%= f.label :address_1, "Address"%></td>
+    <td><%= f.text_field :address_1, :class=> "BLselect", :tabindex => 6%></td>
+  </tr>
+
+  <tr>
+    <td style="text-align: right;"> <%= f.label :naic_number,"NAIC Number" %></td>
+    <td><%= f.text_field :naic_number, :class=> "BLselect" , :tabindex => 3 %></td>
+    <td style="text-align: right;"><%= f.label :address_2, "Address 2"%></td>
+    <td><%= f.text_field :address_2, :class=> "BLselect" , :tabindex => 7%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :date_appointed, "Date Appointed" %> </td>
+    <td><%= f.text_field :date_appointed, :class=> "BLselect" , :tabindex => 4 %></td>
+    <td style="text-align: right;"><%= f.label :city, "City"%></td>
+    <td><%= f.text_field :city, :class=> "BLselect" , :tabindex => 8%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :email, "e-Mail"  %></td>
+    <td><%= f.text_field :email, :class=> "BLselect" , :tabindex => 5%></td>
+    <td style="text-align: right;"><%= f.label :state, "State"%></td>
+    <td><%= f.text_field :state, :class=> "BLselect", :tabindex => 9%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :days_invoice_due, "Days Invoice Due"  %> </td>
+    <td><%= f.text_field :days_invoice_due,  :class=> "BLselect" , :tabindex => 6 %></td>
+    <td style="text-align: right;"><%= f.label :zip, "Zip"%></td>
+    <td><%= f.text_field :zip, :class=> "BLselect" , :tabindex => 10%></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :isstatementgroup, "Is Statement Group?"  %> </td>
+    <td><%= f.check_box :isstatementgroup, :tabindex => 11 %></td>
+    <td style="text-align: right;"><%= f.label :statementgroup_id, "Statement Group"  %> </td>
+    <td><%= f.text_field :statementgroup_id, :class=> "BLselect" , :tabindex => 12%></td>
+
+  </tr>
+  </tbody>
+  <thead>
+  <tr>
+    <th colspan="4"><h3>Contacts:</h3></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+    <td style="text-align: right;"> <%= f.label :marketing_contact, "Marketing Contact"  %></td>
+    <td><%= f.text_field :marketing_contact, :class=> "BLselect", :tabindex => 11 %></td>
+    <td style="text-align: right;"><%= f.label :zip, "Underwriting Contact"%></td>
+    <td><%= f.text_field :underwriting_contact, :class=> "BLselect" , :tabindex => 14%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"> <%= f.label :marketing_telephone, "Marketing Telephone"  %></td>
+    <td><%= f.text_field :marketing_telephone, :class=> "BLselect" , :tabindex => 12%></td>
+    <td style="text-align: right;"><%= f.label :zip, "Underwriting Telephone"%></td>
+    <td><%= f.text_field :underwriting_telephone, :class=> "BLselect" , :tabindex => 15%></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;"> <%= f.label :marketing_email, "Marketing e-Mail"  %></td>
+    <td><%= f.text_field :marketing_email, :class=> "BLselect" , :tabindex => 13%></td>
+    <td style="text-align: right;"><%= f.label :zip, "Underwriting e-Mail"%></td>
+    <td><%= f.text_field :underwriting_email, :class=> "BLselect" , :tabindex => 16%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"> <%= f.label :web_url, "Website"  %></td>
+    <td><%= f.text_field :web_url, :class=> "BLselect" , :tabindex => 17%></td>
+    <td style="text-align: right;"></td>
+    <td></td>
+  </tr>
+  </tbody>
+
+</table >

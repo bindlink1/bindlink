@@ -1,0 +1,28 @@
+<div class="wellwhitemenu">
+
+  <h3>Create a new Acord Form</h3> <button type="button" class="close" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+</div>
+<div class='modal_body modalscroll'>
+  <b>Select a form below to create a new Acord form</b>
+
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @acordforms.each do |af| %>
+        <tr>
+
+          <td><%=link_to  "/clients/#{@client.id}/acordforminstances/new/?id=#{af.form_name}", :class=>"linktext"  do %>  <%= af.form_name + " - "  + af.form_description %> <%end%></td>
+        </tr>
+
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+

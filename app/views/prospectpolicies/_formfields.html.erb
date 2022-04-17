@@ -1,0 +1,20 @@
+<tr>
+  <td>
+    <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini", :id=>"ppfrmbtn"%> <button class="btn btn-mini" id="ppcancel" onclick='return false;'>cancel</button>
+  </td>
+  <td>
+    <%= f.text_field :expiration_date ,:class=>"BLselect",:autocomplete => :off, :placeholder =>"Expiration Date"  %>
+
+  </td>
+  <td>
+    <%= f.text_field :carrier ,:class=>"BLselect",:autocomplete => :off, :placeholder =>"Carrier Name"  %>
+
+  </td>
+  <td>
+    <%= f.text_field :coverage_type ,:class=>"BLselect",:autocomplete => :off, :placeholder =>"Coverage Type"  %>
+  </td>
+  <td>
+    <%= f.text_field :note ,:class=>"BLselect" ,:autocomplete => :off, :placeholder =>"note" %>
+
+  </td>
+</tr>

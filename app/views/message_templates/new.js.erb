@@ -1,0 +1,8 @@
+$("#newtemplate").fadeOut(300);
+
+$(".newDataTablewrapper").html("<%=escape_javascript(render('newform')) %>").hide().slideDown(300);
+
+$('#templaterowcancel').click(function() {
+	$('.newDataTablewrapper').slideUp(300).html('');
+	$("#newtemplate").fadeIn(300);
+});

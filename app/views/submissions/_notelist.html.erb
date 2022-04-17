@@ -1,0 +1,19 @@
+    <ul class="notes">
+    <% @notesforview.each do |note| %>
+           <li id=<%=note.id%>>
+             <table width="100%">
+               <tr>
+                 <!--td width="65px"><%= image_tag("profileimage.jpg", :height=>"50px", :width=>"50px") %></td-->
+                 <td><div class="noteheader"><%= note.agent.fullname %></div><%= note.notetext.to_s %>
+              <div class="notefooter">created on: <%= note.created_at.strftime("%m/%d/%Y %I:%M %p") %>  </div>
+                 <hr>
+                 </td>
+
+               </tr>
+
+
+             </table>
+           </li>
+
+    <% end %>
+    </ul>

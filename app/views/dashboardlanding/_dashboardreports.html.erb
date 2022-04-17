@@ -1,0 +1,47 @@
+ <div  style="width: 50%; float: left;">
+  <div class="wellwhite" style="width: 100%;">
+    <%= form_for @cashreport, :url => "/dashboardlanding/cashreport.pdf" , :method=>'get' ,:html => {:target =>'blank'}, :class=>"form-horizontal"   do |f| %>
+        <h3>Cash Deposited Report</h3>
+        <hr>
+        <div class="control-group">
+
+          <b>Start Date</b>
+          <div class="controls">
+            <input type="text" name="start_date" id="startdate"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <b>End Date</b>
+          <div class="controls">
+            <input type="text" name="end_date" id="enddate"/>
+          </div>
+        </div>
+
+        <div class="form-actions"><%= f.submit 'Run Report', :class=>'btn btn-success', :id=>'endorsethispolicy' %> <button class="btn" id="gobackendorse" onclick='return false;'>Go Back</button>   </div>
+    <% end %>
+  </div>
+  <div class="wellwhite" style="width: 100%;">
+    <%= form_for @policylistingreport, :url => "policylistingreport.pdf" ,:method=>'get', :html => {:target =>'blank'}, :class=>"form-horizontal"   do |f| %>
+        <h3>Policy Listing Report</h3>
+        <hr>
+        <div class="control-group">
+
+          <b>Start Date</b>
+          <div class="controls">
+            <input type="text" name="start_date" id="startdatelist"/>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <b>End Date</b>
+          <div class="controls">
+            <input type="text" name="end_date" id="enddatelist"/>
+          </div>
+        </div>
+
+
+        <div class="form-actions"><%= f.submit 'Run Report', :class=>'btn btn-success', :id=>'policylistingreportbtn' %> <button class="btn" id="gobackendorse" onclick='return false;'>Go Back</button>   </div>
+    <% end %>
+  </div>
+</div>

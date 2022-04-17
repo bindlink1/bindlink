@@ -1,0 +1,37 @@
+<% content_for :head do %>  <%= javascript_include_tag "createpolicy" %> <% end %>
+<%= form_for @policy,:html => {:autocomplete => "off"},:remote => true do |f| %>
+    <% if current_agent.isgeneralagent == "GA" %>
+        <% begin %>
+            <%= f.hidden_field :namedinsured_id ,:value => @quote.submission.namedinsured.id%>
+            <%= f.hidden_field :producingagency_id,:value => @quote.submission.producingagency_id %>
+        <% rescue %>
+        <% end %>
+    <% else %>
+        <% begin%>
+            <%= f.hidden_field :client_id,:value => @client.id %>
+        <% rescue %>
+        <% end %>
+    <% end %>
+    <%begin%>
+        <%= f.hidden_field :quote_id,:value => @quote.id %>
+    <% rescue %>
+    <% end %>
+    <%= render :partial => 'policyfields', :locals=>{:f => f}%>
+    <table id="policyinput">
+      <%= f.fields_for :policypremiumtransactions do |builder| %>
+          <%= render 'policypremiumtransactionsform', f: builder %>
+      <% end %>
+      <tr>
+        <td colspan="5">
+          <div class="form-actions">
+            <%= f.submit 'Create Policy', disable_with: 'Processing...' , :class=>'btn btn-success' %>   <%= link_to "Cancel", policies_path, :class=>"btn btn-inverse" %>
+          </div>
+        </td>
+      </tr>
+    </table>
+<% end %>
+
+
+
+
+

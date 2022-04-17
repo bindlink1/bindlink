@@ -1,0 +1,3 @@
+$("#newlobcomm<%= @carrierlob.id %>").fadeOut(300);
+$("#carrierlob<%= @carrierlob.id %>").html("<%=escape_javascript(render('newform')) %>").hide().slideDown(300);
+$('#lobcancel<%= @carrierlob.id %>').click(function(){$('#carrierlob<%= @carrierlob.id %>').slideUp(300).html('');$("#newlobcomm<%= @carrierlob.id %>").fadeIn(300); });

@@ -1,0 +1,48 @@
+ <%= javascript_include_tag "returnchecks" %>
+<h3>The following commission payments have been applied:</h3>
+<hr>
+
+<table class="worktable">
+  <thead>
+  <tr style="border-bottom: 1px solid #d3d3d3;">
+    <th style="border: 1px solid #d3d3d3; padding: 5px;">Policy Number</th>
+    <th style="border: 1px solid #d3d3d3;">Check Number</th>
+    <th style="border: 1px solid #d3d3d3;">Commission</th>
+    <th style="border: 1px solid #d3d3d3;">Pay To</th>
+
+
+  </tr>
+  </thead>
+  <tbody style="display: table-row-group;">
+
+
+  <%  @compaybatch.compaybatchitems.each do |cp|  %>
+      <tr style="border-bottom: 1px solid #d3d3d3; ">
+        <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+          <%= cp.cashtransaction.policy.policy_number %>
+        </td>
+        <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+          <%= cp.cashtransaction.check_number %>
+        </td>
+        <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+          <%= number_to_currency(cp.cashtransaction.cash_amount  ,  :negative_format => "(%u%n)") %>
+        </td>
+        <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+          <%= cp.policy.producingagency.agency_name %>
+        </td>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<br/>
+
+<div id="printchecks">
+<%= link_to "Print Checks" , printcompaycheck_path(:id=>@compaybatch.id)+".pdf",  :target =>"blank", :class=>"btn btn-success", :id=>"printcheck" %>
+</div>
+
+<div id="printok">
+  <h3>Did all checks print successfully?</h3>
+  <%= link_to "Yes", compayprintsuccess_path(:id=>@compaybatch.id), :class=>"btn btn-success"%> | <%= link_to "No", editcompaybatch_path(:id=>@compaybatch.id), :class=>"btn btn-danger"%>
+</div>

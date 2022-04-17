@@ -1,0 +1,42 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu"> Submissions</div>
+
+  <table class="table table-bordered table-striped table-layout:fixed ">
+
+
+    <% if @submissionsforproducers.blank? %>
+        <tr>
+          <td style="text-align: center; background-color: #eeeeee;">
+
+            No Submissions for <%= @producerforview.agency_name%> just yet.
+
+          </td>
+        </tr>
+    <%else%>
+        <thead>
+        <tr>
+          <th>Named Insured</th>
+          <th>Quote Count</th>
+          <th>Status</th>
+          <th>Date Created</th>
+        </tr>
+        </thead>
+    <%end%>
+    <tbody>
+    <% @submissionsforproducers.each do |submission| %>
+
+        <tr>
+          <td><b style="text-decoration: underline;"><%begin%> <%= link_to submission.namedinsured.named_insured , submission_path(:id => submission) %> <%rescue%> <%= link_to submission.id , submission_path(:id => submission) %><%end%></b></td>
+
+          <td><%= submission.totalquotecount %></td>
+          <td></td>
+          <td><%= begin submission.created_at.strftime("%m/%d/%Y") rescue begin submission.created_on.strftime("%m/%d/%Y") rescue submission.created_on end end %></td>
+        </tr>
+
+
+
+    <% end %>
+
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,31 @@
+$("#cashquestion").fadeOut();
+
+ <% @invoiceforview = Invoice.find($currentinvoice) %>
+
+
+
+if ('<%= @invoiceforview.is_paid %>' == "Not Paid"){
+$("#cashnotifications").prepend('<div id="newclientnotification">You are entering cash for this invoice.</div>') ;
+
+$("#entercash").html('<%= escape_javascript(render  '/cashtransactions/invoiceentercash', :cashtransaction => @cashtransaction = Cashtransaction.new) %>').hide().slideDown(300) ;
+
+}
+else {
+
+$("#dialogquestion").dialog();
+$("#dialogquestion").html('<b>Are you sure you want to enter cash to a paid invoice?</b> </br> <button id="yestoenter">Yes </button> <button id="notoenter">No </button> ');
+}
+
+$("#yestoenter").click(function(){
+
+    $("#cashnotifications").html('<div id="newclientnotification">You are entering cash for this invoice.</div>') ;
+
+    $("#entercash").html('<%= escape_javascript(render  '/cashtransactions/invoiceentercash', :cashtransaction => @cashtransaction = Cashtransaction.new) %>').hide().slideDown(300) ;
+
+    $("#dialogquestion").dialog("close");
+});
+
+$("#notoenter").click(function(){
+    $("#cashquestion").fadeIn();
+    $("#dialogquestion").dialog("close");
+});

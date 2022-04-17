@@ -1,0 +1,25 @@
+<table class="table table-bordered table-layout:fixed;">
+    <thead>
+    <tr>
+      <th colspan="4"><h3>Recent:</h3></th>
+    </tr>
+        <tr>
+      <th>Name</th>
+      <th>Contact</th>
+      <th>Created On</th>
+      <th>Created By</th>
+    </tr>
+    </thead>
+    <tbody>
+     <%  @agncyprospectsforshow.each do |p| %>
+       <tr>
+         <td><%= link_to p.prospect_name.to_s , view_prospect_path(:id => p) %></td>
+         <td><%= p.contactname_1 %></td>
+         <td><%= p.created_at %></td>
+         <td><%= p.agent.first_name %></td>
+       </tr>
+
+
+     <% end %>
+    </tbody>
+</table>

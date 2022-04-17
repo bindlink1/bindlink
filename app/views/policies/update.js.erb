@@ -1,0 +1,9 @@
+
+$('#policyfields').html('<%= escape_javascript(render :partial => 'viewpolicy', :locals => {:policyforview => @policyforview} ) %>').hide().slideDown(300);
+$('#pageheader').html('<%= @policyforview.policy_number %> :<% if current_agent.isgeneralagent == "GA"%> <%= link_to @policyforview.namedinsured.named_insured, namedinsured_path(@policyforview.namedinsured), :style =>"text-decoration: underline;"  %> <%else %> <%= link_to @policyforview.client.fullname , client_path(@policyforview.client.id), :style =>"text-decoration: underline;" , :title=>"go to client file" %><% end %>');
+$('#editpolbutton').removeAttr("disabled");
+$('#cancelpolbutton').removeAttr("disabled");
+$('#endorsepolbutton').removeAttr("disabled");
+$('#policyfieldswork').slideUp(300);
+$('#policyfieldswork').html("");
+

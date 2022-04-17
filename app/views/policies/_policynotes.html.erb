@@ -1,0 +1,11 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu"><h3>Notes</h3> | <%= link_to "Add New", new_policy_note_path(@policyforview) , :remote => true,  :style=>"text-decoration: underline;", :id=>"newtaskbutton" %>  </div>
+
+    <div id="noteform">
+    </div>
+
+    <div id="notewrapper" style="max-height: 170px; overflow-y: auto; margin: 0px; padding: 0px;">
+      <%= render('notelist')%>
+    </div>
+
+  </div>

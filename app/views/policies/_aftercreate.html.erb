@@ -1,0 +1,16 @@
+
+<% if @policy.isga == "GA" %>
+  <h4>Producing Agency: <%= @policy.producingagency.agency_name %> </h4>
+  <h3>You have created a policy for: <%= @policy.namedinsured.named_insured %></h3>
+<% else %>
+  <h3>You have created a policy for: <%= @policy.client.fullname %></h3>
+<% end %>
+<hr>
+
+<h3>Would you like to do?</h3>
+<ul>
+  <li><%= link_to "Enter payment to this policy now?", enter_cash_path, :remote => true %></li>
+  <li><a href="/printinvoice/<%= @invoice[0].id%>.pdf" target="blank" >Print Invoice?</a></li>
+  <li><%= link_to "Go to this new policy?", policy_path(@policy) %></li>
+</ul>
+

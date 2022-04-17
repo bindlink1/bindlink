@@ -1,0 +1,24 @@
+<div id="selectclient">
+<p>Select an existing client</p>
+
+
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+<% @clientsfortable.each do |client| %>
+  <tr class=<%=cycle("even_row","odd_row")%>>
+	<td><%= client.client_name%></td>
+	<td><%= link_to "Select", next_step_path(:id =>client.id), :remote => true %></td>
+  </tr>
+<% end %>
+</table>
+
+
+
+
+</div>
+
+<div id="nextstep"></div>
+

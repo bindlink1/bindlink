@@ -1,0 +1,11 @@
+var res = "<%= @result%>";
+
+if (res == "OK"){
+$("#clientinfowork").slideUp(300);
+$('#clientinfowork').html('<%= escape_javascript(render 'clients/showclientdetails' ) %>').hide().slideDown(300);
+}
+else
+{
+ $('#valerrors').addClass("alert alert-error");
+ $('#valerrors').html(res);
+}

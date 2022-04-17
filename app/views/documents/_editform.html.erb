@@ -1,0 +1,114 @@
+<%= form_for @document,:remote =>true do |f| %>
+    <span>
+    	<label class="documentNameOldLabel"></label>
+    	<br>
+    	<br>
+    	<label>Select new document name</label>
+        <br>
+	    <input class="documentEditNameInput" type="hidden" name="document[name]" />
+	    <%= select_tag("", options_for_select([
+	      ['Cancellation'],
+	      ['Correspondence'],
+          ['Final Audit'],
+	      ['Inspection'],
+	      ['New Business'],
+	      ['Non-Renewal'],
+	      ['Other'],
+	      ['Reinstatement'],
+          ['Renewal Offer'],
+          ['Request to Bind'],
+	      ['Submission'],
+	      ['Endorsement – 1'],
+	      ['Endorsement – 2'],
+	      ['Endorsement – 3'],
+	      ['Endorsement – 4'],
+	      ['Endorsement – 5'],
+	      ['Endorsement – 6'],
+	      ['Endorsement – 7'],
+	      ['Endorsement – 8'],
+	      ['Endorsement – 9'],
+	      ['Endorsement – 10'],
+	      ['Endorsement – 11'],
+	      ['Endorsement – 12'],
+	      ['Endorsement – 13'],
+	      ['Endorsement – 14'],
+	      ['Endorsement – 15'],
+	      ['Endorsement – 16'],
+	      ['Endorsement – 17'],
+	      ['Endorsement – 18'],
+	      ['Endorsement – 19'],
+	      ['Endorsement – 20'],
+	      ['Endorsement – 21'],
+	      ['Endorsement – 22'],
+	      ['Endorsement – 23'],
+	      ['Endorsement – 24'],
+	      ['Endorsement – 25'],
+	      ['Endorsement – 26'],
+	      ['Endorsement – 27'],
+	      ['Endorsement – 28'],
+	      ['Endorsement – 29'],
+	      ['Endorsement – 30'],
+	      ['Endorsement – 31'],
+	      ['Endorsement – 32'],
+	      ['Endorsement – 33'],
+	      ['Endorsement – 34'],
+	      ['Endorsement – 35'],
+	      ['Endorsement – 36'],
+	      ['Endorsement – 37'],
+	      ['Endorsement – 38'],
+	      ['Endorsement – 39'],
+	      ['Endorsement – 40'],
+          ['Endorsement Request 1'],
+          ['Endorsement Request 2'],
+          ['Endorsement Request 3'],
+          ['Endorsement Request 4'],
+          ['Endorsement Request 5'],
+          ['Endorsement Request 6'],
+          ['Endorsement Request 7'],
+          ['Endorsement Request 8'],
+          ['Endorsement Request 9'],
+          ['Endorsement Request 10'],
+          ['Endorsement Request 11'],
+          ['Endorsement Request 12'],
+          ['Endorsement Request 13'],
+          ['Endorsement Request 14'],
+          ['Endorsement Request 15'],
+          ['Endorsement Request 16'],
+          ['Endorsement Request 17'],
+          ['Endorsement Request 18'],
+          ['Endorsement Request 19'],
+          ['Endorsement Request 20'],
+          ['Endorsement Request 21'],
+          ['Endorsement Request 22'],
+          ['Endorsement Request 23'],
+          ['Endorsement Request 24'],
+          ['Endorsement Request 25'],
+          ['Endorsement Request 26'],
+          ['Endorsement Request 27'],
+          ['Endorsement Request 28'],
+          ['Endorsement Request 29'],
+          ['Endorsement Request 30'],
+          ['Endorsement Request 31'],
+          ['Endorsement Request 32'],
+          ['Endorsement Request 33'],
+          ['Endorsement Request 34'],
+          ['Endorsement Request 35'],
+          ['Endorsement Request 36'],
+          ['Endorsement Request 37'],
+          ['Endorsement Request 38'],
+          ['Endorsement Request 39'],
+          ['Endorsement Request 40']
+	    ]), {
+	      :onchange => 'onEditFileCategorySelectChange(event)',
+	      :class => 'input-medium'
+	    }) %>
+	</span>
+	<br/>
+	<div class="documentEditNameInputTextWrapper" style="display: none">
+	  <br/>
+	  <input class="documentEditNameInputText" placeholder="Document name..." class="input-medium" type="text" onkeyup="onEditFileNameValueChange(event)" />
+	</div>
+	<br/>
+
+    <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini"%> <button class="btn btn-mini doceditcancel" onclick='return false;'>cancel</button>
+<% end %>

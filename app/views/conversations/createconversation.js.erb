@@ -1,0 +1,10 @@
+if ($("#createconversation").is(":hidden")) {
+        $("#createconversation").css({zIndex:90}).fadeIn('fast') ;
+    }
+else
+    {
+       $("#createconversation").append('<%= escape_javascript(render :partial => "conversations/createconversation") %>');
+    }
+
+$("#newconversation").css({zIndex:90}).fadeOut('fast') ;
+

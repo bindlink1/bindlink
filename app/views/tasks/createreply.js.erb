@@ -1,0 +1,10 @@
+$('#taskworkdiv').slideUp(300).html('');
+
+if ( $("#discussionheader").length == 0 ) {
+    $("#discussionwrapper").html("<div id='discussionheader'><hr><b><a><i class='icon-comment'></i> Discussion</a></b></div>");
+}
+
+
+$('#temptask').append(" <%= escape_javascript(render :partial => 'tasks/singletasksubdetails', :locals => { :task => @task }) %>");
+$('#temptask<%=@task.mastertask_id%>').append(" <%= escape_javascript(render :partial => 'tasks/singletasksubdetails', :locals => { :task => @task }) %>");
+$('#taskwork<%=@task.mastertask_id%>').html("");

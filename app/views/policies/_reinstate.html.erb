@@ -1,0 +1,23 @@
+<%= javascript_include_tag "reinstatepolicy" %>
+</br>
+<div class="wellwhite">
+    <h3>Reinstate Policy</h3>
+  <hr>
+  <%= form_for @policypremiumtrans, :url => reinstatetransactions_path(@policy), :class=>"form-horizontal"  ,:remote => true do |f| %>
+
+
+             <p><b>Reinsatating this cancellation</b></p>
+             <p><b>Cancellation Effecive Date:</b> <%= @policypremiumtrans.transaction_effective_date.strftime("%m/%d/%Y") %></p>
+
+         <% if @policypremiumtrans.transaction_type != 'Cancel Pending Statement' %>
+             <p><b>Return Premium Amount:</b>  <%=  number_to_currency(@policypremiumtrans.total_premium * -1,  :negative_format => "(%u%n)")  %> </p>
+         <% end %>
+
+
+
+ <div class="form-actions"><button class="btn btn-success" data-disable-with="Processing..." type="submit"  id="reinstate">Process Reinstatement</button> <button class="btn" type="submit" id="gobackreinstatement" onclick='return false;'>Go Back</button></div>
+<% end %>
+</div>
+
+
+

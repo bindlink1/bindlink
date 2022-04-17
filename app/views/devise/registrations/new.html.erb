@@ -1,0 +1,30 @@
+<div id="postit">
+    <div style=" text-align: center;padding: 5px; padding-top: 10px; margin:-5px; background-color: #57BCDA;"><img src="/assets/bindlinklogofunctional.png"></div>
+    <h2>Sign Up Today!</h2>
+
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+    <%= devise_error_messages! %>
+
+    <div><%= f.label :first_name %><br />
+    <%= f.text_field :first_name %></div>
+
+    <div><%= f.label :last_name %><br />
+    <%= f.text_field :last_name %></div>
+
+    <div><%= f.label :agency_name %><br />
+    <%= f.text_field :agency_name %></div>
+
+    <div><%= f.label :email %><br />
+    <%= f.email_field :email %></div>
+
+    <div><%= f.label :password %><br />
+    <%= f.password_field :password %></div>
+
+    <div><%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %></div>
+
+    <div><%= f.submit "Sign up" %></div>
+  <% end %>
+
+  <%= render "links" %>
+</div>

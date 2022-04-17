@@ -1,0 +1,29 @@
+
+
+
+
+  <%= form_for @producingagency, :html=>{:class=>'form-horizontal'} do |f| %>
+      <% if @producingagency.errors.any? %>
+          <div id="errorExplanation">
+            <h2><%= pluralize(@producingagency.errors.count, "error") %> prohibited
+              this producing agency from being saved:</h2>
+            <ul>
+              <% @producingagency.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+      <p>
+      <h3>General Information</h3>
+      </p>
+      <%= render :partial => 'formdetails', :locals=>{:f => f}%>
+      <div class="form-actions">
+        <%= f.submit 'Create',  :class=>"btn btn-success" %> <%= link_to producingagencies_path, :class=>"btn" do%> Go Back <%end%>
+      </div>
+
+
+
+
+  <% end %>
+

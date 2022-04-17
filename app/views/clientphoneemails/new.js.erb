@@ -1,0 +1,3 @@
+$("#newcpebtn").fadeOut(300);
+$('#newcpe').html('<%=escape_javascript(render('newform')) %>').hide().slideDown(300);
+$('#cpecancel').click(function(){$('#newcpe').slideUp(300).html('');$("#newcpebtn").fadeIn(300); });

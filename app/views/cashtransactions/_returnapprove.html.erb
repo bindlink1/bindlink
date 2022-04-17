@@ -1,0 +1,63 @@
+
+<h3>Approve Return and Print Checks:</h3>
+<hr>
+
+       <table class="worktable">
+            <thead>
+            <tr style="border-bottom: 1px solid #d3d3d3;">
+              <th style="border: 1px solid #d3d3d3; padding: 5px;">Policy Number</th>
+              <th style="border: 1px solid #d3d3d3;">Producing Agency</th>
+              <th style="border: 1px solid #d3d3d3;">Named Insured</th>
+              <th style="border: 1px solid #d3d3d3;">Pay To</th>
+              <th style="border: 1px solid #d3d3d3;">Return Premium</th>
+
+            </tr>
+            </thead>
+            <tbody style="display: table-row-group;">
+            <% @returnbatch.returnpremiumbatchitems.each do |item| %>
+            <tr style="border-bottom: 1px solid #d3d3d3; ">
+                <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                  <%=  item.policy.policy_number %>
+                </td>
+                <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                  <%=  item.policy.producingagency.agency_name %>
+                </td>
+                <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                  <%=  item.policy.namedinsured.named_insured %>
+                </td>
+                <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                  <% if item.pay_to_entity == "PFC" %><%= item.pfc.pfc_name%> <%else%> <%= item.producingagency.agency_name%> <%end%>
+                </td>
+              <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+              <%=  number_to_currency(item.policy.policybalance * -1,  :negative_format => "(%u%n)") %>
+              </td>
+             </tr>
+            <%end%>
+            </tbody>
+         </table>
+
+
+
+<hr>
+<%= form_for @returnbatch,:method=>:post, :url=>processreturnbatch_url(@returnbatch), :html => {:autocomplete => "off", :class=>"form-horizontal"}, :remote=>true do |f| %>
+    <p>To print checks in a batch, enter the starting check # of the check batch and the ending #. Then click Approve Returns below.</p>
+
+    <p style="font-weight: bold; font-size: 15px;">You are going to print <%= @returnbatch.returnpremiumbatchitems.length %> checks!</p>
+
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Starting Check#</label>
+      <div class="controls">
+        <%= f.text_field :check_start %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Ending Check#</label>
+      <div class="controls">
+        <%= f.text_field :check_end %>
+      </div>
+    </div>
+
+    <%= f.submit("Approve Returns",disable_with: 'Processing...' , :class=>"btn btn-success") %>
+
+<% end %>
+

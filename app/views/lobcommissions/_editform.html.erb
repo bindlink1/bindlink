@@ -1,0 +1,15 @@
+
+<%= form_for @lobcommission, :remote =>true do |f| %>
+     <table style="width: 100%;">
+
+      <col width="15%" />
+      <col width="20%" />
+      <col width="20%" />
+      <col width="20%" />
+      <col width="25%" />
+      <tbody>
+      <%= render('editformfields', :f => f) %>
+      </tbody>
+    </table>
+
+<% end %>

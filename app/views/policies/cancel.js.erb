@@ -1,0 +1,18 @@
+$('#policyactions').slideUp(300);
+
+//$('#policyfields').slideUp(300);
+//$('#policytransinv').slideUp(300);
+
+
+$('#editpolbutton').attr("disabled", "disabled");
+
+$('#cancelpolbutton').attr("disabled", "disabled");
+$('#endorsepolbutton').attr("disabled", "disabled");
+
+
+$('#policyactions').html('<%= escape_javascript(render 'cancel' ) %>').hide().slideDown(300);
+
+
+
+
+$("#policypremiumtransaction_transaction_effective_date").datepicker();

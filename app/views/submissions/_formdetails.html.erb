@@ -1,0 +1,38 @@
+<div>
+  <fieldset>
+    <div class="control-group">
+      <%= f.label :producingagency_id, "Producing Agency", :class=>"control-label"%>
+      <div class="controls">
+        <%= f.collection_select :producingagency_id, @producers, :id, :nameandcode, {:include_blank => 'Select One'}, { :class =>'required' } %>
+
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :agent_id, "Assigned Agent", :class=>"control-label"%>
+      <div class="controls">
+        <%= f.collection_select :agent_id, @agents, :id, :fullname, {:include_blank => 'Select One'} %>
+
+      </div>
+    </div>
+
+    <%= f.fields_for :namedinsured do |builder| %>
+         <%= render 'namedinsureds/formfields', f: builder %>
+    <% end %>
+
+
+
+    <div class="control-group">
+      <%= f.label :short_note, "Description", :class=>"control-label" %>
+
+      <div class="controls">
+        <%= f.text_field :short_note, :class=> "BLselect"   %>
+      </div>
+    </div>
+
+
+    <div class="form-actions">
+      <%= f.submit 'Create', :remote => true, :class=>"btn btn-success", :id=>"createquotebtn"%>  <%= link_to 'Cancel' , submissions_path,  :class=>'btn' %>
+    </div>
+  </fieldset>
+</div>
+

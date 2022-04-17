@@ -1,0 +1,12 @@
+<%= form_for @lob ,:html => {:autocomplete => "off", :class=>"form-horizontal"}, :remote => true do |f| %>
+    <fieldset>
+      <%= render :partial => 'formdetails', :locals=>{:f => f}%>
+
+      <div class ="control-group">
+        <div class="controls">
+          <%= f.submit 'Save', :class=>'btn btn-primary' %> <button type="button" id="cancelbutton" onclick="return false" class="btn">Cancel Edit</button>
+        </div>
+      </div>
+    </fieldset>
+
+<% end %>

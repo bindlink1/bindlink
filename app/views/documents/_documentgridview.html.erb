@@ -1,0 +1,18 @@
+<% documentsforview.each do |document| %>
+    <%= render :partial=>'documents/iconviewsingle', :locals=>{:document => document, :submission => @submission}%>
+<% end %>
+<% begin %>
+    <%  if !@policyforview.quote_id.nil? && !@quotedocumentsforview.blank?  %>
+        <h3>Quote Documents</h3>
+        <% @quotedocumentsforview.each do |document| %>
+             <%= render :partial=>'documents/iconviewsingle', :locals=>{:document => document}%>
+        <% end %>
+    <% end %>
+    <%  if !@submissiondocumentsforview.blank?  %>
+        <h3>Submission Documents</h3>
+        <% @submissiondocumentsforview.each do |document| %>
+             <%= render :partial=>'documents/iconviewsingle', :locals=>{:document => document}%>
+        <% end%>
+    <%end%>
+<% rescue %>
+<% end %>

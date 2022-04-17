@@ -1,0 +1,11 @@
+<div class="wellwhite">
+<h3>Return Processed:</h3>
+<hr>
+  <b>Policy #:</b> <%=  @policy.policy_number %>
+  </br>
+  <b>Carrier:</b> <%=  @policy.carrier.carrier_name %>
+  </br>
+   Returned <%= number_to_currency( @policy.policybalance * -1)  %> to <%=  @policy.producingagency.agency_name %> ?
+  </br>
+  <button class="btn"  id="returndone" onclick='return false;'>Go Back</button></div>
+</div>

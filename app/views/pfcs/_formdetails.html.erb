@@ -1,0 +1,68 @@
+<table class="table table-bordered table-layout:fixed;">
+    <thead>
+    <tr>
+      <th colspan="4"><h3>Premium Finance Company: </h3></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+       <td style="text-align: right;"><%= f.label :pfc_name,"Name" %></td>
+       <td><%= f.text_field :pfc_name, :class=> "BLselect" %></td>
+       <td style="text-align: right;"></td>
+       <td></td>
+    </tr>
+    <tr>
+       <td style="text-align: right;"><%= f.label :agency_code,"Agency Code" %></td>
+       <td><%= f.text_field :agency_code, :class=> "BLselect" %></td>
+       <td style="text-align: right;"><%= f.label :address, "Address"%></td>
+       <td><%= f.text_field :address, :class=> "BLselect"%></td>
+     </tr>
+       <tr>
+       <td style="text-align: right;"><%= f.label :marketing_contact, "Marketing Contact"%></td>
+       <td><%= f.phone_field :marketing_contact, :class=> "BLselect" %></td>
+       <td style="text-align: right;"><%= f.label :address_2, "Address 2"%></td>
+       <td><%= f.text_field :address_2, :class=> "BLselect"%></td>
+     </tr>
+    <tr>
+      <td style="text-align: right;"> <%= f.label :marketing_telephone, "Marketing Phone" %></td>
+      <td><%= f.text_field :marketing_telephone, :class=> "BLselect"%></td>
+       <td style="text-align: right;"><%= f.label :city, "City"%></td>
+       <td><%= f.text_field :city, :class=> "BLselect"%></td>
+    </tr>
+    <tr>
+       <td style="text-align: right;"><%= f.label :marketing_email, "Marketing e-Mail" %></td>
+      <td ><%= f.text_field :marketing_email, :class=> "BLselect" %></td>
+       <td style="text-align: right;"><%= f.label :state, "State"%></td>
+       <td><%= f.text_field :state, :class=> "BLselect"%></td>
+    </tr>
+    <tr>
+       <td style="text-align: right;"></td>
+      <td></td>
+       <td style="text-align: right;"><%= f.label :zip, "Zip"%></td>
+       <td><%= f.text_field :zip, :class=> "BLselect"%></td>
+
+    </tr>
+    </tbody>
+    <thead>
+    <tr>
+      <th colspan="4"><h3>Other Contacts:</h3></th>
+    </tr>
+    </thead>
+
+      <tbody>
+          <tr>
+            <td style="text-align: right;"> <%= f.label :contact, "Contact"  %></td>
+            <td><%= f.text_field :contact, :class=> "BLselect" %></td>
+            <td style="text-align: right;"><%= f.label :contact_telephone, "Contact Phone"%></td>
+            <td><%= f.text_field :contact_telephone, :class=> "BLselect"%></td>
+          </tr>
+          <tr>
+            <td style="text-align: right;"> <%= f.label :contact_email, "Contact e-Mail"  %></td>
+            <td><%= f.text_field :contact_email, :class=> "BLselect" %></td>
+            <td style="text-align: right;"></td>
+            <td></td>
+          </tr>
+      </tbody>
+
+  </table >

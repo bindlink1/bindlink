@@ -1,0 +1,5 @@
+<%= form_for [@checklist,@checklistitem], :remote =>true do |f| %>
+    <%= f.text_field :task_name ,:class=>"BLselect",:autocomplete => :off, :placeholder =>"Task Name"  %>
+
+    <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini", :id=>"cpefrmbtn"%>
+<% end %>

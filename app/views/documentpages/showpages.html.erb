@@ -1,0 +1,39 @@
+<div id="the-sticky-div" class="fixedElement" style="height: 35px; background-color:#ff6a00 ;">
+  <div style="float:right">
+  <button id="zoomin">Zoom In</button>
+    <button id="zoomout">Zoom Out</button>
+  </div>
+</div>
+
+<div style="float:left; width: 20%; height: 700px; overflow-y: auto; background-color: #FFFFFF;" class="fixedElement">
+  <% @documentpages.each do |dp| %>
+      <%begin%>
+
+            <img class='thumbnail' src='<%= dp.image.expiring_url(600, :thumb) %>' id='<%= dp.page_number%>'  style="background-color: white; margin: 5px; border: 1px solid lightgrey;">
+
+
+      <%rescue%>
+      <%end%>
+  <% end %>
+
+</div>
+
+
+<div id ="container" style="width:80%;float: right; background-color: #d3d3d3;">
+
+  <% @documentpages.each do |dp| %>
+      <%begin%> <div class="imgcontainer" style='width: 826px; height:1169px; background-color: #d3d3d3;  padding-bottom: 5px;  display: table; margin: 0 auto;'>
+
+  <img class="lazy" id='page_<%= dp.page_number %>' src="" data-original="<%= dp.image.expiring_url(600) %>"  width="826" height="1169" style="background-color: white;">
+
+
+      <%rescue%>
+      <%end%>
+
+
+      </div>
+  <% end %>
+
+</div>
+<%= javascript_include_tag 'jquery.lazyload.min.js'%>
+<%= javascript_include_tag 'showpages.js'%>

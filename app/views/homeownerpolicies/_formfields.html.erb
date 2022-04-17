@@ -1,0 +1,175 @@
+<h3>Coverage Limits</h3>
+<hr>
+
+    <div>
+      <div class="control-group">
+        <label class="control-label">Form</label>
+        <div class="controls">
+          <%= f.collection_select :hoform_id, @form,:id, :form_name, {:include_blank => 'Select One'}%>
+        </div>
+      </div>
+    </div>
+
+<div>
+
+
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Dwelling</label>
+      <div class="controls">
+        <%= f.text_field :dwelling_coverage ,:placeholder=>'Dwelling', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Contents</label>
+      <div class="controls">
+        <%= f.text_field :contents_coverage ,:placeholder=>'Contents', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Additional Structure</label>
+      <div class="controls">
+        <%= f.text_field :otherstructure_coverage ,:placeholder=>'Add Structure', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Loss of Use</label>
+      <div class="controls">
+        <%= f.text_field :lossofuse_coverage ,:placeholder=>'Loss of Use', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Liability</label>
+      <div class="controls">
+        <%= f.text_field :liability_coverage ,:placeholder=>'Liability', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Medical Payments</label>
+      <div class="controls">
+        <%= f.text_field :medpay_coverage ,:placeholder=>'Med Pay', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Deductible</label>
+      <div class="controls">
+        <%= f.text_field :deductible ,:placeholder=>'Deductible', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Hurricane Deductible</label>
+      <div class="controls">
+        <%= f.text_field :hurricane_deductible ,:placeholder=>'Hurr Deductible', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="clear:both"></div>
+<h3>Property Details</h3>
+<hr>
+<div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Construction Type</label>
+      <div class="controls">
+        <%= f.collection_select :hoconsttype_id, @consttypes,:id, :construction_type, {:include_blank => 'Select One'}%>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Year Built</label>
+      <div class="controls">
+        <%= f.text_field :year_built ,:placeholder=>'Year Built', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Square Footage</label>
+      <div class="controls">
+        <%= f.text_field :sq_footage ,:placeholder=>'Square Footage', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Number of Rooms</label>
+      <div class="controls">
+        <%= f.text_field :number_rooms ,:placeholder=>'# of Rooms', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Roof Age</label>
+      <div class="controls">
+        <%= f.text_field :roof_age ,:placeholder=>'Roof Age', :class=>"input-small" %>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Usage</label>
+      <div class="controls">
+        <%= f.collection_select  :usage  ,[['Primary','Primary'], ['Secondary','Secondary'],['Vacant','Vacant'], ['Rented','Rented']], :last, :last, {:include_blank => 'Select One'}%>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="clear:both"></div>
+<hr>
+<div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Alarm</label>
+      <div class="controls">
+        <%= f.check_box :alarm%>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Swimming Pool</label>
+      <div class="controls">
+        <%= f.check_box :swimming_pool%>
+      </div>
+    </div>
+  </div>
+
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Fire Station</label>
+      <div class="controls">
+        <%= f.check_box :fire_station%>
+      </div>
+    </div>
+  </div>
+  <div style="float:left;">
+    <div class="control-group">
+      <label class="control-label">Replacement Cost</label>
+      <div class="controls">
+        <%= f.check_box :replacement_cost%>
+      </div>
+    </div>
+  </div>
+</div>
+<div style="clear:both"></div>

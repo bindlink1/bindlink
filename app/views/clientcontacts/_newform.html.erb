@@ -1,0 +1,12 @@
+<div class="wellwhitemenu">
+
+  <h3>Create a new Contact</h3> <button type="button" class="close" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+</div>
+<%= form_for [@client,@clientcontacts], :html => {:autocomplete => "off", :class=>"form-horizontal"}, :remote=>true do |f| %>
+
+   <%= render :partial=> 'clientcontacts/formfields', :locals=>{:f=>f} %>
+
+<% end %>
+
+
+

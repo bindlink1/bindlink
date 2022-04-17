@@ -1,0 +1,39 @@
+<td>
+  <div style="width: 100%;">
+    <div id="taskcheck<%=task.id%>" style="float: left; margin-right: 10px; ">
+      <%if task.status == 'completed'%>
+
+
+          <%= image_tag('check-box-check.gif')%> <%else %> <%=  link_to  image_tag('check-box-empty.gif', :mouseover => image_path('check-box-check.gif') ), completetask_path(task), :remote => true%>
+      <% end %>
+
+    </div>
+    <div>
+      <%= task.task_name %>
+
+      <div class="taskdetails">
+        <% if !task.reminder_date.nil? %>
+            <b>Follow Up Date:</b> <%= task.reminder_date.strftime("%m/%d/%Y") %>
+            <br />
+        <%end%>
+        <b>Created On:</b> <%= task.created_at.strftime("%m/%d/%Y") %>
+
+        <% begin %>
+            | <b>Assigned To:</b> <%= task.agent.fullname %>
+        <%rescue%>
+
+
+
+        <%end%>
+        <%= link_to('edit', edit_task_path(task) , :remote => true, :class=>'linktext') %> | <%= link_to('reply', newtaskreply_path(task) , :remote => true, :class=>'linktext') %> | <%= link_to('delete', task, :confirm => 'Are you sure you want to delete this task?', :method => :delete, :remote => true, :class=>'linktext') %>
+      </div>
+
+    </div>
+    <% task.subordinates.each do |subordinate| %>
+
+        <%= render :partial => 'tasks/singletasksubdetails', :locals => { :task => subordinate } %>
+
+    <% end %>
+    <div id="temptask<%=task.id%>"></div>
+  </div>
+</td>

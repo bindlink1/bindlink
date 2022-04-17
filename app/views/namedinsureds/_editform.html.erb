@@ -1,0 +1,9 @@
+<%= form_for @namedinsured,:remote =>true do |f| %>
+
+
+    <%= render('formfields', :f => f) %>
+    <div class="form-actions">
+      <%= f.submit 'Save', :remote => true, :class=>"btn btn-success"%> <button class="btn" id="namedinsuredcancel" onclick='return false;'>Go Back</button>
+    </div>
+
+<% end %>

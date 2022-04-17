@@ -1,0 +1,44 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu"><h3>Addresses</h3> | <%= link_to "Add New", new_client_clientaddress_path(@clientforview) ,:remote => true, :style=>"text-decoration: underline", :id=>"newaddrbtn" %> </div>
+  <div id="newca" style="width: 100%">
+  </div>
+
+  <table class="table table-bordered table-condensed table-layout:fixed " id="cpetable">
+    <col width="15%" />
+    <col width="15%" />
+    <col width="40%" />
+    <col width="30%" />
+    <% if @clientaddresses.blank? %>
+        <tr>
+          <td colspan="4" style="text-align: center; background-color: #eeeeee;">
+
+            Nothing entered yet. Click "Add New" above to enter an address.
+
+          </td>
+
+        </tr>
+    <% end %>
+
+
+
+    <% @clientaddresses.each do |ca| %>
+
+        <tr id="<%= "ca" + ca.id.to_s %>" class="caarea">
+          <td>
+            <%= link_to('delete', ca, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext') %>
+            | <%= link_to('edit', edit_clientaddress_path(ca) , :remote => true, :class=>'linktext') %>
+          </td>
+          <td>
+            <%begin%> <%= ca.address_type %> <%rescue%> N/A <%end%>
+          </td>
+          <td>
+            <%begin%> <%= ca.fulladdress %> <%rescue%> N/A <%end%>
+          </td>
+          <td>
+            <%begin%> <%= ca.note %>  <%rescue%> N/A <%end%>
+          </td>
+        </tr>
+        <tr id="<%= "cawork" + ca.id.to_s %>" class="caworkarea"></tr>
+    <% end %>
+  </table>
+</div>

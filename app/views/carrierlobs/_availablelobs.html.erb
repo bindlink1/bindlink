@@ -1,0 +1,9 @@
+
+<div class="wellwhiteblock" >
+  <div class="wellwhitemenu">Available Lines of Business (click to associate)</div>
+  <div style="max-height: 150px; overflow-y: auto">
+  <% @alllobs.each do |all| %>
+      <li> <%= link_to all.line_name , new_carrier_lineofbusiness_carrierlob_path(@carrierforview,all),:class=>'linktext', :remote => true %></li>
+  <% end %>
+  </div>
+</div>

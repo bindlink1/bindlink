@@ -1,0 +1,6 @@
+$('#producingagencywork').slideUp(300);
+$('#producingagency').html('<b>Producing Agency :</b> <%= link_to @policy.producingagency.agency_name, producingagency_path(@policy.producingagency) ,:style =>"text-decoration: underline;"%>');
+$('#producingagency').slideDown(300);
+
+
+

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+
+
+  <title><%= yield(:title) %></title>
+  <% title "Your custom title" %>
+
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+  <%= stylesheet_link_tag    "applicationfunctional" %>
+
+  <%= javascript_include_tag "applicationfunctional" %>
+  <%= yield :head %>
+  <%= javascript_include_tag "bootstrap" %>
+  <%= javascript_include_tag "placeholder" %>
+
+  <%= csrf_meta_tags %>
+  <!--script>
+  window['_fs_debug'] = false;
+  window['_fs_host'] = 'fullstory.com';
+  window['_fs_org'] = '4TMJZ';
+  window['_fs_namespace'] = 'FS';
+  (function(m,n,e,t,l,o,g,y){
+      if (e in m && m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].'); return;}
+      g=m[e]=function(a,b){g.q?g.q.push([a,b]):g._api(a,b);};g.q=[];
+      o=n.createElement(t);o.async=1;o.src='https://'+_fs_host+'/s/fs.js';
+      y=n.getElementsByTagName(t)[0];y.parentNode.insertBefore(o,y);
+      g.identify=function(i,v){g(l,{uid:i});if(v)g(l,v)};g.setUserVars=function(v){g(l,v)};
+      g.identifyAccount=function(i,v){o='account';v=v||{};v.acctId=i;g(o,v)};
+      g.clearUserCookie=function(c,d,i){if(!c || document.cookie.match('fs_uid=[`;`]*`[`;`]*`[`;`]*`')){
+      d=n.domain;while(1){n.cookie='fs_uid=;domain='+d+
+      ';path=/;expires='+new Date(0).toUTCString();i=d.indexOf('.');if(i<0)break;d=d.slice(i+1)}}};
+  })(window,document,window['_fs_namespace'],'script','user');
+  // This is an example script - don't forget to change it!
+  FS.identify('<%= current_agent.id %>', {
+    displayName: '<%= current_agent.fullname %>',
+    email: '<%= current_agent.email %>',
+    // TODO: Add your own custom user variables here, details at
+    // http://help.fullstory.com/develop-js/setuservars.
+    reviewsWritten_int: 14,
+  });
+  </script-->
+
+
+</head>
+<body>
+
+<div id="wrapper">
+  <div id="main" >
+    <div id="header" >
+      <div style="float: left; padding: 5px;"><img src="/assets/bindlinklogofunctional.png"></div>
+      <div style="float: left; padding: 5px; margin-left: 10px;"><%= render 'searches/universalsearch'%></div>
+
+      <div style="float: right; padding: 0px; margin: 10px; color: #FFFFFF; font-weight: bold; font-size: 18px;">   <%= current_agent.fullname %> </div>
+
+    </div>
+    <% Announcement.current(cookies.signed[:hidden_announcement_ids]).each do |announcement| %>
+
+            <div style="clear:both"></div>
+            <div id="announcement_<%=announcement.id%>" class="announcement" >
+              <i class="icon-info-sign"></i> Bindlink Announcement: <%= announcement.message %>  <div style="float:right;" ><%= link_to "Hide Announcement", hide_announcement_path(announcement), :class=>"linktext", :remote=>true %></div>
+            </div>
+
+    <% end%>
+    <div class="colmask leftmenu">
+      <div class ="colright ">
+
+
+        <div id="loadingDiv" style="width: 100px; text-align: center; position: fixed;top: 50%;left: 50%;">
+          <h3>Loading</h3>
+          <img src="/assets/ajax-loader.gif">
+        </div>
+        <%= yield %>
+        <div class="col2" style="display: flex; flex-flow: column; height: 100%">
+          <div id="dashblockcenter" style="padding-top: 15px; flex: 2 ;">
+
+            <div class="wellnav" style="padding: 8px 0; ">
+              <%= tabs_tag(:builder => ApplicationHelper::MenuTabBuilder, :namespace => :sidenav, :open_tabs=>{:class=>"nav nav-list"}) do |sidenav| %>
+                  <%= sidenav.home 'Home', '/welcome',:style=>"display: inline;" %>
+                  <li class="divider"></li>
+                  <li>  <a><i class="icon-check"></i>Tasks   (<%= current_agent.opentaskcount %>)</a>
+                  </li>
+
+                  <% if current_agent.overduetaskcount > 0 %>
+                      <a style="color: red; padding-left: 15px; padding-top: 5px;">Overdue (<%= current_agent.overduetaskcount %>)</a>
+                  <% end %>
+                  <li class="divider"></li>
+                  <li> <a href='/welcome#email'><i class='icon-envelope'></i> e-Mail (<%=Inboundemail.new.emailcount(current_agent.agency_id, current_agent.isgeneralagent)%>)</a> </li>
+
+
+                  <li class="divider"></li>
+                  <li class="nav-header"> <i class="icon-star"></i>Create new</li>
+                  <% if current_agent.isgeneralagent =="GA" %>
+                      <%= sidenav.newsubmission   'Submission', new_submission_path %>
+                      <%= sidenav.newpolicy   'Policy', '/newpolicyga' %>
+                  <% else %>
+                      <li class> <%= link_to 'Prospect', new_prospect_path, :remote=>true%> </li>
+                      <li class> <%= link_to 'Client', new_client_path, :remote=>true%> </li>
+                      <%= sidenav.newpolicy   'Policy', newpolicylanding_path %>
+                  <%end%>
+
+                  <li class="divider"></li>
+                  <li class="nav-header"><i class="icon-search"></i>view</li>
+                  <% if current_agent.isgeneralagent =="GA" %>
+
+                      <%= sidenav.namedinsuredhome 'Named Insured', namedinsureds_path %>
+                  <% else %>
+                      <%= sidenav.prospecthome   'Prospect', prospect_home_path %>
+                      <%= sidenav.clienthome 'Client', clients_path %>
+                  <%end%>
+
+                  <%= sidenav.policyhome   'Policy', policies_path %>
+
+                  <% if current_agent.isgeneralagent =="GA" %>
+                      <%= sidenav.producingagencyhome 'Producing Agency', producingagencies_path %>
+                  <% end %>
+                  <%= sidenav.reporthome 'Reports', reports_path %>
+
+                  <% if current_agent.isgeneralagent =="GA" %>
+
+                  <% else %>
+                      <li class="divider"></li>
+                      <li class="nav-header"><i class="icon-bullhorn"></i> Marketing</li>
+
+                      <%= sidenav.referrershome 'Referrals', referers_path %>
+                      <%= sidenav.dripmarketinghome 'Drip Marketing', referers_path %>
+                  <% end %>
+                  <li class="divider"></li>
+
+                  <li class="nav-header"><i class="icon-briefcase"></i> Accounting</li>
+
+                  <% if current_agent.isgeneralagent =="GA" %>
+                      <%= sidenav.bulkentry   'Cash Entry', '/cashtransactions/bulkentry' %>
+                      <%= sidenav.returnpremium   'Return Premium', returnhome_path %>
+                      <%= sidenav.compay   'Commission Payable', compayhome_path %>
+                  <%end%>
+                  <%= sidenav.statementrecon   'Reconciliation', statements_path %>
+
+                  <li class="divider"></li>
+                  <% if current_agent.is_admin? %>
+                    <li class="nav-header"><i class="icon-wrench"></i>Settings</li>
+                    <%= sidenav.carrierhome   'Carrier', carriers_path %>
+                    <%= sidenav.pfchome   'Finance', pfcs_path %>
+                    <%= sidenav.lobhome   'Lines of Business', lineofbusinesses_path %>
+                    <%= sidenav.feehome   'Fees', fees_path %>
+                    <%= sidenav.locationhome   'Locations', locations_path %>
+                    <%= sidenav.checklisthome   'Checklists', checklists_path %>
+                    <%= sidenav.messagetemplatehome   'Templates', message_templates_path %>
+                    <%= sidenav.customfieldhome   'Custom Fields', customfields_path %>
+                    <%= sidenav.edit 'Edit User', edit_agent_registration_path %>
+                    <li class="divider"></li>
+                    <% end %>
+                    <li class="nav-header"><i class="icon-list"></i>Logs</li>
+                    <%= sidenav.emailloghome   'Email History', emaillog_path %>
+                    <li class="divider"></li>
+                  <%= sidenav.signout 'Sign Out', destroy_agent_session_path %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div id="footer"> bindlink - <%= Time.now.year %> </i>
+  </div>
+</div>
+</body>
+</html>

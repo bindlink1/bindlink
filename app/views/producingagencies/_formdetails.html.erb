@@ -1,0 +1,129 @@
+<div class="control-group">
+  <%= f.label :agency_code,"Agency Code", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :agency_code, :class=> "input-xlarge" %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :agency_name,"Agency Name", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :agency_name, :class=> "input-xlarge" %>
+
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :address_1, "Address 1", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :address_1, :class=> "input-xlarge"%>
+
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :address_2, "Address 2", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :address_2, :class=> "input-xlarge"%>
+
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :city, "City", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :city, :class=> "input-xlarge"%>
+
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :state, "State", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.collection_select :state, State.all, :abbreviation, :abbreviation, {:include_blank => 'Select One'} %>
+
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :zip, "Zip", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :zip, :class=> "input-mini"%>
+
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :telephone, "Telephone", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :telephone, :class=> "input-small"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :agency_fax, "Fax", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :agency_fax, :class=> "input-small"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :main_email, "Main e-Mail", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :main_email, :class=> "input-xlarge"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :secondary_emails, "Secondary e-Mails (separated with comma)", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :secondary_emails, :class=> "input-xlarge"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :accounting_email, "Accounting Contact", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :accounting_email, :class=> "input-xlarge"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :agency_contact, " Main Agent", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :agency_contact, :class=> "input-xlarge"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :main_agent_license, " Main Agent License", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :main_agent_license, :class=> "input-xlarge"%>
+  </div>
+</div>
+<p>
+<h3>1099 Tax Information</h3>
+</p>
+<div class="control-group">
+  <%= f.label :tax_id, "Tax ID", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :tax_id, :class=> "input-xlarge"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :name1099, "1099 Name", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :name1099, :class=> "input-xlarge"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :address1099, "1099 Address", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :address1099, :class=> "input-xlarge"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :city1099, "1099 City", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :city1099, :class=> "input-xlarge"%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :city1099, "1099 State", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.collection_select :state1099, State.all, :abbreviation, :abbreviation, {:include_blank => 'Select One'} %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :zip1099, "1099 Zip", :class=> "control-label" %>
+  <div class="controls">
+    <%= f.text_field :zip1099, :class=> "input-mini"%>
+  </div>
+</div>

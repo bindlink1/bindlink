@@ -1,0 +1,9 @@
+
+
+<%= form_for @location,:html => {:autocomplete => "off", :class=>"form-horizontal"} do |f| %>
+
+
+  <%= render :partial => 'formdetails', :locals=>{:f => f}%>
+
+
+<% end %>

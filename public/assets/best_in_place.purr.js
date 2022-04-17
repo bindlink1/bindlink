@@ -1,0 +1,1 @@
+BestInPlaceEditor.defaults.purrErrorContainer="<span class='bip-flash-error'></span>",jQuery(document).on("best_in_place:error",function(r,e){"use strict";jQuery.each(jQuery.parseJSON(e.responseText),function(r,e){"object"==typeof e&&(e=r+" "+e.toString()),jQuery(BestInPlaceEditor.defaults.purrErrorContainer).html(e).purr()})});

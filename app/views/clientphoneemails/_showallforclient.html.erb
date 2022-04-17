@@ -1,0 +1,49 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu"> <h3>Phone and e-Mail</h3> | <%= link_to "Add New", new_client_clientphoneemail_path(@clientforview) , :remote => true, :style=>"text-decoration:underline", :id=>"newcpebtn" %>   </div>
+
+  <div id="newcpe" style="width: 100%">
+  </div>
+
+
+  <table class="table table-bordered table-condensed table-layout:fixed " id="cpetable">
+    <col width="15%" />
+    <col width="25%" />
+    <col width="25%" />
+    <col width="35%" />
+    <% if @clientcpe.blank? %>
+        <tr>
+          <td colspan="4" style="text-align: center; background-color: #eeeeee;">
+
+            Nothing entered yet. Click "Add New" above to enter a phone or e-Mail.
+
+          </td>
+
+        </tr>
+    <% end %>
+
+
+
+    <% @clientcpe.each do |cpe| %>
+
+        <tr id="<%= "cpe" + cpe.id.to_s %>" class="cpearea">
+          <td>
+            <%= link_to('delete', cpe, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext') %>
+            | <%= link_to('edit', edit_clientphoneemail_path(cpe) , :remote => true, :class=>'linktext') %>
+          </td>
+          <td>
+            <%begin%><%= number_to_phone(cpe.contact_value) %>  <%rescue%> N/A <%end%>
+          </td>
+          <td>
+            <%begin%> <%= cpe.contact_type %>  <%rescue%> N/A <%end%>
+          </td>
+          <td>
+            <%begin%> <%= cpe.note %><%rescue%> N/A <%end%>
+          </td>
+        </tr>
+        <tr id="<%= "cpework" + cpe.id.to_s %>" style="border: 0;" class="cpeworkarea"></tr>
+    <% end %>
+  </table>
+</div>
+
+
+

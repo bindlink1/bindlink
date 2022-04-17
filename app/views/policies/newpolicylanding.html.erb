@@ -1,0 +1,41 @@
+
+<div class="col1wrap">
+            <div class="col1 wellwhite" style="float: left;">
+                 <div class="wellwhitemenu"><span class="headtext">Create a New Policy</span> </div>
+
+                <div id="entryform">
+
+                     <%  if current_agent.isgeneralagent == "Retail"%>
+
+                           <%= render 'clientselection' %>
+                    <%else%>
+
+                            <%= render 'producingagentselection' %>
+
+                      <%end%>
+                 <div id="neworexistingclient">
+
+                 </div>
+
+
+                  <div id="createclientforpolicy">
+
+                  </div>
+                  <div id="clientforpolicy">
+
+                  </div>
+
+                  <div id="newpolicy">
+
+                </div>
+
+                  <div id="invoiceselectionnew">
+
+                  </div>
+                  <div id="entercash">
+
+                  </div>
+
+                </div>
+            </div>
+           </div>

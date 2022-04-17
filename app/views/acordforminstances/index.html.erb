@@ -1,0 +1,14 @@
+<%= stylesheet_link_tag 'acordforms' %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+
+    <div id="AcordForm">
+      <div id="AcordFields">
+        <% @acordform.acordformfields.each do |af| %>
+            <input id="<%= af.formfieldname %>" type="<%= af.fieldtype %>" style="left:<%= af.xpos %>px; top:<%= af.ypos %>px; width:<%= af.width %>px; height:<%= af.height %>px" />
+        <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>

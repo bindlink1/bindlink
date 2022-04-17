@@ -1,0 +1,33 @@
+$("#cashtransactions").dataTable(
+
+        {
+
+
+            "bJQueryUI" : true,
+            "bFilter": false,
+            "bLengthChange": false,
+            "bInfo": false,
+            "bPaginate": false
+
+
+        }
+
+);
+
+
+
+$(document).ready(
+   $(function(){updatepolicy("<%= @invoice.policypremiumtransaction.policy.id%>" , 'cash');}));
+
+function updatepolicy(policy_id , transactiontype){
+     $('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove();
+      $.ajax({
+
+            type: "GET",
+        dataType: "script",
+        data: {transtype:transactiontype, policy_id:policy_id},
+        url: "/policies/updateaftertransaction"
+
+    });
+
+ };

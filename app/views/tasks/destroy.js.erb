@@ -1,0 +1,12 @@
+$('#task<%=@taskid%>').html('').hide().slideUp(300);
+if($('.controlright:visible').find('.tasktablewrapper').is(":hidden")) {
+    $('.controlright:visible').find('.tasktablewrapper').slideDown(300);
+    $('.controlright:visible').find('.taskheader').slideDown(300);
+    $('.controlright:visible').find('.taskheaderwork').slideUp(300);
+    $('.controlright:visible').find('.taskwork').slideDown(300).html('');
+} ;
+
+$(".todaybadge:visible").html('<%=  @todaycount %>');
+$(".overduebadge:visible").html('<%= @overduecount %>');
+$(".upcomingbadge:visible").html('<%= @upcomingcount %>');
+$(".allbadge:visible").html('<%= @allcount %>');

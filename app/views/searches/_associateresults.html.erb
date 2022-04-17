@@ -1,0 +1,84 @@
+<div style="overflow-y: scroll; max-height: 400px;">
+  <ul class="notes">
+
+    <% @searchpolicy.each do |resultpolicy| %>
+        <%if resultpolicy.totalscore.to_f > 0.1  %>
+            <li>
+              <table width="100%">
+                <tr>
+
+                  <td>
+                    <div class="noteheader">
+
+                      Policy: <%= link_to resultpolicy.policy_number,  associatepolicy_path(:email_id=>@inboundemail.id, :pol_id=>resultpolicy.id), :class=>'linktext', :remote=>true %>
+
+                    </div>
+                    <div>
+                      Carrier: <%= resultpolicy.carrier.carrier_name%>  |  Status: <%= resultpolicy.status %>
+                      Effective: <%= resultpolicy.effective_date.strftime("%m/%d/%Y")  %>   |  Expiration: <%= resultpolicy.expiration_date.strftime("%m/%d/%Y")  %>
+                    </div>
+
+                  </td>
+
+                </tr>
+
+
+              </table>
+            </li>
+
+            <hr>
+        <% end %>
+
+
+    <% end %>
+
+
+  </ul>
+
+  <ul class="notes">
+
+    <% @searchclient.each do |resultclient| %>
+        <%if resultclient.totalscore.to_f > 0.1 and resultclient.fullname != ''  %>
+            <li>
+              <table width="100%">
+                <tr>
+
+                  <td>
+                    <div class="noteheader">
+
+                      <% if resultclient.client_status == "Prospect" %>
+                          Prospect: <%= link_to resultclient.fullname, associateclient_path(:email_id=>@inboundemail.id, :client_id=>resultclient.id), :class=>'linktext', :remote=>true %>
+                      <% else %>
+                          Client: <%= link_to resultclient.fullname, associateclient_path(:email_id=>@inboundemail.id, :client_id=>resultclient.id), :class=>'linktext', :remote=>true %>
+                      <% end %>
+                      <ul class="notes">
+                        <%resultclient.clientphoneemails.each do |cpeclient|%>
+                            <li><%= cpeclient.contact_type %> | <%= cpeclient.contact_value %></li>
+                        <% end %>
+                      </ul>
+                      <b>Policies</b>
+                      <ul class="notes">
+                        <%resultclient.policies.each do |pol|%>
+                            <li> Policy: <%= link_to pol.policy_number,  associatepolicy_path(:email_id=>@inboundemail.id, :pol_id=>pol.id), :class=>'linktext', :remote=>true %> | <%= pol.lineofbusiness.line_name %> </li>
+                        <% end %>
+                      </ul>
+
+                    </div>
+
+                  </td>
+
+                </tr>
+
+
+              </table>
+            </li>
+
+            <hr>
+        <% end %>
+    <% end %>
+  </ul>
+
+</div>
+<div class="form-actions">
+  <button class="btn btn-info"  id ="close_search">Cancel</button>
+</div>

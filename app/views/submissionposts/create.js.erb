@@ -1,0 +1,15 @@
+
+
+$('#conversation_<%= @thisconversation.id %>').fadeOut('fast');
+$('#post_conversation_<%= @thisconversation.id %>').fadeOut('fast');
+
+
+$("#createdpost").prepend('<%= escape_javascript(render :partial => "/submissionposts/postcreated" )%>').effect('highlight', 1000);
+$("#newconversation").css({zIndex:90}).fadeOut('fast') ;
+$("#createconversation").css({zIndex:90}).fadeOut('fast') ;
+$("#newconversation").css({zIndex:90}).fadeIn('fast').effect('highlight', 1000) ;
+$("html, body").animate({scrollTop:0}, "slow");
+
+
+
+

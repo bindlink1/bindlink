@@ -1,0 +1,4 @@
+$('#tasktable').prepend(" <%= escape_javascript(render :partial => 'tasks/singletasksleek', :locals => { :task => @task }) %>");
+$('#newtaskwork').html("");
+$('#notask').html("");
+ $('#existingtasks').slideDown(300);

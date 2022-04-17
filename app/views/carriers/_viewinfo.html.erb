@@ -1,0 +1,92 @@
+<table class="table table-bordered table-layout:fixed;">
+  <col width="20%" />
+  <col width="30%" />
+  <col width="20%" />
+  <col width="30%" />
+
+  <tr>
+    <td style="text-align: right;">Status</td>
+    <td><%= @carrierforview.status %></td>
+    <td style="text-align: right;"> Admitted Status </td>
+    <td><%= @carrierforview.admitted_status %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Agency Code</td>
+    <td><%= @carrierforview.agency_code %></td>
+    <td style="text-align: right;">Address</td>
+    <td><%= @carrierforview.address_1 %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">NAIC Number</td>
+    <td><%= @carrierforview.naic_number %></td>
+    <td style="text-align: right;">Address 2</td>
+    <td><%= @carrierforview.address_2 %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Date Appointed</td>
+    <td><%= @carrierforview.date_appointed %></td>
+    <td style="text-align: right;">City</td>
+    <td><%= @carrierforview.city %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><i class="icon-envelope"> </i>  e-Mail </td>
+    <td ><%= @carrierforview.email %></td>
+    <td style="text-align: right;">State</td>
+    <td><%= @carrierforview.state %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Days Invoice Due </td>
+    <td><% if !@carrierforview.days_invoice_due.nil? %> <%= @carrierforview.days_invoice_due %> days <%end%></td>
+    <td style="text-align: right;">Zip</td>
+    <td><%= @carrierforview.zip %></td>
+
+  </tr>
+
+  <tr>
+    <td style="text-align: right;"> Marketing Contact </td>
+    <td><%= @carrierforview.marketing_contact %></td>
+    <td style="text-align: right;">Underwriting Contact</td>
+    <td><%= @carrierforview.underwriting_contact %></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;"> Marketing Telephone </td>
+    <td><%= @carrierforview.marketing_telephone %></td>
+    <td style="text-align: right;">Underwriting Telephone</td>
+    <td><%= @carrierforview.underwriting_telephone %></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;"> Marketing e-Mail </td>
+    <td><%= @carrierforview.marketing_email %></td>
+    <td style="text-align: right;">Underwriting e-Mail</td>
+    <td><%= @carrierforview.underwriting_email %></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;"> Is statement group? </td>
+    <td><%= @carrierforview.isstatementgroup %></td>
+    <td style="text-align: right;">Belongs to statement group</td>
+    <td><%= @carrierforview.statementgroup_id %></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;">Web Address</td>
+    <%begin%>
+        <% unless @carrierforview.web_url[/^http:\/\//] || @carrierforview.web_url[/^https:\/\//]
+             @carrierforview.web_url = 'http://' + @carrierforview.web_url
+           end %>
+    <% rescue %>
+    <% end %>
+    <td>
+      <%begin%>
+          <a href="<%= @carrierforview.web_url %>" target="blank" class="linktext"><%= @carrierforview.web_url %></a>
+      <% rescue %>
+      <%end %>
+    </td>
+    <td style="text-align: right;"></td>
+    <td></td>
+
+  </tr>
+
+</table >

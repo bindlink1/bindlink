@@ -1,0 +1,74 @@
+$('#tabcontainer a[href="#generaltab"]').tab('show');
+$('#policyfields').slideUp(300);
+$('#policyfieldswork').html('<%= escape_javascript(render 'editpolicy' ) %>').hide().slideDown(300);
+
+
+$("#editcancel").click(function(){
+    $('#policyfieldswork').slideUp(300);
+    $('#policyfieldswork').html("");
+    $('#policyfields').slideDown(300);
+
+});
+
+
+$('#editpolbutton').attr("disabled", "disabled");
+$('#cancelpolbutton').attr("disabled", "disabled");
+$('#endorsepolbutton').attr("disabled", "disabled");
+var effdatestore = $('#policy_effective_date').val();
+var expdatestore = $('#policy_expiration_date').val();
+
+
+$("#policy_effective_date").datepicker();
+$("#policy_expiration_date").datepicker();
+
+$("#policy_effective_date").change(function() {
+
+    effdatechange() ;
+
+
+
+});
+
+$('#policy_expiration_date').change(function() {
+
+
+
+    expdategnome();
+
+
+});
+
+
+$('#policy_policy_term').change(function() {
+
+
+    expdategnome();
+
+});
+
+function effdatechange(){
+
+
+
+    $("#dialogquestion").html('<b>Are you sure you want to change the effective date?</b> </br> <button id="yestoenter">Yes </button> <button id="notoenter">No </button> ');
+    $("#dialogquestion").dialog();
+    $("#yestoenter").click(function(){
+        expdategnome();
+        checkeffdate();
+        $("#dialogquestion").dialog("close");
+
+    });
+
+    $("#notoenter").click(function(){
+        $("#policy_effective_date").val(effdatestore);
+        $("#policy_effective_date").val(expdatestore);
+
+        $("#dialogquestion").dialog("close");
+    });
+
+
+
+
+
+};
+

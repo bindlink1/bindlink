@@ -1,0 +1,26 @@
+<div class="wellwhite">
+  <div>
+   <p><h3>Search for a client, prospect or policy to associate the attachments to:</h3>
+    Click on a result below and the attachments from this email will be transferred there.
+    </p>
+
+  </div>
+  <%= form_tag(findtoassociateemail_path(@inboundemail.id), :method => "get",:class=>"form-inline" , :remote=> true) do %>
+
+
+      <!--[if IE]>
+      <input type="text" class="span4" name="searchtext"   style=" line-height:22px; height: 22px;">
+      <![endif]-->
+      <![if !IE]>
+      <input type="text" class="span4" name="searchtext" style=" line-height:22px;">
+      <![endif]>
+
+      <button type="submit" class="btn btn-info" style="">Search</button>
+      <button type="submit" class="btn" style="" id="cancelassociate" onclick='return false;'>Cancel</button>
+  <%end%>
+<hr>
+  <div id="searchresults">
+
+  </div>
+
+</div>

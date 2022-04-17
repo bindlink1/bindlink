@@ -1,0 +1,32 @@
+
+
+<table class="controltablemin">
+  <tr>
+    <td class="controlright">
+      <div class="taskhead" id="taskhead">
+        <div id="taskheader" class="taskheader">
+          <table  style="width: 100%;" >
+            <tr>
+              <td style="width: 60%; text-align: left;">Subject</td>
+              <td style="width: 25%; text-align: left;">For</td>
+              <td style="width: 10%; text-align: left;">Due</td>
+              <td style="width: 5%; text-align: center;"></td>
+            </tr>
+          </table>
+        </div>
+        <div id="taskheaderwork"></div>
+      </div>
+      <div class="rightwrappermin">
+        <div id="tasktablewrapper" class="tasktablewrapper">
+          <table id="tasktable" style="width: 100%" class="tasktable">
+
+                <%= render :partial => 'tasks/taskdata', :locals => { :tasks => @tasks } %>
+
+          </table>
+        </div>
+        <div id="taskwork" class="taskwork"></div>
+      </div>
+    </td>
+  </tr>
+</table>
+

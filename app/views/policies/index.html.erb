@@ -1,0 +1,28 @@
+<% title  "Policies | bindlink" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Policy Home</span> </div>
+
+    <h3>All policies: click on a <% if current_agent.isgeneralagent == "GA"%>named insured<%else%>client name<%end%> below to view.</h3>
+    <br />
+    <div class="dataTablewrapper">
+      <table id="policies" class="bordered-table zebra-striped " data-source="<%= policies_url(format: "json") %>">
+        <thead>
+        <tr>
+          <th><% if current_agent.isgeneralagent == "GA"%>Named Insured<%else%>Client Name<%end%></th>
+          <th>Policy Number</th>
+          <th>Carrier</th>
+          <th>Effective Date</th>
+          <th>Line of Business</th>
+          <th>Balance</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>

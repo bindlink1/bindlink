@@ -1,0 +1,10 @@
+
+<% if @match == "1"%>
+$("#trans_action_<%=@transaction.id%>").html("<%= image_tag("check.png", :height=>"15px", :width=>"15px") %>  Process");
+
+<% else %>
+alert("Policy Not Found");
+
+$("#trans_action_<%=@transaction.id%>").html('<%= escape_javascript(render :partial => "nomatch") %>');
+
+<% end%>

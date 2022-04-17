@@ -1,0 +1,134 @@
+
+<ul class="notes">
+  <% if @universalresults.blank? %>
+      No results.
+  <%end%>
+  <% @universalresults.each do |result| %>
+
+      <li>
+        <table width="100%">
+          <tr>
+
+            <td>
+              <div class="noteheader">
+
+                <% if result.type == "policy"%>
+                    <% resultpolicy = Policy.find(result.result_id) %>
+                    <% if result.score == '1'%><span class="badge badge-warning"><i class="icon-star icon-white"></i></span> <%end%>
+                    Policy: <%= link_to result.identifier , policy_path(result.result_id), :class=>'linktext' %>
+                <% elsif result.type == "address"%>
+                    <% resultaddress = Clientaddress.find(result.result_id) %>
+
+                    <% if result.score == '1'%><span class="badge badge-warning"><i class="icon-star icon-white"></i></span> <%end%>
+                    <%=  resultaddress.fulladdress %>
+                    <% if resultaddress.client.client_status == "Prospect" %>
+                        Prospect: <%= link_to resultaddress.client.fullname, showprospect_path(:id => resultaddress.client.id), :class=>'linktext' %>
+                    <% else %>
+                        Client: <%= link_to resultaddress.client.fullname, client_path(resultaddress.client.id), :class=>'linktext' %>
+                    <% end %> <br/>
+
+                <% elsif result.type == "contact"%>
+                    <% resultcontact = Client.find(result.result_id) %>
+                    <% if result.score == '1'%><span class="badge badge-warning"><i class="icon-star icon-white"></i></span> <%end%>
+                    <% if resultcontact.client_status == "Prospect" %>
+                        Prospect: <%= link_to resultcontact.fullname, showprospect_path(:id => resultcontact.id), :class=>'linktext' %>
+                    <% else %>
+                        Client: <%= link_to resultcontact.fullname, client_path(resultcontact), :class=>'linktext' %>
+                    <% end %>
+                    <ul class="notes">
+                      <%resultcontact.clientphoneemails.each do |cpecontact|%>
+                          <li><%= cpecontact.contact_type %> | <%= cpecontact.contact_value %></li>
+                      <% end %>
+                    </ul>
+                <% elsif result.type == "client"%>
+                    <% resultclient = Client.find(result.result_id) %>
+
+                    <% if result.score == '1'%><span class="badge badge-warning"><i class="icon-star icon-white"></i></span> <%end%>
+                    <% if resultclient.client_status == "Prospect" %>
+                        Prospect: <%= link_to resultclient.fullname, showprospect_path(:id => resultclient.id), :class=>'linktext' %>
+                    <% else %>
+                        Client: <%= link_to resultclient.fullname, client_path(resultclient), :class=>'linktext' %>
+                    <% end %>
+                    <ul class="notes">
+                      <%resultclient.clientphoneemails.each do |cpeclient|%>
+                          <li><%= cpeclient.contact_type %> | <%= cpeclient.contact_value %></li>
+                      <% end %>
+                    </ul>
+                <% elsif result.type == "clientcontact"%>
+                    <% resultclientcontact = Clientcontact.find(result.result_id) %>
+                    <% if result.score == '1'%><span class="badge badge-warning"><i class="icon-star icon-white"></i></span> <%end%>
+                    <% if resultclientcontact.client.client_status == "Prospect" %>
+                        Prospect: <%= link_to resultclientcontact.client.fullname, showprospect_path(:id => resultclientcontact.client.id), :class=>'linktext' %>
+                    <% else %>
+                        Client: <%= link_to resultclientcontact.client.fullname, client_path(resultclientcontact.client.id), :class=>'linktext' %>
+                    <% end %> <br/>
+
+                    <ul class="notes">
+                      <li><b>Client Contacts:</b></li>
+                      <li><%= resultclientcontact.contact_value %>   <%= resultclientcontact.note %></li>
+
+                    </ul>
+                <% elsif result.type == "namedinsured"%>
+                    <% resultni = Namedinsured.find(result.result_id) %>
+                    <% if result.score == '1'%><span class="badge badge-warning"><i class="icon-star icon-white"></i></span> <%end%>
+                    Named Insured:  <%= link_to result.identifier, namedinsured_path(result.result_id), :class=>'linktext' %>
+                    <ul>
+                      <% resultni.policies.each do |pols| %>
+
+                          <li>
+                            <%= link_to pols.policy_number, policy_path(pols)%>
+                            <br/>
+                            Effective:  <%= pols.effective_date.strftime("%m/%d/%Y")  %>  |  Expiration: <%= pols.expiration_date.strftime("%m/%d/%Y")  %>
+                          </li>
+                      <% end %>
+                    </ul>
+                    <ul>
+                      <% resultni.submissions.each do |subs| %>
+
+                          <li>
+                            Submission: <%= link_to subs.created_on , submission_path(subs)%>
+                          </li>
+                      <% end %>
+                    </ul>
+                <% elsif result.type == "producer"%>
+                    <%pa = Producingagency.find(result.result_id) %>
+                    <% if result.score == '1'%><span class="badge badge-warning"><i class="icon-star icon-white"></i></span> <%end%>
+                    Producing Agency: <%=  pa.agency_code %>  <%= link_to result.identifier, producingagency_path(result.result_id) , :class=>'linktext' %>
+                    <br/>
+                    <%= pa.address_1 %>
+                <% elsif result.type == "producercode"%>
+                    <% pa = Producingagency.find(result.result_id) %>
+                    <% if result.score == '1'%><span class="badge badge-warning"><i class="icon-star icon-white"></i></span> <%end%>
+                    Producing Agency: (<%= result.identifier%>)  <%= link_to pa.agency_name, producingagency_path(result.result_id) , :class=>'linktext' %>
+                    <br/>
+                    <%= pa.address_1 %> <%= pa.address_2 %> <br/>
+                    <%= pa.city %>, <%= pa.state %> <%= pa.zip %>
+                <% end %>
+              </div>
+              <div>
+                <% if result.type == "policy"%>
+                    <% if current_agent.isgeneralagent == "GA"%><%= resultpolicy.namedinsured.named_insured%><%else%><%= resultpolicy.client.fullname%><%end%><br/>
+                    Carrier: <%= resultpolicy.carrier.carrier_name%>  |  Status: <%= resultpolicy.status %><br/>
+                    Effective: <%= resultpolicy.effective_date.strftime("%m/%d/%Y")  %>   |  Expiration: <%= resultpolicy.expiration_date.strftime("%m/%d/%Y")  %>
+                <% end %>
+              </div>
+
+            </td>
+
+          </tr>
+
+
+        </table>
+      </li>
+
+      <hr>
+
+
+
+  <% end %>
+
+
+</ul>
+
+
+

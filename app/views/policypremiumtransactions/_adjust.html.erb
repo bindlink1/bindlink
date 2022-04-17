@@ -1,0 +1,67 @@
+
+<%= javascript_include_tag "adjusttransaction" %>
+<div class="wellwhitemenu">
+
+  <h3>Adjust Transaction</h3> <button type="button" class="close" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+</div>
+<h3> Adjust the premium and fees for this transaction to their correct values. </h3>
+<hr>
+<%= form_for @ppt, :url=>processadjustment_path(@ppt),:html=>{:class=>"form-horizontal"}, :remote=>true do |f|%>
+    <div class="control-group">
+      <label class="control-label">Base Premium</label>
+      <div class="controls">
+        <%= f.text_field :base_premium, :class =>'input-small', :autocomplete => :off %>
+      </div>
+    </div>
+
+    <%= fields_for :feetransactions do |builder| %>
+
+        <% @feecount = 0 %>
+        <% @fees.each do |lobfee| %>
+
+            <div class="control-group">
+              <label class="control-label"><%=lobfee.fee.fee_name%> </label>
+              <div class="controls">
+                <div class="complexfee"><input id='fee' class='input-small blinput' type='text'   name='policypremiumtransaction[feetransactions_attributes][<%= @feecount %>][fee_amount]' autocomplete='off'></div>
+                <input type='hidden' id='feesid_<%= lobfee.fee.id %>' class='blid' type='text' size='30' name='policypremiumtransaction[feetransactions_attributes][<%= @feecount %>][fee_id]' autocomplete='off' value="<%= lobfee.fee_id %>">
+                <input type='hidden' class='blvalue' type='text' size='30'  autocomplete='off' value="<%= lobfee.fee.fee_value %>">
+                <input type='hidden'  class='bltype' type='text' size='30' autocomplete='off' value="<%= lobfee.fee.fee_type %>">
+                <input type='hidden'  class='blremittype' type='text' size='30' autocomplete='off' value="<%= lobfee.fee.fee_remit_type %>">
+              </div>
+            </div>
+
+
+            <% @feecount = @feecount +1 %>
+
+        <% end %>
+
+    <% end %>
+    <div class="control-group">
+      <label class="control-label">Fees and Taxes</label>
+      <div class="controls">
+
+        <% if @feecount > 0 then  %>
+            <%= f.text_field :complexfees ,:class=>"input-small" ,:autocomplete => :off , :readonly=>'readonly'  %>
+        <% else %>
+            <%= f.text_field :fees, :class =>'input-small', :autocomplete => :off %>
+
+        <% end %>
+
+
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <label class="control-label">Total Premium</label>
+      <div class="controls">
+        <%= f.text_field :total_premium, :class =>'input-small', :autocomplete => :off %>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit 'Adjust' ,:confirm => 'Are you sure you want to adjust the premium for this transaction?' ,disable_with: 'Processing...', :class=>"btn btn-success" %>
+      <button class="btn"  id ="close_modal" onclick='return false;'>Cancel</button>
+    </div>
+
+<% end %>

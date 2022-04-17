@@ -1,0 +1,34 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext"><%= @transaction.al3h2trg.informal_transaction_address_sender %> | <% begin%> <%= @transaction.al3h2trg.al3h5bpi.policy_number%> <%rescue%> <% end %>
+
+    </span>
+    </div>
+
+    Transaction Type: <b><%= @transaction.business_purpose_description %></b>
+
+    <% begin %>
+    <br>
+    Policy Number: <b><%begin%> <% if !@transaction.policy_id.nil? %>  <span class="label label-success"> <%= @transaction.al3h2trg.al3h5bpi.policy_number%></span>    <%= image_tag("check.png", :height=>"15px", :width=>"15px") %>  Policy Match<%else%> <%= @transaction.al3h2trg.al3h5bpi.policy_number%>     <%end%> <%rescue%><%end%> </b>
+    <br>
+    Effective Date: <b><%= @transaction.al3h2trg.al3h5bpi.policy_effective_date%></b>
+    <br>
+    Effective Date: <b><%= @transaction.al3h2trg.al3h5bpi.policy_expiration_date%></b>
+
+    <hr>
+    <h3>Transaction Details</h3>
+    Transaction Date:<b><%= @transaction.al3h2trg.transaction_date %></b><br>
+    Transaction Effective Date:<b><%= @transaction.al3h2trg.transaction_effective_date %></b><br>
+    Policy Premium: <b><%= number_to_currency(@transaction.al3h2trg.al3h5bpi.current_term_amount)%></b><br>
+    Premium Change: <b><%= number_to_currency(@transaction.al3h2trg.al3h5bpi.net_change_amount)%></b>
+    <% rescue %>
+
+    <% end %>
+
+    <% if @transaction.business_purpose_description != 'Miscellaneous Print' %>
+        <%= render 'showauto'%>
+    <% else %>
+        <%= render 'showprint'%>
+    <% end %>
+  </div>
+</div>

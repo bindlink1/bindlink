@@ -1,0 +1,11 @@
+$('#myModal').modal('hide');
+$("#myModal").hide();
+$("#myModal").remove();
+
+if ($("#documenttable").is(":visible")) {
+	$('.documentcontainer:visible').html('<%= escape_javascript(render :partial=>'documents/documentlistview', :locals=>{:documentsforview => @documentsforview}) %>')
+} else {
+	$('.documentcontainer:visible').html('<%= escape_javascript(render :partial=>'documents/documentgridview', :locals=>{:documentsforview => @documentsforview}) %>')
+}
+
+$('#loadingDiv').hide()

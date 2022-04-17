@@ -1,0 +1,8 @@
+alert("<%= @result.to_s %>");
+
+var a = "<%= @direct.to_s %>";
+
+if (a == "redirect"){
+    $('.dataTablewrapper').slideUp(300);
+    $('.dataTablewrapper').html("<%= escape_javascript(render('message_templates/showall'))%>").slideDown(300);
+};

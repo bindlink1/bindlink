@@ -1,0 +1,2 @@
+module GicwebpolicyserviceHelper
+end

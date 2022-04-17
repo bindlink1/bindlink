@@ -1,0 +1,15 @@
+
+$("#myModal").remove();
+$("#wrapper").append('<%=escape_javascript(render('newjournalentry')) %> ');
+$('#loadingdivdoc').hide();
+$('#myModal').modal('show');
+$("#uploadbutton").click(function(){$("#documentform").slideUp(300); $('#loadingdivdoc').fadeIn(300); });
+$(".closeit").click(function(){$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove(); });
+$(document).ready(
+        $(function(){
+
+            $("#close_modal").live("click", function() {
+                $('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove()
+            });
+
+        }));

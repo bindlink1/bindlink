@@ -1,0 +1,8 @@
+<div class="wellwhiteblock" >
+  <div class="wellwhitemenu">NAIC Numbers for Carrier Download <%= link_to "Add New", new_carrier_carriernaic_path(@carrierforview) ,:remote => true, :style=>"text-decoration: underline", :id=>"newaddrbtn" %></div>
+  <ul>
+  <% @carrierforview.carriernaics.each do |cnaic| %>
+       <li><%= cnaic.naic_number%>  <%= link_to "edit", edit_carriernaic_path(cnaic) ,:remote => true,  :class=>"linktext" %> | <%= link_to('delete', cnaic, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext') %> </li>
+    <% end %>
+  </ul>
+</div>

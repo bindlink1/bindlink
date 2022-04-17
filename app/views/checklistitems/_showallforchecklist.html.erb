@@ -1,0 +1,10 @@
+<p>
+  <%= link_to "add new checklist task", new_checklist_checklistitem_path(@checklist) , :remote => true, :class=>"btn btn-success btn-mini" %>
+</p>
+<div id="newci"></div>
+<ul class="notes">
+
+  <div id="checklistitems">
+    <%= render 'checklistitems/itemlist' %>
+  </div>
+</ul>

@@ -1,0 +1,35 @@
+<td>
+  <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini" %> <button class="btn btn-mini" id="templaterowcancel<%=@template.id%>" onclick='return false;' >cancel</button>
+</td>
+<td >
+  
+</td>
+<td>
+  <%= f.text_field :name, :autocomplete => :off, :class=>"input-medium", :placeholder =>"Name..."  %>
+</td>
+<td>
+  <%= f.text_area :content, :placeholder =>"Content...", cols:70, rows:15 %>
+  <li class="dropdown" style="display: inline; vertical-align: top;">
+    <a data-toggle="dropdown" href="#polmenu" class="dropdownmenubox" style="vertical-align: top;">
+      Insert...
+      <span class="caret"></span>
+    </a>
+    <ul class="dropdown-menu insert-tag">
+      <li>
+        <a href="#" id="insured_name"> Insured Name </a>
+      </li>
+      <li>
+        <a href="#" id="policy_num"> Policy Number </a>
+      </li>
+      <li>
+        <a href="#" id="expiration_date"> Expiration Date </a>
+      </li>
+      <li>
+        <a href="#" id="due_date"> Invoice Due Date </a>
+      </li>
+      <li>
+        <a href="#" id="amount_due"> Invoice Amount Due </a>
+      </li>
+    </ul>
+  </li>
+</td>

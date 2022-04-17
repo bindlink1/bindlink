@@ -1,0 +1,2 @@
+
+$("#recentactivity").fadeOut(300).html("<%= escape_javascript(  render 'notelist', :locals => { :notespaginate => @notespaginate })%>").fadeIn(300);

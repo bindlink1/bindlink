@@ -1,0 +1,40 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu"> Submissions</div>
+
+  <table class="table table-bordered table-striped table-layout:fixed ">
+
+
+    <% if @submissions.blank? %>
+        <tr>
+          <td colspan="6" style="text-align: center; background-color: #eeeeee;">
+
+            No Submissions just yet.
+
+          </td>
+        </tr>
+    <%else%>
+        <thead>
+        <tr>
+          <th>Named Insured</th>
+          <th>Quote Count</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+    <%end%>
+    <tbody>
+    <% @submissions.each do |submission| %>
+
+        <tr>
+          <td><b style="text-decoration: underline;"><%= link_to submission.namedinsured.named_insured , submission_path(:id => submission) %></b></td>
+
+          <td><%= submission.totalquotecount %></td>
+          <td></td>
+        </tr>
+
+
+
+    <% end %>
+
+    </tbody>
+  </table>
+</div>

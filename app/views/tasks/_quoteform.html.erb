@@ -1,0 +1,22 @@
+
+<%= form_for [@quote,@task], :remote =>true do |f| %>
+    <div style="border-bottom: 1px solid #d3d3d3; padding: 5px;">
+      <div class="control-group">
+        <%= f.label :task_name, 'Task' , :class=>"control-label"  %>
+        <div class="controls">
+          <%= f.text_area :task_name , :class =>'required BLselect', :autocomplete => :off,:minlength=>'2', :cols => 1, :rows => 5 %>
+        </div>
+      </div>
+
+      <div class="control-group form-inline">
+        <div class="controls">
+          Assigned To <%= f.collection_select :agent_id, @agents, :id, :fullname %>  Follow Up <%= f.text_field :reminder_date ,:autocomplete => :off, :size=>"8", :placeholder =>"Follow Up Date" %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini", :id=>"savebtn"%>
+        <button class="btn btn-mini taskcancel" id="taskcancel" onclick='return false;' >cancel</button>
+      </div>
+    </div>
+<% end %>

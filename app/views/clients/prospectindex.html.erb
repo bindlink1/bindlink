@@ -1,0 +1,32 @@
+<%= javascript_include_tag "clientsdashboard" %>
+<% title  "Prospects | bindlink" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite" >
+  <div class="wellwhitemenu"><span class="headtext">Prospect Home</span> </div>
+
+     <h3>All Prospects: click on a prospect name below to view.</h3>
+    <br />
+    <div class="dataTablewrapper">
+      <table id="prospects" class="bordered-table zebra-striped ">
+        <thead>
+        <tr>
+          <th>Prospect Name</th>
+          <th>Created</th>
+          <th>Sales Stage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @clients.each do |clients| %>
+            <tr>
+              <td><%= link_to clients.fullname , showprospect_path(:id => clients.id) %></td>
+              <td><%= clients.created_at.strftime("%m/%d/%Y")  %></td>
+              <td><%= clients.sales_step  %></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+

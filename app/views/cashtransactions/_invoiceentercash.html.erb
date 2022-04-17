@@ -1,0 +1,23 @@
+
+<div class="wellwhite">
+<h3>Apply Cash:</h3>
+<hr>
+
+<%= form_for @cashtransaction,:url => create_cash_transaction_bulk_path, :class=>"form-horizontal"  ,:remote => true do |f| %>
+
+       <div class="field">
+        <%= f.label :cash_amount,"Cash Amount" %><br />
+        <%= f.text_field :cash_amount %>
+      </div>
+      <div class="field">
+        <%= f.label :payment_type,"Payment Type" %><br />
+        <%= f.text_field :payment_type %>
+      </div>
+       </br>
+
+                 <div class="form-actions"><%= f.submit 'Enter Cash', :class=>'btn btn-success' %> <button class="btn" id="gobackapplycash" onclick='return false;'>Go Back</button></div>
+
+<%end%>
+</div>
+
+

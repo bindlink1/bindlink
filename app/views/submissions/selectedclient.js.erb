@@ -1,0 +1,9 @@
+$("#nextstep").append('<%= escape_javascript(render :partial => "form") %>');
+$("#selectclient").css({zIndex:90}).fadeOut('fast') ;
+$("#neednewclient").css({zIndex:90}).fadeOut('fast') ;
+
+$(function(){
+  $("#submission_deadline").datepicker({dateFormat: "yy-mm-dd"});
+})
+
+

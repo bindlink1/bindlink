@@ -1,0 +1,7 @@
+
+<% if tasks.blank? %>
+
+<% end %>
+<% tasks.each do |task| %>
+    <%= render :partial => 'tasks/singletasksleek', :locals => { :task => task } %>
+<% end %>

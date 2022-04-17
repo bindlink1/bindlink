@@ -1,0 +1,20 @@
+<table class="table table-bordered table-layout:fixed;" style="width: 60%;">
+
+  <tbody>
+  <tr>
+    <td>Line of Business Name</td>
+    <td><%= @lobforview.line_name %></td>
+  </tr>
+  <tr>
+    <td>Coverage Category</td>
+    <td><% begin %> <%=  @lobforview.lobbroadcategory.category_name %> <% rescue %> N/A <% end %></td>
+  </tr>
+  <tr>
+    <td>Coverage Code(Surplus Lines)</td>
+    <td><%= @lobforview.coverage_code %></td>
+  </tr>
+
+
+  </tbody>
+
+</table >

@@ -1,0 +1,20 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Commission Payable
+    </span>
+    </div>
+
+    <h3>Select a check below to reprint & update check #</h3>
+    <hr>
+
+    <div id="editcheck"></div>
+
+
+    <div id="checktable">
+      <%= render 'compaychecktable' %>
+    </div>
+    <hr>
+    <%= link_to "Done Editing", compayhome_path , :class=>"btn" %>
+  </div>
+</div>
+

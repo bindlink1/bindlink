@@ -1,0 +1,44 @@
+<table class="table table-bordered table-layout:fixed;" style="width: 40%;">
+
+  <tbody>
+    <tr>
+      <td style="text-align: right;"><%= f.label :fee_name,"Fee Name" %></td>
+      <td><%= f.text_field :fee_name, :class=> "BLselect" %></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><%= f.label :fee_type,"Fee Type" %></td>
+      <td> <%= collection_select :fee, :fee_type, @feetypes,:last, :last, {:include_blank => 'Select One'}, { :class =>'BLselect' }%></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><%= f.label :state,"State" %></td>
+      <td>   <%= f.collection_select :state, State.all, :abbreviation, :abbreviation, {:include_blank => 'Select One'} %>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><%= f.label :fee_value ,"Fee Amount" %></td>
+      <td><%= f.text_field :fee_value, :class=> "BLselect" %></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><%= f.label :fee_remit_type ,"Remit Type" %></td>
+      <td> <%= collection_select :fee, :fee_remit_type, @remittypes,:last, :last, {:include_blank => 'Select One'}, { :class =>'BLselect' }%></td>
+    </tr>
+
+    <tr>
+      <td style="text-align: right;"><%= f.label :attach_type ,"Attach Type" %></td>
+      <td> <%= collection_select :fee, :attach_type, @attachtypes,:last, :last, {:include_blank => 'Select One'}, { :class =>'BLselect' }%></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><%= f.label :earn_type ,"Earn Type" %></td>
+      <td> <%= collection_select :fee, :earn_type, @earntypes,:last, :last, {:include_blank => 'Select One'}, { :class =>'BLselect' }%></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><%= f.label :effective_date ,"Effective Date" %></td>
+      <td> <%= f.text_field :effective_date, :class=> "BLselect" %></td>
+    </tr>
+    <tr>
+      <td style="text-align: right;"><%= f.label :expiration_date ,"Expiration Date" %></td>
+      <td> <%= f.text_field :expiration_date, :class=> "BLselect" %></td>
+    </tr>
+  </tbody>
+
+</table >

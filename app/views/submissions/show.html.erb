@@ -1,0 +1,69 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu">
+      <span class="headtext" > Submission Id:<%= @submission.id %> -- <%begin%><%= link_to @submission.namedinsured.named_insured, namedinsured_path(@submission.namedinsured_id)  ,:style =>"text-decoration: underline;" %> <%rescue%> <%end%>
+        <li class="dropdown" style="display: inline;">
+          <a  data-toggle="dropdown" href="#polmenu" class="dropdownmenubox">
+            <%= image_tag("list 2.png", :height=>"15px", :width=>"15px") %> Menu
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" >
+            <li>
+                <%= link_to  new_submission_quote_path(@submission) do %><%= image_tag("quote.png", :height=>"25px", :width=>"25px") %> New Quote <%end%>
+            </li>
+          </ul>
+        </li>
+    </span>
+    </div>
+    <div class="row-fluid">
+      <div class="span12" id="tabcontainer">
+      <div class="previewhead">
+       <b>Producing Agency: <%= link_to  @submission.producingagency.agency_name, producingagency_path( @submission.producingagency) ,:style =>"text-decoration: underline;"%></b>
+
+      </div>
+        <div class="tabbable">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#infotab" data-toggle="tab">Info</a></li>
+            <li><a href="#notetab" data-toggle="tab">Notes</a></li>
+            <li><a href="#documenttab" data-toggle="tab">Documents</a></li>
+          </ul>
+          <div class="tab-content " style="overflow: visible;">
+            <div id="infotab" class="tab-pane active">
+              <div class="row-fluid">
+                <div class="span12" id="quotewrapper">
+                  <br/>
+
+
+
+                  <%= render('quotes/showallforclient') %>
+                </div>
+              </div>
+            </div>
+            <div id="notetab" class="tab-pane">
+              <div class="row-fluid">
+                <div class="span12">
+                  <div class="wellwhiteblock">
+                    <div class="wellwhitemenu">Submission Notes</div>
+
+                    <%= render 'notesform' %>
+                  </div>
+                  <div id="notewrapper"><%= render 'notelist', :notesforview =>@notesforview %></div>
+                </div>
+
+              </div>
+            </div>
+            <div id="documenttab" class="tab-pane">
+
+                        <%= render 'submissiondocuments' %>
+
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+</div>

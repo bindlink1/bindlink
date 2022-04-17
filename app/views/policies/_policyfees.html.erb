@@ -1,0 +1,34 @@
+<table class="table table-striped table-bordered" id="feetable">
+  <thead>
+  <tr>
+    <td></td>
+    <th>Date</th>
+    <th>Fee Name</th>
+    <th>Remit Type</th>
+    <th>Amount</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @pptforview.each do |transaction| %>
+     <tr>
+       <td colspan="5"><b><%=transaction.transaction_type%></b></td>
+     </tr>
+  <% transaction.feetransactions.each do |fees| %>
+      <tr>
+        <td></td>
+        <td><%= fees.created_at.strftime("%m/%d/%Y") %></td>
+        <td><%= fees.fee.fee_name %></td>
+        <td><%= fees.fee.fee_remit_type %></td>
+        <td><%= number_to_currency(fees.fee_amount,  :negative_format => "(%u%n)") %></td>
+      </tr>
+
+  <% end %>
+       <tr>
+       <td colspan="5"><b>Total:
+
+               <%=number_to_currency(transaction.feetotal,  :negative_format => "(%u%n)")%>
+       </b></td>
+     </tr>
+  <% end %>
+  </tbody>
+</table>

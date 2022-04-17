@@ -1,0 +1,38 @@
+ <table class="worktable">
+        <thead>
+        <tr style="border-bottom: 1px solid #d3d3d3;">
+
+          <th style="border: 1px solid #d3d3d3; padding: 5px;">Actions</th>
+          <th style="border: 1px solid #d3d3d3;">Check #</th>
+          <th style="border: 1px solid #d3d3d3;">Policy Number</th>
+          <th style="border: 1px solid #d3d3d3;">Producing Agency</th>
+          <th style="border: 1px solid #d3d3d3;">Named Insured</th>
+          <th style="border: 1px solid #d3d3d3;">Commission</th>
+
+        </tr>
+        </thead>
+        <tbody style="display: table-row-group;">
+        <% @compaybatch.compaybatchitems.each do |item| %>
+            <tr style="border-bottom: 1px solid #d3d3d3; ">
+              <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                <%=link_to "Reprint & Edit Check #",editcompaycheck_path(item),  :class=>"linktext", :remote=>true %>
+              </td>
+              <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                <%=  item.cashtransaction.check_number %>
+              </td>
+              <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                <%=  item.policy.policy_number %>
+              </td>
+              <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                <%=  item.policy.producingagency.agency_name %>
+              </td>
+              <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                <%=  item.policy.namedinsured.named_insured %>
+              </td>
+              <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+                <%=  number_to_currency(item.cashtransaction.cash_amount,  :negative_format => "(%u%n)") %>
+              </td>
+            </tr>
+        <%end%>
+        </tbody>
+      </table>

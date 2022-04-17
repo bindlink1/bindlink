@@ -1,0 +1,5 @@
+$('#associatedlobs').slideUp(300);
+$('#associatedlobs').html("<%= escape_javascript(render('carrierlobs/showallforcarrier'))%>").slideDown(300);
+$('#availablelobs').slideUp(300);
+$('#availablelobs').html("<%= escape_javascript(render('carrierlobs/availablelobs'))%>").slideDown(300);
+

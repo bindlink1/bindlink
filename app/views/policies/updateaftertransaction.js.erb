@@ -1,0 +1,34 @@
+
+$("#statuscontainer").html('<%= escape_javascript(render  'policystatuscontainer') %>').hide().slideDown(300) ;
+$("#policyfields").html('<%= escape_javascript(render  'viewpolicy') %>').hide().slideDown(300) ;
+$("#transactioncontainer").html('<%= escape_javascript(render  'policytransactions') %>').hide().slideDown(300) ;
+$("#invoicecontainer").html('<%= escape_javascript(render  'policyinvoices') %>').hide().slideDown(300) ;
+$(".documentcontainer:visible").html('<%= escape_javascript(render :partial=>'documents/documentgridview', :locals=>{:documentsforview => @documentsforview}) %>').hide().slideDown(300) ;
+$("#accountingcontainer").html('<%= escape_javascript(render  'policyaccounting') %>').hide().slideDown(300) ;
+$("#historycontainer").html('<%= escape_javascript(render  'cashhistory') %>').hide().slideDown(300) ;
+$("#feecontainer").html('<%= escape_javascript(render  'policyfees') %>').hide().slideDown(300) ;
+$("#previewcontainer").html('<%= escape_javascript(render  'previewhead') %>').hide().slideDown(300) ;
+<% if @transtype.to_s == "cancel" %>
+$('#policystatus').removeClass("activestep");
+ $('#policystatus').removeClass("cancelstep");
+$('#policystatus').addClass("cancelstep");
+$('#cancelreinstatelink').html('<%= link_to reinstate_policy_path(:id=>@policyforview.id), :remote=>true, :id=>"reinstatepolbutton" , :disabled => @cancelbuttondisabled do  %> <i class="icon-refresh"></i> Reinstate <%end%> ');
+
+<% elsif @transtype.to_s !="cancel" && @transtype.to_s !="cash" %>
+$('#policystatus').removeClass("activestep");
+$('#policystatus').removeClass("cancelstep");
+$('#policystatus').addClass("activestep");
+$('#cancelreinstatelink').html('<%= link_to cancel_policy_path(:id=>@policyforview.id), :remote=>true, :id=>"cancelpolbutton" , :disabled => @cancelbuttondisabled do  %> <i class="icon-remove"></i> Cancel <%end%>');
+
+
+
+
+<% end %>
+
+  $('#policyactions').hide();
+$('#policyactions').html("");
+        $('#editpolbutton').removeAttr("disabled");
+        $('#cancelpolbutton').removeAttr("disabled");
+        $('#endorsepolbutton').removeAttr("disabled");
+
+

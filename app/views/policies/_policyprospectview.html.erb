@@ -1,0 +1,24 @@
+
+<h3>Select an existing Prospect</h3>
+
+<div class="dataTablewrapper">
+  <table id="prospects" class="bordered-table zebra-striped ">
+    <thead>
+    <tr>
+      <th>Prospect Name</th>
+      <th>Sales Stage</th>
+      <th>Created</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @allprospects.each do |prospects| %>
+        <tr>
+          <td><%= link_to prospects.fullname.to_s , new_client_policy_path(prospects) %></td>
+          <td><%= prospects.sales_step  %></td>
+          <td><%= prospects.created_at.strftime("%m/%d/%Y")  %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

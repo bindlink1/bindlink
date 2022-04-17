@@ -1,0 +1,150 @@
+<%= javascript_include_tag "reconcilestatement" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Statement Reconciliation
+    </span>
+    </div>
+
+    <table>
+      <tr>
+        <td>Carrier:</td>
+        <td><%begin%><%= @statement.carrier.carrier_name%><%rescue%>Multiple<%end%></td>
+
+      </tr>
+      <tr>
+        <td>Start Date:</td>
+        <td><%begin%><%= @statement.start_date.to_date.strftime("%m/%d/%Y") %><%rescue%> N/A <%end%></td>
+      </tr>
+      <tr>
+        <td>End Date:</td>
+        <td><%begin%><%= @statement.end_date.to_date.strftime("%m/%d/%Y") %><%rescue%>N/A<%end%></td>
+      </tr>
+    </table>
+    <hr>
+
+<% if true or !@statement.carrier.hasdirectbillinstallments or @statement.carrier.isstatementgroup? %>
+    <h3>Reconciled Totals</h3>
+    <table class="bordered-table">
+      <tr>
+        <td>Commisionable</td>
+        <td>Non Commissionable</td>
+        <td>Commission</td>
+        <%begin%>
+            <% if @statement.carrier.hasagencybill and !@statement.carrier.isstatementgroup? %>
+                <td>Premium Payable/Receivable</td>
+            <% end %>
+        <%rescue%>
+        <%end%>
+      </tr>
+      <tr>
+        <td><h2 id="comm_total"></h2></td>
+        <td><h2 id="noncomm_total"></h2></td>
+        <td><h2 id="commish_total"></h2></td>
+        <%begin%>
+            <% if @statement.carrier.hasagencybill and !@statement.carrier.isstatementgroup? %>
+                <td><h2 id="premiumtotal_total"></h2></td>
+            <% end %>
+        <%rescue%>
+        <%end%>
+      </tr>
+    </table>
+
+
+    <hr>
+
+        <%= form_for @statement, :url=>'processreconciliation', :html => {:autocomplete => "off"}  do |f| %>
+
+            <%begin%><%= f.hidden_field :carrier_id,:value=>@statement.carrier.id, :readonly=>true %> <%rescue%> <%end%>
+            <%= f.hidden_field :agent_id,:value=>@statement.agent_id, :readonly=>true %>
+            <%= f.hidden_field :start_date,:value=>@statement.start_date, :readonly=>true %>
+            <%= f.hidden_field :end_date,:value=>@statement.end_date, :readonly=>true %>
+            <table class="table table-bordered ">
+              <thead>
+              <tr>
+                <th>Reconcile</th>
+                <th>Policy Number</th>
+                <th>Insured Name</th>
+                <th>Transaction Type</th>
+                <th>Transaction Effective Date</th>
+                <th>Invoice #</th>
+                <th>Commissionable</th>
+                <th>Non Commissionable</th>
+                <th>Commission</th>
+                <th>Balance Due</th>
+                <%begin%>
+                    <% if @statement.carrier.hasagencybill  and !@statement.carrier.isstatementgroup?%>
+                        <th>Premium Pay/Rec</th>
+                    <% end %>
+                <%rescue%>
+                <%end%>
+              </tr>
+              </thead>
+              <tbody>
+              <% totalbd = 0 %>
+              <% totalbp = 0 %>
+              <% totalf = 0 %>
+              <% totalc = 0 %>
+              <% totalp = 0 %>
+              <% if !@statement.statementppts.nil? %>
+              <% @statement.statementppts.each do |ppt|%>
+                  <tr>
+                    <td style="text-align: center;"><%= check_box_tag "statement[ppt_ids][][ppt_id]", ppt.id %></td>
+                    <td><%=ppt.policy.policy_number%></td>
+                    <td><%=ppt.policy.namedinsured.named_insured%></td>
+                    <td><%=ppt.transaction_type%></td>
+                    <td><%=ppt.transaction_effective_date.to_date.strftime("%m/%d/%Y")%></td>
+                    <td>
+                      <%= ppt.policy.invoices.last.id %>
+                    </td>
+                    <% if ppt.transaction_type == 'Cancel Pending Statement' %>
+                        <td><%=text_field_tag "statement[ppt_ids][][cancelpending][][commissionable]" %></td>
+                        <td><%=text_field_tag "statement[ppt_ids][][cancelpending][][noncommissionable]" %></td>
+                        <td><%=text_field_tag "statement[ppt_ids][][cancelpending][][commission]" %></td>
+                        <td></td>
+                    <% else %>
+                        <td><%=number_to_currency(ppt.base_premium,  :negative_format => "(%u%n)")%></td>
+                        <td><%=number_to_currency(ppt.fees,  :negative_format => "(%u%n)")%></td>
+                        <td><%=number_to_currency(ppt.pptreconciliationcommission,  :negative_format => "(%u%n)")%></td>
+                        <td><%=number_to_currency(ppt.policy.policybalance,  :negative_format => "(%u%n)")%></td>
+                    <% end %>
+
+                    <%begin%>
+                        <% if @statement.carrier.hasagencybill  and !@statement.carrier.isstatementgroup? %>
+                            <td><%=number_to_currency(ppt.prempayrecfriendly,  :negative_format => "(%u%n)")%> </td>
+                            <% totalp= totalp + ppt.prempayrecfriendly %>
+                        <% end %>
+                    <%rescue%> <%end%>
+                  </tr>
+                  <% begin %>  <% totalbp = totalbp +ppt.base_premium %> <%rescue%> <%end%>
+                  <% begin %>  <% totalf = totalf + ppt.fees %>    <%rescue%> <%end%>
+                  <% begin %> <% totalc = totalc + ppt.pptreconciliationcommission %> <%rescue%> <%end%>
+                  <% begin %> <% totalbd = totalbd + ppt.policy.policybalance %> <%rescue%> <%end%>
+              <% end %>
+              <% end %>
+              <tr >
+                <td colspan="6" style="border-top: 2px solid black; background-color: lightgray"></td>
+                <td style="border-top: 2px solid black"><%=number_to_currency(totalbp,  :negative_format => "(%u%n)")%></td>
+                <td style="border-top: 2px solid black"><%=number_to_currency(totalf,  :negative_format => "(%u%n)")%></td>
+                <td style="border-top: 2px solid black"><%=number_to_currency(totalc,  :negative_format => "(%u%n)")%></td>
+                <td style="border-top: 2px solid black"><%=number_to_currency(totalbd,  :negative_format => "(%u%n)")%></td>
+                <%begin%>
+                    <% if @statement.carrier.hasagencybill  and !@statement.carrier.isstatementgroup? %>
+                        <td style="border-top: 2px solid black"><%=number_to_currency(totalp,  :negative_format => "(%u%n)")%></td>
+                    <% end %>
+                <%rescue%> <%end%>
+              </tr>
+              </tbody>
+            </table>
+
+            <%= f.submit 'Process', :id=>'process_transactions', :class=>'btn btn-success'%>   <%= f.submit 'Save', :id=>'save_transactions', :class=>'btn btn-primary'%>
+        <% end %>
+    <% else %>
+
+        <%= render 'reconcileentry'%>
+
+    <% end %>
+
+
+
+  </div>
+</div>

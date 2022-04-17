@@ -1,0 +1,99 @@
+
+<table class="table table-striped table-bordered">
+  <col width="20%" />
+  <col width="30%" />
+  <col width="20%" />
+  <col width="30%" />
+
+  <tbody>
+  <tr>
+    <td>
+      <b>Policy Term:</b>
+    </td>
+    <td >
+      <%= @policyforview.policy_term %>
+    </td>
+    <% begin%>
+    <% unless @policyforview.carrier.web_url[/^http:\/\//] || @policyforview.carrier.web_url[/^https:\/\//]
+         @policyforview.carrier.web_url = 'http://' + @policyforview.carrier.web_url
+       end %>
+        <% rescue %>
+
+        <% end %>
+
+    <td >
+      <b>Carrier:</b>
+    </td>
+    <td>
+      <%= @policyforview.carrier.carrier_name %>  <%begin%> <% if !@policyforview.carrier.web_url.blank? %> ( <a href="<%= @policyforview.carrier.web_url %>" target="blank" class="linktext">Link</a> ) <% end %> <%rescue%> <% end %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Effective Date:</b>
+    </td>
+    <td class="left" >
+      <%= @policyforview.effective_date.strftime("%m/%d/%Y")%>
+    </td>
+    <td >
+      <b>Expiration Date:</b>
+    </td>
+    <td class="left">
+      <%= @policyforview.expiration_date.strftime("%m/%d/%Y") %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+
+      <b>Line:</b>
+    </td>
+    <td class="left" >
+
+      <%= @policyforview.lineofbusiness.line_name %>
+    </td>
+    <td >
+<b>MGA:</b>
+    </td>
+    <td class="left">
+<%= @policyforview.mga_id %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Finance Company:</b>
+    </td>
+    <td class="left" >
+      <%begin%> <%= @policyforview.pfc.pfc_name %>  <%rescue%> N/A <%end%>
+    </td>
+
+    <td >
+ <b>Finance Contract:</b>
+
+    </td>
+    <td class="left">
+<%=@policyforview.pfc_contract %>
+
+    </td>
+  </tr>
+
+  <tr>
+    <td><b>Description:</b></td>
+    <td>
+      <%= @policyforview.description %>
+    </td>
+    <td >
+      <b>Finance Payment Due:</b>
+    </td>
+    <td class="left">
+      <%= @policyforview.pfc_date_due %>
+    </td>
+
+  </tr>
+
+
+
+  </tbody>
+
+
+
+</table>

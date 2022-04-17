@@ -1,0 +1,8 @@
+alert("<%= @result.to_s %>");
+
+var a = "<%= @direct.to_s %>";
+
+if (a == "redirect"){
+    $('#associatedlobs').slideUp(300);
+    $('#associatedlobs').html("<%= escape_javascript(render('carrierlobs/showallforcarrier'))%>").slideDown(300);
+};

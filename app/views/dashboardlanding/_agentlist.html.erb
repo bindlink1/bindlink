@@ -1,0 +1,24 @@
+<h2>Manage Agents</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>e-Mail</th>
+    <th>Agency</th>
+    <th>Signed Up</th>
+    <th>Action</th>
+  </tr>
+
+<% @agentsfortable.each do |agent| %>
+  
+  <tr class=<%=cycle("even_row","odd_row")%>>
+    <td><%= agent.first_name + " " + agent.last_name%></td>
+    <td><%= agent.email%></td>
+    <td><%= agent.agency_name%></td>
+    <td><%= agent.created_at%></td>
+	<td><%= link_to 'Edit', edit_agent_path(:id => agent) %></td>
+  </tr>
+
+<% end %>
+</table>
+

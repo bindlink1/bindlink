@@ -1,0 +1,101 @@
+
+<%= javascript_include_tag "endorsepolicy" %>
+</br>
+<div class="wellwhite">
+
+  <h3>Endorse Policy</h3>
+  <hr>
+  <%= form_for @pptendorse, :url => endorsetransactions_path(@policy), :class=>"form-horizontal", :autocomplete => "off"  ,:remote => true do |f| %>
+
+      <table class="table table-striped table-bordered" style="width: 60%;">
+        <col width="50%" />
+        <col width="50%" />
+        <tr>
+
+          <td><%= f.label :transaction_effective_date,"Endorsement Effective Date", :class=>"control-label " %></td>
+
+          <td><%= f.text_field :transaction_effective_date,:class=>"input-xlarge required", :size=>"10"%></td>
+
+        </tr>
+        <tr>
+
+          <td><%= f.label :description ,"Endorsement Description", :class=>"control-label " %></td>
+
+          <td><%= f.text_field :description ,:class=>"input-xlarge required"%></td>
+
+        </tr>
+      </table>
+      <table class="table table-striped table-bordered" style="width: 60%;">
+        <col width="50%" />
+        <col width="50%" />
+        <tr>
+
+          <td><a class="control-label">Endorsement Type</a></td>
+
+          <td>
+            <select id="endorsetype" class="control-label" name="policypremiumtransaction[endorsetype]">
+              <option value="Additional">Additional Premium</option>
+              <option value="Return">Return Premium</option>
+            </select>
+          </td>
+
+        </tr>
+        <tr id="recmoney">
+
+          <td>Have you received the return premium?</td>
+          <td>
+            <%= radio_button_tag(:recmoney, "Yes") %>
+            <%= label_tag(:yesrec, "Yes") %>
+            <%= radio_button_tag(:recmoney, "No") %>
+            <%= label_tag(:norec, "No") %>
+          </td>
+        </tr>
+        <tr>
+
+          <td><%= f.label :base_premium,"Base Premium", :class=>"control-label" %></td>
+
+          <td><%= f.text_field :base_premium ,:class=>"input-xlarge",:style=>"text-align: right;" ,:autocomplete => :off , :size=>"10" %></td>
+
+        </tr>
+        <%= f.fields_for :feetransactions do |builder| %>
+            <% @feecount = 0 %>
+            <% @fees.each do |lobfee| %>
+                <tr id="feerow">
+                  <td> <%=lobfee[0].fee_name%></td><td><div class="complexfee"><input id='fee' class='input-xlarge blinput' type='text' size='10' style="text-align: right;" name='policypremiumtransaction[feetransactions_attributes][<%= @feecount %>][fee_amount]' autocomplete='off'> </div>
+                  <input type='hidden' id='feesid_<%= lobfee[0].id %>' class='blid' type='text' size='30' name='policypremiumtransaction[feetransactions_attributes][<%= @feecount %>][fee_id]' autocomplete='off' value="<%= lobfee[0].id %>">
+                  <input type='hidden' class='blvalue' type='text' size='30'  autocomplete='off' value="<%= lobfee[0].fee_value %>">
+                  <input type='hidden'  class='bltype' type='text' size='30' autocomplete='off' value="<%= lobfee[0].fee_type %>">
+                </td>
+                </tr>
+                <% @feecount = @feecount +1 %>
+            <% end %>
+        <% end %>
+
+
+
+        <tr>
+
+          <td><%= f.label :fees,"Total Fees", :class=>"control-label" %></td>
+
+          <% if @feecount > 0 then  %>
+              <td><%= f.text_field :complexfees ,:class=>"input-xlarge", :autocomplete => :off, :readonly=>'readonly', :style=>"text-align: right;", :size=>"10"  %></td>
+
+          <% else %>
+              <td><%= f.text_field :fees ,:class=>"input-xlarge", :autocomplete => :off , :style=>"text-align: right;", :size=>"10" %></td>
+
+          <% end %>
+        </tr>
+        <tr>
+
+          <td> <b><%= f.label :total_premium,"Total Premium", :class=>"control-label" %></b></td>
+
+          <td><%= f.text_field :total_premium ,:class=>"input-xlarge required", :autocomplete => :off , :readonly=>'readonly', :size=>"10" , :style=>"text-align: right;" %></td>
+
+        </tr>
+
+      </table>
+      <div class="form-actions"><%= f.submit 'Process Endorsement',disable_with: 'Processing...' ,:class=>'btn btn-success', :id=>'endorsethispolicy' %> <button class="btn" id="gobackendorse" onclick='return false;'>Go Back</button>   </div>
+  <%end%>
+
+
+</div>

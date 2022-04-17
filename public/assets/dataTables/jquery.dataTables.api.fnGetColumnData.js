@@ -1,0 +1,1 @@
+jQuery.fn.dataTableExt.oApi.fnGetColumnData=function(a,r,i,n,t){if(void 0===r)return new Array;var e;void 0===i&&(i=!0),void 0===n&&(n=!0),void 0===t&&(t=!0),e=1==n?a.aiDisplay:a.aiDisplayMaster;for(var o=new Array,u=0,v=e.length;u<v;u++){iRow=e[u];var y=this.fnGetData(iRow,r);1==t&&0==y.length||1==i&&-1<jQuery.inArray(y,o)||o.push(y)}return o};

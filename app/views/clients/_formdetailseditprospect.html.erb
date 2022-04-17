@@ -1,0 +1,67 @@
+
+  <fieldset>
+    <div class="control-group">
+      <%= f.label :client_type, "Prospect Type", :class=>"control-label"%>
+      <div class="controls">
+        <%= f.collection_select  :client_type  ,[['Individual','Individual'],['corporate','Corporate']], :last, :last, {:include_blank => 'Select One'}%>
+
+        <p class="help-block">Select a prospect type to enter either a corporate name or individual name</p>
+      </div>
+    </div>
+    <div class="control-group" id="firstname">
+      <%= f.label :first_name, :class=>"control-label" %>
+
+      <div class="controls">
+        <%= f.text_field :first_name, :class=> "BLselect"   %>
+      </div>
+    </div>
+    <div class="control-group" id="lastname">
+      <%= f.label :last_name, :class=>"control-label" %>
+
+      <div class="controls">
+        <%= f.text_field :last_name, :class=> "BLselect"   %>
+      </div>
+    </div>
+    <div class="control-group" id="corpname">
+      <%= f.label :corporate_name, :class=>"control-label" %>
+      <div class="controls">
+        <%= f.text_field :corporate_name, :class=> "BLselect"   %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :location_id, :class=>"control-label" %>
+      <div class="controls">
+        <% if current_agent.isgeneralagent == "GA" %>
+            <%= collection_select :client, :location_id, Location.find_all_by_generalagency_id(current_agent.generalagency_id) ,:id,:location_nickname, {:include_blank => 'None'}%>
+
+        <% else %>
+            <%= collection_select :client, :location_id, Location.find_all_by_agency_id(current_agent.agency_id) ,:id,:location_nickname, {:include_blank => 'None'}%>
+
+        <% end %>
+
+      </div>
+    </div>
+    <div class="control-group">
+
+      <%= f.label :agent_id,"Producer", :class=>"control-label" %>
+      <div class="controls">
+        <% if current_agent.isgeneralagent == "GA" %>
+            <%= collection_select :client, :agent_id, Agent.where( :is_active => true ).where( "id > 0" ).order( "first_name, last_name" ).find_all_by_generalagency_id(current_agent.generalagency_id) ,:id,:fullname, {:include_blank => 'None'}%>
+        <% else %>
+            <%= collection_select :client, :agent_id, Agent.where( :is_active => true ).where( "id > 0" ).order( "first_name, last_name" ).find_all_by_agency_id(current_agent.agency_id) ,:id,:fullname, {:include_blank => 'None'}%>
+        <%end%>
+        <p class="help-block">Select the producer that is responsible for the prospect.</p>
+      </div>
+    </div>
+    <div class="control-group" id="comments">
+      <%= f.label :comments, :class=>"control-label" %>
+      <div class="controls">
+        <%= f.text_field :comments, :class=> "BLselect"   %>
+      </div>
+    </div>
+    <div class="form-actions">
+      <%= f.submit 'Save Prospect', :class=>'btn  btn-success'%> <button class="btn" id="clientcancel" onclick='return false;'>Go Back</button>
+    </div>
+  </fieldset>
+
+

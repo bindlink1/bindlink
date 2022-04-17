@@ -1,0 +1,19 @@
+<%= javascript_include_tag "newclient" %>
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+    <div class="wellwhitemenu"><button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" >×</button><span class="headtext">Create a New Prospect</span> </div>
+  <div class="modal_body" >
+    <div class="alert alert-info">
+      Select a prospect type first.
+    </div>
+    <%= form_for @client,:url=> create_prospect_url ,:html => {:autocomplete => "off", :class=>"form-horizontal"} do |f| %>
+
+
+        <%= render :partial => 'formdetailsprospect', :locals=>{:f => f}%>
+
+        <div class="form-actions">
+          <%= f.submit 'Save Prospect', :class=>'btn  btn-success'%> <button class="btn closeit" onclick='return false;'>Go Back</button>
+        </div>
+    <% end %>
+    </div>
+
+ </div>

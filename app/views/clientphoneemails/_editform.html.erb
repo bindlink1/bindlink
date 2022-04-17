@@ -1,0 +1,11 @@
+<%= form_for @cpe,:remote =>true do |f| %>
+    <table style="width: 100%;">
+      <col width="15%" />
+      <col width="25%" />
+      <col width="25%" />
+      <col width="35%" />
+
+      <%= render('formfields', :f => f) %>
+
+    </table>
+<% end %>

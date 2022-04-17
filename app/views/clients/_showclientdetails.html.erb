@@ -1,0 +1,102 @@
+<table class="table table-bordered table-condensed table-layout:fixed " id="clientgentable">
+  <col width="30%"  />
+  <col width="70%" />
+
+  <tr>
+    <td style="text-align: right;">
+      Type
+    </td>
+    <td style="text-align: left;">
+      <%= @clientforview.client_type %>
+    </td>
+  </tr>
+  <% if @clientforview.client_type == "Individual" %>
+      <tr>
+        <td style="text-align: right;">
+          Name
+        </td>
+        <td style="text-align: left;">
+          <%= @clientforview.fullname %>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;">
+          First Name
+        </td>
+        <td style="text-align: left;">
+          <%= @clientforview.first_name %>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: right;">
+          Last Name
+        </td>
+        <td style="text-align: left;">
+          <%= @clientforview.last_name %>
+        </td>
+      </tr>
+  <% end %>
+  <% if @clientforview.client_type == "Corporate" %>
+      <tr>
+        <td style="text-align: right;">
+          Corporate Name
+        </td>
+        <td style="text-align: left;">
+          <%= @clientforview.corporate_name %>
+        </td>
+      </tr>
+  <% end %>
+  <tr>
+    <td style="text-align: right;">
+      Location
+    </td>
+    <td style="text-align: left;">
+      <%begin%>
+          <%= @clientforview.location.location_nickname %>
+      <%rescue%>
+          None
+      <%end%>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Producer
+    </td>
+    <td style="text-align: left;">
+      <%begin%>
+          <%= @clientforview.agent.fullname %>
+      <%rescue%>
+          None
+      <%end%>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Comment
+    </td>
+    <td style="text-align: left;">
+      <%begin%>
+          <%= @clientforview.comments %>
+      <%rescue%>
+
+      <%end%>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Referred By
+    </td>
+    <td style="text-align: left;">
+
+      <% if @clientforview.referral.nil? %>
+          <%= link_to "Add Referral", new_client_referral_path(@clientforview) , :remote => true, :style=>"text-decoration:underline", :id=>"newreferralbtn" %>
+      <%else%>
+          <%if !@clientforview.referral.referer.client_id.nil? %>
+              <%= link_to @clientforview.referral.referer.refererfullname.to_s, client_path(@clientforview.referral.referer.client_id), :class=>"linktext" %>
+          <% else %>
+             <%= link_to @clientforview.referral.referer.refererfullname.to_s, referer_path(@clientforview.referral.referer), :class=>"linktext"  %>
+          <% end %>
+      <%end%>
+    </td>
+  </tr>
+</table>

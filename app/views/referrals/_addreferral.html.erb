@@ -1,0 +1,42 @@
+<%= javascript_include_tag "addreferral" %>
+
+
+<%= form_for [@clientforview,@referral], :remote =>true , :html => {:autocomplete => "off"}  do |f| %>
+    <div class="wellwhite">
+      <h3>Who referred <%= @clientforview.fullname%> ?</h3>
+      <hr>
+      <div id="valerrors" ></div>
+      <div id="existingreferer">
+
+        Select a client:
+        <%= f.collection_select :client_id , @clientsfour , :id, :fullname , {:include_blank => 'Select One'} %>
+        <%if !@referers.blank? %>
+            <br/>
+            or, <br/>
+
+            Select a Referrer <%= f.collection_select :referer_id , @referers, :id, :refererfullname, {:include_blank => 'Select One'} %>
+            <p>
+              <b>Is the Referrer not listed above?</b> <a id="addreferralsource" style="cursor: pointer; text-decoration: underline;">Create New Referrer</a>
+            </p>
+        <% else %>
+            <p>
+              <b>Is the referral not from a Client?</b> <a id="addreferralsource" style="cursor: pointer; text-decoration: underline;">Create New Referrer</a>
+            </p>
+        <% end %>
+        <br/>
+
+      </div>
+      <div id="newreferer">
+        <%= f.fields_for :referer do |builder| %>
+            <%= render 'referers/form', f: builder %>
+        <% end %>
+        <br/>
+        <a id="refferalsourceback" style="cursor: pointer; text-decoration: underline;">Go Back</a>
+      </div>
+      <div class ="form-actions">
+        <%= f.submit 'save',  :class=>"btn btn-success btn-mini"%> <button class="btn btn-mini" id="refcancel" onclick='return false;'>cancel</button>
+      </div>
+
+    </div>
+<% end %>
+

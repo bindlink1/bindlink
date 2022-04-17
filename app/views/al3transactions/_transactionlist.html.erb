@@ -1,0 +1,32 @@
+<%= javascript_include_tag 'al3transactions'%>
+<table class="table table-bordered table-striped">
+  <tr>
+    <th>Actions</th>
+    <th>Transaction Type</th>
+      <th>Carrier</th>
+    <th>Policy Number</th>
+    <th>Named Insured</th>
+    <th>Transaction Date</th>
+    <th>Effective Date</th>
+    <th>Expiration Date</th>
+    <th>Premium Change</th>
+
+  </tr>
+
+  <% @altransactions.each do |al| %>
+  <tr id="trans_<%=al.id%>">
+    <td id="trans_action_<%=al.id%>">
+     <%begin%><% if al.cycle_business_purpose == "NBS" or al.cycle_business_purpose == "RWL"%>     <%else%>  <% if !al.policy_id.nil? %><%= image_tag("check.png", :height=>"15px", :width=>"15px") %>    <%= link_to 'Process', "al3transactions/processtransaction/#{al.id}", :class=>'linktext trbutton', :remote=>true %> <%else%><span class="badge badge-warning">?</span> <%= link_to 'Match', "al3transactions/matchtransaction/#{al.id}", :class=>'linktext trbutton', :remote=>true %><% end %> <%end%> |<%rescue%> <%end%> <%= link_to('delete', al, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext deleteal') %>
+    </td>
+    <td><%begin%><%= link_to al.business_purpose_description , al3transaction_path(al)%><%rescue%><%end%></td>
+    <td><%= al.al3h2trg.informal_transaction_address_sender %></td>
+    <td><%begin%> <% if !al.policy_id.nil? %>  <span class="label label-success"> <%= al.al3h2trg.al3h5bpi.policy_number%></span><%else%> <%= al.al3h2trg.al3h5bpi.policy_number%>     <%end%> <%rescue%><%end%> </td>
+     <td><%begin%><%= al.al3h2trg.al3h5bis.insureds_name%><%rescue%><%end%></td>
+    <td><%begin%> <%= al.al3h2trg.transaction_effective_date.strftime("%m/%d/%Y")%><%rescue%><%end%></td>
+    <td><%begin%><%= al.al3h2trg.al3h5bpi.policy_effective_date.strftime("%m/%d/%Y")%><%rescue%><%end%></td>
+    <td><%begin%><%= al.al3h2trg.al3h5bpi.policy_expiration_date.strftime("%m/%d/%Y")%><%rescue%><%end%></td>
+    <td><%begin%><%=number_to_currency(al.al3h2trg.al3h5bpi.net_change_amount)%> <%rescue%><%end%></td>
+  </tr>
+
+   <% end %>
+</table>

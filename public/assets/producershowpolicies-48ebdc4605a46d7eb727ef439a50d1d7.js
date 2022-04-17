@@ -1,0 +1,1 @@
+$(document).ready($(function(){$("#headtable").outerWidth($("#scrolltable").outerWidth());$("#scrolltable tr:nth-child(1) td").each(function(t){$("#headtable tr>td:nth-child("+(t+1)+")").outerWidth($(this).outerWidth()),$(this).attr("colspan")?+$(this).attr("colspan"):0})}));

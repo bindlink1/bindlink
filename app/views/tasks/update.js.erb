@@ -1,0 +1,6 @@
+$('#task<%=@task.id%>').html('<%=escape_javascript( render :partial => 'tasks/singletasksleekdata', :locals => { :task => @task } ) %>').hide().slideDown(300);
+$(".taskwork:visible").hide().html('<%=escape_javascript( render :partial => 'tasks/taskshow', :locals => { :task => @task } ) %>').hide().slideDown(300);
+$(".todaybadge:visible").html('<%=  @todaycount %>');
+$(".overduebadge:visible").html('<%= @overduecount %>');
+$(".upcomingbadge:visible").html('<%= @upcomingcount %>');
+$(".allbadge:visible").html('<%= @allcount %>');

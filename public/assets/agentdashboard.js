@@ -1,0 +1,1 @@
+$(function(){$("#button1").popover({offset:5,placement:"right"})}),$("#myTab a").click(function(t){t.preventDefault(),$(this).tab("view")}),$(function(){$("#myTab a:first").tab("view")}),$("#taskheaderwork").hide();

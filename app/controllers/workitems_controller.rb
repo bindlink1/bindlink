@@ -1,0 +1,2 @@
+class WorkitemsController < ApplicationController
+end

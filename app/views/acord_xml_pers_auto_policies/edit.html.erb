@@ -1,0 +1,80 @@
+<%= javascript_include_tag 'acord_xml_pers_auto_policies' %>
+
+
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Edit Personal Auto Policy</span> </div>
+    <%= form_for [@policy, @axpap], :html=>{:class=>'form-horizontal', :autocomplete => "off"} do |f|%>
+        <%= f.fields_for :acord_xml_pers_auto_line_business do |palb|  %>
+
+            <h3>Vehicles</h3>
+            <% @axpap.acord_xml_pers_auto_line_business.acord_xml_pers_vehs.each do |pv| %>
+                <%= palb.fields_for pv, :index=>pv.id  do |builder|  %>
+                    <div class="vehiclecontainer">
+                      <fieldset>
+                        <div class="wellwhiteblock">
+                          <%= render 'acord_xml_pers_veh_fields_edit', :f => builder %>
+                          <hr>
+                          <h3>Coverages</h3>
+                          <table style="padding: 3px; width: 100%; margin-bottom: 10px;">
+                            <% pv.acord_xml_coverages.each_slice(2) do | slice| %>
+
+                                <tr>
+                                  <% slice.each do |coverage| %>
+
+                                      <%= f.fields_for coverage, :index=>coverage.id do |c| %>
+                                          <td> <b> <%= coverage.coverage_cd %></b></td>
+                                          <td ><%= render 'coveragefields', :c => c%></td>
+                                      <% end %>
+
+                                  <%end%>
+                                </tr>
+
+                            <% end %>
+                          </table>
+
+                          <a class="remove_vehicle btn btn-danger" style="float: right;" ><i class="icon-minus icon-white"></i> Remove Vehicle</a>
+                          <div style="clear:both"></div>
+                        </div>
+                      </fieldset>
+                    </div>
+
+                <% end %>
+            <% end %>
+            <div id="newvehicles"></div>
+            <%= link_to_add_fields "Add Vehicle", palb, :acord_xml_pers_vehs %>
+
+            <hr/>
+
+
+        <% end %>
+
+        <h3>Drivers</h3>
+        <% @axpap.acord_xml_insured_or_principals.each do |p| %>
+            <%= f.fields_for p, :index=>p.id do |iop| %>
+                <%= render 'acord_xml_insured_or_principal_fields_edit', :f => iop %>
+            <%end%>
+            <div id="newdrivers"></div>
+            <%= link_to_add_fields "Add Driver", f, :acord_xml_insured_or_principals %>
+        <%end%>
+        <hr/>
+        <h3>Locations</h3>
+        <% @axpap.acord_xml_locations.each do |loc| %>
+            <%= f.fields_for loc, :index=>loc.id do |l| %>
+                <%= render 'acord_xml_location_fields', :f => l %>
+            <%end%>
+        <% end %>
+        <div id="newlocations"></div>
+        <%= link_to_add_fields "Add Location", f, :acord_xml_locations %>
+
+        <hr/>
+
+        <div>
+          <%= f.submit 'Save', :class=>'btn btn-success' %>  <%= link_to 'Cancel', policy_path(@axpap.policy_id) , :class=>'btn'%>
+        </div>
+
+
+
+    <% end %>
+  </div>
+</div>

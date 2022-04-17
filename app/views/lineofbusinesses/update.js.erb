@@ -1,0 +1,2 @@
+$("#editlobwork").slideUp(300).html("");
+ $("#lobinfo").html('<%= escape_javascript(render :partial => 'viewinfo', :locals => {:lobforview => @lobforview}) %>').slideDown(300);

@@ -1,0 +1,13 @@
+/tmp/build_a8f1009445e3c98debd6bf312ebd8d93/artemipanchuk-bindlink-96cfbf0cad4f1cab1e6034908b2ae7d6a82d4eeb/vendor/ruby-2.1.5/bin/ruby extconf.rb
+checking for main() in -lstdc++... yes
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling unf.cc
+linking shared-object unf_ext.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 unf_ext.so ./.gem.20180221-225-1xcebpp
+installing default unf_ext libraries

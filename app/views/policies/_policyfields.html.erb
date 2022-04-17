@@ -1,0 +1,134 @@
+<div id="dialogquestion"></div>
+<hr>
+<table class="table table-striped table-bordered" >
+  <col width="30%" />
+  <col width="70%" />
+  <thead>
+  <tr>
+    <th colspan="2" ><h3>Policy Information: </h3></th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td style="text-align: right;">
+      Policy Number *
+    </td>
+    <td>
+      <%= f.text_field :policy_number, { :class =>'required' } %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Transaction Type
+    </td>
+    <td>
+      <%= f.select :is_renewal, [['New Business', false], ['Renewal', true]] %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">State *</td>
+    <td><%= collection_select :policy, :state, @states,:state, :state, {:include_blank => 'Select One'}, { :class =>'required' }%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Carrier *
+    </td>
+    <td>
+      <%= collection_select :policy, :carrier_id, @carriers, :id, :carrier_name, {:include_blank => 'Select One'}, { :class =>'required' }%>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Line of Business *
+    </td>
+    <td class="left" >
+      <%= f.select :lineofbusiness_id, options_for_select(@line.map{ |o| [o.line_name, o.id, {'tag'=>o.billing_type}] }, selected_key = f.object.lineofbusiness_id), {:include_blank => 'Select One'}, { :class =>'required' } %>
+    </td>
+  </tr>
+  <tr id="billingTypeRow" style="display: none">
+    <td style="text-align: right;">
+      Billing Type *
+    </td>
+    <td class="left" >
+      <%= collection_select :policy, :payment_type_id, @paymenttype, :first, :last, {:include_blank => 'Select One'}, { :class =>'required' }%>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Policy Term *
+    </td>
+    <td >
+      <%= collection_select :policy, :policy_term, @policyterm, :last.to_s, :last, {:include_blank => 'Select One'}, { :class =>'required' }%>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="text-align: right;">
+      Effective Date *
+    </td>
+    <td class="left" >
+      <%= f.text_field :effective_date,:class =>'required'%>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Expiration Date
+    </td>
+    <td class="left">
+
+      <%= f.text_field :expiration_date %>
+    </td>
+  </tr>
+
+  <% if current_agent.isgeneralagent == 'Retail' %>
+      <tr>
+        <td style="text-align: right;">
+          MGA
+        </td>
+        <td class="left" >
+          <%= f.text_field :mga_id %>
+        </td>
+      </tr>
+  <% end %>
+  <tr>
+    <td style="text-align: right;">Finance Company</td>
+    <td class="left">
+      <%= collection_select :policy, :pfc_id, @pfcs, :id, :pfc_name, {:include_blank => 'Select One'}%>
+    </td>
+  </tr>
+
+  <tr>
+    <td style="text-align: right;">Finance Contract</td>
+    <td class="left" >
+      <%= f.text_field :pfc_contract %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Finance Payment Due</td>
+    <td class="left">
+      <%= f.text_field :pfc_date_due %>
+    </td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;">Description</td>
+    <td>
+      <%= f.text_field :description %>
+    </td>
+  </tr>
+  <% if current_agent.isgeneralagent == 'GA' %>
+      <tr>
+        <td style="text-align: right;">
+          Producing Agent Commission Override
+        </td>
+        <td class="left" >
+          <%= f.text_field :cond_comm_producer %>
+        </td>
+      </tr>
+  <% end %>
+  </tbody>
+
+
+
+</table>

@@ -1,0 +1,3 @@
+$('#producingagency').slideUp(300);
+$('#producingagencywork').html('<%= escape_javascript(render 'agentofrecordchange') %>').hide().slideDown(300);
+$('#aorcancel').click(function(){$('#producingagencywork').slideUp(300).html('');$("#producingagency").slideDown(300); });

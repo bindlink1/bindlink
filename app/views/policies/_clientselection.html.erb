@@ -1,0 +1,19 @@
+                        <div id="entryformsectionhead" class="well">
+                    <h2>
+                      <% if current_agent.isgeneralagent =="GA" %>
+                         Next, we need to select a policyholder
+
+
+                      <% else %>
+                         To get started, we need to select a client or prospect
+
+
+                      <% end %>
+
+                    </h2>
+
+                          </br>
+                            <%= link_to "Select Existing Client", existing_client_path, :remote => true, :class=>"btn btn-large", :id=>"clientselectexisting" %> <%= link_to "Select Existing Prospect", existing_prospect_path, :remote => true, :class=>"btn btn-large", :id=>"clientselectexisting" %>
+
+
+                  </div>

@@ -1,0 +1,40 @@
+Creating a new invoice is easy:
+
+<%= form_for @invoice,:url => create_invoice_policy_path  ,:remote => true do |f| %>
+  <p> Need some help?</p>
+
+  <div id="entryformsectionhead">Invoice</div>
+
+  <div id="formblockleft">
+      <div class="field">
+        <%= f.label :due_on,"Due On", :class=> "fieldname" %><br />
+        <%= f.text_field :due_on, :class=>"dateselector" %>
+      </div>
+
+  </div>
+
+  <div id ="formblockright">
+
+
+        <div class="field">
+             <%= f.label :total_billed, "Total Premium", :class=> "fieldname" %><br />
+             <%= f.text_field :total_billed%>
+        </div>
+
+        <div class="field">
+            <%= f.label :fees,"Fees", :class=> "fieldname" %><br />
+            <%= f.text_field :fees %>
+        </div>
+
+        <div class="field">
+            <%= f.label :taxes, :class=> "fieldname" %><br />
+            <%= f.text_field :taxes  %>
+        </div>
+
+
+</div>
+
+<%= f.submit %>
+
+
+<% end %>

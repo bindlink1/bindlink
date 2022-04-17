@@ -1,0 +1,16 @@
+$("#myModal").remove();
+$("#wrapper").append('<%= escape_javascript(render :partial => "newemailform") %>');
+$('#myModal').modal('show');
+$("#close_modal").click(function(){$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove();  });
+$("#closeit").click(function(){$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove(); });
+$('.removedoc').on('click.mynamespace',function(){$(this).parents(".emaildocs").fadeOut(300).html(''); });
+$('.addagentemail').on('click.mynamespace',function(){$('#email_to').val($(this).data("agent")); });
+$('.addcarrieremail').on('click.mynamespace',function(){$('#email_to').val($(this).data("carrier")); });
+
+$("#new_email").submit(function() {
+
+if ($("#new_email").valid()) {
+    $("#emailstatus").html('<h3>Sending Mail...</h3> <br>'); //$("#new_email").slideUp(300);
+}
+
+});

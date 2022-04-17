@@ -1,0 +1,4 @@
+$("#newppbtn").fadeOut(300);
+$('#newpp').html('<%=escape_javascript(render('newform')) %>').hide().slideDown(300);
+$('#ppcancel').click(function(){$('#newpp').slideUp(300).html('');$("#newppbtn").fadeIn(300); });
+$(document).ready(function() { $('#prospectpolicy_expiration_date').datepicker(); });

@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"><![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"><![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"><![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+<head>
+
+  <%= stylesheet_link_tag "style" %>
+
+  <!-- Basic Page Needs
+ ================================================== -->
+  <meta charset="utf-8">
+  <title>Insurance Agency Management Software | Bindlink</title>
+  <!-- Mobile Specific
+ ================================================== -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <!-- CSS
+ ================================================== -->
+
+  <!-- Java Script
+ ================================================== -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+  <meta name="description" content="Revolutionary Web-based Insurance Agency Management Software, Insurance Agency CRM Software, Insurance Agent Customer Management Software, Insurance Agency Carrier Download, and Insurance Agency Marketing solutions. See what Bindlink can do for your Insurance Agency."/>
+  <link rel="canonical" href="http://www.bindlink.com/" />
+
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-37938751-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+  </script>
+</head>
+<body>
+<!-- Header -->
+<div id="header">
+  <!-- 960 Container Start -->
+  <div class="container ie-dropdown-fix">
+    <!-- Logo -->
+    <div class="four columns">
+      <a href="/"><img src="/assets/mktimages/logo.png" alt=""/></a>
+    </div>
+    <!-- Main Navigation Start -->
+    <div class="twelve columns">
+      <div id="navigation">
+        <ul id="nav">
+          <li>
+            <a id="hometab" href="/">Home</a>
+          </li>
+          <li>
+            <a id="featurestab" href="features">Features</a>
+          </li>
+          <li>
+            <a id="contacttab" href="contact">Contact Us</a>
+          </li>
+        </ul>
+
+        <%= link_to 'Login',  '/d/agents/sign_in', :class=>"button medium blue", :style => 'margin:25px 0px 0px 30px'%>
+
+      </div>
+    </div>
+    <!-- Main Navigation End -->
+  </div>
+  <!-- 960 Container End -->
+</div>
+
+<%= yield %>
+
+<!-- Footer Start -->
+<div id="footer">
+
+  <!-- 960 Container -->
+  <div class="container">
+    <div class="eight columns">
+      <h5>About Us</h5>
+      <p>
+        Bindlink is a comprehensive agency management system for small to mid-size insurance agencies. We work hard to help you focus on competing for, attracting, and retaining clients - Not worrying about: documents, invoices, payables, renewal dates, and workflows.
+      </p>
+    </div>
+
+    <!-- Connect With Us -->
+    <div class="eight columns">
+      <h5>Connect With Us</h5>
+      <div class="8 column">
+        <!--  <img src="/assets/mktimages/social_icons/twitter.png" alt="Twitter"> <br>
+                              <img src="/assets/mktimages/social_icons/facebook.png" alt="Facebook"> <br>   -->
+        <a href="http://www.linkedin.com/company/bindlink" target="_blank" ><img src="/assets/mktimages/social_icons/linkedin.png" alt="Linkedin"></a> <br>
+      </div>
+    </div>
+
+    <!-- 960 Container End -->
+  </div>
+  <!-- Footer End -->
+  <!--  Footer Copyright-->
+  <div id="footer-bottom">
+    <!-- 960 Container -->
+    <div class="container">
+      <div class="eight columns">
+        <div id="copyright">
+          © Copyright <%= Time.now.year %> by <span>Bindlink</span>. All Rights Reserved.
+        </div>
+      </div>
+
+    </div>
+    <!-- End 960 Container -->
+  </div>
+  <!--  Footer Copyright End -->
+  <!-- Back To Top Button -->
+  <div id="backtotop">
+    <a href="#"></a>
+  </div>
+  <!-- Imagebox Build -->
+ </div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+/*
+$("#invoice<%= @invoice.id.to_s %>").html("<td colspan='9' style='background-color: #f5f5f5;' ><div id='entercash<%= @invoice.id.to_s %>'><%= escape_javascript(render  'polinvoiceentercash') %>  </div></td>");
+
+$("#invoice<%= @invoice.id.to_s %>").show();
+ $("#entercash<%= @invoice.id.to_s %>").hide().slideDown(300);
+
+ $("#gobackapplycash").click(function(){applycashcancel()});
+$("#entercashbutton").click(function(){applycashcancel()});
+
+ function applycashcancel(){
+
+    $("#invoice<%= @invoice.id.to_s %>").slideUp(300);}
+
+
+
+function updatepolicy(){
+    $.ajax({
+
+        type: "GET",
+        dataType: "script",
+        data: "transtype=reinstate",
+        url: "/policies/updateaftertransaction"
+
+
+
+    });
+
+}
+*/
+
+$("#myModal").remove();
+$("#wrapper").append('<%= escape_javascript(render :partial => "polinvoiceentercash") %>');
+$('#myModal').modal('show');
+$("#close_modal").click(function(){$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove();  });
+$("#closeit").click(function(){$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove(); });

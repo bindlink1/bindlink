@@ -1,0 +1,71 @@
+<%= javascript_include_tag "showallcontacts" %>
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu"><h3>Contacts</h3> | <%= link_to "Add New", new_client_clientcontact_path(@clientforview) ,:remote => true, :style=>"text-decoration: underline", :id=>"newcontactbtn" %></div>
+
+  <div id="newcontact" style="width: 100%">
+  </div>
+
+
+  <table  id="contacttable" style="width: 100%;" class="table table-bordered table-condensed table-layout:fixed ">
+    <col width="15%" />
+    <col width="25%" />
+    <col width="25%" />
+    <col width="35%" />
+    <% if @clientcontacts.blank? %>
+        <tr>
+          <td colspan="4" style="text-align: center; background-color: #eeeeee;">
+
+            Nothing entered yet. Click "Add New" above to enter a new contact.
+
+          </td>
+
+        </tr>
+    <% end %>
+
+
+
+    <% @clientcontacts.each do |contact| %>
+
+        <tr id="<%= "contact" + contact.id.to_s %>" >
+          <td style="border-bottom: 1px solid #E8E8E8; padding: 5px">
+            <div style="float: left; width: 200px;">
+              <div>
+                <b><%begin%> <%= contact.contact_value %>  <%rescue%> N/A <%end%></b>
+              </div>
+              <div>
+                <%begin%> <%= contact.contact_type %> <%rescue%> N/A <%end%>
+
+              </div>
+              <div>
+                <%= link_to('delete', contact, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext') %>
+                | <%= link_to('edit', edit_clientcontact_path(contact) , :remote => true, :class=>'linktext') %>
+
+              </div>
+            </div>
+
+            <div style="float: left; margin-left: 10px; width:150px;">
+             <div><b> Sex:</b> <%begin%> <%= contact.sex %> <%rescue%> N/A <%end%></div>
+              <div><b>Birth Date:</b>  <%begin%> <%= contact.birth_date.strftime("%m/%d/%Y")  %> <%rescue%> N/A <%end%> </div>
+              <div><b> Occupation:</b> <%begin%> <%= contact.occupation %> <%rescue%> N/A <%end%> </div>
+             <div><b> Note:</b> <%begin%> <%= contact.note %> <%rescue%> N/A <%end%> </div>
+            </div>
+            <div style="float: left; margin-left: 10px;width: 200px;">
+             <div><b> Drivers License #:</b> <%begin%> <%= contact.dlnum %> <%rescue%> N/A <%end%></div>
+              <div><b>State:</b>  <%begin%> <%= contact.dlstate  %> <%rescue%> N/A <%end%> </div>
+             <div><b> Expiration Date:</b> <%begin%> <%= contact.dlexp.strftime("%m/%d/%Y") %> <%rescue%> N/A <%end%> </div>
+            </div>
+            <div style="float: left; margin-left: 10px;">
+             <div><b> SSN #:</b> <%begin%> <span id="ssn"> <%= contact.ssn %> </span><%rescue%> N/A <%end%></div>
+
+             </div>
+
+
+          </td>
+        </tr>
+        <tr id="<%= "contactwork" + contact.id.to_s %>" style="border: 0;" class="contactworkarea"></tr>
+    <% end %>
+  </table>
+</div>
+
+
+

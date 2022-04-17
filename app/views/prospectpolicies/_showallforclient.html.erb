@@ -1,0 +1,53 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu"><h3>Prospect Policies</h3> | <%= link_to "Add New", new_client_prospectpolicy_path(@clientforview) , :remote => true, :style=>"text-decoration: underline", :id=>"newcpebtn" %>    </div>
+
+  <div id="newpp" style="width: 100%">
+  </div>
+
+
+  <table class="table table-bordered table-condensed table-layout:fixed " id="pptable">
+      <col width="10%" />
+      <col width="10%" />
+      <col width="20%" />
+      <col width="20%" />
+      <col width="40%" />
+    <% if @clientpp.blank? %>
+        <tr>
+          <td colspan="4" style="text-align: center; background-color: #eeeeee;">
+
+            Nothing entered yet. Click "add" above to enter a new prospect policy.
+
+          </td>
+
+        </tr>
+    <% end %>
+
+
+
+    <% @clientpp.each do |pp| %>
+
+        <tr id="<%= "pp" + pp.id.to_s %>" class="pparea">
+          <td>
+            <%= link_to('delete', pp, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext') %>
+            | <%= link_to('edit', edit_prospectpolicy_path(pp) , :remote => true, :class=>'linktext') %>
+          </td>
+          <td>
+            <%begin%><%= pp.expiration_date.strftime("%m/%d/%Y") %>  <%rescue%> N/A <%end%>
+          </td>
+          <td>
+            <%begin%><%= pp.carrier %>  <%rescue%> N/A <%end%>
+          </td>
+          <td>
+            <%begin%> <%= pp.coverage_type %>  <%rescue%> N/A <%end%>
+          </td>
+          <td>
+            <%begin%> <%= pp.note %><%rescue%> N/A <%end%>
+          </td>
+        </tr>
+        <tr id="<%= "ppwork" + pp.id.to_s %>" style="border: 0;" class="ppworkarea"></tr>
+    <% end %>
+  </table>
+</div>
+
+
+

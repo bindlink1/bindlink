@@ -1,0 +1,18 @@
+<div class="wellwhite">
+  <h3>Approve Return:</h3>
+  <hr>
+  <b>Policy #:</b> <%=  @policy.policy_number %>
+  </br>
+  <b>Carrier:</b> <%=  @policy.carrier.carrier_name %>
+  </br>
+  Return <%= number_to_currency( @policy.policybalance * -1)  %> to <%=  @policy.producingagency.agency_name %> ?
+  </br>
+  </br>
+  <% if @policy.pfc_id.nil? == false %>
+      <b>Premium Finance Company: </b><%= @policy.pfc.pfc_name %>
+      </br>
+  <% end %>
+
+  </br>
+  <%= link_to "Print Check" , printreturncheck_path(:id=>@policy.id)+".pdf",  :target =>"blank", :class=>"btn btn-warning" %>  <%= link_to "Return Premium" , processreturn_path(:id=>@policy.id), :remote => true, :class=>"btn btn-success" %>  <button class="btn" type="submit" id="gobackreturn" onclick='return false;'>Go Back</button></div>
+</div>

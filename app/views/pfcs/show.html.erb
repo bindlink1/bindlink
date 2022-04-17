@@ -1,0 +1,25 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext"><%= @pfcforview.pfc_name %>
+      <li class="dropdown" style="display: inline;">
+        <a  data-toggle="dropdown" href="#menu" class="dropdownmenubox">
+
+          <%= image_tag("list 2.png", :height=>"15px", :width=>"15px") %> Menu
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" >
+          <li> <%= link_to  edit_pfc_path(@pfcforview.id), :remote=>true, :method => :get  do %> <i class="icon-pencil"></i> Edit <% end %>
+
+          </li>
+
+
+        </ul>
+      </li>
+    </span>
+    </div>
+
+    <div id="pfcinfo">
+      <%= render('viewinfo') %>
+    </div>
+  </div>
+</div>

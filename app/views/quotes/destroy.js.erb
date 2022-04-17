@@ -1,0 +1,3 @@
+
+$('#quotewrapper').slideUp(300);
+$('#quotewrapper').html('<%= escape_javascript(render :partial => 'quotes/showallforclient', :locals => {:quotes=> @quotes}) %>').hide().slideDown(300);

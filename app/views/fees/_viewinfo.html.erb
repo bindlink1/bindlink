@@ -1,0 +1,41 @@
+<table class="table table-bordered table-layout:fixed;" style="width: 30%;">
+  <col width="40%" />
+  <col width="60%" />
+
+
+  <tbody>
+  <tr>
+    <td style="text-align: right;">State</td>
+    <td><%= @feeforview.state %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Type</td>
+    <td><%= @feeforview.fee_type %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Value</td>
+    <td><%begin%><%= if @feeforview.fee_type == "Flat" then number_to_currency(@feeforview.fee_value) else number_to_percentage(@feeforview.fee_value*100) end %><%rescue%><%end%> </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Remit Type</td>
+    <td><%= @feeforview.fee_remit_type %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Attach Type</td>
+    <td><%= @feeforview.attach_type %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Earn Type</td>
+    <td><%= @feeforview.earn_type %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Effective</td>
+    <td><%begin%><%= @feeforview.effective_date.strftime("%m/%d/%Y") %><%rescue%><%end%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">Expiration</td>
+    <td><%begin%><%= @feeforview.expiration_date.strftime("%m/%d/%Y") %><%rescue%><%end%></td>
+  </tr>
+  </tbody>
+
+</table >

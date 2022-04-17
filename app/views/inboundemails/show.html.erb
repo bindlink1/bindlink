@@ -1,0 +1,41 @@
+<%= javascript_include_tag "inboundemailview" %>
+<% title @inboundemail.subject + " | bindlink" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext"><%=@inboundemail.subject%></span></div>
+
+    <div style="background-color: #F8F8F8; border-bottom: 1px solid #d3d3d3; padding: 10px; margin-left: -15px; margin-right: -15px; margin-top: -10px;  margin-bottom: 15px;">
+      <div style="float: left">
+        <h3><%= @inboundemail.from %></h3>
+        <%= @inboundemail.created_at.strftime("%m/%d/%Y")%>
+      </div>
+      <div style="float: left; margin-left: 25px;"><%= link_to associateemail_path(@inboundemail), :class=>"btn btn-info", :remote => true do %> <i class="icon-share-alt icon-white"></i> Attach to File <% end %></div>
+      <div style="float: left; margin-left: 25px;"><%= link_to('Delete', @inboundemail, :confirm => 'Are you sure you want to delete this email?', :method => :delete,  :class=>'btn btn-danger') %></div>
+      <div style="float: left; margin-left: 25px;"><%= link_to('edit', edit_inboundemail_path(@inboundemail) , :remote => true, :class=>'btn') %></div>
+      <div style="clear: both"></div>
+    </div>
+
+    <div id="transferwork"></div>
+    <div id="emailmessage">
+      <p><%= raw(@inboundemail.stripped_text)%></p>
+    </div>
+    <h4>Attachments:</h4>
+    <div style="min-height: 180px ">
+      <% if @inboundemail.documents.blank? %>
+          No Attachments
+      <% else %>
+
+          <% @inboundemail.documents.each do |document| %>
+
+              <%= render :partial=>'documents/iconviewsingle', :locals=>{:document => document}%>
+
+              <% if !document.policy_id.blank? %> (Transferred to Policy <%=link_to Policy.find(document.policy_id).policy_number, policy_path(document.policy_id), :class=>"linktext" %> ) <%end%>
+              <% if !document.client_id.blank? %> (Transferred to Client <%=link_to Client.find(document.client_id).fullname, client_path(document.client_id), :class=>"linktext" %> ) <%end%>
+
+          <% end %>
+
+      <% end %>
+    </div>
+  </div>
+</div>
+

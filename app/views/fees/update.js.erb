@@ -1,0 +1,2 @@
+$("#feeinfo").slideUp(300);
+ $("#feeinfo").html('<%= escape_javascript(render :partial => 'viewinfo', :locals => {:feeforview => @feeforview}) %>').hide().slideDown(300);

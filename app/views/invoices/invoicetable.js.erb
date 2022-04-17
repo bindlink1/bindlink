@@ -1,0 +1,13 @@
+$("#testdiv").html('<%= escape_javascript(render  'invoicetable') %>').fadeIn(500) ;
+
+$("#invoices").dataTable(
+
+        {
+
+            "sPaginationType" : "full_numbers",
+            "bJQueryUI" : true
+
+
+        }
+
+);

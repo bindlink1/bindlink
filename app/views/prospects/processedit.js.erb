@@ -1,0 +1,2 @@
+$("#prospectinfo").slideUp(300);
+ $("#prospectinfo").html('<%= escape_javascript(render :partial => 'viewinfo', :locals => {:prospectforview => @prospectforview}) %>').hide().slideDown(300);

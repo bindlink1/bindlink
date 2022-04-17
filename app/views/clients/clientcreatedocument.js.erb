@@ -1,0 +1,13 @@
+// Display a Javascript alert
+
+<% if remotipart_submitted? %>
+  $("#documentlist").slideUp(300).html('<%= escape_javascript(render :partial => 'clientdocuments', :locals => { :documentsforview => @documentsforview}) %>');
+  $("#documentlist").slideDown(300);
+ $("#document_name").val("");
+   $("#document_image").val("");
+<% else %>
+  alert('error uploading...contact bindlink');
+<% end %>
+
+
+

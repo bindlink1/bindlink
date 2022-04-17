@@ -1,0 +1,49 @@
+<div class="formheader">
+  <b>New General Agency</b>
+</div>
+<div class="formcontainer">
+<%= form_for @generalagency do |f| %>
+  <table id="policyinput">
+     <tr>
+       <td><%= f.label :agency_name,"Agency Name" %></td>
+       <td><%= f.text_field :agency_name, :class=> "BLselect" %></td>
+       <td><%= f.label :address_1, "Address 1"%></td>
+       <td><%= f.text_field :address_1, :class=> "BLselect"%></td>
+     </tr>
+       <tr>
+       <td><%= f.label :telephone%></td>
+       <td><%= f.phone_field :telephone, :class=> "BLselect" %></td>
+         <td> <%= f.label :address_2,"Address 2" %></td>
+       <td><%= f.text_field :address_2, :class=> "BLselect" %></td>
+     </tr>
+    <tr>
+      <td>
+        </td>
+      <td></td>
+       <td> <%= f.label :city %></td>
+      <td><%= f.text_field :city, :class=> "BLselect"   %></td>
+    </tr>
+
+       <td></td>
+      <td></td>
+      <td><%= f.label :state  %></td>
+      <td><%= f.text_field :state, :class=> "BLselect" %></td>
+    </tr>
+       <td></td>
+      <td></td>
+      <td><%= f.label :zip %></td>
+      <td><%= f.text_field :zip, :class=> "BLselect"  %></td>
+    </tr>
+  </table >
+
+
+             <div class="buttons">
+                <button type="submit" class="positive" name="save">
+                    <img src=<%= image_path("checkicon.jpg") %> alt=""/>
+                    Save<%= f.submit 'create general agency', :class=>'positive' %>
+                </button>
+          </div>
+</div>
+
+<% end %>
+

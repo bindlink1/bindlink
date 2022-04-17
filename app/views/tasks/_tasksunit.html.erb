@@ -1,0 +1,41 @@
+<% content_for :head do %>
+<%= javascript_include_tag "taskunit" %>
+<% end %>
+<div class="controlbox">
+  <div class="controlboxmenu"><h3><%= caption %></h3></div>
+  <table class="controltable">
+    <tr>
+      <td class="controlleft">
+        <ul class="nav nav-listfull" style="margin-left: 0px;">
+          <li class="active"><%=link_to  taskview_path(:type=>'today',:agent=>agentid), :class=>'tasklink', :remote=>true do%>Today's <span class="badge todaybadge" id="todaybadge"><%= todaycount %></span><%end%></li>
+          <li><%=link_to  taskview_path(:type=>'overdue',:agent=>agentid), :class=>'tasklink', :remote=>true do%>Overdue <span class="badge overduebadge" id="overduebadge"><%= overduecount %></span><%end%></li>
+          <li><%=link_to  taskview_path(:type=>'future',:agent=>agentid), :class=>'tasklink', :remote=>true do%>Upcoming <span class="badge upcomingbadge" id="upcomingbadge"><%= upcomingcount %></span><%end%></li>
+          <li><%=link_to  taskview_path(:type=>'all',:agent=>agentid), :class=>'tasklink', :remote=>true do%>All <span class="badge allbadge" id="allbadge"><%= allcount %></span><%end%></li>
+        </ul>
+      </td>
+      <td class="controlright">
+        <div class="taskhead" id="taskhead">
+          <div id="taskheader" class="taskheader">
+          <table  style="width: 100%;" >
+            <tr>
+              <td style="width: 60%; text-align: left;">Subject</td>
+              <td style="width: 25%; text-align: left;">For</td>
+              <td style="width: 10%; text-align: left;">Due</td>
+              <td style="width: 5%; text-align: center;"></td>
+            </tr>
+          </table>
+          </div>
+          <div id="taskheaderwork" class="taskheaderwork"></div>
+        </div>
+        <div class="rightwrapper">
+          <div id="tasktablewrapper" class="tasktablewrapper">
+            <table id="tasktable<%= suffix %>" style="width: 100%" class="tasktable">
+              <%= render :partial => 'tasks/taskdata', :locals => { :tasks => tasks } %>
+            </table>
+          </div>
+          <div id="taskwork" class="taskwork"></div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>

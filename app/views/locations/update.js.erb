@@ -1,0 +1,3 @@
+$("#locationwork").slideUp(300);
+$("#locationwork").html("");
+ $("#locationinfo").html('<%= escape_javascript(render :partial => 'viewinfo', :locals => {:feeforview => @feeforview}) %>').hide().slideDown(300);

@@ -1,0 +1,9 @@
+Entering Reconciliation Cash for: <%= @policy.policy_number %>
+<%= form_for  @policy, :url=>recordentry_path(@policy), :html=>{ :method=>'post'}, :remote=>true do |f| %>
+
+    <%= text_field_tag :recoamount %>
+
+
+    <%= f.submit 'Apply'%>
+
+<%end%>

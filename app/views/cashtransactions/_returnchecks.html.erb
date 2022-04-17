@@ -1,0 +1,48 @@
+ <%= javascript_include_tag "returnchecks" %>
+<h3>The following returns are applied:</h3>
+<hr>
+
+<table class="worktable">
+  <thead>
+  <tr style="border-bottom: 1px solid #d3d3d3;">
+    <th style="border: 1px solid #d3d3d3; padding: 5px;">Policy Number</th>
+    <th style="border: 1px solid #d3d3d3;">Check Number</th>
+    <th style="border: 1px solid #d3d3d3;">Return Premium</th>
+    <th style="border: 1px solid #d3d3d3;">Pay To</th>
+
+
+  </tr>
+  </thead>
+  <tbody style="display: table-row-group;">
+
+
+  <%  @returnbatch.returnpremiumbatchitems.each do |ret|  %>
+      <tr style="border-bottom: 1px solid #d3d3d3; ">
+        <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+          <%= ret.cashtransaction.policy.policy_number %>
+        </td>
+        <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+          <%= ret.cashtransaction.check_number %>
+        </td>
+        <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">
+          <%= number_to_currency(ret.cashtransaction.cash_amount * -1 ,  :negative_format => "(%u%n)") %>
+        </td>
+        <td style="padding: 5px; border: 1px solid #d3d3d3; text-align: center;">  <% if ret.pay_to_entity == "PFC" %><%= ret.pfc.pfc_name%> <%else%> <%= ret.producingagency.agency_name%> <%end%>
+
+        </td>
+      </tr>
+  <% end %>
+
+  </tbody>
+</table>
+
+<br/>
+
+<div id="printchecks">
+<%= link_to "Print Checks" , printreturncheck_path(:id=>@returnbatch.id)+".pdf",  :target =>"blank", :class=>"btn btn-success", :id=>"printcheck" %>
+</div>
+
+<div id="printok">
+  <h3>Did all checks print successfully?</h3>
+  <%= link_to "Yes", retprintsuccess_path(:id=>@returnbatch.id), :class=>"btn btn-success"%> | <%= link_to "No", editreturnbatch_path(:id=>@returnbatch.id), :class=>"btn btn-danger"%>
+</div>

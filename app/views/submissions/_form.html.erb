@@ -1,0 +1,88 @@
+
+<div id="newsubmission">
+<%= form_for @submission,:html => {:autocomplete => "off", :class=>"form-horizontal", :id=>"new_submission"} do |f| %>
+
+
+      <div>
+        <fieldset>
+          <div class="control-group">
+            <%= f.label "producingagency_code", "Producing Agency Code", :class=> "control-label"%>
+            <div class="controls">
+              <input id="producingagency_code" type="text" value=""/>
+              <span id="producingagency_code_error" for="producingagency_code" class="error"></span>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :producingagency_id, "Producing Agency *", :class=>"control-label"%>
+            <div class="controls">
+              <%= f.collection_select :producingagency_id, @producers, :id, :nameandcode, {:include_blank => 'Select One' }, { :class =>'required' } %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :agent_id, "Assigned Agent", :class=>"control-label"%>
+            <div class="controls">
+              <%= f.collection_select :agent_id, @agents, :id, :fullname, {:include_blank => 'Select One', :selected => @current_agent.id } %>
+            </div>
+          </div>
+
+          <%= f.fields_for :namedinsured do |builder| %>
+              <%= render 'namedinsureds/formfields', f: builder %>
+          <% end %>
+
+
+
+          <div class="control-group">
+            <%= f.label :short_note, "Description", :class=>"control-label" %>
+
+            <div class="controls">
+              <%= f.text_field :short_note, :class=> "BLselect"   %>
+            </div>
+          </div>
+
+
+          <div class="form-actions">
+            <%= f.submit 'Create', :remote => true, :class=>"btn btn-success", :id=>"createquotebtn"%>  <%= link_to 'Cancel' , submissions_path,  :class=>'btn' %>
+          </div>
+        </fieldset>
+      </div>
+
+<script>
+  $("#submission_namedinsured_attributes_zip").keyup(function() {
+        var el = $(this);
+
+        if (el.val().length === 5) {
+            $.ajax({
+                url: "https://ziptasticapi.com/"+el.val(),
+                cache: false,
+                dataType: "json",
+                type: "GET",
+                success: function(result, success) {
+                    $("#submission_namedinsured_attributes_city").val(result.city);
+                    $("#submission_namedinsured_attributes_state").val(result.state);
+                }
+            });
+        }
+    });
+
+  $("#producingagency_code").keyup(function() {
+        var el = $(this),
+            value = el.val();
+
+        //debugger;
+
+        $('#producingagency_code_error').html('');
+
+        if (value.length === 4) {
+          var option = $('#submission_producingagency_id option:contains(' + value + ')');
+
+          if (option.length) {
+            $('#submission_producingagency_id').val(option.val());
+          } else {
+            $('#producingagency_code_error').html('Invalid Code');
+          }
+        }
+    });
+</script>
+
+<% end %>
+</div>

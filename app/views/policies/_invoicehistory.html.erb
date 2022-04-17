@@ -1,0 +1,66 @@
+
+</br>
+<div class="wellwhite">
+
+  <h3>Invoice Cash History:</h3>
+
+  <hr>
+
+
+  <table class="table table-bordered">
+    <tr>
+      <th style="background-color: #f5f5f5;">Actions</th>
+      <th style="background-color: #f5f5f5;">Date Entered</th>
+      <th style="background-color: #f5f5f5;">Amount</th>
+      <th style="background-color: #f5f5f5;">Type</th>
+      <th style="background-color: #f5f5f5;">Payor</th>
+      <th style="background-color: #f5f5f5;">Payee</th>
+      <th style="background-color: #f5f5f5;">Check #</th>
+    </tr>
+    <% @cashtrans.each do |cash| %>
+        <tr id="<%= "main" + cash.id.to_s %>" >
+          <td style="background-color: #FFFFFF;">
+
+            <% if cash.transaction_type.to_s !="Returned / NSF" && cash.nsf_flag.to_s != "yes" && cash.transfer_flag.to_s != "yes" && cash.transaction_type.to_s !="Transfer" && cash.void_flag.to_s != "yes" && cash.transaction_type.to_s !="Void"  %>
+                <ul class="nav" style="padding: 0; margin: 0;">
+                  <li class="dropdown" id="menu1cash<%=cash.id.to_s%>">
+                    <a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#menu1" >
+                      Actions
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" >
+                      <li><%= link_to 'Transfer to Another Policy', transfercash_path(:id => cash), :remote => true%></li>
+                      <li><%= link_to 'Check Returned/NSF', enternsf_path(:id => cash), :remote => true%></li>
+                      <li><%= link_to 'Void Payment', voidpayment_path(cash), :remote => true%></li>
+                    </ul>
+                  </li>
+                </ul>
+            <% elsif cash.nsf_flag.to_s == "yes"%>
+                <a style="color: red; ;">NSF Payment</a>
+            <% elsif cash.void_flag.to_s == "yes"%>
+                <a style="color: blue; ">Voided</a>
+            <% elsif  cash.transfer_flag.to_s == "yes"  %>
+                <a style="color: blue; ">Transferred</a>
+            <% end %>
+          </td>
+          <td style="background-color: #FFFFFF;"><a <% if cash.transaction_type.to_s == "Returned / NSF" %> style="color: red; font-style: italic;"<%end%>> <%begin%> <%= cash.created_at.strftime("%m/%d/%Y %I:%M %p") %> <%rescue%> <%end%></a></td>
+
+
+          <td style="background-color: #FFFFFF;">
+            <a class="pop" data-content="Entered by: <%= cash.id %>" data-title="Cash Details">
+              <b <% if cash.transaction_type.to_s == "Returned / NSF" %> style="color: red; font-style: italic;"<%end%>><%= number_to_currency(cash.cash_amount,  :negative_format => "(%u%n)")%></b>
+            </a>
+          </td>
+          <td style="background-color: #FFFFFF;"><a <% if cash.transaction_type.to_s == "Returned / NSF" %> style="color: red; font-style: italic;"<%end%>><%=cash.transaction_type.to_s%> </a><% if cash.transaction_type.to_s == "Applied to Outstanding Invoice" %> <%=cash.outstandinginvoice%><%end%></td>
+          <td style="background-color: #FFFFFF;"></td>
+          <td style="background-color: #FFFFFF;"><%if !cash.producingagency_id.nil? %><%=cash.producingagency.agency_name%><%elsif !cash.pfc_id.nil? %> <%=cash.pfc.pfc_name%><%end%></td>
+          <td style="background-color: #FFFFFF;"><%=cash.check_number.to_s%></td>
+        </tr>
+        <tr id="<%= "workarea" + cash.id.to_s %>"></tr>
+    <% end %>
+  </table>
+
+
+
+
+</div>

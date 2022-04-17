@@ -1,0 +1,2 @@
+module SubmissionpostsHelper
+end

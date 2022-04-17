@@ -1,0 +1,31 @@
+
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu" >
+
+    <h3>Transfer Cash</h3> <button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+  </div>
+
+  <h3>Search for the policy you want to transfer this cash to:</h3>
+
+  <%= form_tag("/searches/findpolicytransfer", :method => "get",:class=>"form-search" , :remote=> true) do %>
+
+      <fieldset>
+        <div class="control-group">
+          <%= label_tag(:q, "Search for Policy:" ) %>
+          <div class="controls">
+            <%= text_field_tag :q,nil ,:class =>'input-medium', :autocomplete => :off %>
+
+            <%= select_tag(:carrier, options_from_collection_for_select(@carriers, :id, :carrier_name))%>
+            <%= hidden_field_tag :cid,  @cashtransaction.id %>
+          </div>
+        </div>
+      </fieldset>
+
+      <%= submit_tag("Search") %>
+  <%end%>
+
+  <div id="cashtransactionssection"></div>
+  <div id="searchresults"></div>
+
+</div>
+

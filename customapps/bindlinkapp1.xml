@@ -1,0 +1,74 @@
+<root>
+<appfields>
+	<appfield>
+		<field_name display_name="Coverage">Coverage</field_name>
+		<field_type>Text</field_type>
+		<required>Yes</required>
+	</appfield>
+	<appfield>
+		<field_name display_name="Limit">Limit</field_name>
+		<field_type>Text</field_type>
+		<required>Yes</required>
+	</appfield>
+	<appfield>
+		<field_name display_name="Classification">Classification</field_name>
+		<field_type>Text</field_type>
+		<required>Yes</required>
+	</appfield>
+	<appfield>
+		<field_name display_name="Premium Basis" >PremiumBasis</field_name>
+		<field_type>Text</field_type>
+		<required>No</required>
+	</appfield>
+	<appfield>
+		<field_name display_name="Payroll" >Payroll</field_name>
+		<field_type>Text</field_type>
+		<required>No</required>
+	</appfield>
+	<appfield>
+		<field_name display_name="Territory" >Territory</field_name>
+		<field_type>Text</field_type>
+		<required>Yes</required>
+	</appfield>
+	<appfield>
+		<field_name display_name="Deductible">Deductible</field_name>
+		<field_type>drop_down</field_type>
+		<required>Yes</required>
+		<options>
+			<option>$500</option>
+			<option>$600</option>
+			<option>$700</option>
+		</options>
+	</appfield>
+	<appfield>
+		<field_name display_name="Question 1">Question1</field_name>
+		<field_type>radio</field_type>
+		<required>Yes</required>
+		<options>
+			<option>Option 1</option>
+			<option>Option 2</option>
+			<option>Option 3</option>
+		</options>
+	</appfield>
+	<appfield>
+		<field_name display_name="Question 2">Question2</field_name>
+		<field_type>checkbox</field_type>
+		<required>Yes</required>
+		<options>
+			<option>Option 4</option>
+			<option>Option 5</option>
+			<option>Option 6</option>
+		</options>
+	</appfield>
+	<appfield>
+		<field_name display_name="Sub Limit">SubLimit</field_name>
+		<field_type>drop_down</field_type>
+		<required>Yes</required>
+		<options>
+			<option>$50,000</option>
+			<option>$100,000</option>
+			<option>$150,000</option>
+		</options>
+	</appfield>
+</appfields>
+</root>

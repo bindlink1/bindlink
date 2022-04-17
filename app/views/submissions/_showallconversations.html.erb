@@ -1,0 +1,26 @@
+
+            <% @allconversations.each do |allconversations| %>
+
+                  <%= div_for(allconversations) do %>
+
+                       <b><%= allconversations.poster_name %></b> : <%= allconversations.company_name %>
+
+                   <% end %>
+
+                <%= div_for(allconversations, :post) do %>
+
+                <% allconversations.submissionthreads.each do |a| %>
+                    <% a.submissionposts.each do |b| %>
+                          <b><%= b.poster_name %></b></br>
+                          <%= b.created_at.to_formatted_s(:long) %></br>
+                          <%= b.submissionposttext  %>
+                          </br></br>
+                    <% end %>
+                 <%= link_to "New Post", createfollowup_post_path(:id =>a.id), :remote => true %>
+                <% end %>
+
+               <% end %>
+
+               </br>
+            <% end %>
+

@@ -1,0 +1,24 @@
+
+<div class="infoblock">
+    <div class="infoblockhead">
+      Submissions
+    </div>
+    <% @submissionlist.each do |submission| %>
+        <ul>
+          <li class=<%=cycle("stripe","")%>>
+
+            <b><%= link_to submission.client.client_name, view_submission_path(:id =>submission.id) %></b> -- Deadline: <%= submission.created_on%>
+            <div>
+            <b>Agency:</b> <%= submission.agency.agency_name%>
+            </div>
+            <div>
+              <%= submission.quotetype%>
+            </div>
+            <div>
+            <%= submission.short_note%>
+            </div>
+          </li>
+
+        </ul>
+    <% end %>
+</div>

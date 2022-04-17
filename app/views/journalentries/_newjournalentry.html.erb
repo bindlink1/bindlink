@@ -1,0 +1,39 @@
+
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu" >
+
+    <h3>Journal Entry</h3> <button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+  </div>
+
+  <%= form_for @je,:html=>{:class=>"form-horizontal"}, :remote=>true do |f|%>
+
+      <div class="control-group">
+        <label class="control-label">Select an account:</label>
+        <div class="controls">
+          <%= f.collection_select  :accountingaccount_id ,@accounts,:id, :account_name, {:include_blank => 'Select One'}, { :class =>'required' }%>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Transaction Type:</label>
+        <div class="controls">
+          <%= f.select( :trans_type, [['Debit', 'Debit'], ['Credit', 'Credit']]) %>
+            </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label">Amount:</label>
+        <div class="controls">
+          <%= f.text_field :amount%>
+        </div>
+      </div>
+
+          <%= f.hidden_field :policy_id, :value=>@policy.id%>
+
+      <div class="form-actions">
+        <%= f.submit 'Process'  ,disable_with: 'Processing...', :class=>"btn btn-success" %>
+        <button class="btn"  id ="close_modal" onclick='return false;'>Cancel</button>
+      </div>
+  <% end %>
+
+
+
+</div>

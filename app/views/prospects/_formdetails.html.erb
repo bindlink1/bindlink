@@ -1,0 +1,117 @@
+<table class="table table-bordered table-layout:fixed;">
+  <thead>
+  <tr>
+    <th colspan="4"><h3>General Info:</h3></th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td style="text-align: right;"><%= f.label :pospect_name,"Prospect Name" %></td>
+    <td><%= f.text_field :prospect_name, :class=> "BLselect" %></td>
+    <td style="text-align: right;"><%= f.label :address_1, "Address 1"%></td>
+    <td><%= f.text_field :address_1, :class=> "BLselect"%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :home_phone, "Home Phone"%></td>
+    <td><%= f.phone_field :home_phone, :class=> "BLselect" %></td>
+    <td style="text-align: right;"> <%= f.label :address_2,"Address 2" %></td>
+    <td><%= f.text_field :address_2, :class=> "BLselect" %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"> <%= f.label :cell_phone, "Cell Phone" %>
+    </td>
+    <td><%= f.text_field :cell_phone, :class=> "BLselect" %></td>
+    <td style="text-align: right;"> <%= f.label :city %></td>
+    <td><%= f.text_field :city, :class=> "BLselect"   %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :cell_phone_2, "Cell Phone 2" %></td>
+    <td ><%= f.text_field :cell_phone_2, :class=> "BLselect" %></td>
+    <td style="text-align: right;"><%= f.label :state  %></td>
+    <td><%= f.text_field :state, :class=> "BLselect" %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><i class="icon-envelope"> </i> <%= f.label :email, "e-Mail"  %></td>
+    <td><%= f.text_field :email, :class=> "BLselect" %></td>
+    <td style="text-align: right;"><%= f.label :zip %></td>
+    <td><%= f.text_field :zip, :class=> "BLselect"  %></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :customer_type, "Customer Type"  %></td>
+    <td><%= f.select(:customer_type, [['Individual', 'Individual'], ['Corporation', 'Corporation']]) %></td>
+    <td style="text-align: right;"></td>
+    <td></td>
+
+  </tr>
+  </tbody>
+
+  <thead>
+  <tr>
+    <th colspan="4"><h3>Mailing Address:</h3></th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td style="text-align: right;"><%= f.label :mailing_address_1,"Address 1" %></td>
+    <td><%= f.text_field :mailing_address_1, :class=> "BLselect" %></td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :mailing_address_2, "Address 2"%></td>
+    <td><%= f.phone_field :mailing_address_2, :class=> "BLselect" %></td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"> <%= f.label :mailing_city, "City" %>
+    </td>
+    <td><%= f.text_field :mailing_city, :class=> "BLselect" %></td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :mailing_state, "State" %></td>
+    <td ><%= f.text_field :mailing_state, :class=> "BLselect" %></td>
+    <td colspan="2"></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :mailing_zip, "Zip"  %></td>
+    <td><%= f.text_field :mailing_zip, :class=> "BLselect" %></td>
+
+    <td colspan="2"></td>
+
+  </tr>
+  </tbody>
+  <thead>
+  <tr>
+    <td colspan="4"><h3>Contacts:</h3></td>
+
+  </tr>
+
+  </thead>
+  <tbody>
+  <tr>
+    <td style="text-align: right;"><%= f.label :contactname_1, "Contact 1"  %></td>
+    <td><%= f.text_field :contactname_1, :class=> "BLselect" %></td>
+
+    <td colspan="2"></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :contactname_2, "Contact 2"  %></td>
+    <td><%= f.text_field :contactname_2, :class=> "BLselect" %></td>
+
+    <td colspan="2"></td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;"><%= f.label :contactname_3, "Contact 3"  %></td>
+    <td><%= f.text_field :contactname_3, :class=> "BLselect" %></td>
+
+    <td colspan="2"></td>
+
+  </tr>
+  </tbody>
+
+</table >

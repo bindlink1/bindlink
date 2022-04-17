@@ -1,0 +1,117 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">
+            Quote:
+      <% if current_agent.isgeneralagent == "GA" %>
+                 <%= link_to @quote.submission.namedinsured.named_insured, submission_path(@quote.submission_id),:style =>"text-decoration: underline;" %>
+            <% else %>
+                <% if @quote.client.client_status == "Prospect" %>
+               <%= link_to @quote.client.fullname, showprospect_path(@quote.client_id),:style =>"text-decoration: underline;" %>
+              <% else %>
+                      <%= link_to @quote.client.fullname, client_path(@quote.client_id),:style =>"text-decoration: underline;" %>
+                <% end %>
+            <% end %>
+    </span></div>
+    <div id="quoteinfo">
+      <div class="row-fluid">
+        <div class="span12" id="tabcontainer">
+          <% if current_agent.isgeneralagent == "GA" %>
+              <div class="previewhead">
+                <p> <%= link_to '< Back to Submission  ', submission_path(@quote.submission_id),:style =>"text-decoration: underline;" %>
+                </p><b>Producing Agency: <%= link_to  @quote.submission.producingagency.agency_name, producingagency_path( @quote.submission.producingagency) ,:style =>"text-decoration: underline;"%></b>
+
+              </div>
+          <% end %>
+          <div class="tabbable">
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#generaltab" data-toggle="tab">Home</a></li>
+              <li><a href="#documenttab" data-toggle="tab">Documents</a></li>
+
+              <li><a href="#notetab" data-toggle="tab">Notes</a></li>
+            </ul>
+            <div class="tab-content" style="overflow: visible;">
+              <div id="generaltab" class="tab-pane active">
+                <div class="row-fluid">
+
+
+                  <div class="span12" id="statuscontainer">
+
+
+                  </div>
+
+
+                </div>
+                <div class="row-fluid">
+
+
+                  <div class="span6">
+
+                    <% if @quote.status == "bound" %>
+                        <b>This quote is bound :</b>
+
+                        <%= link_to @quote.policy.policy_number, policy_path(@quote.policy), html_options = {:style=>"text-decoration: underline;"} %>
+
+                    <% else %>
+                      <span id="bindQuoteBtn">
+                        <%= link_to 'Bind Quote', current_agent.isgeneralagent =="Retail" ? newquotepolicy_path(@quote) : newquotepolicyga_path(@quote),
+                          :class=>"btn btn-success",
+                          :onclick=> @quote.submission.namedinsured.valid ? "" : "if( $('#bindQuoteBtnLbl').length == 0 ) $('#bindQuoteBtn').append('<label id=\\'bindQuoteBtnLbl\\' for=\\'submission_namedinsured_attributes_named_insured\\' class=\\'error\\'>Named Insured address information is required.</label>'); return false;" %>
+                      </span>
+                    <% end %>
+
+
+                  </div>
+                  <div class="span6" >
+
+                  </div>
+
+
+                </div>
+                <br/>
+                <div class="row-fluid">
+                  <div class="span6">
+                    <div class="wellwhiteblock">
+                      <div class="wellwhitemenu">Quote Information  <%= link_to('edit', edit_quote_path(@quote) , :remote => true, :class=>'linktext') %></div>
+
+                      <div id="quotefieldswork"></div>
+                      <div id="quotefields">
+
+                        <%= render 'viewquote' %>
+
+                      </div>
+
+                    </div>
+                  </div>
+                  <div class="span6">
+                    <%= render 'tasks/showtasksforquote' %>
+                  </div>
+                </div>
+              </div>
+              <div id="documenttab" class="tab-pane">
+
+                          <%= render 'quotedocuments' %>
+
+              </div>
+
+
+              <div id="notetab" class="tab-pane">
+                <div class="row-fluid">
+                  <div class="span12">
+                    <div class="wellwhiteblock">
+                      <div class="wellwhitemenu">Quote Notes</div>
+                      <%= render 'notesform' %>
+                    </div>
+                    <div id="notewrapper"><%= render 'notelist', :notesforview =>@notesforview %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+</div>

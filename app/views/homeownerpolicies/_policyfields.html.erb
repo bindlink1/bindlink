@@ -1,0 +1,78 @@
+<div class="page-header"><h3>Homeowner's Policy</h3></div>
+
+<table class="table table-bordered table-condesed">
+  <col width="16.66%" />
+  <col width="16.66%" />
+  <col width="16.66%" />
+  <col width="16.66%" />
+  <col width="16.66%" />
+  <col width="16.67%" />
+  <tbody>
+  <tr>
+    <td colspan=6><h3>Coverage Limits</h3></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><b>Form</b></td>
+    <td><%= number_to_currency(@policyforview.homeownerpolicy.hoform.form_name) %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><b>Dwelling</b></td>
+    <td><%= number_to_currency(@policyforview.homeownerpolicy.dwelling_coverage) %></td>
+    <td style="text-align: right;"><b>Contents</b></td>
+    <td><%= number_to_currency(@policyforview.homeownerpolicy.contents_coverage) %></td>
+    <td style="text-align: right;"><b>Additional Structure</b></td>
+    <td><%= number_to_currency(@policyforview.homeownerpolicy.otherstructure_coverage) %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><b>Loss of Use</b></td>
+    <td><%= number_to_currency(@policyforview.homeownerpolicy.lossofuse_coverage) %></td>
+    <td style="text-align: right;"><b>Liability</b></td>
+    <td><%= number_to_currency(@policyforview.homeownerpolicy.liability_coverage) %></td>
+    <td style="text-align: right;"><b>Medical Payments</b></td>
+    <td><%= number_to_currency(@policyforview.homeownerpolicy.medpay_coverage) %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><b>Deductible</b></td>
+    <td><%= @policyforview.homeownerpolicy.deductible %></td>
+    <td style="text-align: right;"><b>Hurricane Deductible</b></td>
+    <td><%= @policyforview.homeownerpolicy.hurricane_deductible %></td>
+    <td style="text-align: right;"></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td colspan=6><h3>Property Details</h3></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><b>Construction Type</b></td>
+    <td><%= @policyforview.homeownerpolicy.hoconsttype.construction_type %></td>
+    <td style="text-align: right;"><b>Year Built</b></td>
+    <td><%= @policyforview.homeownerpolicy.year_built %></td>
+    <td style="text-align: right;"><b>Square Footage</b></td>
+    <td><%= @policyforview.homeownerpolicy.sq_footage %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><b>Number of Rooms</b></td>
+    <td><%= @policyforview.homeownerpolicy.number_rooms %></td>
+    <td style="text-align: right;"><b>Roof Age</b></td>
+    <td><%= @policyforview.homeownerpolicy.roof_age %></td>
+    <td style="text-align: right;"><b>Usage</b></td>
+    <td><%= @policyforview.homeownerpolicy.usage %></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><b>Alarm</b></td>
+    <td><% if @policyforview.homeownerpolicy.alarm == true %> <i class="icon-ok"></i> <%else%> <%end%></td>
+    <td style="text-align: right;"><b>Swimming Pool</b></td>
+    <td><% if @policyforview.homeownerpolicy.swimming_pool == true%> <i class="icon-ok"></i> <%else%> <%end%></td>
+    <td style="text-align: right;"><b>Fire Station</b></td>
+    <td><% if @policyforview.homeownerpolicy.fire_station == true %> <i class="icon-ok"></i> <%else%> <%end%></td>
+  </tr>
+  <tr>
+    <td style="text-align: right;"><b>Replacement Cost</b></td>
+    <td><% if @policyforview.homeownerpolicy.replacement_cost == true %> <i class="icon-ok"></i> <%else%> <%end%></td>
+    <td style="text-align: right;"><b></b></td>
+    <td></td>
+    <td style="text-align: right;"><b></b></td>
+    <td></td>
+  </tr>
+  </tbody>
+</table>

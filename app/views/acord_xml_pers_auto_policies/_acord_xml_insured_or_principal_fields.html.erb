@@ -1,0 +1,109 @@
+<fieldset>
+  <div class="wellwhiteblock">
+    <div class="row-fluid">
+
+
+      <%= f.fields_for :acord_xml_general_party_info, :index=>"1" do |gpi| %>
+          <div class="span6">
+            <div class="control-group">
+              <label class="control-label">First Name</label>
+              <div class="controls">
+                <%= gpi.text_field :given_name,:placeholder=>'First Name' %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Last Name</label>
+              <div class="controls">
+                <%= gpi.text_field :surname,:placeholder=>'Last Name' %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">SSN</label>
+              <div class="controls">
+                <%= gpi.text_field :tax_id,:placeholder=>'SSN' %>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" >Sex</label>
+              <div class="controls">
+                <%= f.collection_select  :gender_cd  ,[['F','Female'],['M','Male']], :first, :last, {:include_blank => 'Select One'}%>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">DOB</label>
+              <div class="controls">
+                <%= f.text_field :birth_dt,:placeholder=>'Date of Birth' %>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Marital Status</label>
+              <div class="controls">
+                <%= f.collection_select  :marital_status_cd  ,[['M','Married'],['S','Single']], :first, :last, {:include_blank => 'Select One'}%>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label">Relationship</label>
+              <div class="controls">
+                <%= f.collection_select  :relationship_cd  ,[['I','Individual'],['S','Spouse'],['C','Child']], :first, :last, {:include_blank => 'Select One'}%>
+              </div>
+            </div>
+          </div>
+          <div class="span6">
+            <%= gpi.fields_for :acord_xml_pers_drivers do |pd| %>
+
+                <div class="control-group">
+                  <label class="control-label" >License Status</label>
+                  <div class="controls">
+                    <%= pd.collection_select  :license_status_cd  ,[['V','Valid'],['E','Expired'],['S','Suspended']], :first, :last, {:include_blank => 'Select One'}%>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">License #</label>
+                  <div class="controls">
+                    <%= pd.text_field :driver_license_number,:placeholder=>'License #' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">License State</label>
+                  <div class="controls">
+                    <%= pd.text_field :state_prov_cd,:placeholder=>'License State' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label">Date Licensed</label>
+                  <div class="controls">
+                    <%= pd.text_field :license_dt ,:placeholder=>'Date Licensed' %>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" >Mature Driver Indicator</label>
+                  <div class="controls">
+                    <%= pd.collection_select  :mature_driver_ind  ,[['Y','Yes'],['','No']], :first, :last, {:include_blank => 'Select One'}%>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" >Driver Training Indicatior</label>
+                  <div class="controls">
+                    <%= pd.collection_select  :driver_training_ind  ,[['Y','Yes'],['','No']], :first, :last, {:include_blank => 'Select One'}%>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" >Good Driver Indicatior</label>
+                  <div class="controls">
+                    <%= pd.collection_select  :good_driver_ind  ,[['Y','Yes'],['','No']], :first, :last, {:include_blank => 'Select One'}%>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+      <% end %>
+
+
+
+
+
+    </div>
+    <a class="remove_driver btn btn-danger" style="float: right;" ><i class="icon-minus icon-white"></i> Remove Driver</a>
+    <div style="clear:both"></div>
+  </div>
+</fieldset>

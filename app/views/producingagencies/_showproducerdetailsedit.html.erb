@@ -1,0 +1,107 @@
+
+<%= form_for @producer, :remote =>true , :html => {:autocomplete => "off"}  do |f| %>
+    <div class="control-group">
+      <%= f.label :status,"Status" %>
+      <div class="controls">
+        <%= f.collection_select  :status  ,[['Active','Active'],['Inactive','Inactive']], :last, :last, {:include_blank => 'Select One'}%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :agency_code,"Agency Code" %>
+      <div class="controls">
+        <%= f.text_field :agency_code, :class=> "BLselect" %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :agency_name,"Agency Name" %>
+      <div class="controls">
+        <%= f.text_field :agency_name, :class=> "BLselect" %>
+
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :address_1, "Address 1"%>
+      <div class="controls">
+        <%= f.text_field :address_1, :class=> "BLselect"%>
+
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :address_2, "Address 2"%>
+      <div class="controls">
+        <%= f.text_field :address_2, :class=> "BLselect"%>
+
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :city, "City"%>
+      <div class="controls">
+        <%= f.text_field :city, :class=> "BLselect"%>
+
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :state, "State"%>
+      <div class="controls">
+        <%= f.collection_select :state, State.all, :abbreviation, :abbreviation, {:include_blank => 'Select One'} %>
+
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :zip, "Zip"%>
+      <div class="controls">
+        <%= f.text_field :zip, :class=> "BLselect"%>
+
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :telephone, "Telephone"%>
+      <div class="controls">
+        <%= f.text_field :telephone, :class=> "BLselect"%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :agency_fax, "Fax"%>
+      <div class="controls">
+        <%= f.text_field :agency_fax, :class=> "BLselect"%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :main_email, "Main e-Mail"%>
+      <div class="controls">
+        <%= f.text_field :main_email, :class=> "BLselect"%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :secondary_emails, "Secondary e-Mails (separated with comma)"%>
+      <div class="controls">
+        <%= f.text_field :secondary_emails, :class=> "BLselect"%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :accounting_email, "Accounting Contact"%>
+      <div class="controls">
+        <%= f.text_field :accounting_email, :class=> "BLselect"%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :agency_contact, "Main Agent"%>
+      <div class="controls">
+        <%= f.text_field :agency_contact, :class=> "BLselect"%>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :main_agent_license, "Main Agent License"%>
+      <div class="controls">
+        <%= f.text_field :main_agent_license, :class=> "BLselect"%>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit 'Save',  :class=>"btn btn-success", :id=>"editproducergeneral" %> <button class="btn" id="producingagencycacnel" onclick='return false;'>Go Back</button>
+    </div>
+
+
+
+
+<% end %>

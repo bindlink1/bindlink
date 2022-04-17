@@ -1,0 +1,11 @@
+<%= javascript_include_tag 'acord_xml_pers_auto_policies' %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Create New Personal Auto Policy</span> </div>
+    <%= form_for [@policy, @axpap], :html=>{:class=>'form-horizontal', :autocomplete => "off"} do |f|%>
+
+      <%= render :partial=>'formfields', :locals=>{:f=>f}%>
+
+    <% end %>
+  </div>
+</div>

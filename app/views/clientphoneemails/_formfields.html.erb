@@ -1,0 +1,17 @@
+<tr>
+  <td>
+    <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini", :id=>"cpefrmbtn"%> <button class="btn btn-mini" id="cpecancel" onclick='return false;'>cancel</button>
+  </td>
+  <td>
+    <%= f.text_field :contact_value ,:class=>"BLselect",:autocomplete => :off, :placeholder =>"number / e-mail"  %>
+
+  </td>
+  <td>
+    <%= f.collection_select  :contact_type  ,[['e-Mail','e-Mail'],['Home','Home'],['Cell','Cell'],['Fax','Fax'],['Work','Work']], :last, :last, {:include_blank => 'Select One'}, { :class =>'BLselect' }%>
+
+  </td>
+  <td>
+    <%= f.text_field :note ,:class=>"BLselect" ,:autocomplete => :off, :placeholder =>"note" %>
+
+  </td>
+</tr>

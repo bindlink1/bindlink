@@ -1,0 +1,18 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Checklist Manager</span></div>
+
+    <h3> Checklist Name: <%= @checklist.checklist_name %></h3>
+
+    <%= form_for [@checklist], :remote =>true do |f| %>
+        <%= f.collection_select :lobcommission_id,  @lobcommissions, :id, :namelinestate , include_blank: true %>
+
+        <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini", :id=>"cpefrmbtn"%>
+    <% end %>
+
+
+    <hr>
+
+    <%= render 'checklistitems/showallforchecklist' %>
+  </div>
+</div>

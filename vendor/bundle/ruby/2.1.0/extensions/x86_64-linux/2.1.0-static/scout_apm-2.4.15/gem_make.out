@@ -1,0 +1,12 @@
+/tmp/build_0a4d4a936d7e73c609476f1582644b5e/vendor/ruby-2.1.5/bin/ruby extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling rusage.c
+linking shared-object rusage.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 rusage.so ./.gem.20180810-269-izyypt
+installing default rusage libraries

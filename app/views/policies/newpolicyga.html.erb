@@ -1,0 +1,59 @@
+
+<% content_for :head do %>  <%= javascript_include_tag "createpolicy" %> <% end %>
+<div class="col1wrap">
+  <div class="col1 wellwhite" style="float: left; min-width: 700px">
+    <div class="wellwhitemenu"><span class="headtext">Create a New Policy</span> </div>
+    <div id="newpolicy">
+
+      <%= form_for @policy,:html => {:autocomplete => "off", :class=>"form-horizontal"},:remote => true  do |f| %>
+          <table class="table table-striped table-bordered" >
+            <col width="30%" />
+            <col width="70%" />
+            <thead>
+            <tr>
+              <th style="text-align: right;">Producing Agency *</th>
+              <th><%= collection_select :policy, :producingagency_id, @producingagencies,:id, :nameandcode, {:include_blank => 'Select One'}, { :class =>'required' }%> </th>
+            </tr>
+            </thead>
+          </table>
+
+          <%= f.fields_for :namedinsured do |builder| %>
+              <%= render 'namedinsureds/formfieldsrequired', f: builder %>
+          <% end %>
+          <%= render :partial => 'policyfields', :locals=>{:f => f}%>
+          <table id="policyinput">
+            <%= f.fields_for :policypremiumtransactions do |builder| %>
+                <%= render 'policypremiumtransactionsform', f: builder %>
+            <% end %>
+            <tr>
+              <td colspan="5">
+                <div class="form-actions" style="padding-left: 20px;">
+                  <%= f.submit 'Create Policy', disable_with: 'Processing...' , :class=>'btn btn-success' %>   <%= link_to 'Cancel' ,policies_path,  :class=>'btn' %>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+      <% end %>
+    </div>
+    <script>
+      $("#policy_namedinsured_attributes_zip").keyup(function() {
+          var el = $(this);
+
+          if (el.val().length === 5) {
+              $.ajax({
+                  url: "https://ziptasticapi.com/"+el.val(),
+                  cache: false,
+                  dataType: "json",
+                  type: "GET",
+                  success: function(result, success) {
+                      $("#policy_namedinsured_attributes_city").val(result.city);
+                      $("#policy_namedinsured_attributes_state").val(result.state);
+                  }
+              });
+          }
+      });
+    </script>
+    <div id="invoiceselectionnew"></div>
+  </div>
+</div>

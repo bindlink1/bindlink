@@ -1,0 +1,6 @@
+<div class="previewhead">
+  <div style="float: left; margin: 5px; margin-left: 10px;  padding-left: 10px; text-align: center;"><b>Active Policies</b><h3><%=  @producerforview.activepolcount %></h3></div>
+  <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Active Premium</b><h3><%=number_to_currency(@producerforview.activepremium) %></h3></div>
+  <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Open Balance</b><h3><%begin%>  <%= number_to_currency(@producerforview.openbalance) %><%rescue%> $0 <%end%></h3></div>
+  <div style="clear:both"></div>
+</div>

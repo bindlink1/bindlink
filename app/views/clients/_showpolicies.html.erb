@@ -1,0 +1,22 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu">
+    <div style="float:left;"><h3>Policies</h3> | <%= link_to "Create New",new_client_policy_path(@clientforview), :style=>"text-decoration: underline;" %></div>
+    <div style="float:right" class="sunkenlist">
+      Showing :
+      <ul>
+        <li id="activepolicies" class="active">
+          <%= link_to "Active (#{@clientforview.activepolcount})",showactivepolicies_path(@clientforview), :remote=>true %>
+        </li>
+        <li id="renewedpolicies"><%= link_to "Renewed (#{@clientforview.renewedpolcount})",showrenewedpolicies_path(@clientforview), :remote=>true %></li>
+        <li id="cancelledpolicies"><%= link_to "Cancelled (#{@clientforview.cancelledpolcount})",showcancelledpolicies_path(@clientforview), :remote=>true %></li>
+        <li id="expiredpolicies"><%= link_to "Expired (#{@clientforview.expiredpolcount})",showexpiredpolicies_path(@clientforview), :remote=>true %></li>
+        <li id="allpolicies"><%= link_to "All (#{@clientforview.totalpolcount})",showallpolicies_path(@clientforview), :remote=>true %></li>
+      </ul>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+  <div id="policytable">
+
+    <%= render 'clientpolicytable' %>
+  </div>
+</div>

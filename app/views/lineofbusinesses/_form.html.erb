@@ -1,0 +1,6 @@
+<%= form_for(@lob, :html => { :class => "form-horizontal"} ) do |f| %>
+    <%= render :partial => 'formdetails', :locals=>{:f => f}%>
+    <div class="form-actions">
+      <%= f.submit 'Add Line of Business', :class=>'btn btn-success' %>   <%= link_to "Cancel", lineofbusinesses_path, :class=>"btn btn-inverse" %>
+    </div>
+<% end %>

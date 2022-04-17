@@ -1,0 +1,30 @@
+
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Statement Reconciliation
+    </span>
+    </div>
+
+    <table>
+      <tr>
+        <td>Results:</td>
+        <td></td>
+
+      </tr>
+
+    </table>
+    <hr>
+    <% if @missingflag == true %>
+        <h2>Not processed: the following policy numbers do not exist:</h2>
+        <% @missing.each_with_index do |m,i| %>
+            <h3><%= m %></h3>
+        <% end %>
+    <% else %>
+       <h2>All Processed!</h2>
+
+    <% end %>
+
+
+
+  </div>
+</div>

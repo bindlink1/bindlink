@@ -1,0 +1,36 @@
+
+<div id="submissioninfo">
+<H2>Submission: <%= @submissionforview.client.client_name %> </H2>
+
+      <table class="snapshotable">
+        <tr>
+          <th>Quote Type:</th>
+          <td><%= @submissionforview.quotetype %></td>
+
+          <th>Quick Desc:</th>
+          <td><%= @submissionforview.short_note %></td>
+
+        </tr>
+
+        <tr>
+          <th>Created On:</th>
+          <td><%= @submissionforview.created_on %></td>
+
+          <th>Deadline:</th>
+          <td><%= @submissionforview.deadline %></td>
+
+        </tr>
+      </table>
+      </br>
+
+  <td>
+
+    <div id="newconversation"><%= link_to "Create new conversation thread", create_conversation_path, :remote => true %></td></div>
+    <div id="createconversation"></div>
+    <div id="createdpost"></div>
+    <div id="allconversations"><%= render 'showallconversations'%></div>
+
+
+
+</div>
+<%= link_to 'Back', '/welcome' %>

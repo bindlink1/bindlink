@@ -1,0 +1,11 @@
+
+<h1>Lets confirm the appointment to: <%= $qeforappointmentname %></h1>
+
+<%= form_for(@appointment) do |f| %>
+
+  <h2>Click below to activate the appointment.</h2>
+  </br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>  
+<% end %>

@@ -1,0 +1,40 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext"><%= @carrierforview.carrier_name%>
+
+
+      <li class="dropdown" style="display: inline;">
+
+        <a  data-toggle="dropdown" href="#menu" class="dropdownmenubox">
+
+          <%= image_tag("list 2.png", :height=>"15px", :width=>"15px") %> Menu
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" >
+          <li> <%= link_to  edit_carrier_path(:id=>@carrierforview.id), :remote=>true, :method => :get  do %> <i class="icon-pencil"></i> Edit <% end %>
+
+          </li>
+
+
+        </ul>
+      </li>
+    </span>
+    </div>
+    <div id="carrierinfodefault">
+      <%= render('viewinfo') %>
+    </div>
+    <div id="carrierinfo">
+    </div>
+    <div id="carriernaics">
+        <%= render  'carriernaics/showallforcarrier', :carrierforview => @carrierforview  %>
+    </div>
+    <div id="availablelobs">
+      <%= render  'carrierlobs/availablelobs', :alllobs => @alllobs  %>
+    </div>
+    <h3>Associated Lines of Business</h3>
+    <div id="associatedlobs" >
+      <%= render  'carrierlobs/showallforcarrier', :carrierforview => @carrierforview  %>
+    </div>
+
+  </div>
+</div>

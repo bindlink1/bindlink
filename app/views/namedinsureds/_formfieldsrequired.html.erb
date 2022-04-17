@@ -1,0 +1,62 @@
+
+
+<table class="table table-striped table-bordered" >
+  <col width="30%" />
+  <col width="70%" />
+  <thead>
+  <tr>
+    <th colspan="2" ><h3>Named Insured Information: </h3></th>
+
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td style="text-align: right;">
+      <%= f.label :named_insured, "Named Insured"%> *
+    </td>
+    <td>
+      <%= f.text_field :named_insured, :class =>'required' %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      <%= f.label :address_1, "Address 1"%> *
+    </td>
+    <td>
+      <%= f.text_field :address_1, :class =>'required' %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      <%= f.label :address_2, "Address 2"%>
+    </td>
+    <td>
+      <%= f.text_field :address_2 %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      <%= f.label :zip, "Zip"%> *
+    </td>
+    <td>
+      <%= f.text_field :zip, :class =>'required' %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      <%= f.label :city, "City"%> *
+    </td>
+    <td>
+      <%= f.text_field :city, :class =>'required' %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      <%= f.label :state, "State"%> *
+    </td>
+    <td>
+      <%= f.collection_select :state, State.all, :abbreviation, :abbreviation, {:include_blank => 'Select One'}, :class =>'required' %>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,79 @@
+<% @associatedlobs.each do |lob| %>
+
+    <div class="wellwhiteblock" >
+      <div class="wellwhitemenu"><%=lob.lineofbusiness.line_name%> :  <%= link_to "add state", new_carrierlob_lobcommission_path(lob) , :remote => true, :class=>"btn btn-success btn-mini", :id=>'newlobcomm'+lob.id.to_s %>
+        <%= link_to('remove', lob, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext')%>
+      </div>
+      <div id="carrierlob<%= lob.id %>"></div>
+      <table class="table table-striped table-bordered table-condensed">
+        <% if current_agent.isgeneralagent == "GA" %>
+            <col width="15%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="25%" />
+
+            <thead>
+            <tr>
+              <th>Actions</th>
+              <th>State</th>
+              <th>General Agency</th>
+              <th>Producing Agency</th>
+              <th>Billing Type</th>
+            </tr>
+            </thead>
+        <% else %>
+            <col width="15%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="25%" />
+            <thead>
+            <tr>
+              <th>Actions</th>
+              <th>State</th>
+              <th>New Rate</th>
+              <th>Renewal Rate</th>
+              <th>Billing Type</th>
+            </tr>
+            </thead>
+        <%end%>
+        <tbody>
+        <% lob.lobcommissions.order("enabled desc").each do |lobc| %>
+
+            <tr id="lobcomm<%=lobc.id%>" <%= lobc.enabled ? "" : " style=color:grey" %>>
+              <td>
+                <% if lobc.enabled %>
+                  <%= link_to('edit', edit_lobcommission_path(lobc),:class=>'linktext', :remote=>true) %>
+                  | <%= link_to('disable', disablelobcommission_path(lobc),:class=>'linktext' ) %>
+                <%else%>
+                  <%=link_to('enable', enablelobcommission_path(lobc),:class=>'linktext' ) %>
+                <%end%>
+                | <%= link_to('delete', lobc, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext') %> </td>
+              <td><%= lobc.state %></td>
+              <td><%begin%> <%= number_to_percentage(lobc.commission_rate * 100) %> <%rescue%> N/A <%end%></td>
+              <td><% if current_agent.isgeneralagent == "GA" %> <%begin%> <%= number_to_percentage(lobc.producer_rate * 100) %><%rescue%> N/A <%end%> <%else%>
+
+                <%begin%>
+                  <%= number_to_percentage(lobc.commission_rate_renew * 100) %>
+                <%rescue%>
+                  N/A
+
+                <%end%>
+
+                <%end%></td>
+              <td><%= lobc.billingtype.to_s %></td>
+            </tr>
+            <tr id="lobcommwork<%=lobc.id%>">
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+    </div>
+<% end %>
+
+
+
+
+

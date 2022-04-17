@@ -1,0 +1,2 @@
+$("#returnworkarea").html("<%= escape_javascript(render :partial => 'returnapprove', :locals =>{:policy =>@policy}) %>").hide().slideDown(300);
+$("#gobackreturn").click(function(){$("#returnworkarea").slideUp(300);$("#returnworkarea").html("")});

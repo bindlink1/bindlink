@@ -1,0 +1,20 @@
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu" >
+    <h3><% if !@policy.is_pendingcancellation? %>Mark for pending cancellation<%else%>Undo pending cancellation<%end%></h3> <button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+  </div>
+  <div class="alert alert-error">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <% if !@policy.is_pendingcancellation? %>
+      <strong>Warning!</strong> This action will flag this policy for pending cancellation. Click OK below to mark for pending cancellation.
+    <% else %>
+      <strong>Warning!</strong> This action will undo pending cancellation of this policy. Click OK below to undo pending cancellation.
+    <% end %>
+  </div>
+  <%= form_for @policy,:method=>"POST" ,:url=>updatependingcancellation_path(:id=>@policy.id), :html=>{:class=>'form-horizontal'}, :remote => true do |f| %>
+    <div class="row fileupload-buttonbar">
+      <div class="span7">
+        <%= f.submit 'OK', :class=>"btn btn-success btn-small", :id=>"aorfrmbtn"%> <button class="btn btn-info"  id ="close_modal"  onclick='return false;'>Cancel</button>
+      </div>
+    </div>
+  <% end %>
+</div>

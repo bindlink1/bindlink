@@ -1,0 +1,8 @@
+$("#carrierinfodefault").slideUp(300);
+ $('#carrierinfo').html('<%= escape_javascript(render 'editinfo' ) %>').hide().slideDown(300);
+
+function cancelclick (){
+
+    $("#carrierinfodefault").slideDown(300);
+    $("#carrierinfo").slideUp(300);
+ }

@@ -1,0 +1,36 @@
+<div class="control-group">
+  <%= f.label :quotedescription, "Quote Description", :class=>"control-label"%>
+  <div class="controls">
+   <%= f.text_field :quotedescription ,:autocomplete => :off, :placeholder =>"quote description"  %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :carrier_id, "Carrier", :class=>"control-label"%>
+  <div class="controls">
+    <%= f.collection_select :carrier_id, @carriers.sort! { |a,b| a.carrier_name.downcase <=> b.carrier_name.downcase }, :id, :carrier_name, {:include_blank => 'Select One'} %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :lineofbusiness_id, "Line of Business", :class=>"control-label"%>
+  <div class="controls">
+    <%= f.collection_select  :lineofbusiness_id, @line, :id, :line_name, {:include_blank => 'Select One'}%>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :base_premium, "Base Premium", :class=>"control-label"%>
+  <div class="controls">
+    <%= f.text_field :base_premium ,:autocomplete => :off, :placeholder =>"base premium"  %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :total_fees, "Total Fees", :class=>"control-label"%>
+  <div class="controls">
+    <%= f.text_field :total_fees ,:autocomplete => :off, :placeholder =>"total fees"  %>
+  </div>
+</div>
+<div class="control-group">
+  <%= f.label :total_premium, "Total Premium", :class=>"control-label"%>
+  <div class="controls">
+    <%= f.text_field :total_premium ,:autocomplete => :off, :placeholder =>"total premium"  %>
+  </div>
+</div>

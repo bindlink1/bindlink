@@ -1,0 +1,16 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite" style="width: 400px;">
+    <div class="wellwhitemenu" ><span class="headtext">Create a New Checklist</span></div>
+    <%= form_for(@checklist, :html => { :class => "form-horizontal"} ) do |f| %>
+        <div class="control-group">
+          <%= f.label :checklist_name, :class=>"control-label" %>
+          <div class="controls">
+            <%= f.text_field :checklist_name, :class=> "BLselect"   %>
+          </div>
+        </div>
+        <div class="form-actions">
+          <%= f.submit 'Create Checklist', :class=>'btn btn-success' %>
+        </div>
+    <% end %>
+  </div>
+</div>

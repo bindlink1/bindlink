@@ -1,0 +1,70 @@
+<%= javascript_include_tag "createpolicy" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite" style="float: left; min-width: 700px">
+    <div class="wellwhitemenu">Renewing: <% if current_agent.isgeneralagent == "GA" %><%= @policy.namedinsured.named_insured %> <% else %> <%= @policy.client.fullname %><% end  %></div>
+
+    <% if @policy.namedinsured.zip.empty? and @policy.namedinsured.address_1.empty? %>
+      <div class="row-fluid">
+        <div class="span12" id="alercommtcontainer">
+          <div class="alert alert-error">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <b>Alert!</b> Namedinsured's address and zip code are empty, please fill in the data and then try to renew again.
+          </div>
+        </div>
+      </div>
+    <% elsif @policy.namedinsured.zip.empty? %>
+      <div class="row-fluid">
+        <div class="span12" id="alercommtcontainer">
+          <div class="alert alert-error">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <b>Alert!</b> Namedinsured's zip code is empty, please fill in the data and then try to renew again.
+          </div>
+        </div>
+      </div>
+    <% elsif @policy.namedinsured.address_1.empty? %>
+      <div class="row-fluid">
+        <div class="span12" id="alercommtcontainer">
+          <div class="alert alert-error">
+            <a class="close" data-dismiss="alert" href="#">×</a>
+            <b>Alert!</b> Namedinsured's address is empty, please fill in the data and then try to renew again.
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= form_for @policy,:url=> renew_policy_transactions_path ,:html => {:autocomplete => "off", :class=>"form-horizontal"} do |f| %>
+        <% if current_agent.isgeneralagent == "GA" %>
+
+            <%= f.hidden_field :namedinsured_id, :value =>@policy.namedinsured_id%>
+
+            <div class="control-group">
+              <label class="control-label" >Producing Agency</label>
+              <div class="controls">
+                <%= collection_select :policy, :producingagency_id, @producingagencies,:id, :agency_name, {:include_blank => 'Select One'}%>
+              </div>
+            </div>
+        <% else %>
+            <%= f.hidden_field :client_id, :value =>@policy.client_id %>
+        <% end %>
+        <%= f.hidden_field :originalpolicy_id, :value =>@policy.originalpolicy_id%>
+        <%= render :partial => 'policyfields', :locals=>{:f => f}%>
+        <table id="policyinput">
+          <%= f.fields_for :policypremiumtransactions do |builder| %>
+              <%= render 'policypremiumtransactionsformrenew', f: builder %>
+          <% end %>
+          <tr>
+            <td colspan="5">
+              <div class="form-actions">
+                <% unless @policy.namedinsured.zip.empty? or @policy.namedinsured.address_1.empty? %>
+                  <%= f.submit 'Create Policy', disable_with: 'Processing...' , :class=>'btn btn-success' %>
+                <% end %>
+                     <%= link_to "Cancel", cancel_new_policy_path, :class=>"btn btn-inverse" %>
+              </div>
+            </td>
+          </tr>
+        </table>
+
+    <% end %>
+
+  </div>
+</div>

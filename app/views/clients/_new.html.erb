@@ -1,0 +1,15 @@
+<%= javascript_include_tag "newclient" %>
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu"><button type="button" class="close closeit" data_dismiss="modal" aria_hidden="true" >×</button><span class="headtext">Create a New Client</span> </div>
+  <div class="modal_body" >
+    <div class="alert alert-info">
+      Select a client type first.
+    </div>
+
+
+        <%= render 'form'%>
+
+
+  </div>
+
+</div>

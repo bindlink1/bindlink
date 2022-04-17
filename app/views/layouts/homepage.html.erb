@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bindlink</title>
+  <%= stylesheet_link_tag    "bootstrap" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+
+
+<div id="bannerhome">
+    <div id="bannerhome-content">
+        <img src="/assets/bindlinklogo.png"></img>
+    </div>
+
+
+    <div id="bannerhome-links-cost"> <%= link_to "How much does it cost?", pricing_path%></br> <p>Get started for as little as $55/month.</p></div>
+    <div id="bannerhome-links-trial">Try Bindlink for Free </br> <p>Start your 10 day trial today.</p></div>
+ <div id="homepagelogin"><a href="http://127.0.0.1:3000/d/agents/sign_in">Log In</a></div>
+</div>
+<div id="mainblockhome">
+
+<%= yield %>
+
+  </div>
+</div>
+<p align="center">bindlink - <%= Time.now.year %></p>
+
+</body>
+</html>

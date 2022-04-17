@@ -1,0 +1,5 @@
+<%= form_for @fee ,:remote => true do |f| %>
+ <%= render :partial => 'formdetails', :locals=>{:f => f}%>
+<div class="form-actions"><%= f.submit 'Save', :class=>'btn btn-success' %> <%= f.submit 'Cancel', :class=>'btn' %> </div>
+
+<% end %>

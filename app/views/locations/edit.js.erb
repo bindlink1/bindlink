@@ -1,0 +1,3 @@
+$("#locationinfo").slideUp(300);
+ $('#locationwork').html('<%= escape_javascript(render 'editinfo' ) %>').hide().slideDown(300);
+$('#locationcancel').click(function(){$('#locationinfo').slideDown(300);$('#locationwork').html('') });

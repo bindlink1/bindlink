@@ -1,0 +1,72 @@
+
+    <div class="control-group">
+
+      <% if current_agent.isgeneralagent == "GA" %>
+      <%= f.label :client_type, "Policyholder Type", :class=>"control-label"%>
+      <div class="controls">
+        <%= f.collection_select  :client_type  ,[['Individual','Individual'],['corporate','Corporate']], :last, :last, {:include_blank => 'Select One'}%>
+
+        <p class="help-block">Select a policyholder type to enter either a corporate name or individual name</p>
+      </div>
+
+      <% else %>
+      <%= f.label :client_type, "Client Type", :class=>"control-label"%>
+      <div class="controls">
+        <%= f.collection_select  :client_type  ,[['Individual','Individual'],['Corporate','Corporate']], :last, :last, {:include_blank => 'Select One'}%>
+
+        <p class="help-block">Select a client type to enter either a corporate name or individual name</p>
+      </div>
+
+
+
+      <% end %>
+
+    </div>
+    <div class="control-group" id="firstname">
+      <%= f.label :first_name, :class=>"control-label" %>
+
+      <div class="controls">
+        <%= f.text_field :first_name, :class=> "BLselect"   %>
+      </div>
+    </div>
+    <div class="control-group" id="lastname">
+      <%= f.label :last_name, :class=>"control-label" %>
+
+      <div class="controls">
+        <%= f.text_field :last_name, :class=> "BLselect"   %>
+      </div>
+    </div>
+    <div class="control-group" id="corpname">
+      <%= f.label :corporate_name, :class=>"control-label" %>
+      <div class="controls">
+        <%= f.text_field :corporate_name, :class=> "BLselect"   %>
+      </div>
+    </div>
+    <div class="control-group">
+      <%= f.label :location_id, :class=>"control-label" %>
+      <div class="controls">
+       <%= collection_select :client, :location_id, @locations,:id,:location_nickname, {:include_blank => 'None'}%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= f.label :agent_id, :class=>"control-label" %>
+      <div class="controls">
+        <%= collection_select :client, :agent_id, @agents,:id,:fullname, {:include_blank => 'None'}%>
+        <% if current_agent.isgeneralagent == "GA" %>
+            <p class="help-block">Select the agent that is responsible for the submission.</p>
+        <% else %>
+            <p class="help-block">Select the agent that is responsible for the client.</p>
+        <% end %>
+      </div>
+
+    </div>
+    <div class="control-group">
+      <%= f.label :comments , :class=>"control-label" %>
+      <div class="controls">
+        <%= f.text_field :comments, :class=> "BLselect"   %>
+      </div>
+
+    </div>
+
+

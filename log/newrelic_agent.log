@@ -1,0 +1,18 @@
+# Logfile created on 2018-10-12 19:52:48 +0000 by logger.rb/44203
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Starting the New Relic agent version 5.4.0.347 in "production" environment.
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : To prevent agent startup add a NEW_RELIC_AGENT_ENABLED=false environment variable or modify the "production" section of your newrelic.yml.
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Reading configuration from config/newrelic.yml (/tmp/build_86edf89babff55529c65830e6f513512)
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Environment: production
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : No known dispatcher detected.
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Application: My Application
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : NewRelic::Agent::Samplers::DelayedJobSampler not available: No DJ worker present. Skipping DJ queue sampler
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Installing deferred Rack::Builder instrumentation
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Installing Rack::Builder middleware instrumentation
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Installing DelayedJob instrumentation [part 1/2]
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Installing ActiveRecord instrumentation
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Installing Rails 3+ middleware instrumentation
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Installing Net instrumentation
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Installing Rails 3 Controller instrumentation
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Installing Rails 3.1/3.2 view instrumentation
+[2018-10-12 19:52:48 +0000 run.* (3571)] INFO : Finished instrumentation
+[2018-10-12 19:52:50 +0000 run.* (3571)] INFO : Starting Agent shutdown

@@ -1,0 +1,40 @@
+<%= javascript_include_tag "polinvoiceentercash" %>
+
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+  <div class="wellwhitemenu">
+    <button type="button" class="close" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+    <h3>Apply Payment</h3>
+  </div>
+  <div class="modal_body">
+    <%= form_for @cashtransaction,:url => create_cash_transaction_invoice_path(:id => @invoice.id),:html => {:autocomplete => "off", :class=>"form-horizontal" } ,:remote => true do |f| %>
+
+          <div class="control-group">
+            <%= f.label :transaction_effective_date ,"Transaction Date:", :class=>"control-label"  %>
+            <div class="controls">
+               <%= f.text_field :transaction_effective_date, :size=>"10",:class =>'required'%>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :cash_amount,"Cash Amount:", :class=>"control-label"  %>
+            <div class="controls">
+              <%= f.text_field :cash_amount, :autocomplete => :off , :size=>"10", :class=>"required" %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <%= f.label :check_number,"Check #:", :class=>"control-label"  %>
+            <div class="controls">
+              <%= f.text_field :check_number , :size=>"10" %>
+            </div>
+          </div>
+
+
+          <div class="form-actions">
+            <%= f.submit 'Enter Cash', disable_with: 'Processing...' ,  :class=>'btn btn-success', :id=>"entercashbutton" %> <button class="btn btn-info"  id ="close_modal" onclick="return false;">Cancel</button>
+          </div>
+
+    <%end%>
+  </div>
+</div>
+

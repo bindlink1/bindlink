@@ -1,0 +1,33 @@
+<div id="clientwrapper">
+  <div class="row-fluid">
+    <div class="span6" style="margin-top: 15px;">
+      <div class="wellwhiteblock">
+        <div class="wellwhitemenu"><h3>Sales Stage</h3><%= link_to('edit', editsalesstage_path(@clientforview) , :remote => true, :class=>'linktext') %></div>
+
+        <%= render 'salesstage' %>
+      </div>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="span6" >
+      <div class="wellwhiteblock">
+        <div class="wellwhitemenu"><h3>General Info</h3><%= link_to('edit', edit_client_path(@clientforview) , :remote => true, :class=>'linktext') %></div>
+        <div id="clientinfo">
+          <%= render 'showclientdetails' %>
+        </div>
+        <div id="clientinfowork">
+
+        </div>
+      </div>
+
+    </div>
+    <div class="span6" >
+
+        <%= render 'tasks/showtasksforclient' %>
+    </div>
+  </div>
+  <div id="ppwrapper"><%= render 'prospectpolicies/showallforclient', :pp => @clientpp  %></div>
+  <div id="ccwrapper"><%= render 'clientcontacts/showallforclient', :clientcontacts =>@clientcontacts  %></div>
+  <div id="cpewrapper"><%= render 'clientphoneemails/showallforclient', :cpe => @clientcpe  %></div>
+  <div id="cawrapper"><%= render 'clientaddresses/showallforclient', :clientaddresses =>@clientaddresses  %></div>
+ </div>

@@ -1,0 +1,36 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu"><h3>Custom Fields</h3> | <%= link_to "Add New", new_client_customfieldvalue_path(@clientforview) ,:remote => true, :style=>"text-decoration: underline", :id=>"newcfbtn" %>
+
+    <div style="float: right"><%= link_to "Define New Custom Field", customfields_path , :style=>"text-decoration: underline" %></div>
+  </div>
+
+  <div id="newcf" style="width: 100%">
+  </div>
+
+
+  <table class="table table-bordered table-condensed table-layout:fixed " id="contacttable">
+
+    <% if @clientcustomfields.blank? %>
+        <tr>
+          <td style="text-align: center; background-color: #eeeeee;">
+
+            Nothing entered yet. Click "Add New" above to enter a new custom field.
+
+          </td>
+
+        </tr>
+    <% end %>
+
+
+
+    <% @clientcustomfields.each do |cf| %>
+        <tr id="<%= "cf" + cf.id.to_s %>" class="cfarea">
+            <%= render :partial=> 'customfieldvalues/singlevalue', :locals=>{:cf => cf} %>
+        </tr>
+        <tr id="<%= "cfworkarea" + cf.id.to_s %>" style="border: 0;" class="cfworkarea"></tr>
+    <% end %>
+  </table>
+</div>
+
+
+

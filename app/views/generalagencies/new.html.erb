@@ -1,0 +1,23 @@
+<div class="colmask leftmenu">
+    <div class ="colleft">
+            <div class="col1">
+                <h2>Create a new general agency:</h2>
+
+
+                    <%= render 'form' %>
+
+
+
+            </div>
+            <div class="col2">
+                <h2>Admin Tasks</h2>
+                <ul>
+                  <li><%= link_to 'Create a new client',new_client_path %></li>
+                  <li>Create a new Invoice</li>
+                  <li>Create a client reminder</li>
+                  <li>Create a policy</li>
+                  <li><%= link_to 'Back' , client_home_path %></li>
+                </ul>
+            </div>
+    </div>
+</div>

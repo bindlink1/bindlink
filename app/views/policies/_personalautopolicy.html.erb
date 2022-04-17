@@ -1,0 +1,182 @@
+<% begin %>
+    <br/>
+
+    <br/>
+
+    <% if !@persautopolicy.nil? %>
+        <div class="page-header"><h3>Drivers</h3></div>
+        <% @persautopolicy.acord_xml_pers_auto_line_business.acord_xml_pers_drivers.each do |driver| %>
+            <div class="wellwhiteblock">
+
+              <div class="wellwhitemenu"><h3><%= driver.acord_xml_general_party_info.surname%>, <%= driver.acord_xml_general_party_info.given_name%></h3> </div>
+              <table class="table table-bordered table-condesed">
+                <thead>
+                <tr>
+
+                  <th>DOB</th>
+                  <th>Gender</th>
+                  <th>Marital Status</th>
+                  <th>Lic Status</th>
+                  <th>Lic Date</th>
+                  <th>Driver Lic #</th>
+                  <th>Lic State</th>
+                  <th>SS #</th>
+                  <th>Veh Princ Driv</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                <tr>
+
+                  <td><%= driver.birth_dt%></td>
+                  <td><%= driver.acord_xml_general_party_info.acord_xml_insured_or_principal.gender_cd%></td>
+                  <td><%= driver.acord_xml_general_party_info.acord_xml_insured_or_principal.marital_status_cd%></td>
+                  <td><%= driver.license_status_cd%></td>
+                  <td><%= driver.license_dt%></td>
+                  <td><%= driver.driver_license_number%></td>
+                  <td><%= driver.state_prov_cd%></td>
+                  <td><%= driver.acord_xml_general_party_info.tax_id%></td>
+                  <td><%= driver.veh_principally_driven_ref%></td>
+                </tr>
+
+
+
+                </tbody>
+              </table>
+            </div>
+        <% end %>
+        <div class="page-header"><h3>Vehicles</h3></div>
+
+
+        <% @persautopolicy.acord_xml_pers_auto_line_business.acord_xml_pers_vehs.each do |vehicle| %>
+
+
+            <div class="wellwhiteblock">
+              <div class="wellwhitemenu">
+                <h3 style="cursor: pointer"><%= vehicle.model_year%>
+                  <%= vehicle.manufacturer%>
+                  <%= vehicle.model%>
+                  VIN # :<%= vehicle.veh_identification_number%></h3>
+              </div>
+              <br/>
+
+              <b>Drivers & Usage</b>
+              <ul>
+                <% vehicle.acord_xml_driver_vehs.each do |driverveh| %>
+                    <li><%= AcordXmlPersDriver.find(driverveh.acord_xml_pers_driver_id).acord_xml_general_party_info.surname  %>, <%= AcordXmlPersDriver.find(driverveh.acord_xml_pers_driver_id).acord_xml_general_party_info.given_name  %> | <%= number_to_percentage(driverveh.use_pct, :precision => 0)%> </li>
+                <%end%>
+              </ul>
+
+              <table class="table table-striped" >
+                <thead>
+                <tr>
+                  <th>Coverages</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                <% vehicle.acord_xml_coverages.each_slice(3) do | slice| %>
+                    <tr>
+
+
+                      <% slice.each do |coverage| %>
+                          <td>
+                            <%= coverage.coverage_cd %> <%AcordXmlLimit.find_all_by_acord_xml_coverage_id(coverage.id).each do |limit|%> <b><%=number_to_currency(limit.limit_amt)%></b>  <%=limit.limit_applies_to_cd%> <%end%>  <%AcordXmlDeductible.find_all_by_acord_xml_coverage_id(coverage.id).each do |deduct|%> <b><%=number_to_currency(deduct.deductible_amt)%></b>  <%=deduct.deductible_applies_to_cd%> <%end%> <%AcordXmlOption.find_all_by_acord_xml_coverage_id(coverage.id).each do |option|%> <b>Option: <%= option.option_cd%></b>  <%end%>
+                          </td>
+                      <% end %>
+
+                    </tr>
+                <%end%>
+                </tbody>
+              </table>
+
+              <table class="table table-bordered table-condesed">
+                <thead>
+                <tr>
+                  <th colspan="5"><h3>Vehicle Use</h3></th>
+                </tr>
+                <tr>
+                  <th>Cost New</th>
+                  <th>Ownership</th>
+                  <th>Mile 1 Way</th>
+                  <th># Days Wk</th>
+                  <th>Annual Mileage</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><%= number_to_currency(vehicle.cost_new_amt)%></td>
+                  <td><%= vehicle.ownership%></td>
+                  <td><%= vehicle.distance_one_way%></td>
+                  <td><%= vehicle.num_days_driven_per_week%></td>
+                  <td><%= vehicle.estimated_annual_distance%></td>
+                </tr>
+                </tbody>
+              </table>
+
+
+              <table class="table table-bordered table-condesed">
+                <thead>
+                <tr>
+                  <th colspan="5"><h3>Vehicle Description</h3></th>
+                </tr>
+                <tr>
+                  <th>Anti Lock Brake</th>
+                  <th>Anti Theft Device</th>
+                  <th>Air Bag Type</th>
+                  <th>Present Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><%= vehicle.anti_lock_brake_cd%></td>
+                  <td><%= vehicle.anti_theft_device_cd%></td>
+                  <td><%= vehicle.air_bag_type_cd%></td>
+                  <td><%= number_to_currency(vehicle.present_value_amt)%></td>
+                </tr>
+                </tbody>
+              </table>
+
+
+
+            </div>
+
+
+
+        <%end %>
+
+        <div class="page-header"><h3>Locations</h3></div>
+
+        <% @persautopolicy.acord_xml_locations.each do |location| %>
+        <div class="wellwhiteblock">
+            <table class="table table-bordered table-condesed">
+              <thead>
+              <tr>
+                <th>Address Type</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>County</th>
+                <th>State</th>
+                <th>Zip</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td><%= location.addr_type_cd%></td>
+                <td><%= location.addr_1 %></td>
+                <td><%= location.city %></td>
+                <td><%= location.county %></td>
+                <td><%= location.state_prov_cd%></td>
+                <td><%= location.postal_code %></td>
+              </tr>
+              </tbody>
+            </table>
+        </div>
+        <% end %>
+    <% end %>
+<% rescue %>
+
+    <h3>No policy information</h3>
+
+<% end %>

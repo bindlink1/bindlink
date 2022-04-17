@@ -1,0 +1,15 @@
+
+<h3>Step 1 : Please answer the following qualifying questions:</h3>
+<hr>
+<table class="table table-striped table-bordered" >
+  <% @qualifyingquestions.each do |question| %>
+      <tr>
+        <td>
+
+          <%= question.question %>
+        <div style="display: inline; float: right;"></div>
+        </td>
+
+      </tr>
+  <% end %>
+</table>

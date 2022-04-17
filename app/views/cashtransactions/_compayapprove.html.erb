@@ -1,0 +1,70 @@
+
+<h3>Approve Commission Payments and Print Checks:</h3>
+<hr>
+
+       <table class="worktable table-bordered table">
+            <thead>
+            <tr>
+              <th >Policy Number</th>
+              <th>Producing Agency</th>
+              <th>Pay To</th>
+              <th>Commission Payment</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @batchtotal = 0 %>
+            <% @batchcount = 0 %>
+            <% @compaybatch.compaybatchitems.each do |item| %>
+            <tr>
+                <td>
+                  <%=  item.policy.policy_number %>
+                </td>
+                <td>
+                  <%=  item.policy.producingagency.agency_name %>
+                </td>
+
+                <td>
+                <%= item.policy.producingagency.agency_name%>
+                </td>
+              <td>
+              <%=  number_to_currency(item.policy.accountbalance(20005, 'Liability'),  :negative_format => "(%u%n)") %>
+              </td>
+             </tr>
+            <% @batchtotal = @batchtotal + (item.policy.accountbalance(20005, 'Liability'))  %>
+                <% @batchcount = @batchcount + 1 %>
+            <%end%>
+
+                <tr>
+                  <td><b>Count</b></td>
+                  <td><b><%=  @batchcount %></b></td>
+                  <td><b>Totals</b></td>
+                  <td><b><%=  number_to_currency(@batchtotal,  :negative_format => "(%u%n)") %></b></td>
+                </tr>
+            </tbody>
+         </table>
+
+
+
+<hr>
+<%= form_for @compaybatch,:method=>:post, :url=>processcompaybatch_url(@compaybatch), :html => {:autocomplete => "off", :class=>"form-horizontal"}, :remote=>true do |f| %>
+    <p>To process payments by ACH. Then click Approve Commission Payments below.</p>
+
+
+   <!--
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Starting Check#</label>
+      <div class="controls">
+        <%= f.text_field :check_start %>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="inputEmail">Ending Check#</label>
+      <div class="controls">
+        <%= f.text_field :check_end %>
+      </div>
+    </div>
+    -->
+    <%= f.submit("Approve Commission Payments",disable_with: 'Processing...' , :class=>"btn btn-success") %>
+
+<% end %>
+

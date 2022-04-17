@@ -1,0 +1,76 @@
+<%= javascript_include_tag "reconcilehome" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Statement Reconciliation
+    </span>
+    </div>
+
+    <div class="wellwhite" >
+      <%= form_for @statement, :url => '/statements/reconcilestatement' , :html=>{:class=>"form-horizontal", :autocomplete => "off"}   do |f| %>
+          <h3>Create a new statement</h3>
+
+          <b>Select a Carrier and Statement Dates Below:</b>
+          <hr>
+
+          <div class="control-group">
+            <label class="control-label" >Carrier:</label>
+            <div class="controls">
+              <%= collection_select :statement, :carrier_id, @agencymaster.carriers.sort! { |a,b| a.carrier_name.downcase <=> b.carrier_name.downcase }, :id, :carrier_name, {:include_blank => 'Select One'}, { :class =>'required' }%>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" >Start Date:</label>
+            <div class="controls">
+
+              <%= f.text_field :start_date%>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label" >End Date:</label>
+            <div class="controls">
+              <%= f.text_field :end_date %>
+            </div>
+          </div>
+
+
+
+
+
+
+          <div class="form-actions"><%= f.submit 'Create Statement', :class=>'btn btn-success', :id=>'endorsethispolicy' %>   </div>
+      <% end %>
+    </div>
+
+
+
+
+
+
+    <h3>Past Statements: Click to View</h3>
+    <hr>
+
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th>Created On</th>
+        <th>Status</th>
+        <th>Carrier</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+      </tr>
+      </thead>
+      <tbody>
+      <% @agencymaster.statements.each do |statement| %>
+          <tr>
+            <td><%= link_to  statement.created_at.strftime("%m/%d/%Y").to_s,statement_path(statement), :class=>'linktext'%></td>
+            <td><%= statement.status %></td>
+            <td><%begin%><%= statement.carrier.carrier_name%><%rescue%>Multiple<%end%></td>
+            <td><%begin%><%= statement.start_date.strftime("%m/%d/%Y")%><%rescue%> N/A<%end%></td>
+            <td><%begin%><%= statement.end_date.strftime("%m/%d/%Y")%><%rescue%> N/A<%end%></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+
+  </div>
+</div>

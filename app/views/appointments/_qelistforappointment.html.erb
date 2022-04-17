@@ -1,0 +1,10 @@
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+    <% @qelist.each do |quotingentity| %>
+    <tr class=<%=cycle("even_row","odd_row")%>>
+	    <td><%= quotingentity.quotingentity_name%></td>
+    </tr>
+<% end %>
+</table>

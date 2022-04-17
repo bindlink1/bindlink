@@ -1,0 +1,24 @@
+<h2>Manage Underwriters</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>e-Mail</th>
+    <th>QE</th>
+    <th>Signed Up</th>
+    <th>Action</th>
+  </tr>
+
+<% @underwritersfortable.each do |underwriter| %>
+  
+  <tr class=<%=cycle("even_row","odd_row")%>>
+    <td><%= underwriter.first_name + " " + underwriter.last_name%></td>
+    <td><%= underwriter.email%></td>
+    <td><%= underwriter.quotingentity.quotingentity_name%></td>
+    <td><%= underwriter.created_at%></td>
+	<td><%= link_to 'Edit', edit_underwriter_path(:id => underwriter) %></td>
+  </tr>
+
+<% end %>
+</table>
+

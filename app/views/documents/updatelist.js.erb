@@ -1,0 +1,4 @@
+$("#documentworklist_<%= @document.id%>").slideUp(300);
+
+$("#documentdetailslist_<%= @document.id%>").html('<%= escape_javascript(link_to @document.name, download_document_path(@document, :id =>@document.id), :target => "_blank", :id=>"listdocname_"+@document.id.to_s) %>').hide().slideDown(300);
+

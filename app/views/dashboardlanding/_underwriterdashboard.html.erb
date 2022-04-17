@@ -1,0 +1,15 @@
+<p>Underwriter Dashboard Tasks</p>
+
+<div align="left">
+  <ul>
+    <li>
+	    <%= link_to "Edit your information", edit_underwriter_registration_path%>
+    </li>
+    <li>
+	    <%= link_to "Sign Out", destroy_underwriter_session_path%>
+    </li>
+</div>
+<div >
+    <%= render 'submissionlist'%>
+</div>
+

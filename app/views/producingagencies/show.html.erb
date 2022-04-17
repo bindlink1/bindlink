@@ -1,0 +1,81 @@
+<% title @producerforview.agency_name + " | Producing Agency | bindlink" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite" >
+    <div class="wellwhitemenu">
+      <span class="headtext" >Producing Agency: <%= @producerforview.agency_name %>
+        <li class="dropdown" style="display: inline;">
+          <a  data-toggle="dropdown" href="#polmenu" class="dropdownmenubox">
+            <%= image_tag("list 2.png", :height=>"15px", :width=>"15px") %> Menu
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" >
+            <li>
+              <%= link_to newproducingagencypolicy_path(@producerforview) do %> <%= image_tag("star.png", :height=>"25px", :width=>"25px") %> New Policy <%end%>
+              <%= link_to new_client_quote_path(@producerforview) do %><%= image_tag("quote.png", :height=>"25px", :width=>"25px") %> New Submission <%end%>
+              <%= link_to(booktransfer_path(@producerforview), :remote => true) do %><%= image_tag("icon_arrow_green.gif", :height=>"25px", :width=>"25px") %> Book Transfer <%end%>
+              <%= link_to( @producerforview, :confirm => 'Are you sure?', :method => :delete, :remote => true) do %><%= image_tag("vcard_delete.png", :height=>"25px", :width=>"25px") %> Delete <%end%>
+            </li>
+          </ul>
+        </li>
+      </span>
+    </div>
+    <%= render 'producerstats' %>
+    <div class="row-fluid">
+      <div class="span12" id="tabcontainer">
+        <div class="tabbable">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#infotab" data-toggle="tab">Info</a></li>
+            <li><a href="#notetab" data-toggle="tab">Notes</a></li>
+            <li><a href="#submissiontab" data-toggle="tab">Submissions</a></li>
+            <li><a href="#documenttab" data-toggle="tab">Documents <% if @producerforview.documentcount > 0 %> (<%=@producerforview.documentcount%>) <% end %></a></li>
+            <li><a href="#1099" data-toggle="tab">1099 Info</a></li>
+          </ul>
+          <div class="tab-content " style="overflow: visible;">
+            <div id="infotab" class="tab-pane active">
+              <div class="row-fluid">
+                <div class="span12">
+                  <%= render 'showinfo' %>
+                </div>
+              </div>
+            </div>
+
+            <div id="notetab" class="tab-pane">
+              <div class="row-fluid">
+                <div class="span12">
+                  <div class="wellwhiteblock">
+                    <div class="wellwhitemenu">Producing Agency Notes</div>
+                      <%= render 'notesform' %>
+                    </div>
+                  <div id="notewrapper"><%= render 'notelist', :notesforview =>@notesforview %></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="submissiontab" class="tab-pane">
+              <div class="row-fluid">
+                <div class="span12">
+                  <%= render 'showsubmissions' %>
+                </div>
+              </div>
+            </div>
+
+            <div id="documenttab" class="tab-pane">
+              <%= render 'producerdocuments' %>
+            </div>
+
+            <div id="1099" class="tab-pane">
+              <div class ="row-fluid">
+                <div class="span12">
+                  <div class="wellwhiteblock">
+                    <div class="wellwhitemenu">1099 Info</div>
+                    <%= render 'taxinfo' %>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

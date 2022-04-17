@@ -1,0 +1,42 @@
+
+<ul class="notes">
+  <% @notespaginate.each do |note| %>
+      <li id=<%=note.id%>>
+        <table width="100%">
+          <tr>
+            <td>
+
+              <% begin %>
+
+              <% if !note.policy_id.nil? %>
+                  <div class="noteheader"><%begin%><%= note.agent.fullname %><%rescue%><%end%> <%if note.note_type =="TaskComplete"%> completed a Task for <%= image_tag("check.png", :height=>"25px", :width=>"25px") %> <%else%> created a Note on <%end%> Policy:</br><%= link_to  policy_path(:id => note.policy.id) do%>  <%= note.policy.policy_number %> - <%begin%> <%= note.policy.client.fullname %><%rescue%><%= note.policy.namedinsured.named_insured %>  <%end%> <%end%> </div>
+              <% elsif !note.client_id.nil? %>
+                  <% if note.client.client_status =="Prospect"%>
+                      <div class="noteheader"><%begin%><%= note.agent.fullname %><%rescue%><%end%><%if note.note_type =="TaskComplete"%> completed a Task for <%= image_tag("check.png", :height=>"25px", :width=>"25px") %> <%else%> created a Note on <%end%> Prospect: </br> <%= link_to  showprospect_path(:id => note.client_id) do%> <%begin%><%= note.client.fullname %><%rescue%><%= note.quote.submission.named_insured %>  <%end%> <%end%>  </div>
+                  <% else %>
+                      <div class="noteheader"><%begin%><%= note.agent.fullname %><%rescue%><%end%><%if note.note_type =="TaskComplete"%> completed a Task for <%= image_tag("check.png", :height=>"25px", :width=>"25px") %> <%else%> created a Note on <%end%> Client: </br> <%= link_to  client_path(:id => note.client_id) do%> <%begin%> <%= note.client.fullname %><%rescue%><%= note.quote.submission.named_insured %>  <%end%> <%end%>  </div>
+                  <%end%>
+              <% elsif !note.quote_id.nil? %>
+                  <div class="noteheader"><%begin%><%= note.agent.fullname %><%rescue%><%end%><%if note.note_type =="TaskComplete"%> completed a Task for <%= image_tag("check.png", :height=>"25px", :width=>"25px") %> <%else%> created a Note on <%end%> Quote: </br> <%= link_to  quote_path(:id => note.quote_id) do%> <%if !note.quote.agency_id.nil? %><%= note.quote.client.fullname %><%else%><%= note.quote.submission.namedinsured.named_insured %>  <%end%> <%end%>  </div>
+              <% elsif !note.submission_id.nil? %>
+                  <div class="noteheader"><%begin%><%= note.agent.fullname %><%rescue%><%end%><%if note.note_type =="TaskComplete"%> completed a Task for <%= image_tag("check.png", :height=>"25px", :width=>"25px") %> <%else%> created a Note on <%end%>Submission: </br> <%= link_to  submission_path(:id => note.submission_id) do%> <%= note.submission.namedinsured.named_insured %> <%end%> </div>
+              <% end %>
+              <%= note.notetext.to_s %> </br>
+
+              <div class="notefooter">Created on: <%= note.created_at.strftime("%m/%d/%Y %I:%M %p") %>  </div>
+             <%rescue%>
+                 <div class="notefooter">Note Error: Contact Bindlink (error # <%=note.id%>)</div>
+             <% end %>
+            </td>
+
+          </tr>
+
+
+        </table>
+      </li>
+
+
+  <% end %>
+</ul>
+
+<%= link_to_previous_page @notespaginate, 'Previous', :params => { :controller => "notes", :action => 'infinitenotes' } ,:class=>"btn" , :remote=>true %>  <%= link_to_next_page @notespaginate, 'Next', :params => { :controller => "notes", :action => 'infinitenotes' } ,:class=>"btn" , :remote=>true %>

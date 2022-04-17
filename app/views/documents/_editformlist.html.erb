@@ -1,0 +1,7 @@
+<%= form_for @document, :url=>updatelist_path(:id=>@document.id),:class=>"form-inline", :remote =>true do |f| %>
+
+    <%= f.text_field :name ,:autocomplete => :off, :style=>"width: 175px" %>
+    <div>
+      <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini"%> <button class="btn btn-mini" id="doceditcancel" onclick='return false;'>cancel</button>
+    </div>
+<% end %>

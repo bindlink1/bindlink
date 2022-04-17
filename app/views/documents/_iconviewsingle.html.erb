@@ -1,0 +1,25 @@
+<div class="documentwrapper" id="document_<%=document.id%>">
+  <div class="documentbox" >
+    <div class="documentleft">
+      <% if document.image_content_type == "application/vnd.openxmlformats-officedocument.wordprocessingml.document" %>
+
+          <%= link_to (image_tag 'file_doc.png' ) , download_document_path(document), :target => "_blank" %>
+
+      <%elsif document.image_content_type =="application/vnd.ms-excel" %>
+           <%= link_to (image_tag 'file_xls.png' ) , download_document_path(document), :target => "_blank" %>
+
+
+      <% elsif document.image? %>
+
+        <%begin%>  <%= link_to (image_tag document.image.expiring_url(10,:thumb) ) , download_document_path(document), :target => "_blank" %> <%rescue%> <%end%>
+      <% else %>
+          <%= link_to (image_tag 'quote.png' ) , download_document_path(document), :target => "_blank" %>
+
+      <% end %>
+    </div>
+    <div class="documentright">
+      <%= render :partial =>'documents/iconviewdetails', :locals=>{:document => document} %>
+    </div>
+    <div style="clear:both"></div>
+  </div>
+</div>

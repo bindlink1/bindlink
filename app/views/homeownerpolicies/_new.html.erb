@@ -1,0 +1,16 @@
+
+<h3>Create a new Homeowner's Policy</h3>
+<br>
+<%= form_for [@policy,@homepolicy], :html=>{:class =>"form-horizontal"} , :remote =>true do |f| %>
+
+    <%= render('formfields', :f => f) %>
+
+    <div class="form-actions">
+
+      <%= f.submit 'Save', :remote => true,disable_with: 'Saving...', :class=>"btn btn-success ", :id=>"contactfrmbtn"%> <button class="btn " id="cancelnewhome" onclick='return false;' >Cancel</button>
+
+
+    </div>
+<% end %>
+
+

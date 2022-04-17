@@ -1,0 +1,53 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Return Premium
+    </span>
+    </div>
+    <div class="previewhead">
+      <%= link_to "Process Returns", createreturnbatch_path, :class=>"btn btn-mini btn-success", :remote=>true, :id=>'processreturnbtn' %>
+    </div>
+
+    <div id='unprocessedbatches'>
+      <%= render 'unprocessedreturnbatches' %>
+    </div>
+
+    <hr/>
+        <div id='openbatches'>
+      <%= render 'openreturnbatches' %>
+    </div>
+
+    <hr/>
+    <h3>Processed Return Premium Batches: Click to View</h3>
+    <hr>
+    <div class="dataTablewrapper">
+      <table id="returnpremiumbatches" class="table table-bordered table-condensed ">
+        <thead>
+        <tr>
+          <th>Action</th>
+          <th>Batch Date</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% if !@returnbatches.empty?  %>
+            <% @returnbatches.each do |rb| %>
+                <% begin %>
+                    <tr >
+                      <td><%= link_to 'view', viewreturnbatch_path(rb), :class=>"linktext"%>
+                        | <%= link_to 're-print checks', editreturnbatch_path(rb), :class=>"linktext"%>
+                        | <%= link_to 'print invoices', printinvoicesprocessed_path(rb), :class=>"linktext", :target=>"_blank"%></td>
+                      <td><%= rb.created_at.strftime("%m/%d/%Y")  %></td>
+                      <td><%= rb.status %></td>
+                    </tr>
+                <% end %>
+            <% end %>
+        <% else %>
+            <tr>
+              <td colspan="3">No batches just yet.</td>
+            </tr>
+        <% end  %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

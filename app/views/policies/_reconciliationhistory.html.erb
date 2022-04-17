@@ -1,0 +1,80 @@
+</br>
+
+
+
+<div>
+
+  <div class="wellwhiteblock" style="padding-bottom: 20px">
+    <div class="wellwhitemenu"><h3>Reconciliation History</h3></div>
+    <div class="row-fluid">
+
+      <div class="span12">
+
+
+
+
+
+        <table class="table table-bordered ">
+          <thead>
+          <tr>
+
+            <th>Reconclied</th>
+            <th>Reconclied Date</th>
+            <th>Transaction Type</th>
+            <th>Transaction Effective Date</th>
+            <th>Commissionable</th>
+            <th>Non Commissionable</th>
+            <th>Commission</th>
+
+          </tr>
+          </thead>
+          <tbody>
+          <% totalbp = 0 %>
+          <% totalf = 0 %>
+          <% totalc = 0 %>
+
+          <% @pptforview.each do |ppt|%>
+
+              <tr>
+
+                <td> <% if ppt.reconciled == 'Yes' %> <%= image_tag("check.png", :height=>"25px", :width=>"25px") %> Yes<%else%> No - <%=  link_to 'Reconcile', reconcilesingleppt_path(ppt.id), :class=>'linktext', :confirm => 'Are you sure you want to reconcile this transaction?', :remote => true %> <%end%></td>
+                <td> <% if ppt.reconciled == 'Yes' %>  <%= ppt.updated_at.strftime("%m/%d/%Y") %><%else%><%end%></td>
+                <td><%=ppt.transaction_type%></td>
+                <td><%begin%><%=ppt.transaction_effective_date.to_date.strftime("%m/%d/%Y")%><%rescue%> <%end%></td>
+                <td><%=number_to_currency(ppt.base_premium,  :negative_format => "(%u%n)")%></td>
+                <td> <% if current_agent.isgeneralagent == "GA"  %><%=number_to_currency(ppt.complexfees,  :negative_format => "(%u%n)")%>  <% else %> <%=number_to_currency(ppt.fees,  :negative_format => "(%u%n)")%><%end%></td>
+                <td><%=number_to_currency(ppt.pptreconciliationcommission,  :negative_format => "(%u%n)")%></td>
+
+              </tr>
+              <%begin%>
+              <% totalbp = totalbp +ppt.base_premium %>
+              <%rescue%>
+                 Pending
+               <%end%>
+
+              <%begin%>
+              <% if current_agent.isgeneralagent == "GA"  %>
+                  <% totalf = totalf + ppt.complexfees %>
+              <% else%>
+                  <% totalf = totalf + ppt.fees %>
+              <% end %>
+              <% totalc = totalc + ppt.pptreconciliationcommission %>
+               <%rescue%>
+
+              <%end%>
+          <% end %>
+
+          <tr >
+            <td colspan="3" style="border-top: 2px solid black; background-color: lightgray"></td>
+            <td style="border-top: 2px solid black"><%=number_to_currency(totalbp,  :negative_format => "(%u%n)")%></td>
+            <td style="border-top: 2px solid black"><%=number_to_currency(totalf,  :negative_format => "(%u%n)")%></td>
+            <td style="border-top: 2px solid black"><%=number_to_currency(totalc,  :negative_format => "(%u%n)")%></td>
+
+          </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

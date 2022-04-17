@@ -1,0 +1,24 @@
+<%= form_for @task, :url => createreply_path(:id=>@task.mastertask_id) ,:remote => true do |f| %>
+
+
+
+    <div style="border-bottom: 1px solid #d3d3d3">
+      <div class="control-group">
+        <%= f.label :task_name, 'Reply: ' , :class=>"control-label"  %>
+        <div class="controls">
+          <%= f.text_area :task_name , :class =>'required BLselect', :autocomplete => :off,:minlength=>'2', :cols => 1, :rows => 5 %>
+        </div>
+         <%= f.hidden_field :agent_id, :value=> current_agent.id %>
+      </div>
+
+
+      <div class="control-group">
+        <%= f.submit 'save', :remote => true, :class=>"btn btn-success btn-mini", :id=>"savebtn"%>
+        <button class="btn btn-mini" id="subtaskcancel" onclick='return false;' >cancel</button>
+
+      </div>
+
+    </div>
+
+
+<% end %>

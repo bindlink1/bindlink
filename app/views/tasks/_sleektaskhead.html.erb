@@ -1,0 +1,35 @@
+
+<div style="float: left; margin-left: 5px;">
+  <button class="btn btn-mini taskback" id="taskback">  <i class="icon-chevron-left"></i> Back</button>
+
+
+
+</div>
+<div style="float: left; margin-left: 10px;">
+  <%if @task.status == 'completed'%>
+
+      <%= form_tag(completetask_path(@task), :method => "get", :remote=>true) do %>
+          <button class="btn btn-mini btn-primary" >  <i class="icon-repeat icon-white"></i> Mark Incomplete</button>
+      <% end %>
+  <%else %>
+      <%= form_tag(completetask_path(@task), :method => "get", :remote=>true) do %>
+          <button class="btn btn-mini btn-success" >  <i class="icon-check icon-white"></i> Mark Complete</button>
+      <% end %>
+  <% end %>
+
+</div>
+<div style="float: left; margin-left: 10px; padding-top: 5px;">
+  For
+  <% if !@task.policy_id.nil? %>
+      Policy : <%= link_to @task.policy.policy_number, policy_path(@task.policy), :class => 'linktext' %>
+  <% elsif !@task.client_id.nil? %>
+      <% if @task.client.client_status == "Prospect" %>
+          Prospect : <%= link_to @task.client.fullname, showprospect_path(@task.client), :class => 'linktext' %>
+      <% else %>
+          Client : <%= link_to @task.client.fullname, client_path(@task.client), :class => 'linktext' %>
+      <% end %>
+  <% elsif !@task.quote_id.nil? %>
+      Quote: <%= link_to @task.quote.submission.namedinsured.named_insured, quote_path(@task.quote), :class => 'linktext' %>
+  <% end %>
+</div>
+<div style="clear:both"></div>

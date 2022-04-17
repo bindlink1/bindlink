@@ -1,0 +1,4 @@
+$("#homeownerworkarea").html('<%=escape_javascript(render('edit')) %>');
+$("#homepolicyedit").fadeOut(300);
+$("#homeownerpolicy").fadeOut(300);
+$('#canceledithome').click(function(){$("#homeownerpolicy").fadeIn(300); $("#homeownerworkarea").html(''); $("#homepolicyedit").fadeIn(300);});

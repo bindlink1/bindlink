@@ -1,0 +1,6 @@
+<%= form_for @client,:url =>updatesalesstage_path(@client.id) ,:remote =>true , :html => {:autocomplete => "off", :class=>"form-inline"}  do |f| %>
+    <%= f.collection_select  :sales_step  ,[['Initial Contact','Initial Contact'],['Need Identification','Need Identification'],['Quote/Proposal','Quote/Proposal'],['Closing','Closing'],['Follow-Up','follow-Up']], :last, :last, {:include_blank => 'Select One'}%>
+    <%= f.submit 'Save Status', :class=>'btn btn-mini btn-success'%>
+
+<% end %>
+

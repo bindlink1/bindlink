@@ -1,0 +1,27 @@
+<div id="selectproducer">
+<table id="producingagencies" class="display">
+                    <thead>
+                      <tr>
+                           <th>Agency Name</th>
+                           <th>Created On</th>
+                           <th>Address</th>
+                           <th>City</th>
+                           <th>State</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                        <% @producingagencies.each do |producer| %>
+                      <tr>
+                        <td><%= link_to producer.agency_name , existing_producingagency_policy_path(:id => producer), :remote => true %></td>
+                        <td><%= producer.created_at  %></td>
+                        <td><%= producer.address_1  %></td>
+                        <td><%= producer.city  %></td>
+                        <td><%= producer.state  %></td>
+
+                      </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+</div>
+

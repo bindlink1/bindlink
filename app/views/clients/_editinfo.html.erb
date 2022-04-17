@@ -1,0 +1,10 @@
+
+<%= form_for @client, :remote =>true , :html => {:autocomplete => "off", :class=>"form-horizontal"}  do |f| %>
+
+    <% if @client.client_status == "Prospect" %>
+        <%= render :partial => 'formdetailseditprospect', :locals=>{:f => f}%>
+    <% else %>
+        <%= render :partial => 'formdetailsedit', :locals=>{:f => f}%>
+    <% end %>
+
+<% end %>

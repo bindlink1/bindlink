@@ -1,0 +1,27 @@
+<table class="table table-bordered table-layout:fixed;">
+  <thead>
+    <tr>
+      <th colspan="4"><h3>Select a fee to view more details or edit:</h3></th>
+    </tr>
+    <tr>
+      <th>Name</th>
+      <th>State</th>
+      <th>Type</th>
+      <th>Amount</th>
+      <th>Effective</th>
+      <th>Expiration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%  @fees.each do |f| %>
+    <tr>
+      <td><%= link_to( if !f.fee_name.nil? && f.fee_name != '' then f.fee_name.to_s else '<noname>' end, fee_path(:id => f) ) %></td>
+      <td><%= f.state %></td>
+      <td><%= f.fee_type %></td>
+      <td><%begin%><%= if f.fee_type == "Flat" then number_to_currency(f.fee_value) else number_to_percentage(f.fee_value*100) end %><%rescue%><%end%></td>
+      <td><%begin%><%= f.effective_date.to_date.strftime("%m/%d/%Y") %><%rescue%><%end%></td>
+      <td><%begin%><%= f.expiration_date.to_date.strftime("%m/%d/%Y") %><%rescue%><%end%></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

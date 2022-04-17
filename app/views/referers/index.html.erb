@@ -1,0 +1,32 @@
+<% title  "Referrals | bindlink" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Referrals Home</span> </div>
+    <h3>All referrers: click on a name below to view.</h3>
+    <br />
+
+      <table id="referrers" class="bordered-table zebra-striped ">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Clients Referred</th>
+          <th>Prospects Referred</th>
+          <th>Policies Referred</th>
+          <th>Premium Referred</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @referers.each do |referrer| %>
+            <tr data-href='<%=referer_path(referrer)%>' style="cursor: pointer;">
+              <td><%= link_to  referrer.refererfullname, referer_path(referrer) %></td>
+              <td><%= referrer.referralcountclient%></td>
+              <td><%= referrer.referralcountprospect%></td>
+              <td><%= referrer.referraltotalpol%></td>
+              <td><%= number_to_currency(referrer.referraltotal)%></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+     <div style="clear:both;"></div>
+  </div>
+</div>

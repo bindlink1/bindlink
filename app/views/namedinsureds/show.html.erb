@@ -1,0 +1,38 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu">
+      <span class="headtext" >Named Insured: <%= @namedinsured.named_insured%>
+
+    </span>
+    </div>
+
+    <div class="row-fluid">
+
+      <div class="span6" id="namedinsureddetails">
+
+
+        <div class="wellwhiteblock">
+          <div class="wellwhitemenu"><h3>Named Insured Information </h3> <%= link_to('edit', edit_namedinsured_path(@namedinsured) , :remote => true, :class=>'linktext') %></div>
+
+          <div id="namedinsuredwork"></div>
+          <div id="namedinsuredfields">
+
+            <%= render 'details'%>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <div class="row-fluid">
+      <%= render 'showpolicies' %>
+    </div>
+    <div class="row-fluid">
+       <%= render 'submissions/showsubmissions', :locals=>{:submissions=>@submissions}%>
+    </div>
+  </div>
+
+
+
+</div>

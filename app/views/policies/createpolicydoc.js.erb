@@ -1,0 +1,61 @@
+// Display a Javascript alert
+
+<% if remotipart_submitted? %>
+  uploadstatus('complete');
+    resetupload();
+ $("#documentstabhead").html('Documents <% if @policy.documentcount > 0 %>(<%=@policy.documentcount %>)<% end %>');
+<% else %>
+  alert('error uploading...contact bindlink');
+<% end %>
+
+
+
+function uploadstatus(status){
+
+   if (status == 'start'){
+   $("#uploadstatus").addClass("alert");
+   $("#uploadstatus").html('uploading your document');
+   }
+      if (status == 'complete'){
+   $("#uploadstatus").addClass("alert-success");
+   $("#uploadstatus").html('upload status: ' + status)
+   $("#document_name").val("");
+   $("#document_image").val("");
+   $("#uploadstatus").fadeOut(3000);
+   }
+
+
+
+
+};
+
+
+function resetupload(){
+
+        $('#policyactions').html("");
+        $('#policyfields').slideDown(300);
+        $('#policytransinv').slideDown(300);
+        $('#transactiontable').slideDown(300);
+        $('#invoicetable').slideDown(300);
+        $('#editpolbutton').removeAttr("disabled");
+        $('#cancelpolbutton').removeAttr("disabled");
+        $('#endorsepolbutton').removeAttr("disabled");
+
+        updatepolicydoc( "<%=@policy.id%>", "Docupload" );
+   } ;
+
+
+function updatepolicydoc(policy_id , transactiontype){
+
+    $.ajax({
+
+        type: "GET",
+        dataType: "script",
+        data: {transtype:transactiontype, policy_id:policy_id},
+        url: "/policies/updateaftertransaction"
+
+
+
+    });
+
+};

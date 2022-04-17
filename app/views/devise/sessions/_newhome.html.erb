@@ -1,0 +1,13 @@
+<%= form_for("agent", :url => agent_session_path, :html => {:autocomplete => "off", :class=>"form-inline"} ) do |f| %>
+
+    <ul style="list-style: none; ">
+      <li style="display: inline-block; ">
+         <p style="margin-bottom: 2px;">e-Mail</p>
+        <%= f.email_field :email, :class=>"input-medium"%></li>
+      <li style="display: inline-block;">
+          <p style="margin-bottom: 2px;">Password</p>
+        <%= f.password_field :password, :class=>"input-medium" %></li>
+      <li style="display: inline-block; *position:relative;*top:1px"><button type="submit" class="btn btn-primary">Sign in</button></li>
+    </ul>
+
+<% end %>

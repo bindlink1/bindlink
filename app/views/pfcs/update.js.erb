@@ -1,0 +1,2 @@
+$("#pfcinfo").slideUp(300);
+ $("#pfcinfo").html('<%= escape_javascript(render :partial => 'viewinfo', :locals => {:carrierforview => @carrierforview}) %>').hide().slideDown(300);

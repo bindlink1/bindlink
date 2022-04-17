@@ -1,0 +1,91 @@
+
+    <div class="row-fluid" >
+      <div class="span6">
+
+        <div class="control-group">
+          <label class="control-label" >Year</label>
+          <div class="controls">
+            <%= f.text_field :model_year,:placeholder=>'Year' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" >Make</label>
+          <div class="controls">
+            <%= f.text_field :manufacturer,:placeholder=>'Make' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" >Model</label>
+          <div class="controls">
+            <%= f.text_field :model,:placeholder=>'Model' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" >Vin Number</label>
+          <div class="controls">
+            <%= f.text_field :veh_identification_number,:placeholder=>'Vin Number' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" >Primary Use</label>
+          <div class="controls">
+            <%= f.collection_select  :veh_use_cd  ,[['Commuting to work/school','Commuting to work/school'],['Pleasure','Pleasure'],['Business/commercial','Business/commercial']], :last, :last, {:include_blank => 'Select One'}%>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" >Est. Annual Mileage</label>
+          <div class="controls">
+            <%= f.collection_select  :estimated_annual_distance  ,[['5000','Fewer than 5,000'],['10000','5,000 - 10,000'],['15000','10,000 - 15,000'],['30000','More than 15,000']], :first, :last, {:include_blank => 'Select One'}%>
+          </div>
+        </div>
+      </div>
+      <div class="span6">
+
+        <div class="control-group">
+          <label class="control-label" >Ownership Status</label>
+          <div class="controls">
+            <%= f.collection_select  :ownership  ,[['Leased','Leased'],['Financed','Financed'],['Paid for','Paid for']], :last, :last, {:include_blank => 'Select One'}%>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" >Cost New</label>
+          <div class="controls">
+            <%= f.text_field :cost_new_amt,:placeholder=>'Cost New' %>
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" >Present Value</label>
+          <div class="controls">
+            <%= f.text_field :present_value_amt,:placeholder=>'Present Value' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" >Airbag Type</label>
+          <div class="controls">
+            <%= f.collection_select  :air_bag_type_cd  ,[['None','None'],['Driver','Driver'],['Both','Both']], :last, :last, {:include_blank => 'Select One'}%>
+
+          </div>
+        </div>
+
+        <div class="control-group">
+          <label class="control-label" >Anti-Lock Brakes</label>
+          <div class="controls">
+            <%= f.collection_select  :anti_lock_brake_cd  ,[['None','None'],['2','2'],['4','4']], :last, :last, {:include_blank => 'Select One'}%>
+
+          </div>
+        </div>
+        <div class="control-group">
+          <label class="control-label" >Anti-Theft Device</label>
+          <div class="controls">
+            <%= f.collection_select  :anti_theft_device_cd  ,[['Yes','Yes'],['No','No']], :last, :last, {:include_blank => 'Select One'}%>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+

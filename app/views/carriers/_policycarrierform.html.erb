@@ -1,0 +1,63 @@
+<b>New Carrier</b>
+
+<%= form_for(@carrier) do |f| %>
+  <p> Need some help?</p>
+
+  <div id="entryformsectionhead">Carrier Information</div>
+
+  <div id="formblockleft">
+      <div class="field">
+        <%= f.label :carrier_name,"Carrier Name", :class=> "fieldname" %><br />
+        <%= f.text_field :carrier_name %>
+      </div>
+      <div class="field">
+        <%= f.label :commission_percent,"Commission Percent", :class=> "fieldname"  %><br />
+        <%= f.phone_field :commission_percent %>
+      </div>
+
+      <div class="field">
+        <%= f.label :billing_type,"Billing Type", :class=> "fieldname" %><br />
+        <%= f.text_field :billing_type %>
+      </div>
+  </div>
+
+  <div id ="formblockright">
+
+
+        <div class="field">
+             <%= f.label :address_1, "Address 1", :class=> "fieldname" %><br />
+             <%= f.text_field :address_1%>
+        </div>
+
+        <div class="field">
+            <%= f.label :address_2,"Address 2", :class=> "fieldname" %><br />
+            <%= f.text_field :address_2 %>
+        </div>
+
+        <div class="field">
+            <%= f.label :city, :class=> "fieldname" %><br />
+            <%= f.text_field :city  %>
+        </div>
+
+
+        <div class="field">
+            <%= f.label :state, :class=> "fieldname"  %><br />
+            <%= f.text_field :state%>
+        </div>
+
+
+      <div class="field">
+        <%= f.label :zip, :class=>  "fieldname" %><br />
+        <%= f.text_field :zip %>
+      </div>
+
+</div>
+<%= f.submit %>
+
+
+
+
+
+
+
+<% end %>

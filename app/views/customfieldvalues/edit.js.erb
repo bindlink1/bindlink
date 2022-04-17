@@ -1,0 +1,6 @@
+
+ $("#cf<%= @cfv.id.to_s %>").slideUp(300);
+$("#cfworkarea<%= @cfv.id.to_s %>").html('<td><%=escape_javascript(render('editform')) %></td>').hide().slideDown(300);
+
+$('#cfcancel').click(function(){$("#cfworkarea<%= @cfv.id.to_s %>").slideUp(300).html('');$("#newcfbtn").fadeIn(300);
+$("#cf<%= @cfv.id.to_s %>").slideDown(300);});

@@ -1,0 +1,89 @@
+<%= javascript_include_tag "senddocemail" %>
+<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;">
+
+  <button type="button" class="close" data_dismiss="modal" aria_hidden="true" id ="closeit">×</button>
+
+
+  <div id="emailstatus"></div>
+
+  <%= form_for @email,:url=>createdocemail_path, :html => { :class => "form-horizontal"}  ,:remote =>true  do |f| %>
+      <div  style="overflow-x: hidden; overflow-y: hidden; max-height: 450px;">
+        <div style="height: 350px">
+          <div style="text-align: left;">
+            <%= f.submit 'Send', disable_with: 'Sending...', :remote => true, :class=>"btn btn-success", :id=>"sendemailbtn"%>  <button class="btn btn-info"  id ="close_modal"  onclick='return false;'>Cancel</button>
+            <hr>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">From:</label>
+            <div class="controls">
+              <%= f.text_field :from, :value=>@emailaddress.outboundemail ,:autocomplete => :off %>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">To:</label>
+            <div class="controls">
+              <%= f.text_field :to,:class=>"required",:autocomplete => :off %>
+              <br>
+              <a class="addagentemail linktext" data-agent="<%= @policy.producingagency ? @policy.producingagency.main_email : '' %>" style="cursor: pointer;" onclick='return false;'>Agent Email</a>
+              <br>
+              <a class="addcarrieremail linktext" style="cursor: pointer;" data-carrier="<%= @carrieremail %>" onclick='return false;'>Carrier Email</a>
+              <br>
+              <% if @policy.producingagency && @policy.producingagency.secondary_emails %>
+                <% @policy.producingagency.secondary_emails.split(',').each do |email|%>
+                  <a class="addcarrieremail linktext" style="cursor: pointer;" data-carrier="<%= email %>" onclick='return false;'><%= email %></a>
+                  <br>
+                <% end %>
+              <% end %>
+              <% if @policy.producingagency && @policy.producingagency.accounting_email %>
+                <a class="addcarrieremail linktext" style="cursor: pointer;" data-carrier="<%= @policy.producingagency.accounting_email %>" onclick='return false;'>Accounting Email</a>
+                <br>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <label class="control-label">Subject:</label>
+            <div class="controls">
+              <% begin %>
+                  <%= f.text_field :subject, :value=>"#{@policy.policy_number}:#{@policy.namedinsured.named_insured}",:autocomplete => :off, :readonly => :readonly %>
+              <%rescue%>
+                  <%= f.text_field :subject, :autocomplete => :off %>
+              <% end %>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Template:</label>
+            <div class="controls">
+              <%= select_tag(:template_name, options_from_collection_for_select(@templates, :content, :name), {:include_blank => ''})%>
+            </div>
+          </div>
+          <div class="control-group">
+            <label class="control-label">Message:</label>
+            <div class="controls">
+              <%= f.text_area :body , :autocomplete => :off,:minlength=>'2', :cols => 45, :rows => 7 %>
+
+            </div>
+          </div>
+        </div>
+        <div style="height: 75px; overflow-y: auto;">
+          <ul >
+            <% begin%>
+                <% @documents.each do |doc|%>
+                    <li class="emaildocs" id="doc_<%=doc.id %>">
+                      <%= link_to doc.name, download_document_path(doc), :target => "_blank" , :class=>'linktext'%> |  <a class="removedoc linktext" style="cursor: pointer;" onclick='return false;'>(Remove)</a>
+                      <input type="hidden" name="[documents][]" value="<%=doc.id %>">
+                    </li>
+                <% end %>
+            <%rescue%>
+            <%end%>
+            <%begin%>  <%= hidden_field_tag :invoice, @invoice.id %>  <%rescue%> <%end %>
+
+          </ul>
+        </div>
+
+
+      </div>
+  <% end %>
+
+</div>

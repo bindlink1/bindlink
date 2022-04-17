@@ -1,0 +1,25 @@
+
+$("#clientselectionnew").fadeOut() ;
+$("#clientselectexisting").fadeOut() ;
+
+
+$("#createclientforpolicy").fadeOut() ;
+$("#entryformsectionhead").fadeOut() ;
+
+
+$("#clientforpolicy").append('<%= escape_javascript(render '/clients/viewforpolicy') %>').hide().slideDown(300) ;
+
+$("#newpolicy").append('<%= escape_javascript(render 'form') %>').hide().slideDown(300) ;
+//$(function(){
+  //$("#policy_effective_date").datepicker();
+ // $("#policy_expiration_date").datepicker();
+//})
+$("#step1").addClass("inactivestep");
+$("#step2").removeClass("inactivestep");
+$("#step2").addClass("activestep");
+
+$("#gastep2").addClass("inactivestep");
+$("#gastep3").removeClass("inactivestep");
+$("#gastep3").addClass("activestep");
+
+

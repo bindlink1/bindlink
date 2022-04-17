@@ -1,0 +1,53 @@
+
+<fieldset>
+  <div class="control-group">
+    <%= f.label :client_type, "Prospect Type", :class=>"control-label"%>
+    <div class="controls">
+      <%= f.collection_select  :client_type  ,[['Individual','Individual'],['corporate','Corporate']], :last, :last, {:include_blank => 'Select One'}%>
+
+      <p class="help-block">Select a prospect type to enter either a corporate name or individual name</p>
+    </div>
+  </div>
+  <div class="control-group" id="firstname">
+    <%= f.label :first_name, :class=>"control-label" %>
+
+    <div class="controls">
+      <%= f.text_field :first_name, :class=> "BLselect"   %>
+    </div>
+  </div>
+  <div class="control-group" id="lastname">
+    <%= f.label :last_name, :class=>"control-label" %>
+
+    <div class="controls">
+      <%= f.text_field :last_name, :class=> "BLselect"   %>
+    </div>
+  </div>
+  <div class="control-group" id="corpname">
+    <%= f.label :corporate_name, :class=>"control-label" %>
+    <div class="controls">
+      <%= f.text_field :corporate_name, :class=> "BLselect"   %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :location_id, :class=>"control-label" %>
+    <div class="controls">
+      <%= collection_select :client, :location_id, @locations,:id,:location_nickname, {:include_blank => 'None'}%>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :agent_id, :class=>"control-label" %>
+    <div class="controls">
+      <%= collection_select :client, :agent_id, @agents,:id,:fullname, {:include_blank => 'None'}%>
+      <p class="help-block">Select the agent that is responsible for the prospect.</p>
+    </div>
+
+  </div>
+  <div class="control-group" id="comments">
+    <%= f.label :comments, :class=>"control-label" %>
+    <div class="controls">
+      <%= f.text_field :comments, :class=> "BLselect"   %>
+    </div>
+  </div>
+
+</fieldset>
+

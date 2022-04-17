@@ -1,0 +1,12 @@
+
+<div class="wellwhiteblock" >
+  <div class="wellwhitemenu">Available Fees (click to associate)</div>
+
+  <% @allfees.each do |all| %>
+
+
+      <li> <%= link_to all.fee_name , new_lineofbusiness_fee_lobfee_path(@lobforview,all),:class=>'linktext', :remote => true %></li>
+
+
+  <% end %>
+</div>

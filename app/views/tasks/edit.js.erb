@@ -1,0 +1,13 @@
+$('.controlright:visible').find('.taskworkdiv').html('<%=escape_javascript(render('tasks/editform')) %>').hide().slideDown(300);
+$('.controlright:visible').find('.taskdetails').slideUp(300);
+//$('#task<%=@task.id%>').html('<td><%=escape_javascript(render('tasks/editform')) %></td>').hide().slideDown(300);
+$(".controlright:visible').find('.taskcancel").click(function(){
+    //$('#task<%=@task.id%>').slideUp(300);
+    $('.controlright:visible').find('.taskworkdiv').slideUp(300);
+    $('.controlright:visible').find('.taskdetails').slideDown(300);
+   // $('#task<%=@task.id%>').html('<%=escape_javascript( render :partial => 'tasks/singletaskdetails', :locals => { :task => @task } ) %>').slideDown(300);
+
+
+});
+
+$(document).ready(function() { $('#task_reminder_date').datepicker(); });

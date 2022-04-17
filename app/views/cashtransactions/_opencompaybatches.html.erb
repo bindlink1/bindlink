@@ -1,0 +1,33 @@
+    <h3>Open Commission Payable Batches: Click to View</h3>
+    <hr>
+
+    <div class="dataTablewrapper">
+      <table id="returnpremiumbatches" class="table table-bordered table-condensed ">
+        <thead>
+        <tr>
+          <th>Action</th>
+          <th>Batch Date</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <% if !@open.empty?  %>
+            <% @open.each do |rb| %>
+                <% begin %>
+                    <tr >
+                      <td><%= link_to 'view', compaylist_path(rb), :class=>"linktext"%> </td>
+                      <td><%= rb.created_at.strftime("%m/%d/%Y")  %></td>
+                      <td><%= rb.status %></td>
+                    </tr>
+
+                <% end %>
+            <% end %>
+        <% else %>
+            <tr>
+              <td colspan="3">No batches just yet.</td>
+            </tr>
+        <% end  %>
+        </tbody>
+      </table>
+    </div>

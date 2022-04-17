@@ -1,0 +1,15 @@
+<div class="previewhead">
+  <div style="float: left; margin: 5px; margin-left: 10px;  padding-left: 10px; text-align: center;"><b>Active Policies</b><h3><%=  @clientforview.activepolcount %></h3></div>
+  <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Active Premium</b><h3><%=number_to_currency(@clientforview.activepremium) %></h3></div>
+  <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Open Balance</b><h3><%begin%>  <%= number_to_currency(@clientforview.openbalance) %><%rescue%> $0 <%end%></h3></div>
+
+
+  <% if !@clientforview.referer_id.nil?%>
+  <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Active Referred Premium</b><h3><%= number_to_currency(@referrer.referraltotal) %></h3></div>
+  <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Referred Clients</b><h3><%= @referrer.referralcountclient %></h3></div>
+  <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Referred Prospects</b><h3><%= @referrer.referralcountprospect %></h3></div>
+  <div style="float: left; margin: 5px; margin-left: 10px; border-left: 1px solid #d3d3d3; padding-left: 10px; text-align: center;"><b>Active Policies Referred</b><h3><%= @referrer.referraltotalpol %></h3></div>
+  <% end %>
+
+  <div style="clear:both"></div>
+</div>

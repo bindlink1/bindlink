@@ -1,0 +1,56 @@
+
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Producing Agency Home</span> </div>
+
+    <div class="row">
+      <div class="span3">
+        <div class="circlewrapper">
+          <div style="float: left">
+            <div class="circleinfo">
+              <%= current_agent.generalagency.producercount %>
+            </div>
+          </div>
+          <div class="circleinfotitle">
+            <div class="innertext">
+              Active Producing Agencies
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="span7">
+        <h4>Producing Agency Tasks</h4>
+        <hr>
+        <ul>
+          <li><%= link_to new_producingagency_path, :class=>"linktext" do%> Create New Producing Agency <% end %></li>
+
+        </ul>
+
+      </div>
+    </div>
+
+    <hr>
+    <h3>Click on a Producing Agency name below to view.</h3>
+    <br />
+    <div class="dataTablewrapper">
+      <table id="producingagencies" class="bordered-table zebra-striped " data-source="<%= producingagencies_url(format: "json") %>">
+        <thead>
+        <tr>
+          <th>Agency Name</th>
+          <th>Address</th>
+          <th>City</th>
+          <th>Status</th>
+          <th>Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,4 @@
+$('.controlright:visible').find('.tasktablewrapper').slideUp(300);
+$('.controlright:visible').find('.taskheader').slideUp(300);
+$('.controlright:visible').find('.taskheaderwork').hide().html('<%=escape_javascript(render 'sleektaskhead') %>').slideDown(300);
+$('.controlright:visible').find('.taskwork').hide().html('<%=escape_javascript(render 'taskshow') %>').slideDown(300);

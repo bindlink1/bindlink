@@ -1,0 +1,16 @@
+/tmp/build_dced5fcc691a35be37e7a13f91c9071b/artemipanchuk-bindlink-d60caeb6edeec8f9e6a7cb5bba10913ec5415f7f/vendor/ruby-2.1.5/bin/ruby extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling wrapper.c
+compiling crypt.c
+compiling crypt_blowfish.c
+compiling crypt_gensalt.c
+compiling bcrypt_ext.c
+linking shared-object bcrypt_ext.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20180116-236-cc8l51
+installing default bcrypt_ext libraries

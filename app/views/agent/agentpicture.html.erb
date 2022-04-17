@@ -1,0 +1,36 @@
+<%= javascript_include_tag "uploaddocument" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite" id="policyviewmain">
+<div class="wellwhite">
+    <h3>Upload Picture</h3>
+   <div id="uploadstatus"></div>
+  <hr>
+
+<%= form_for @document, :url => create_document_policy_path   , :class=>"form-vertical", :html => { :multipart => true, :id =>'documentform' }, :remote => true   do |f| %>
+
+                    <div class="control-group">
+
+                        <%= f.label :name,"Document Name", :class=>"control-label" %>
+                        <div class="controls">
+                         <%= f.text_field :name,:class=>"input-xlarge" %>
+                        </div>
+                    </div>
+                    <div class="control-group">
+
+                        <%= f.label :image,"Document to Upload", :class=>"control-label" %>
+                        <div class="controls">
+                          <%= f.file_field :image,:class=>"input-xlarge" %>
+                        </div>
+                    </div>
+
+            <div class="form-actions"><%= f.submit "Submit", :id=>"uploadbutton", :class=>"btn btn-success"%> <button class="btn" id="gobackdocumentupload" onclick='return false;'>Go Back</button></div>
+
+
+
+<% end %>
+
+
+</div>
+</div>
+  <iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+</div>

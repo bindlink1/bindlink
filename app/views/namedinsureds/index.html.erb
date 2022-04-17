@@ -1,0 +1,28 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite" >
+     <div class="wellwhitemenu"><span class="headtext">Named Insured Home</span> </div>
+     <h3>All named insureds: click on a name below to view.</h3>
+    <br />
+    <div class="dataTablewrapper">
+      <table id="clients" class="bordered-table zebra-striped ">
+        <thead>
+        <tr>
+          <th>Named Insured</th>
+          <th>Created</th>
+          <th>Comments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @namedinsureds.each do |namedinsured| %>
+            <tr>
+              <td><%= link_to namedinsured.named_insured , namedinsured_path(namedinsured) %></td>
+              <td></td>
+              <td></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

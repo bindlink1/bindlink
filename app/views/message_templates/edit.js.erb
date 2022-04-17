@@ -1,0 +1,10 @@
+$('#templaterow<%=@template.id%>').slideUp(300);
+
+$('#templaterowedit<%=@template.id%>')
+	.html("<td colspan='4' style='border-left: 0px;padding: 0; margin: 0;'><%=escape_javascript(render('editform')) %></td>")
+	.slideDown(300);
+
+$('#templaterowcancel<%=@template.id%>').click(function() {
+	$('#templaterowedit<%=@template.id%>').slideUp(300).html("");
+	$('#templaterow<%=@template.id%>').fadeIn(300);
+});

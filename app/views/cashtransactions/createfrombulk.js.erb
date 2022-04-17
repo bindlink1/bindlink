@@ -1,0 +1,3 @@
+$("#entercash").fadeOut();
+$("#cashnotifications").fadeOut();
+$('#cashtransactionssection').html('<%= escape_javascript(render :partial => 'invoices/cashtransactions', :locals => {:cashtransactions => @cashtransactions} ) %>').hide().slideDown(300);

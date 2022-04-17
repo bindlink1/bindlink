@@ -1,0 +1,38 @@
+$("#clientinfo").slideUp(300);
+$('#clientinfowork').html('<%= escape_javascript(render 'editinfo' ) %>').hide().slideDown(300);
+$('#clientcancel').click(function(){$('#clientinfo').slideDown(300);$('#clientinfowork').html('') });
+
+<% if @client.client_type == "Individual" %>
+$("#corpname").hide();
+
+<%else%>
+
+$("#firstname").hide();
+$("#lastname").hide();
+
+
+<% end %>
+
+$("#client_client_type").change(function(){
+
+    if (this.value == "Individual"){
+
+        $("#corpname").hide();
+        $("#client_corporate_name").val("");
+        $("#firstname").slideDown(100);
+        $("#lastname").slideDown(100);
+
+    }
+    else
+    {
+        $("#firstname").hide();
+        $("#lastname").hide();
+        $("#client_first_name").val("");
+        $("#client_last_name").val("");
+        $("#corpname").slideDown(100);
+
+    }
+
+
+
+});

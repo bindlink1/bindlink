@@ -1,0 +1,24 @@
+<% @associatedfees.each do |af| %>
+    <tr>
+      <td>
+        <%= link_to('remove', af, :confirm => 'Are you sure?', :method => :delete, :remote => true, :class=>'linktext') %>
+      </td>
+      <td>
+        <%= af.fee.fee_name %>
+      </td>
+      <td>
+        <%= af.fee.fee_type %>
+      </td>
+      <td>
+        <% if af.fee.fee_type == "Percent"%>
+            <%= number_to_percentage(af.fee.fee_value* 100)  %>
+        <% else %>
+            <%= number_to_currency(af.fee.fee_value)  %>
+        <% end %>
+      </td>
+      <td>
+        <%= af.fee.state %>
+      </td>
+
+    </tr>
+<% end %>

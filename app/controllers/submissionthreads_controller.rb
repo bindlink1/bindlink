@@ -1,0 +1,9 @@
+class SubmissionthreadsController < ApplicationController
+
+
+
+
+
+
+
+end

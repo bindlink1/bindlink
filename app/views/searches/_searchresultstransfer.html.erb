@@ -1,0 +1,42 @@
+<hr>
+
+<h3>Select the invoice to apply this cash to:</h3>
+
+<table class="table table-bordered table-condensed" >
+
+  <tr>
+    <td>Invoice Id</td>
+    <td>Policy Number</td>
+    <td>Policy Status</td>
+    <td>Due Date</td>
+    <td>Balance</td>
+  </tr>
+
+
+  <% @search.each do |result| %>
+
+      <% result.invoices.each do |inv| %>
+
+              <tr>
+                <td> <%= link_to inv.id, processtransfercash_path(:id => inv.id, :cid => @cashtransaction, :class=>'transferlinks'), :remote=>true %>
+
+                </td>
+                <td>
+                  <%= result.policy_number %>
+                </td>
+                <td>
+                  <%= result.status%>
+                </td>
+                <td>
+
+                  <%=inv.due_on.strftime("%m/%d/%Y") %>
+                </td>
+                <td>
+                  <%=inv.outstandingbalance %>
+                </td>
+              </tr>
+
+      <%end%>
+  <% end %>
+
+</table>

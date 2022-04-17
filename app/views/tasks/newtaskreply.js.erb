@@ -1,0 +1,3 @@
+$('#taskworkdiv').hide().html("<%= escape_javascript(render  'subtaskform') %>").slideDown(300);
+$('#taskwork<%=@task.mastertask_id%>').html("<td><%= escape_javascript(render  'subtaskform') %></td>").slideDown(300);
+$("#subtaskcancel").click(function(){$('#taskwork<%=@task.mastertask_id%>').slideUp(300); $('#taskworkdiv').slideUp(300);});

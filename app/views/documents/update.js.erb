@@ -1,0 +1,3 @@
+$("#documentwork_<%= @document.id%>").slideUp(300);
+
+$("#document_<%= @document.id%> .documentright").html('<%= escape_javascript(render :partial => 'iconviewdetails', :locals=>{:document=>@document}) %>').hide().slideDown(300);

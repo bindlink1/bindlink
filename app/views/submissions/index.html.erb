@@ -1,0 +1,33 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite" >
+    <div class="wellwhitemenu"><span class="headtext">Submission Home</span> </div>
+     <h3>Click on a submission below to view.</h3>
+    <br />
+    <div class="dataTablewrapper">
+      <table id="submissions" class="bordered-table zebra-striped ">
+        <thead>
+        <tr>
+          <th>Named Insured</th>
+          <th>Producing Agency</th>
+          <th>Comments</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @submissions.each do |submission| %>
+           <% begin %>
+            <tr data-href='<%=submission_path(submission)%>' style="cursor: pointer;">
+              <td><%= submission.namedinsured.named_insured %></td>
+              <td><%= submission.producingagency.agency_name %></td>
+              <td><%= submission.short_note %></td>
+            </tr>
+            <% rescue %>
+               <td colspan="3"><%= submission.producingagency.agency_name%></td>
+            <% end %>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+

@@ -1,0 +1,83 @@
+<%= javascript_include_tag "client" %>
+<% title @clientforview.fullname + " | Client | bindlink" %>
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu">
+      <span class="headtext" ><% if !@clientforview.referer_id.nil?%><%= image_tag("button_red_heart.png", :height=>"20px", :width=>"20px") %>  <%end%><%= @clientforview.fullname%>
+        <li class="dropdown" style="display: inline;">
+          <a  data-toggle="dropdown" href="#polmenu" class="dropdownmenubox">
+            <%= image_tag("list 2.png", :height=>"15px", :width=>"15px") %> Menu
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" >
+            <li>
+              <%= link_to new_client_policy_path(@clientforview) do %> <%= image_tag("star.png", :height=>"25px", :width=>"25px") %> New Policy <%end%>
+              <%= link_to  new_client_quote_path(@clientforview) do %><%= image_tag("quote.png", :height=>"25px", :width=>"25px") %> New Quote <%end%>
+              <%= link_to( @clientforview, :confirm => 'Are you sure?', :method => :delete, :remote => true) do %><%= image_tag("vcard_delete.png", :height=>"25px", :width=>"25px") %> Delete <%end%>
+            </li>
+          </ul>
+        </li>
+    </span>
+    </div>
+    <%= render 'clientstats' %>
+    <div class="row-fluid">
+      <div class="span12" id="tabcontainer">
+        <div class="tabbable">
+          <ul class="nav nav-tabs">
+            <li class="active"><a href="#infotab" data-toggle="tab">Info</a></li>
+            <li><a href="#notetab" data-toggle="tab">Notes</a></li>
+            <li><a href="#quotetab" data-toggle="tab">Quotes</a></li>
+            <li><a href="#documenttab" data-toggle="tab">Documents <% if @clientforview.documentcount > 0 %> (<%=@clientforview.documentcount%>) <% end %></a></li>
+            <% if !@clientforview.referer_id.nil?%>
+                <li><a href="#referraltab" data-toggle="tab">Referrals (<%= @referrer.referralcountclient + @referrer.referralcountprospect  %>)</a></li>
+            <% end %>
+          </ul>
+          <div class="tab-content " style="overflow: visible;">
+            <div id="infotab" class="tab-pane active">
+              <div class="row-fluid">
+                <div class="span12">
+
+                  <%= render 'showinfo' %>
+                </div>
+              </div>
+            </div>
+
+            <div id="notetab" class="tab-pane">
+              <div class="row-fluid">
+                <div class="span12">
+                  <div class="wellwhiteblock">
+                    <div class="wellwhitemenu">Client Notes</div>
+                    <%= render 'notes/form' %>
+                  </div>
+                  <div id="notewrapper"><%= render 'notes/filenotelist', :notesforview =>@notesforview %></div>
+                </div>
+              </div>
+            </div>
+            <div id="quotetab" class="tab-pane">
+              <div class="row-fluid">
+                <div class="span12" id="quotewrapper">
+                  <%= render 'quotes/showallforclient' %>
+                </div>
+              </div>
+            </div>
+            <div id="documenttab" class="tab-pane">
+
+                      <%= render 'clientdocuments' %>
+
+            </div>
+            <% if !@clientforview.referer_id.nil?%>
+                <div id="referraltab" class="tab-pane">
+                  <div class="row-fluid">
+                    <div class="span12" id="referralwrapper">
+
+                      <%= render 'referers/referredclientspolicy' %>
+                    </div>
+                  </div>
+                </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

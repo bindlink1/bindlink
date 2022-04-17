@@ -1,0 +1,112 @@
+<table class="table table-bordered table-condensed table-layout:fixed " id="producergentable">
+  <col width="30%"  />
+  <col width="70%" />
+
+  <tr>
+    <td style="text-align: right;">
+      Status
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.status %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Agency Code
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.agency_code %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Name
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.agency_name %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Address 1
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.address_1 %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Address 2
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.address_2 %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      City, State, Zip
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.city %>, <%= @producerforview.state %> <%= @producerforview.zip %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Telephone
+    </td>
+    <td style="text-align: left;">
+      <%= number_to_phone(@producerforview.telephone) %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Fax
+    </td>
+    <td style="text-align: left;">
+      <%= number_to_phone(@producerforview.agency_fax) %>
+    </td>
+  </tr>
+   <tr>
+    <td style="text-align: right;">
+      Main e-Mail
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.main_email %>
+    </td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Secondary e-Mails
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.secondary_emails %>
+    </td>
+
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Accounting Contact
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.accounting_email %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Main Agent
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.agency_contact %>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align: right;">
+      Main Agent License
+    </td>
+    <td style="text-align: left;">
+      <%= @producerforview.main_agent_license %>
+    </td>
+  </tr>
+
+</table>

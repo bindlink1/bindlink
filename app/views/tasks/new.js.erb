@@ -1,0 +1,8 @@
+$('#newtaskwork').html('<%=escape_javascript(render('tasks/form')) %>').hide().slideDown(300);
+$('#existingtasks').slideUp(300);
+$('.taskcancel').click(function(){
+    $('#newtaskwork').slideUp(300);
+    $('#newtaskwork').html("")
+    $('#existingtasks').slideDown(300);
+});
+$(document).ready(function() { $('#task_reminder_date').datepicker(); });

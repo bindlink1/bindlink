@@ -1,0 +1,22 @@
+<h2>Manage Quoting Entities</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>City</th>
+    <th>Signed Up</th>
+    <th>Action</th>
+  </tr>
+
+<% @quotingentitiesfortable.each do |quotingentity| %>
+  
+  <tr class=<%=cycle("even_row","odd_row")%>>
+    <td><%= quotingentity.quotingentity_name%></td>
+    <td><%= quotingentity.city%></td>
+    <td><%= quotingentity.signed_up%></td>
+	<td><%= link_to 'Edit', edit_quotingentity_path(:id => quotingentity) %></td>
+  </tr>
+
+<% end %>
+</table>
+

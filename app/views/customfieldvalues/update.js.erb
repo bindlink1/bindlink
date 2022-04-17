@@ -1,0 +1,4 @@
+$("#cfworkarea<%= @cfv.id.to_s %>").slideUp(300).html('') ;
+ $("#cf<%= @cfv.id.to_s %>").html("<%= escape_javascript( render :partial=> 'customfieldvalues/singlevalue', :locals=>{:cf => @cfv} ) %>").slideDown(300);
+
+$("#newcfbtn").fadeIn(300);

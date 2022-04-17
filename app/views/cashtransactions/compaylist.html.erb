@@ -1,0 +1,78 @@
+<% content_for :head do %><%= javascript_include_tag "selectallchecks" %>  <%end%>
+
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">Commission Payable
+    </span>
+    </div>
+
+
+    <div id="afterprocess"></div>
+
+    <div id="returnworkarea"></div>
+    <%= form_for @compaybatch, :url=>paycompay_path(@compaybatch.id), :html => {:autocomplete => "off", :class=>"form-horizontal"}, :remote=>true  do |f| %>
+        <div id="selectreturn">
+          <table class="worktable table-bordered table">
+            <thead>
+           <tr>
+             <td colspan="6">
+
+
+               Select all: <input type="checkbox" name="select-all" id="select-all" />
+             </td>
+           </tr>
+            <tr >
+              <th>Select</th>
+              <th>Policy Number</th>
+              <th>Producing Agency</th>
+              <th>Named Insured</th>
+              <th>Pay To</th>
+              <th>Commission Amount</th>
+
+            </tr>
+            </thead>
+            <tbody >
+
+            <% @batchtotal = 0 %>
+            <% @batchcount = 0 %>
+            <% @compay.each do |cp| %>
+
+                <tr>
+                  <td><%= check_box_tag "compay[policy_ids][]", cp.policy.id %></td>
+                  <td><%=  cp.policy.policy_number %> </td>
+                  <% if current_agent.isgeneralagent == "GA" %>
+                      <td > <%= cp.policy.producingagency.agency_name %></td>
+                      <td> <%= cp.policy.namedinsured.named_insured %></td>
+                  <% else %>
+                      <td> <%= cp.policy.client.fullname %></td>
+                  <% end %>
+                  <td >
+                        <%= select_tag("compay[policy_payto][" + cp.policy.id.to_s + "]", options_for_select([[cp.policy.producingagency.agency_name, 'ProducingAgency']])) %>
+
+                   </td>
+                  <td ><%= number_to_currency((cp.policy.accountbalance(20005, 'Liability')- cp.policy.accountbalance(10004, 'Asset')),  :negative_format => "(%u%n)") %></td>
+
+                  <% @batchtotal = @batchtotal + (cp.policy.accountbalance(20005, 'Liability'))  %>
+                   <% @batchcount = @batchcount + 1 %>
+
+                </tr>
+            <% end %>
+
+
+                <tr>
+                  <td><b>Count</b></td>
+                  <td><b><%=  @batchcount %></b></td>
+                  <td></td>
+                  <td></td>
+                  <td><b>Total</b></td>
+                  <td><b><%=  number_to_currency(@batchtotal,  :negative_format => "(%u%n)")  %></b></td>
+                </tr>
+            </tbody>
+          </table>
+          <div style="padding-top: 15px">
+            <%= f.submit "Process Commission Payments" %>
+          </div>
+    <% end %>
+    </div>
+  </div>
+</div>

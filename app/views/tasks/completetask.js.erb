@@ -1,0 +1,21 @@
+if  ($("#taskdetails").is(":visible")) {
+$('.controlright:visible').find('.taskheaderwork').html('<%=escape_javascript(render 'sleektaskhead') %>');
+$("#task<%=@task.id%>").html('<%=escape_javascript(render :partial=> 'tasks/singletasksleekdata' , :locals => { :task => @task }) %>');
+
+};
+
+
+$("#note_notetext").val("");
+
+$(".todaybadge:visible").html('<%=  @todaycount %>');
+$(".overduebadge:visible").html('<%= @overduecount %>');
+$(".upcomingbadge:visible").html('<%= @upcomingcount %>');
+$(".allbadge:visible").html('<%= @allcount %>');
+
+$(".taskback").click(function(){
+    $('.controlright:visible').find('.taskwork').slideUp(300);
+    $('.controlright:visible').find('.taskheaderwork').slideUp(300);
+    $('.controlright:visible').find('.tasktablewrapper').slideDown(300);
+    $('.controlright:visible').find('.taskheader').slideDown(300);
+});
+

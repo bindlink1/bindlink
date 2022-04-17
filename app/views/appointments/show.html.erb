@@ -1,0 +1,32 @@
+<h1>Manage your appointments</h1>
+
+<h2>Active Appointments</h2>
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+    <% @qelist.each do |quotingentity| %>
+    <tr class=<%=cycle("even_row","odd_row")%>>
+	    <td><%= quotingentity.quotingentity_name%></td>
+    </tr>
+<% end %>
+</table>
+
+<h2>Available Appointments</h2>
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+    <% @notappointedqe.each do |quotingentity| %>
+    <tr class=<%=cycle("even_row","odd_row")%>>
+	    <td><%= quotingentity.quotingentity_name%></td>
+        <td><%= link_to "Select for appointment", create_appointment_path(:id =>quotingentity.id), :remote => true %></td>
+    </tr>
+<% end %>
+</table>
+
+<div id="nextstep"></div>
+
+      </br>
+
+<%= link_to "Back", '/welcome'%>

@@ -1,0 +1,23 @@
+
+
+<div class="control-group">
+  <%= f.label :line_name,"Line Name" , :class=>"control-label"%>
+  <div class="controls">
+    <%= f.text_field :line_name%>
+  </div>
+
+</div>
+<div class="control-group">
+  <%= f.label :lobbroadcategory_id,"Category" , :class=>"control-label"%>
+  <div class="controls">
+    <%= f.collection_select :lobbroadcategory_id, Lobbroadcategory.all,  :id, :category_name ,{:include_blank => 'Select One'} %>
+  </div>
+
+</div>
+<div class="control-group">
+  <%= f.label :coverage_code,"Coverage Code (Surplus Lines)", :class=>"control-label" %>
+  <div class="controls">
+    <%= f.collection_select :coverage_code, Surpluscoveragecode.all.sort! { |a,b| a.coverage_code <=> b.coverage_code },  :coverage_code, :coverage_readable, {:include_blank => 'Select One'} %>
+  </div>
+
+</div>

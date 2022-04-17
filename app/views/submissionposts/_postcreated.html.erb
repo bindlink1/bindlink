@@ -1,0 +1,19 @@
+
+
+               <div class="conversation"%> <%= @thisconversation.poster_name %> </br>
+                <%= @thisconversation.company_name %> </br>
+               </div>
+
+                <div class="post_conversation">
+                <% @thisconversation.submissionthreads.each do |a| %>
+                    <% a.submissionposts.each do |b| %>
+                           <%= b.poster_name %></br>
+                          <%= b.created_at %></br>
+                          <%= b.submissionposttext  %>
+                          </br></br>
+
+                    <% end %>
+
+                <% end %>
+                </div>
+               </br>

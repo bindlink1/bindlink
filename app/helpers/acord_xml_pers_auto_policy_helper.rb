@@ -1,0 +1,2 @@
+module AcordXmlPersAutoPolicyHelper
+end

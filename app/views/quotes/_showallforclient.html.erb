@@ -1,0 +1,79 @@
+<div class="wellwhiteblock">
+  <div class="wellwhitemenu">Quotes</div>
+
+
+
+
+  <table class="table table-bordered table-condensed table-layout:fixed " id="quotetable">
+    <thead>
+    <tr>
+      <th></th>
+      <th>Label</th>
+      <th>Carrier</th>
+      <th>Line of Business</th>
+      <th>Total Premium</th>
+    </tr>
+
+    </thead>
+
+    <tbody>
+    <% if @quotes.blank? %>
+        <tr>
+          <td colspan="5" style="text-align: center; background-color: #eeeeee;">
+
+            Nothing entered yet. Select "New Quote" from the menu above to create one.
+
+          </td>
+
+        </tr>
+    <% end %>
+
+
+
+    <% @quotes.each do |quote| %>
+
+        <tr id="<%= "quote" + quote.id.to_s %>" class="cpearea">
+          <td>
+
+
+            <% if quote.status == 'bound'%>
+
+                <b>(Quote Bound) </b>
+                Policy #: <%= link_to quote.policy.policy_number, policy_path(quote.policy),  html_options = {:style=>"text-decoration: underline;"} %>
+           | <%= link_to('view quote', quote_path(quote) ,  :class=>'linktext') %>
+            <% else %>
+                <%= link_to('edit', quote_path(quote) ,  :class=>'linktext') %> | <%= link_to('delete', quote, :confirm => 'Are you sure you want to delete this quote?', :method => :delete, :remote => true, :class=>'linktext') %>
+
+            <% end %>
+          </td>
+          <td>
+            <%= quote.quotedescription %>
+          </td>
+          <td>
+            <%begin%>
+                <%= link_to quote.carrier.carrier_name, quote_path(quote), html_options = {:style=>"text-decoration: underline;"} %>
+            <%rescue%>
+                <%= link_to 'No Carrier Selected', quote_path(quote), html_options = {:style=>"text-decoration: underline;"} %>
+            <% end %>
+          </td>
+
+
+
+          <td>
+
+
+             <%begin%> <%= quote.lineofbusiness.line_name %> <%rescue%> None Selected <% end %>
+          </td>
+          <td>
+            <%begin%>  <%= number_to_currency(quote.total_premium,  :negative_format => "(%u%n)") %> <%rescue%> N/A <% end %>
+
+          </td>
+        </tr>
+
+    <% end %>
+
+    </table>
+</div>
+
+
+

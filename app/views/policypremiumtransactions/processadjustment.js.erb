@@ -1,0 +1,3 @@
+$('#transactioncontainer').html('<%= escape_javascript(render :partial=>'policies/policytransactions', :locals=>{:pptforview => @pptforview})%>') ;
+$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove();
+updatepolicy( "<%= @policy.id%>" , 'reinstate');

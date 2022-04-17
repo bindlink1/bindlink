@@ -1,0 +1,2 @@
+module CompayBatchesHelper
+end

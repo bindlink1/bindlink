@@ -1,0 +1,3 @@
+$("#searchresults").hide();
+$("#searchresults").html('<%= escape_javascript(render :partial => "associateresults") %>').slideDown(300);
+$("#close_search").click(function(){$("#searchresults").slideUp(300); $("#searchresults").html("");});

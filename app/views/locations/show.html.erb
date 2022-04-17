@@ -1,0 +1,30 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="wellwhitemenu"><span class="headtext">
+            <%= link_to locations_path do%>Locations<%end%> : <%= @locationforshow.location_nickname %>
+
+
+      <li class="dropdown" style="display: inline;">
+
+        <a  data-toggle="dropdown" href="#polmenu" class="dropdownmenubox">
+
+          <%= image_tag("list 2.png", :height=>"15px", :width=>"15px") %> Menu
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" >
+          <li><%= link_to  edit_location_path(:id=>@locationforshow.id), :remote=>true, :method => :get  do %> <i class="icon-pencil"></i> Edit <% end %></li>
+           <li>
+            <%= link_to( @locationforshow, :confirm => 'Are you sure?', :method => :delete, :remote => true) do %><%= image_tag("vcard_delete.png", :height=>"25px", :width=>"25px") %> Delete <%end%>
+          </li>
+        </ul>
+      </li>
+
+
+
+    </span></div>
+    <div id="locationwork"></div>
+    <div id="locationinfo">
+      <%= render('viewinfo') %>
+    </div>
+  </div>
+</div>

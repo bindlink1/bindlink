@@ -1,0 +1,56 @@
+<div class="col1wrap">
+  <div class="col1 wellwhite">
+    <div class="page-header"><h1>Prospect: <%= @prospectforview.prospect_name %></h1></div>
+    <table class="table table-bordered" >
+      <col width="10%" />
+      <col width="30%" />
+      <col width="20%" />
+      <col width="30%" />
+      <thead>
+      <tr >
+        <th>Status</th>
+        <th>Source</th>
+        <th>Location</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td><a class="activestep"><%= @prospectforview.prospect_status %></a></td>
+        <td><%= @prospectforview.referral_source %></td>
+        <td><%= @prospectforview.location_id%></td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <%= link_to  convert_prospect_path(:id=>@prospectforview.id), :remote=>true, :method => :put  do %> <i class="icon-star"></i> Convert to Client <% end %>
+    <div class="tabbable">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#infotab" data-toggle="tab">Info</a></li>
+        <li><a href="#policiestab" data-toggle="tab">Quotes/Apps</a></li>
+
+        <li><a href="#historytab" data-toggle="tab">Activities</a></li>
+      </ul>
+      <div class="tab-content wellwhite">
+        <div id="infotab" class="tab-pane active">
+
+          <div id="prospectinfo">
+            <%= link_to  edit_prospect_path(:id=>@prospectforview.id), :remote=>true, :method => :get  do %> <i class="icon-pencil"></i> Edit <% end %>
+
+            <%= render('viewinfo') %>
+
+
+          </div>
+        </div>
+        <div id="policiestab" class="tab-pane">
+          2
+        </div>
+        <div id="historytab" class="tab-pane">
+          3
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+/tmp/build_dced5fcc691a35be37e7a13f91c9071b/artemipanchuk-bindlink-d60caeb6edeec8f9e6a7cb5bba10913ec5415f7f/vendor/ruby-2.1.5/bin/ruby extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+make "DESTDIR=" install
+installing default libraries

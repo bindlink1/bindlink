@@ -1,0 +1,8 @@
+<%= form_for @submissionpost, :remote => true do |f| %>
+  <div id="postbody">
+   <b>Enter your questions here:</b><br />
+    <%= f.text_area :submissionposttext,  :cols => 80, :rows => 10 %>
+    </br></br>
+    <%= f.submit "Respond" %>
+  </div>
+<% end %>

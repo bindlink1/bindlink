@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Bindlink</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <%= stylesheet_link_tag    "applicationfunctional" %>
+  <%= javascript_include_tag "applicationfunctional" %>
+  <%= javascript_include_tag "bootstrap" %>
+
+
+  <%= csrf_meta_tags %>
+
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+</head>
+<body>
+<div id="wrapper">
+  <div id="main" >
+    <div id="header" >
+      <table style="width: 100%;">
+
+        <tr >
+          <td style=" width: 80%;">
+            <img src="/assets/bindlinklogofunctional.png">
+          </td>
+          <td>
+            <div style="float: right">Quoting Engine</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+
+
+  </div>
+
+  <div class="row-fluid" >
+    <div class="span2"> </div>
+    <div class="span8"> <%= yield %></div>
+    <div class="span2"> </div>
+  </div>
+</div>
+</body>
+</html>

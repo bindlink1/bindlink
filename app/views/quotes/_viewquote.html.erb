@@ -1,0 +1,86 @@
+
+<table class="table table-striped table-bordered" >
+  <col width="30%" />
+  <col width="70%" />
+  <tbody>
+  <tr>
+    <td >
+      <b>Description:</b>
+    </td>
+    <td>
+      <%= @quote.quotedescription %>
+    </td>
+  </tr>
+  <tr>
+
+    <td >
+      <b>Carrier:</b>
+    </td>
+    <td>
+      <%begin%> <%= @quote.carrier.carrier_name %>  <%rescue%> <%end%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+
+      <b>Line:</b>
+    </td>
+    <td class="left" >
+
+     <%begin%> <%= @quote.lineofbusiness.line_name %> <%rescue%> <%end%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+
+      <b>Base Premium:</b>
+    </td>
+    <td class="left" >
+
+      <%= number_to_currency(@quote.base_premium,  :negative_format => "(%u%n)") %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+
+      <b>Taxes and Fees:</b>
+    </td>
+    <td class="left" >
+
+      <%= number_to_currency(@quote.total_fees,  :negative_format => "(%u%n)") %>
+    </td>
+  </tr>
+  <tr>
+    <td>
+
+      <b>Total Premium:</b>
+    </td>
+    <td class="left" >
+
+     <b> <%= number_to_currency(@quote.total_premium,  :negative_format => "(%u%n)") %></b>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <b>Effective Date:</b>
+    </td>
+    <td class="left" >
+
+    </td>
+  </tr>
+  <tr>
+    <td >
+      <b>Expiration Date:</b>
+    </td>
+    <td class="left">
+
+    </td>
+  </tr>
+
+
+
+  </tbody>
+
+
+
+</table>

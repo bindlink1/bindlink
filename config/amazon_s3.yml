@@ -1,0 +1,28 @@
+development:
+  bucket: bldev
+  access_key_id: AKIAIRJG3ROQFYOLQZXQ
+  secret_access_key: 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
+  max_file_size: 20485760
+  acl: private
+
+
+staging:
+  bucket: blstaging
+  access_key_id: AKIAIRJG3ROQFYOLQZXQ
+  secret_access_key: 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
+  max_file_size: 20485760
+  acl: private
+
+test:
+  bucket: bldev
+  access_key_id: AKIAIRJG3ROQFYOLQZXQ
+  secret_access_key: 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
+  max_file_size: 20485760
+  acl: private
+
+production:
+  bucket: bindlink
+  access_key_id: AKIAIRJG3ROQFYOLQZXQ
+  secret_access_key: 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
+  max_file_size: 20485760
+  acl: private

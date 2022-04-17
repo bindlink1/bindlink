@@ -1,0 +1,5 @@
+$("#document_<%=@document.id%>").html('') ;
+
+<% if !@policy.blank? %>
+    $("#documentstabhead").html('Documents <% if @policy.documentcount > 0 %>(<%=@policy.documentcount %>)<% end %>');
+<% end %>

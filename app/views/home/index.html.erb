@@ -1,0 +1,110 @@
+<div class="colmask fullpage">
+    <div class="col1">
+        <H2>Bindlink is an easy to use, yet powerful agency management system. </H2>
+    </div>
+</div>
+
+<div class="colmask threecol">
+	<div class="colmid">
+		<div class="colleft">
+			<div class="col1 orangeaccent">
+				<!-- Column 1 start -->
+              <b>Everything you need to run your agency is all integrated.</b> Accounting, imaging, workflows, and customer relationship management.
+
+				<!-- Column 1 end -->
+			</div>
+			<div class="col2 blueaccent">
+				<!-- Column 2 start -->
+              <b>No need to worry about servers or upgrades.</b> Bindlink is fully web-based and all upgrades are included.
+
+                <!-- Column 2 end -->
+			</div>
+			<div class="col3 greenaccent">
+				<!-- Column 3 start -->
+                <b>Switching to Bindlink is simple.</b> So simple that its free. Let us convert your data and save your agency time and money.
+                <!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="colmask threecoleq">
+	<div class="colmid">
+		<div class="colleft">
+			<div class="col1 ">
+				<!-- Column 1 start -->
+                 <p class="postit">
+                    Invoices, Receivables, and General Accounting.
+                </p>
+				<!-- Column 1 end -->
+			</div>
+			<div class="col2 ">
+				<!-- Column 2 start -->
+             <div class="whybindlinkleftA1"> How can bindlink help my agency?</div>
+                <!-- Column 2 end -->
+			</div>
+			<div class="col3 ">
+				<!-- Column 3 start -->
+                <p class="postit">Full library of Acord forms with our exclusive BindlinkSubmit system.</p>
+                 <!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+</div>
+<div class="colmask threecoleq">
+	<div class="colmid">
+		<div class="colleft">
+			<div class="col1 ">
+				<!-- Column 1 start -->
+
+                    <p class="postit">Automatic reminders for important customer events: renewals, cancellations, inspections.</p>
+
+				<!-- Column 1 end -->
+			</div>
+			<div class="col2 ">
+				<!-- Column 2 start -->
+
+                <!-- Column 2 end -->
+			</div>
+			<div class="col3 ">
+				<!-- Column 3 start -->
+                    <p class="postit">Image and document storage, place notes and flag documents for review</p>
+                 <!-- Column 3 end -->
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+	<% if agent_signed_in? == true %>    
+
+		<%= current_agent.email %> is logged in. If user is not you, click <%= link_to "Sign Out", destroy_agent_session_path %>
+
+	<% elsif underwriter_signed_in? == true %>    
+	
+		<%= current_underwriter.email %> is logged in. If user is not you, click <%= link_to "Sign Out", destroy_underwriter_session_path %>
+	
+	<% else %>
+	
+	<div id="postit" >
+		<h2>Agents</h2>
+		<%= link_to "Register", new_agent_registration_path %> -
+		<%= link_to "Sign In", new_agent_session_path %> 
+
+		<h2>Underwriters</h2>
+		<%= link_to "Register", new_underwriter_registration_path %> -
+		<%= link_to "Sign In", new_underwriter_session_path %> 
+	</div>
+
+
+		or <%= link_to "Admin", new_admin_session_path %>
+
+	<% end %>
+
+</div>
+	

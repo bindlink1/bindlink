@@ -1,0 +1,4 @@
+$('#newcpe').html("");
+$('#cpewrapper').html("<%= escape_javascript(render('showallforclient'))%>");
+$("#newcpebtn").fadeIn(300);
+$("#cpetable tr:last").effect('highlight',1000);

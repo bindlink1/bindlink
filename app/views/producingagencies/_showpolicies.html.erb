@@ -1,0 +1,53 @@
+
+<div class="wellwhiteblock" >
+  <div class="wellwhitemenu"> Policies</div>
+
+  <div id="policiesdata" style="max-height: 150px; overflow-y: auto;">
+    <table id="scrolltable" class="table table-bordered table-striped">
+
+
+      <% if @policiesforproducers.blank? %>
+          <tr>
+            <td colspan="6" style="text-align: center; background-color: #eeeeee;">
+
+              No policies for <%= @producerforview.agency_name%> just yet.
+
+            </td>
+          </tr>
+      <% else %>
+          <thead>
+          <tr>
+            <th>Policy Number</th>
+            <th>Effective</th>
+            <th>Expiration</th>
+            <th>Named Insured</th>
+            <th>Line</th>
+            <th>Balance</th>
+            <th>Status</th>
+
+
+          </tr>
+
+
+          </thead>
+      <%end%>
+      <tbody>
+      <% @policiesforproducers.each do |policy| %>
+
+          <tr>
+            <td><b style="text-decoration: underline;"><%= link_to policy.policy_number.to_s , policy_path(:id => policy) %></b></td>
+            <td><%= policy.effective_date.strftime("%m/%d/%Y") %></td>
+            <td><%= policy.expiration_date.strftime("%m/%d/%Y") %></td>
+            <td><% begin %><%= policy.namedinsured.named_insured %><% rescue %> N/A <%end%></td>
+            <td><%= policy.lineofbusiness.line_name %></td>
+            <td><% begin %> <%= number_to_currency(policy.policybalance,  :negative_format => "(%u%n)") %> <% rescue %> N/A <%end%></td>
+            <td><%= policy.status %></td>
+          </tr>
+
+
+
+      <% end %>
+
+      </tbody>
+    </table></div>
+</div>

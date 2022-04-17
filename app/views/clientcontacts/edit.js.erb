@@ -1,0 +1,14 @@
+$("#myModal").remove();
+$("#wrapper").append('<div class="modal wellwhiteblock" id="myModal" style="overflow: hidden;"><%=escape_javascript(render('editform')) %> </div>');
+$('#myModal').modal('show');
+
+$("#closeit").click(function(){$('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove(); });
+$(document).ready(
+        $(function(){
+
+            $("#close_modal").live("click", function() {
+               $('#myModal').modal('hide'); $("#myModal").hide();$("#myModal").remove()
+            });
+            $('#birthdate').datepicker();
+            $('#dlexp').datepicker();
+        }));

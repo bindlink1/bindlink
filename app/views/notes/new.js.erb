@@ -1,0 +1,2 @@
+$('#noteform').html('<%=escape_javascript(render('notes/policyform')) %>').hide().slideDown(300);
+$("#notecancel").click(function(){$('#noteform').slideUp(300).html('')});

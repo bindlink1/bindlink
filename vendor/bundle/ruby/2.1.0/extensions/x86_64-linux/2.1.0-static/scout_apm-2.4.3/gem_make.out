@@ -1,0 +1,12 @@
+/tmp/build_610b5fbba662097eea23440cf11ff0ec/artemipanchuk-bindlink-23dd22c4278d0a9f2d99d6ec7f06e4204e2e3532/vendor/ruby-2.1.5/bin/ruby extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling rusage.c
+linking shared-object rusage.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 rusage.so ./.gem.20180118-242-11qwe4x
+installing default rusage libraries

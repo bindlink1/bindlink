@@ -1,0 +1,13 @@
+
+$("#createinvoice").append('<%= escape_javascript(render  '/invoices/policyinvoiceform', :invoice => @invoice = Invoice.new) %>').hide().slideDown(300) ;
+
+
+$("#createinvoice").prepend('<div id="newclientnotification">You are creating a new invoice.</div>') ;
+
+$(function(){
+  $("#invoice_due_on").datepicker({dateFormat: "dd-mm-yy"});
+})
+
+
+
+$("html, body").animate({scrollTop:150}, "slow");

@@ -1,0 +1,39 @@
+<div class="col1wrap">
+            <div class="col1 wellwhite">
+                <div class="page-header"><H2>Invoice for: <%= @invoiceforview.policypremiumtransaction.policy.client.client_name %></H2></div>
+                <H2>Status: <%= @invoiceforview.is_paid %></H2>
+                 <table class="topdetails display">
+                    <thead>
+                      <tr>
+                         <th>Date Created</th>
+                         <th>Date Due</th>
+                         <th>Amount Due</th>
+                         <th>Balance</th>
+                        <th>Description</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr>
+                         <td><%= @invoiceforview.created_at.strftime("%m/%d/%Y") %></td>
+                         <td><%= @invoiceforview.due_on.strftime("%m/%d/%Y") %></td>
+                         <td><%= @invoiceforview.total_billed %></td>
+                         <td><%= @invoiceforview.outstandingbalance %></td>
+                        <td><%= @invoiceforview.description %></td>
+                      </tr>
+                     </tbody>
+
+                 </table>
+                <div id="cashquestion"><%= link_to "Have you received cash for this invoice?", enter_cash_path, :remote => true %></div>
+                <div id="dialogquestion" title="This invoice is already paid"></div>
+                <div id="cashnotifications"></div>
+                <div id="entercash"></div>
+                </br></br>
+                <div id="cashtransactionssection">
+                  <%= render :partial => 'cashtransactions',
+                           :locals => {:cashtransactions => @cashtransactions}
+                %>
+                </div>
+            </div>
+  </div>
+
+

@@ -1,0 +1,20 @@
+<table class="table table-striped table-bordered tasktable" id="tasktable">
+  <% if @tasks.blank? %>
+      <tr>
+        <th>
+          <div id="notask" style="text-align: center; background-color: #eeeeee;">
+
+            No Tasks
+
+          </div>
+        </th>
+
+      </tr>
+
+  <% else %>
+
+      <% @tasks.each do |task| %>
+          <%= render :partial => 'tasks/singletask', :locals => { :task => task } %>
+      <% end %>
+  <% end %>
+</table>

@@ -1,0 +1,41 @@
+$("#policytable").fadeOut(300);
+$("#policytable").html("<%= escape_javascript(render 'clientpolicytable')%>").fadeIn(300);
+$("#viewtype").html("Renewals");
+
+
+
+$('#activepolicies').removeClass("active");
+$('#cancelledpolicies').removeClass("active");
+$('#expiredpolicies').removeClass("active");
+$('#allpolicies').removeClass("active");
+$('#renewedpolicies').addClass("active");
+
+$("#clientpolicies").dataTable(
+
+        {
+
+            "sPaginationType": "bootstrap",
+
+            "oLanguage": {
+                "sLengthMenu": "Display _MENU_ Clients" ,
+                "sZeroRecords": "No clients match your search!",
+                "sEmptyTable": "No data available in table",
+                "sInfo": "Showing (_START_ to _END_) of _TOTAL_ Clients",
+                "sSearch": "Search Clients:" ,
+                "sProcessing": "Processing",
+                "sInfoFiltered": " - searchinging from _MAX_ Clients" },
+
+
+
+            "bFilter": false,
+            "bLengthChange": false,
+            "bInfo": false,
+            "bSort": true,
+
+            "aaSorting" : [[2,'asc']]
+
+
+
+        }
+
+);

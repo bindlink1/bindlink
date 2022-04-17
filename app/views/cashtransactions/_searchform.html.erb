@@ -1,0 +1,20 @@
+
+<%= form_tag("/searches/findpolicy", :method => "get",:class=>"form-search" , :remote=> true) do %>
+
+    <fieldset>
+      <div class="control-group">
+
+        <%= label_tag(:searchtext, "Search for Policy:" ) %>
+        <div class="controls">
+          <%= text_field_tag :searchtext,nil ,:class =>'input-medium search-query', :autocomplete => :off %>
+          <%= select_tag(:carrier, options_from_collection_for_select(@carriers, :id, :carrier_name))%>
+
+        </div>
+      </div>
+    </fieldset>
+
+    <%= submit_tag("Search") %>
+<%end%>
+
+<div id="cashtransactionssection"></div>
+<div id="searchresults"></div>

@@ -1,2 +1,7 @@
 == Welcome to bindlink
 
+### autostart with linux bash
+sudo systemctl enable docker-run-bindlink.service
+
+### autostart with docker bash
+docker run -it -p 8080:3000 --restart=always -d bindlink
